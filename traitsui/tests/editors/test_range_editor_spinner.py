@@ -44,7 +44,7 @@ class NumberWithSpinnerEditor(HasTraits):
     traits_view = View(
         Item(label="Enter 4, then press OK without defocusing"),
         Item('number', editor=RangeEditor(low=3, high=8, mode='spinner')),
-        buttons=['OK']
+        buttons = ['OK']
     )
 
 
@@ -110,8 +110,7 @@ def test_wx_spin_control_editing_does_not_update():
         # press the OK button and close the dialog
         press_ok_button(ui)
 
-        # if all went well, the number traits has been updated and its value is
-        # 4
+        # if all went well, the number traits has been updated and its value is 4
         assert num.number == 4
 
 
@@ -130,7 +129,7 @@ def test_qt_spin_control_editing():
         # range editor, enter a number, and clicking ok without defocusing
 
         # text element inside the spin control
-        lineedit = ui.control.findChild(qt.QtGui.QLineEdit)
+        lineedit = ui.control.findChild(qt.QtWidgets.QLineEdit)
         lineedit.setFocus()
         lineedit.setText('4')
 

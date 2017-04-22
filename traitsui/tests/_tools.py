@@ -25,7 +25,6 @@ import traits.trait_notifiers
 
 # ######### Testing tools
 
-
 @contextmanager
 def store_exceptions_on_all_threads():
     """Context manager that captures all exceptions, even those coming from
@@ -74,7 +73,6 @@ def skip_if_not_backend(test_func, backend_name=''):
     if not _is_current_backend(backend_name):
         # preserve original name so that it appears in the report
         orig_name = test_func.__name__
-
         def test_func():
             raise nose.SkipTest
         test_func.__name__ = orig_name
@@ -112,7 +110,6 @@ def skip_if_null(test_func):
     if _is_current_backend('null'):
         # preserve original name so that it appears in the report
         orig_name = test_func.__name__
-
         def test_func():
             raise nose.SkipTest
         test_func.__name__ = orig_name
@@ -159,7 +156,7 @@ def press_ok_button(ui):
         from pyface import qt
 
         # press the OK button and close the dialog
-        ok_button = ui.control.findChild(qt.QtGui.QPushButton)
+        ok_button = ui.control.findChild(qt.QtWidgets.QPushButton)
         ok_button.click()
 
 
@@ -173,7 +170,7 @@ def get_dialog_size(ui_control):
     """
 
     if is_current_backend_wx():
-        return ui_control.GetSizeTuple()
+        return ui_control.GetSize().Get()
 
     elif is_current_backend_qt4():
         return ui_control.size().width(), ui_control.size().height()
@@ -184,10 +181,10 @@ def get_dialog_size(ui_control):
 def apply_on_children(func, node, _level=0):
     """Print the result of applying a function on `node` and its children.
     """
-    print '-' * _level + str(node)
-    print ' ' * _level + str(func(node)) + '\n'
+    print '-'*_level + str(node)
+    print ' '*_level + str(func(node)) + '\n'
     for child in get_children(node):
-        apply_on_children(func, child, _level + 1)
+        apply_on_children(func, child, _level+1)
 
 
 def wx_print_names(node):

@@ -19,18 +19,18 @@
 #------------------------------------------------------------------------------
 
 import wx
-import wx.combo
+import wx.adv
 
 from traits.api import List, TraitError
 from traitsui.editors.color_editor \
     import ToolkitEditorFactory as BaseToolkitEditorFactory
 
-from editor_factory import SimpleEditor as BaseSimpleEditor
-from editor_factory import ReadonlyEditor as BaseReadonlyEditor
-from editor_factory import TextEditor as BaseTextEditor
+from .editor_factory import SimpleEditor as BaseSimpleEditor
+from .editor_factory import ReadonlyEditor as BaseReadonlyEditor
+from .editor_factory import TextEditor as BaseTextEditor
 
-from color_trait import w3c_color_database
-from helper import TraitsUIPanel
+from .color_trait import w3c_color_database
+from .helper import TraitsUIPanel
 
 # Version dependent imports (ColourPtr not defined in wxPython 2.5):
 try:
@@ -80,10 +80,10 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
             alpha = color.Alpha()
             if alpha == 255:
                 return "rgb(%d,%d,%d)" % (
-                    color.Red(), color.Green(), color.Blue())
+                        color.Red(), color.Green(), color.Blue())
 
             return "rgb(%d,%d,%d,%d)" % (
-                color.Red(), color.Green(), color.Blue(), alpha)
+                    color.Red(), color.Green(), color.Blue(), alpha)
 
         return str(color)
 
@@ -92,8 +92,7 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
 #  'ColorComboBox' class:
 #------------------------------------------------------------------------------
 
-class ColorComboBox(wx.combo.OwnerDrawnComboBox):
-
+class ColorComboBox(wx.adv.OwnerDrawnComboBox):
     def OnDrawItem(self, dc, rect, item, flags):
 
         r = wx.Rect(rect.x, rect.y, rect.width, rect.height)
@@ -103,7 +102,7 @@ class ColorComboBox(wx.combo.OwnerDrawnComboBox):
         color_name = self.GetString(item)
 
         dc.DrawText(color_name, r.x + 3,
-                    r.y + (r.height - dc.GetCharHeight()) / 2)
+                    r.y + (r.height - dc.GetCharHeight()) // 2)
 
         if color_name == 'custom':
             swatch = wx.Rect(r.x + r.width - swatch_size, r.y + 1,
@@ -149,9 +148,9 @@ class SimpleColorEditor(BaseSimpleEditor):
         current_color = self.factory.to_wx_color(self)
         current_color_name = current_color.GetAsString()
 
-        self.control = ColorComboBox(parent, -
-                                     1, current_color_name, wx.Point(0, 0), wx.Size(40, -
-                                                                                    1), self.choices, style=wx.wx.CB_READONLY)
+        self.control = ColorComboBox(parent, -1, current_color_name,
+                                wx.Point(0, 0), wx.Size(40, -1), self.choices,
+                                style=wx.CB_READONLY)
 
         self.control.Bind(wx.EVT_COMBOBOX, self.color_selected)
         return
@@ -225,13 +224,12 @@ class CustomColorEditor(BaseSimpleEditor):
         # 'text_control' is the text display of the color.
         text_control = wx.TextCtrl(parent, -1, self.str_value,
                                    style=wx.TE_PROCESS_ENTER)
-        wx.EVT_KILL_FOCUS(text_control, self.update_object)
-        wx.EVT_TEXT_ENTER(parent, text_control.GetId(), self.update_object)
+        text_control.Bind( wx.EVT_KILL_FOCUS, self.update_object)
+        text_control.Bind( wx.EVT_TEXT_ENTER, self.update_object)
 
         # 'button_control' shows the 'Edit' button.
         button_control = wx.Button(parent, label='Edit', style=wx.BU_EXACTFIT)
-        wx.EVT_BUTTON(button_control, button_control.GetId(),
-                      self.open_color_dialog)
+        button_control.Bind( wx.EVT_BUTTON,self.open_color_dialog)
 
         sizer.Add(text_control, wx.ALIGN_LEFT)
         sizer.AddSpacer(8)
@@ -249,7 +247,6 @@ class CustomColorEditor(BaseSimpleEditor):
         """ Handles the user changing the contents of the edit control.
         """
         if not isinstance(event, wx._core.CommandEvent):
-            event.Skip()
             return
         try:
             # The TextCtrl object was saved as self._text_control in init().

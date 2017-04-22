@@ -67,9 +67,9 @@ class HResizeTestDialog(HasTraits):
                 Item('txt_item', resizable=True),
                 show_left=False
             ),
-        ),
-        width=_DIALOG_WIDTH,
-        height=100,
+            ),
+        width  = _DIALOG_WIDTH,
+        height = 100,
         resizable=True
     )
 
@@ -92,9 +92,9 @@ class VResizeTestDialog(HasTraits):
                 Item('txt_item', resizable=True),
                 show_left=False
             ),
-        ),
-        width=_DIALOG_WIDTH,
-        height=100,
+            ),
+        width  = _DIALOG_WIDTH,
+        height = 100,
         resizable=True
     )
 
@@ -126,7 +126,7 @@ def test_qt_show_labels_right_without_colon():
         ui = dialog.edit_traits()
 
         # get reference to label objects
-        labels = ui.control.findChildren(qt.QtGui.QLabel)
+        labels = ui.control.findChildren(qt.QtWidgets.QLabel)
 
         # the first is shown to the right, so no colon
         nose.tools.assert_false(labels[0].text().endswith(':'))
@@ -151,12 +151,12 @@ def _test_qt_labels_right_resizing(dialog_class):
         ui = dialog.edit_traits()
 
         # all labels
-        labels = ui.control.findChildren(qt.QtGui.QLabel)
+        labels = ui.control.findChildren(qt.QtWidgets.QLabel)
 
         # the checkbox and its label should be close to one another; the
         # size of the checkbox should be small
         checkbox_label = labels[0]
-        checkbox = ui.control.findChild(qt.QtGui.QCheckBox)
+        checkbox = ui.control.findChild(qt.QtWidgets.QCheckBox)
 
         # horizontal space between checkbox and label should be small
         h_space = checkbox_label.x() - checkbox.x()
@@ -167,13 +167,13 @@ def _test_qt_labels_right_resizing(dialog_class):
         # the text item and its label should be close to one another; the
         # size of the text item should be large
         text_label = labels[0]
-        text = ui.control.findChild(qt.QtGui.QLineEdit)
+        text = ui.control.findChild(qt.QtWidgets.QLineEdit)
 
         # horizontal space between text and label should be small
         h_space = text_label.x() - text.x()
         nose.tools.assert_less(h_space, 100)
         # and the text item size should be large
-        nose.tools.assert_greater(text.width(), _DIALOG_WIDTH - 200)
+        nose.tools.assert_greater(text.width(), _DIALOG_WIDTH-200)
 
         # the size of the window should still be 500
         nose.tools.assert_equal(ui.control.width(), _DIALOG_WIDTH)
@@ -198,6 +198,7 @@ def test_qt_no_labels_on_the_right_bug():
     with store_exceptions_on_all_threads():
         dialog = NoLabelResizeTestDialog()
         ui = dialog.edit_traits()
+
 
 
 if __name__ == "__main__":

@@ -20,9 +20,9 @@
     where *red*, *green* and *blue* are floats in the range from 0.0 to 1.0.
 """
 
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 #  Imports:
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 from __future__ import absolute_import
 
@@ -30,12 +30,11 @@ from .color_editor import ToolkitEditorFactory as EditorFactory
 
 from ..toolkit import toolkit_object
 
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
-
-class ToolkitEditorFactory(EditorFactory):
+class ToolkitEditorFactory ( EditorFactory ):
     """ Factory for editors for RGB colors.
     """
     pass
@@ -44,8 +43,6 @@ class ToolkitEditorFactory(EditorFactory):
 # The function will try to return the toolkit-specific editor factory (located
 # in traitsui.<toolkit>.rgb_color_editor, and if none is found, the
 # ToolkitEditorFactory declared here is returned.
-
-
 def RGBColorEditor(*args, **traits):
     """ Returns an instance of the toolkit-specific editor factory declared in
     traitsui.<toolkit>.rgb_color_editor. If such an editor factory
@@ -60,7 +57,7 @@ def RGBColorEditor(*args, **traits):
     """
 
     try:
-        return toolkit_object('rgb_color_editor:ToolkitEditorFactory', True)(
-            *args, **traits)
+       return toolkit_object('rgb_color_editor:ToolkitEditorFactory', True)(
+                                                            *args, **traits)
     except:
-        return ToolkitEditorFactory(*args, **traits)
+       return ToolkitEditorFactory(*args, **traits)

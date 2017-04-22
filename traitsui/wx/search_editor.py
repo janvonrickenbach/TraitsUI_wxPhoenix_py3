@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 #
 #  Copyright (c) 2009, Enthought, Inc.
 #  All rights reserved.
@@ -13,13 +13,13 @@
 #  Author: Evan Patterson
 #  Date:   06/25/09
 #
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 # System library imports
 import wx
 
 # Local imports
-from editor import Editor
+from .editor import Editor
 
 
 class SearchEditor(Editor):
@@ -39,15 +39,13 @@ class SearchEditor(Editor):
         self.control.ShowCancelButton(self.factory.cancel_button)
 
         if self.factory.auto_set:
-            wx.EVT_TEXT(parent, self.control.GetId(), self.update_object)
+            self.control.Bind( wx.EVT_TEXT, self.update_object)
 
         if self.factory.enter_set:
-            wx.EVT_TEXT_ENTER(parent, self.control.GetId(), self.update_object)
+            self.control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
 
-        wx.EVT_SEARCHCTRL_SEARCH_BTN(parent, self.control.GetId(),
-                                     self.update_object)
-        wx.EVT_SEARCHCTRL_CANCEL_BTN(parent, self.control.GetId(),
-                                     self.clear_text)
+        self.control.Bind( wx.EVT_SEARCHCTRL_SEARCH_BTN, self.update_object)
+        self.control.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.clear_text)
 
     def update_object(self, event):
         """ Handles the user entering input data in the edit control.

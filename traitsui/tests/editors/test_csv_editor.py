@@ -35,8 +35,8 @@ class ListOfFloatsWithCSVEditor(ModelView):
 
     traits_view = View(
         Item(label="Close the window to append data"),
-        Item('model.data', editor=CSVListEditor()),
-        buttons=['OK']
+        Item('model.data', editor = CSVListEditor()),
+        buttons = ['OK']
     )
 
 
@@ -48,7 +48,7 @@ def test_csv_editor_disposal():
 
     try:
         with store_exceptions_on_all_threads():
-            list_of_floats = ListOfFloats(data=[1, 2, 3])
+            list_of_floats = ListOfFloats(data=[1,2,3])
             csv_view = ListOfFloatsWithCSVEditor(model=list_of_floats)
             ui = csv_view.edit_traits()
             press_ok_button(ui)
@@ -72,7 +72,7 @@ def test_csv_editor_external_append():
 
     def _qt_get_text_value(ui):
         from pyface import qt
-        txt_ctrl = ui.control.findChild(qt.QtGui.QLineEdit)
+        txt_ctrl = ui.control.findChild(qt.QtWidgets.QLineEdit)
         return txt_ctrl.text()
 
     with store_exceptions_on_all_threads():
@@ -97,7 +97,7 @@ def test_csv_editor_external_append():
 
 if __name__ == '__main__':
     # Executing the file opens the dialog for manual testing
-    list_of_floats = ListOfFloats(data=[1, 2, 3])
+    list_of_floats = ListOfFloats(data=[1,2,3])
     csv_view = ListOfFloatsWithCSVEditor(model=list_of_floats)
     csv_view.configure_traits()
 

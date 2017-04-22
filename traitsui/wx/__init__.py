@@ -19,11 +19,12 @@
     the wxPython user interface toolkit.
 """
 
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 #  Define the reference to the exported GUIToolkit object:
-#-------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
-import toolkit
-
+#import .toolkit
+from .toolkit import GUIToolkit
 # Reference to the GUIToolkit object for wxPython
-toolkit = toolkit.GUIToolkit()
+#toolkit = toolkit.GUIToolkit()
+toolkit = GUIToolkit()

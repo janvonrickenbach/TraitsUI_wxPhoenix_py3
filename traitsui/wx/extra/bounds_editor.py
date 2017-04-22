@@ -35,74 +35,67 @@ class _BoundsEditor(Editor):
         self.format = factory.format
 
         self.evaluate = factory.evaluate
-        self.sync_value(factory.evaluate_name, 'evaluate', 'from')
+        self.sync_value( factory.evaluate_name, 'evaluate', 'from' )
 
-        self.sync_value(factory.low_name, 'low', 'both')
-        self.sync_value(factory.high_name, 'high', 'both')
+        self.sync_value( factory.low_name,  'low',  'both' )
+        self.sync_value( factory.high_name, 'high', 'both' )
 
-        self.control = panel = TraitsUIPanel(parent, -1)
-        sizer = wx.FlexGridSizer(2, 3, 0, 0)
+        self.control = panel = TraitsUIPanel( parent, -1 )
+        sizer = wx.FlexGridSizer(2,3, 0, 0)
 
         # low text box
         self._label_lo = wx.TextCtrl(panel, -1, self.format % self.low,
-                                     size=wx.Size(56, 20),
-                                     style=wx.TE_PROCESS_ENTER)
+                                         size=wx.Size(56, 20),
+                                         style=wx.TE_PROCESS_ENTER )
         sizer.Add(self._label_lo, 0, wx.ALIGN_CENTER)
-        wx.EVT_TEXT_ENTER(
-            panel,
-            self._label_lo.GetId(),
-            self.update_low_on_enter)
-        wx.EVT_KILL_FOCUS(self._label_lo, self.update_low_on_enter)
+        self._label_lo.Bind( wx.EVT_TEXT_ENTER, self.update_low_on_enter)
+        self._label_lo.Bind(wx.EVT_KILL_FOCUS, self.update_low_on_enter)
 
         # low slider
         self.control.lslider = Slider(panel, -1, 0, 0, 10000,
-                                      size=wx.Size(100, 20),
-                                      style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS)
+                                              size=wx.Size( 100, 20 ),
+                                              style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS )
         self.control.lslider.SetValue(self._convert_to_slider(self.low))
-        self.control.lslider.SetTickFreq(1000, 1)
-        self.control.lslider.SetPageSize(1000)
-        self.control.lslider.SetLineSize(100)
-        wx.EVT_SCROLL(self.control.lslider, self.update_object_on_scroll)
+        self.control.lslider.SetTickFreq( 1000, 1 )
+        self.control.lslider.SetPageSize( 1000 )
+        self.control.lslider.SetLineSize( 100 )
+        self.control.lslider.Bind( wx.EVT_SCROLL , self.update_object_on_scroll )
         sizer.Add(self.control.lslider, 1, wx.EXPAND)
         sizer.AddStretchSpacer(0)
 
         # high slider
         sizer.AddStretchSpacer(0)
-        self.control.rslider = Slider(
-            panel, -1, self._convert_to_slider(
-                self.high), 0, 10000, size=wx.Size(
-                100, 20), style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS)
-        self.control.rslider.SetTickFreq(1000, 1)
-        self.control.rslider.SetPageSize(1000)
-        self.control.rslider.SetLineSize(100)
-        wx.EVT_SCROLL(self.control.rslider, self.update_object_on_scroll)
+        self.control.rslider = Slider(panel, -1, self._convert_to_slider(self.high), 0, 10000,
+                                              size=wx.Size( 100, 20 ),
+                                              style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS )
+        self.control.rslider.SetTickFreq( 1000, 1 )
+        self.control.rslider.SetPageSize( 1000 )
+        self.control.rslider.SetLineSize( 100 )
+        self.control.rslider.Bind( wx.EVT_SCROLL, self.update_object_on_scroll )
         sizer.Add(self.control.rslider, 1, wx.EXPAND)
 
         # high text box
         self._label_hi = wx.TextCtrl(panel, -1, self.format % self.high,
-                                     size=wx.Size(56, 20),
-                                     style=wx.TE_PROCESS_ENTER)
+                                         size=wx.Size(56, 20),
+                                         style=wx.TE_PROCESS_ENTER )
         sizer.Add(self._label_hi, 0, wx.ALIGN_CENTER)
-        wx.EVT_TEXT_ENTER(
-            panel,
-            self._label_hi.GetId(),
-            self.update_high_on_enter)
-        wx.EVT_KILL_FOCUS(self._label_hi, self.update_high_on_enter)
+        self._label_hi.Bind( wx.EVT_TEXT_ENTER, self.update_high_on_enter)
+        self._label_hi.Bind(wx.EVT_KILL_FOCUS, self.update_high_on_enter)
 
         self.set_tooltip(self.control.lslider)
         self.set_tooltip(self.control.rslider)
         self.set_tooltip(self._label_lo)
         self.set_tooltip(self._label_hi)
 
+
         # Set-up the layout:
         panel.SetSizerAndFit(sizer)
 
-    def update_low_on_enter(self, event):
-        if isinstance(event, wx.FocusEvent):
-            event.Skip()
+
+    def update_low_on_enter(self, value):
         try:
             try:
-                low = eval(unicode(self._label_lo.GetValue()).strip())
+                low = eval(str(self._label_lo.GetValue()).strip())
                 if self.evaluate is not None:
                     low = self.evaluate(low)
             except Exception as ex:
@@ -121,12 +114,10 @@ class _BoundsEditor(Editor):
         except:
             pass
 
-    def update_high_on_enter(self, event):
-        if isinstance(event, wx.FocusEvent):
-            event.Skip()
+    def update_high_on_enter(self, value):
         try:
             try:
-                high = eval(unicode(self._label_hi.GetValue()).strip())
+                high = eval(str(self._label_hi.GetValue()).strip())
                 if self.evaluate is not None:
                     high = self.evaluate(high)
             except:
@@ -167,6 +158,7 @@ class _BoundsEditor(Editor):
             self.control.lslider.SetValue(self._convert_to_slider(low))
             self.control.rslider.SetValue(self._convert_to_slider(high))
 
+
     def update_editor(self):
         return
 
@@ -181,7 +173,7 @@ class _BoundsEditor(Editor):
         slider_delta = self.control.lslider.GetMax() - self.control.lslider.GetMin()
         range_delta = self.max - self.min
 
-        return float(range_delta) / slider_delta
+        return float(range_delta)/slider_delta
 
     def _convert_from_slider(self, slider_val):
         self._check_max_and_min()
@@ -189,7 +181,7 @@ class _BoundsEditor(Editor):
 
     def _convert_to_slider(self, value):
         self._check_max_and_min()
-        return self.control.lslider.GetMin() + (value - self.min) / self._step_size()
+        return self.control.lslider.GetMin() + (value-self.min) / self._step_size()
 
     def _low_changed(self, low):
         if self.control is None:
@@ -207,7 +199,6 @@ class _BoundsEditor(Editor):
 
         self.control.rslider.SetValue(self._convert_to_slider(self.high))
 
-
 class BoundsEditor(RangeEditor):
 
     min = Trait(None, Float)
@@ -215,6 +206,5 @@ class BoundsEditor(RangeEditor):
 
     def _get_simple_editor_class(self):
         return _BoundsEditor
-
     def _get_custom_editor_class(self):
         return _BoundsEditor
