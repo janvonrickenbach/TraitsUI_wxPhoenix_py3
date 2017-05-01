@@ -98,10 +98,12 @@ class SimpleEditor ( Editor ):
         if factory.enter_set and (not multi_line):
             control = wx.TextCtrl( parent, -1, self.str_value,
                                    style = style | wx.TE_PROCESS_ENTER )
-            parent.Bind(wx.EVT_TEXT_ENTER, self.update_object )
+            parent.Bind(wx.EVT_TEXT_ENTER, self.update_object, control)
+            parent.Bind(wx.EVT_TEXT, self.update_object, control)
         else:
             control = wx.TextCtrl( parent, -1, self.str_value, style = style )
-
+            parent.Bind(wx.EVT_TEXT_ENTER, self.update_object, control)
+            parent.Bind(wx.EVT_TEXT, self.update_object, control)
         #wx.EVT_KILL_FOCUS( control, self.update_object )
         control.Bind(wx.EVT_KILL_FOCUS,self.update_object )
 
@@ -133,7 +135,7 @@ class SimpleEditor ( Editor ):
 
             except TraitError as excp:
                 pass
-
+        event.Skip()
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------

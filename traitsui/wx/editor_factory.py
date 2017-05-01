@@ -151,7 +151,7 @@ class TextEditor ( Editor ):
             self.value = self.control.GetValue()
         except TraitError as excp:
             pass
-
+        event.Skip()
 #-------------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------------
