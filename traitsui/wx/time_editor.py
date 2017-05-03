@@ -33,21 +33,20 @@ from traitsui.wx.text_editor \
     import ReadonlyEditor as TextReadonlyEditor
 
 
-class SimpleEditor (Editor):
+class SimpleEditor(Editor):
     """
     Traits UI time editor.
     """
 
-    def init ( self, parent ):
+    def init(self, parent):
         """
         Finishes initializing the editor by creating the underlying toolkit
         widget.
         """
-        tctl = masked.TimeCtrl( parent, -1, name="12 hour control" )
+        tctl = masked.TimeCtrl(parent, -1, name="12 hour control")
         self.control = tctl
         self.control.Bind(masked.EVT_TIMEUPDATE, self.time_updated)
         return
-
 
     def time_updated(self, event):
         """
@@ -60,8 +59,7 @@ class SimpleEditor (Editor):
         self.value = datetime.time(hour, minute, second)
         return
 
-
-    def update_editor ( self ):
+    def update_editor(self):
         """
         Updates the editor when the object trait changes externally to the
         editor.
@@ -73,6 +71,8 @@ class SimpleEditor (Editor):
             time.SetSecond(self.value.second)
             self.control.SetValue(time)
         return
+
+
 #-- end SimpleEditor definition ------------------------------------------------
 
 
@@ -81,8 +81,10 @@ class SimpleEditor (Editor):
 #------------------------------------------------------------------------------
 # TODO: Write me.  Possibly use TextEditor as a model to show a string
 # representation of the time, and have enter-set do a time evaluation.
-class TextEditor (SimpleEditor):
+class TextEditor(SimpleEditor):
     pass
+
+
 #-- end TextEditor definition -------------------------------------------------
 
 
@@ -90,16 +92,18 @@ class TextEditor (SimpleEditor):
 #--  Custom Editor
 #------------------------------------------------------------------------------
 # TODO: Write me.
-class CustomEditor (SimpleEditor):
+class CustomEditor(SimpleEditor):
     pass
-#-- end TextEditor definition -------------------------------------------------
 
+
+#-- end TextEditor definition -------------------------------------------------
 
 #------------------------------------------------------------------------------
 #--  Readonly Editor
 #------------------------------------------------------------------------------
 
-class ReadonlyEditor (TextReadonlyEditor):
+
+class ReadonlyEditor(TextReadonlyEditor):
     """ Use a TextEditor for the view. """
 
     def _get_str_value(self):
@@ -109,7 +113,7 @@ class ReadonlyEditor (TextReadonlyEditor):
         else:
             return self.value.strftime(self.factory.strftime)
 
-#-- end ReadonlyEditor definition ---------------------------------------------
 
+#-- end ReadonlyEditor definition ---------------------------------------------
 
 #-- eof -----------------------------------------------------------------------

@@ -1,4 +1,3 @@
-
 from pyface.qt import QtCore, QtGui
 from pyface.qt.QtGui import QFont
 
@@ -51,8 +50,10 @@ class CustomEditor(DateCustomEditor):
         self._apply_styles(styles, groups_to_set)
 
         # Handle the removed items by resetting them
-        [map(self._reset_formatting, dates)
-         for dates in event.removed.values()]
+        [
+            map(self._reset_formatting, dates)
+            for dates in event.removed.values()
+        ]
 
     def _styles_changed(self, old, new):
         groups = getattr(self.object, self.factory.dates_trait, {})

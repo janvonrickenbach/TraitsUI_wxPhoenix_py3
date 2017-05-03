@@ -15,6 +15,7 @@ class Person(HasTraits):
     gender = Trait(None, 'M', 'F')
     name_view = View('first_name', 'last_name')
 
+
 # Note that person_view is a standalone object.
 person_view = View('first_name', 'last_name', 'age', 'gender')
 
@@ -22,7 +23,6 @@ bill = Person()
 
 
 class TraitApp(wx.App):
-
     def __init__(self, object, view):
         self.object = object
         self.view = view

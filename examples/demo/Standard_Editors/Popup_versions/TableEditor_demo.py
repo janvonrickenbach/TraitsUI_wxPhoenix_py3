@@ -29,25 +29,31 @@ class Employee(HasTraits):
     phone = Regex(value='000-0000', regex='\d\d\d[-]\d\d\d\d')
 
     traits_view = View(
-        'name', 'age', 'phone',
+        'name',
+        'age',
+        'phone',
         title='Create new employee',
         width=0.18,
-        buttons=['OK', 'Cancel']
-    )
+        buttons=['OK', 'Cancel'])
+
 
 # For readability, the parameters of the demo TableEditor are set here, rather
 # than in the View:
 table_editor = TableEditor(
-    columns=[ObjectColumn(name='name', width=0.30),
-             ObjectColumn(name='age', width=0.20),
-             ObjectColumn(name='gender', width=0.25),
-             ObjectColumn(name='phone', width=0.25)],
+    columns=[
+        ObjectColumn(
+            name='name', width=0.30), ObjectColumn(
+                name='age', width=0.20), ObjectColumn(
+                    name='gender', width=0.25), ObjectColumn(
+                        name='phone', width=0.25)
+    ],
     auto_size=False,
     deletable=True,
     sort_model=True,
     orientation='vertical',
-    edit_view=View(Group('name', 'age', 'phone', show_border=True),
-                   resizable=True),
+    edit_view=View(
+        Group(
+            'name', 'age', 'phone', show_border=True), resizable=True),
     filters=[EvalFilterTemplate, MenuFilterTemplate, RuleFilterTemplate],
     search=RuleTableFilter(),
     row_factory=Employee)
@@ -57,16 +63,18 @@ table_editor = TableEditor(
 
 class Department(HasStrictTraits):
     employees = List(Employee)
-    traits_view = View(Group(Item('employees',
-                                  editor=table_editor),
-                             show_border=True,
-                             show_labels=False),
-                       title='Department Personnel',
-                       width=.4,
-                       height=.4,
-                       resizable=True,
-                       buttons=['OK', 'Cancel', 'Undo'],
-                       kind='live')
+    traits_view = View(
+        Group(
+            Item(
+                'employees', editor=table_editor),
+            show_border=True,
+            show_labels=False),
+        title='Department Personnel',
+        width=.4,
+        height=.4,
+        resizable=True,
+        buttons=['OK', 'Cancel', 'Undo'],
+        kind='live')
 
 
 # Create some employees:

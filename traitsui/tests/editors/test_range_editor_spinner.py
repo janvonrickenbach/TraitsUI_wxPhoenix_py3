@@ -12,7 +12,6 @@
 #  Date:   Jan 2012
 #
 #------------------------------------------------------------------------------
-
 """
 Test case for bug (wx, Mac OS X)
 
@@ -43,9 +42,10 @@ class NumberWithSpinnerEditor(HasTraits):
 
     traits_view = View(
         Item(label="Enter 4, then press OK without defocusing"),
-        Item('number', editor=RangeEditor(low=3, high=8, mode='spinner')),
-        buttons = ['OK']
-    )
+        Item(
+            'number', editor=RangeEditor(
+                low=3, high=8, mode='spinner')),
+        buttons=['OK'])
 
 
 @skip_if_not_wx

@@ -67,8 +67,7 @@ from pyface.image_resource \
 #--<Constants>------------------------------------------------------------
 
 # Necessary because of the dynamic way in which the demos are loaded:
-search_path = [join(dirname(traitsui.api.__file__),
-                    'demo', 'Applications')]
+search_path = [join(dirname(traitsui.api.__file__), 'demo', 'Applications')]
 
 #--[FileInfo Class]-------------------------------------------------------
 
@@ -91,24 +90,20 @@ class FileInfo(HasPrivateTraits):
 
     @cached_property
     def _get_time(self):
-        return strftime('%I:%M:%S %p',
-                        localtime(getmtime(self.file_name)))
+        return strftime('%I:%M:%S %p', localtime(getmtime(self.file_name)))
 
     @cached_property
     def _get_date(self):
-        return strftime('%m/%d/%Y',
-                        localtime(getmtime(self.file_name)))
+        return strftime('%m/%d/%Y', localtime(getmtime(self.file_name)))
+
 
 #--[FileInfoAdapter Class]------------------------------------------------
 
 
 class FileInfoAdapter(TabularAdapter):
 
-    columns = [('File Name', 'name'),
-               ('Size', 'size'),
-               ('', 'big'),
-               ('Time', 'time'),
-               ('Date', 'date')]
+    columns = [('File Name', 'name'), ('Size', 'size'), ('', 'big'),
+               ('Time', 'time'), ('Date', 'date')]
 
     even_bg_color = wx.Colour(201, 223, 241)
     font = 'Courier 10'
@@ -126,6 +121,7 @@ class FileInfoAdapter(TabularAdapter):
 
         return (None, 'blue_ball')[size > 16384]
 
+
 #--[Tabular Editor Definition]--------------------------------------------
 
 tabular_editor = TabularEditor(
@@ -133,9 +129,11 @@ tabular_editor = TabularEditor(
     selected='file_info',
     adapter=FileInfoAdapter(),
     operations=[],
-    images=[ImageResource('blue_ball', search_path=search_path),
-             ImageResource('red_ball', search_path=search_path)]
-)
+    images=[
+        ImageResource(
+            'blue_ball', search_path=search_path), ImageResource(
+                'red_ball', search_path=search_path)
+    ])
 
 #--[PythonBrowser Class]--------------------------------------------------
 
@@ -149,25 +147,26 @@ class PythonBrowser(HasPrivateTraits):
 
     view = View(
         HSplit(
-            Item('dir', style='custom'),
+            Item(
+                'dir', style='custom'),
             VSplit(
-                Item('files', editor=tabular_editor),
-                Item('code', style='readonly'),
+                Item(
+                    'files', editor=tabular_editor),
+                Item(
+                    'code', style='readonly'),
                 show_labels=False),
-            show_labels=False
-        ),
+            show_labels=False),
         resizable=True,
         width=0.75,
-        height=0.75
-    )
+        height=0.75)
 
     #-- Event Handlers -------------------------------------------------------
 
     def _dir_changed(self, dir):
-        self.files = [FileInfo(file_name=join(dir, name))
-                      for name in listdir(dir)
-                      if ((splitext(name)[1] == '.py') and
-                          isfile(join(dir, name)))]
+        self.files = [
+            FileInfo(file_name=join(dir, name)) for name in listdir(dir)
+            if ((splitext(name)[1] == '.py') and isfile(join(dir, name)))
+        ]
 
     def _file_info_changed(self, file_info):
         fh = None
@@ -179,6 +178,7 @@ class PythonBrowser(HasPrivateTraits):
 
         if fh is not None:
             fh.close()
+
 
 #--[Example*]-------------------------------------------------------------
 

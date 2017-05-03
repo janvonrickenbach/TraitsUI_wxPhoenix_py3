@@ -42,9 +42,10 @@ class TestEnumEditor(HasTraits):
     #  Trait definitions:
     #-------------------------------------------------------------------------
 
-    value = Trait(1, enum, range,
-                  editor=EnumEditor(values=values,
-                                    evaluate=int))
+    value = Trait(
+        1, enum, range, editor=EnumEditor(
+            values=values, evaluate=int))
+
 
 #-------------------------------------------------------------------------
 #  Run the test:

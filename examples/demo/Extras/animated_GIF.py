@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This demo shows you how to use animated GIF files in a traits user interface.
 """
@@ -12,7 +11,6 @@ from traits.api import HasTraits, File, Bool
 from traitsui.api import View, VGroup, HGroup, Item, EnumEditor
 
 from traitsui.wx.animated_gif_editor import AnimatedGIFEditor
-
 
 # Some sample animated GIF files:
 base_path = join(dirname(__file__), 'images')
@@ -36,20 +34,18 @@ class AnimatedGIFDemo(HasTraits):
     view = View(
         VGroup(
             HGroup(
-                Item('gif_file',
-                     editor=AnimatedGIFEditor(playing='playing'),
-                     show_label=False),
-                Item('playing'),
-            ),
+                Item(
+                    'gif_file',
+                    editor=AnimatedGIFEditor(playing='playing'),
+                    show_label=False),
+                Item('playing'), ),
             '_',
-            Item('gif_file',
-                 label='GIF File',
-                 editor=EnumEditor(values=files)
-                 )
-        ),
+            Item(
+                'gif_file', label='GIF File',
+                editor=EnumEditor(values=files))),
         title='Animated GIF Demo',
-        buttons=['OK']
-    )
+        buttons=['OK'])
+
 
 # Create the demo:
 demo = AnimatedGIFDemo()

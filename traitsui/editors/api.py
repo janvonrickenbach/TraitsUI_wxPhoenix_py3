@@ -1,8 +1,6 @@
-
 from __future__ import absolute_import
 
 from ..toolkit import toolkit
-
 
 try:
     from .array_editor import ArrayEditor

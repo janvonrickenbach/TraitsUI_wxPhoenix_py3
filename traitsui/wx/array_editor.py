@@ -14,7 +14,6 @@
 #  Date:   01/10/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines array editors for the WX user interface toolkit.
 """
 
@@ -35,20 +34,24 @@ from .editor \
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class SimpleEditor ( BaseSimpleEditor, Editor ):
+
+class SimpleEditor(BaseSimpleEditor, Editor):
     """ Simple style of editor for arrays.
     """
     # FIXME: This class has been re-defined here simply so it inherits from the
     # wx Editor class.
     pass
 
+
 #-------------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------------
+
 
 class ReadonlyEditor(SimpleEditor):
 
     # Set the value of the readonly trait.
     readonly = True
+
 
 ### EOF #######################################################################

@@ -71,7 +71,6 @@ from tempfile import mkdtemp
 
 from invoke import task
 
-
 supported_combinations = {
     '2.7': {'pyside', 'pyqt', 'wx', 'null'},
     '3.5': {'pyqt', 'pyqt5', 'null'},
@@ -97,13 +96,25 @@ extra_dependencies = {
 }
 
 environment_vars = {
-    'pyside': {'ETS_TOOLKIT': 'qt4', 'QT_API': 'pyside'},
-    'pyqt': {'ETS_TOOLKIT': 'qt4', 'QT_API': 'pyqt'},
-    'pyqt5': {'ETS_TOOLKIT': 'qt4', 'QT_API': 'pyqt5'},
-    'wx': {'ETS_TOOLKIT': 'wx'},
-    'null': {'ETS_TOOLKIT': 'null'},
+    'pyside': {
+        'ETS_TOOLKIT': 'qt4',
+        'QT_API': 'pyside'
+    },
+    'pyqt': {
+        'ETS_TOOLKIT': 'qt4',
+        'QT_API': 'pyqt'
+    },
+    'pyqt5': {
+        'ETS_TOOLKIT': 'qt4',
+        'QT_API': 'pyqt5'
+    },
+    'wx': {
+        'ETS_TOOLKIT': 'wx'
+    },
+    'null': {
+        'ETS_TOOLKIT': 'null'
+    },
 }
-
 
 
 @task
@@ -111,8 +122,8 @@ def install(ctx, runtime='3.5', toolkit='null', environment=None):
     """ Install project and dependencies into a clean EDM environment. """
     parameters = _get_parameters(runtime, toolkit, environment)
 
-    parameters['packages'] = ' '.join(dependencies |
-                                      extra_dependencies.get(toolkit, set()))
+    parameters['packages'] = ' '.join(dependencies | extra_dependencies.get(
+        toolkit, set()))
 
     commands = [
         # create environment with dependencies
@@ -205,9 +216,11 @@ def test_all(ctx):
                 # continue to next runtime
                 print(exc)
 
+
 # ----------------------------------------------------------------------------
 # Utility routines
 # ----------------------------------------------------------------------------
+
 
 def _get_parameters(runtime, toolkit, environment):
     """ Set up parameters dictionary for format() substitution """

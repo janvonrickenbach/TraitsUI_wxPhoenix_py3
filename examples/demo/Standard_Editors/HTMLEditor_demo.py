@@ -27,9 +27,7 @@ from traitsui.api import UItem, View, HTMLEditor
 sample_text = ("""
 <html><body><h1>HTMLEditor example</h1>
 
-""" +
-               __doc__ +
-               """
+""" + __doc__ + """
 <i>Here are some lists formatted in this way:</i>
 
 Numbered list:
@@ -52,14 +50,16 @@ class HTMLEditorDemo(HasTraits):
 
     # Demo view
     traits_view = View(
-        UItem('my_html_trait',
-              # we specify the editor explicitly in order to set format_text:
-              editor=HTMLEditor(format_text=True)),
+        UItem(
+            'my_html_trait',
+            # we specify the editor explicitly in order to set format_text:
+            editor=HTMLEditor(format_text=True)),
         title='HTMLEditor',
         buttons=['OK'],
         width=800,
         height=600,
         resizable=True)
+
 
 # Create the demo:
 demo = HTMLEditorDemo()

@@ -14,7 +14,6 @@
 #  Date:   10/07/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the abstract Editor class, which represents an editing control for
     an object trait in a Traits-based user interface.
 """
@@ -25,20 +24,9 @@
 
 from __future__ import absolute_import
 
-from traits.api import (
-    Any,
-    Bool,
-    HasPrivateTraits,
-    HasTraits,
-    Instance,
-    Property,
-    ReadOnly,
-    Str,
-    Trait,
-    TraitError,
-    TraitListEvent,
-    Undefined,
-    cached_property)
+from traits.api import (Any, Bool, HasPrivateTraits, HasTraits, Instance,
+                        Property, ReadOnly, Str, Trait, TraitError,
+                        TraitListEvent, Undefined, cached_property)
 
 from traits.trait_base import not_none
 
@@ -164,8 +152,8 @@ class Editor(HasPrivateTraits):
         """
         name = self.extended_name
         if name != 'None':
-            self.context_object.on_trait_change(self._update_editor, name,
-                                                dispatch='ui')
+            self.context_object.on_trait_change(
+                self._update_editor, name, dispatch='ui')
         self.init(parent)
         self._sync_values()
         self.update_editor()
@@ -202,8 +190,8 @@ class Editor(HasPrivateTraits):
 
         name = self.extended_name
         if name != 'None':
-            self.context_object.on_trait_change(self._update_editor, name,
-                                                remove=True)
+            self.context_object.on_trait_change(
+                self._update_editor, name, remove=True)
 
         if self._user_from is not None:
             for name, handler in self._user_from:
@@ -273,8 +261,8 @@ class Editor(HasPrivateTraits):
                 handler = self.ui.handler
                 obj_name = self.object_name
                 name = self.name
-                method = (getattr(handler, '%s_%s_setattr' % (obj_name,
-                                                              name), None) or
+                method = (getattr(handler, '%s_%s_setattr' % (obj_name, name),
+                                  None) or
                           getattr(handler, '%s_setattr' % name, None) or
                           getattr(handler, 'setattr'))
                 method(self.ui.info, self.object, name, value)
@@ -370,8 +358,8 @@ class Editor(HasPrivateTraits):
 
         # Log the change that was made (as long as it is not for an event):
         if object.base_trait(name).type != 'event':
-            self.log_change(self.get_undo_item, object, name,
-                            old_value, new_value)
+            self.log_change(self.get_undo_item, object, name, old_value,
+                            new_value)
 
         # If the change was not caused by the editor itself:
         if not self._no_update:
@@ -424,10 +412,8 @@ class Editor(HasPrivateTraits):
     def get_undo_item(self, object, name, old_value, new_value):
         """ Creates an undo history entry.
         """
-        return UndoItem(object=object,
-                        name=name,
-                        old_value=old_value,
-                        new_value=new_value)
+        return UndoItem(
+            object=object, name=name, old_value=old_value, new_value=new_value)
 
     #-------------------------------------------------------------------------
     #  Returns a tuple of the form ( context_object, name[.name...], callable )
@@ -444,7 +430,7 @@ class Editor(HasPrivateTraits):
         if col < 0:
             object = self.context_object
         else:
-            object, name = self.ui.context[name[: col]], name[col + 1:]
+            object, name = self.ui.context[name[:col]], name[col + 1:]
 
         return (object, name, eval("lambda obj=object: obj." + name))
 
@@ -462,9 +448,8 @@ class Editor(HasPrivateTraits):
             value = getattr(factory, name)
             if isinstance(value, ContextValue):
                 self_trait = self.trait(name)
-                self.sync_value(value.name, name,
-                                self_trait.sync_value or trait.sync_value,
-                                self_trait.is_list is True)
+                self.sync_value(value.name, name, self_trait.sync_value or
+                                trait.sync_value, self_trait.is_list is True)
             elif value is not Undefined:
                 setattr(self, name, value)
 
@@ -473,8 +458,7 @@ class Editor(HasPrivateTraits):
     #  trait:
     #-------------------------------------------------------------------------
 
-    def sync_value(self, user_name, editor_name, mode='both',
-                   is_list=False):
+    def sync_value(self, user_name, editor_name, mode='both', is_list=False):
         """ Sets or unsets synchronization between an editor trait and a user
             object trait.
         """
@@ -490,15 +474,15 @@ class Editor(HasPrivateTraits):
                 user_object = self.context_object
                 xuser_name = user_name
             else:
-                user_object = self.ui.context[user_name[: col]]
+                user_object = self.ui.context[user_name[:col]]
                 user_name = xuser_name = user_name[col + 1:]
                 col = user_name.rfind('.')
                 if col >= 0:
-                    user_ref += ('.' + user_name[: col])
+                    user_ref += ('.' + user_name[:col])
                     user_name = user_name[col + 1:]
 
-            user_value = compile('%s.%s' % (user_ref, user_name),
-                                 '<string>', 'eval')
+            user_value = compile('%s.%s' % (user_ref, user_name), '<string>',
+                                 'eval')
             user_ref = compile(user_ref, '<string>', 'eval')
 
             if mode in ('from', 'both'):
@@ -530,8 +514,8 @@ class Editor(HasPrivateTraits):
                                 self._no_trait_update[key] = None
                                 n = event.index
                                 try:
-                                    getattr(self, editor_name)[
-                                        n: n + len(event.removed)] = event.added
+                                    getattr(self, editor_name)[n:n + len(
+                                        event.removed)] = event.added
                                 except:
                                     from traitsui.api import raise_to_debug
                                     raise_to_debug()
@@ -577,8 +561,8 @@ class Editor(HasPrivateTraits):
                             self._no_trait_update[key] = None
                             n = event.index
                             try:
-                                eval(user_value)[
-                                    n: n + len(event.removed)] = event.added
+                                eval(user_value)[n:n + len(
+                                    event.removed)] = event.added
                             except:
                                 from traitsui.api import raise_to_debug
                                 raise_to_debug()
@@ -591,8 +575,9 @@ class Editor(HasPrivateTraits):
 
                 if mode == 'to':
                     try:
-                        setattr(eval(user_ref), user_name,
-                                getattr(self, editor_name))
+                        setattr(
+                            eval(user_ref), user_name,
+                            getattr(self, editor_name))
                     except:
                         from traitsui.api import raise_to_debug
                         raise_to_debug()

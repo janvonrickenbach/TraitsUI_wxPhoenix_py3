@@ -68,8 +68,8 @@ class RangeSlider(QtGui.QSlider):
 
             opt.sliderPosition = value
             opt.sliderValue = value
-            style.drawComplexControl(
-                QtGui.QStyle.CC_Slider, opt, painter, self)
+            style.drawComplexControl(QtGui.QStyle.CC_Slider, opt, painter,
+                                     self)
 
     def mousePressEvent(self, event):
         event.accept()
@@ -91,8 +91,8 @@ class RangeSlider(QtGui.QSlider):
 
             for i, value in enumerate([self._low, self._high]):
                 opt.sliderPosition = value
-                hit = style.hitTestComplexControl(
-                    style.CC_Slider, opt, event.pos(), self)
+                hit = style.hitTestComplexControl(style.CC_Slider, opt,
+                                                  event.pos(), self)
                 if hit == style.SC_SliderHandle:
                     self.active_slider = i
                     self.pressed_control = hit
@@ -159,10 +159,10 @@ class RangeSlider(QtGui.QSlider):
         self.initStyleOption(opt)
         style = QtGui.QApplication.style()
 
-        gr = style.subControlRect(
-            style.CC_Slider, opt, style.SC_SliderGroove, self)
-        sr = style.subControlRect(
-            style.CC_Slider, opt, style.SC_SliderHandle, self)
+        gr = style.subControlRect(style.CC_Slider, opt, style.SC_SliderGroove,
+                                  self)
+        sr = style.subControlRect(style.CC_Slider, opt, style.SC_SliderHandle,
+                                  self)
 
         if self.orientation() == QtCore.Qt.Horizontal:
             slider_length = sr.width()
@@ -173,18 +173,18 @@ class RangeSlider(QtGui.QSlider):
             slider_min = gr.y()
             slider_max = gr.bottom() - slider_length + 1
 
-        return style.sliderValueFromPosition(
-            self.minimum(),
-            self.maximum(),
-            pos - slider_min,
-            slider_max - slider_min,
-            opt.upsideDown)
+        return style.sliderValueFromPosition(self.minimum(),
+                                             self.maximum(), pos - slider_min,
+                                             slider_max - slider_min,
+                                             opt.upsideDown)
+
 
 if __name__ == "__main__":
     import sys
 
     def echo(value):
         print(value)
+
     app = QtGui.QApplication(sys.argv)
     slider = RangeSlider()
     slider.setMinimum(0)

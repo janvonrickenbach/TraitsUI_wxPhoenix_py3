@@ -36,10 +36,11 @@ class ArrayAdapter(TabularAdapter):
 
     def _get_index_image(self):
         x, y, z = self.item
-        if sqrt((x - 0.5) ** 2 + (y - 0.5) ** 2 + (z - 0.5) ** 2) <= 0.25:
+        if sqrt((x - 0.5)**2 + (y - 0.5)**2 + (z - 0.5)**2) <= 0.25:
             return '@icons:red_ball'
 
         return None
+
 
 #-- ShowArray Class Definition -------------------------------------------
 
@@ -49,16 +50,16 @@ class ShowArray(HasTraits):
     data = Array
 
     view = View(
-        Item('data',
-             show_label=False,
-             style='readonly',
-             editor=TabularEditor(adapter=ArrayAdapter())
-             ),
+        Item(
+            'data',
+            show_label=False,
+            style='readonly',
+            editor=TabularEditor(adapter=ArrayAdapter())),
         title='Array Viewer',
         width=0.3,
         height=0.8,
-        resizable=True
-    )
+        resizable=True)
+
 
 # Create the demo:
 demo = ShowArray(data=random((100000, 3)))

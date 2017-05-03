@@ -52,15 +52,12 @@ class FlashDemo(HasTraits):
 
     # The view to display:
     view = View(
-        HGroup(
-            Item('flash', label='Pick a game to play')
-        ),
+        HGroup(Item(
+            'flash', label='Pick a game to play')),
         '_',
-        Item('flash',
-             show_label=False,
-             editor=FlashEditor()
-             )
-    )
+        Item(
+            'flash', show_label=False, editor=FlashEditor()))
+
 
 #--<Example*>-------------------------------------------------------------
 

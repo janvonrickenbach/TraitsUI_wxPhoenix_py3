@@ -36,7 +36,6 @@ class DummyModel(HasStrictTraits):
 
 @skip_if_null
 class TestTupleEditor(UnittestTools, unittest.TestCase):
-
     def test_value_update(self):
         # Regression test for #179
         model = DummyModel()

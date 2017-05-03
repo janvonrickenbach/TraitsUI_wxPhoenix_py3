@@ -37,9 +37,9 @@ class PlotView(HasTraits):
         # This HGroup keeps 'n' from over-widening, by implicitly placing
         # a spring to the right of the item.
         HGroup(Item('n')),
-        UItem('plot1', editor=ComponentEditor()),
-        resizable=True,
-    )
+        UItem(
+            'plot1', editor=ComponentEditor()),
+        resizable=True, )
 
     def create_plot(self, data, name, color):
         p = Plot(self.data)
@@ -58,9 +58,7 @@ class VerticalBar(HasTraits):
         VGroup(
             Item('a'),
             Item('b'),
-            show_border=True,
-        ),
-    )
+            show_border=True, ), )
 
 
 class BigView(HasTraits):
@@ -79,12 +77,13 @@ class BigView(HasTraits):
             # proportionate width, use a width < 1.0)
             # We specify the height here for sake of demonstration;
             # it could also be specified for the top-level view.
-            InstanceUItem('bar', width=150),
-            InstanceUItem('plot', width=500, height=500),
-            show_border=True,
-        ),
-        resizable=True,
-    )
+            InstanceUItem(
+                'bar', width=150),
+            InstanceUItem(
+                'plot', width=500, height=500),
+            show_border=True, ),
+        resizable=True, )
+
 
 x = linspace(-2 * pi, 2 * pi, 100)
 pv = PlotView(data=ArrayPlotData(x=x, y1=sin(x)))

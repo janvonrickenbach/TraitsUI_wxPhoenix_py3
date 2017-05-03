@@ -48,15 +48,9 @@ from traitsui.api \
 #-- The list of possible entrees -----------------------------------------
 
 possible_entrees = [
-    'Chicken Fried Steak',
-    'Chicken Fingers',
-    'Chicken Enchiladas',
-    'Cheeseburger',
-    'Pepper Steak',
-    'Beef Tacos',
-    'Club Sandwich',
-    'Ceasar Salad',
-    'Cobb Salad'
+    'Chicken Fried Steak', 'Chicken Fingers', 'Chicken Enchiladas',
+    'Cheeseburger', 'Pepper Steak', 'Beef Tacos', 'Club Sandwich',
+    'Ceasar Salad', 'Cobb Salad'
 ]
 
 #-- The KitchenCapabilities class ----------------------------------------
@@ -66,6 +60,7 @@ class KitchenCapabilities(HasPrivateTraits):
 
     # The current set of entrees the kitchen can make (based on its larder):
     available = List(possible_entrees)
+
 
 # The KitchenCapabilities are shared by all waitstaff taking orders:
 kitchen_capabilities = KitchenCapabilities()
@@ -85,27 +80,23 @@ class OrderMenu(HasPrivateTraits):
     view = View(
         HSplit(
             VGroup(
-                Item('entree',
-                     editor=EnumEditor(
-                         name='object.capabilities.available')
-                     ),
+                Item(
+                    'entree',
+                    editor=EnumEditor(name='object.capabilities.available')),
                 label='Order',
                 show_border=True,
-                dock='tab'
-            ),
+                dock='tab'),
             VGroup(
-                Item('object.capabilities.available',
-                     show_label=False,
-                     style='custom',
-                     editor=CheckListEditor(values=possible_entrees)
-                     ),
+                Item(
+                    'object.capabilities.available',
+                    show_label=False,
+                    style='custom',
+                    editor=CheckListEditor(values=possible_entrees)),
                 label='Kitchen',
                 show_border=True,
-                dock='tab'
-            )
-        ),
-        title='Dynamic EnumEditor Demo',
-    )
+                dock='tab')),
+        title='Dynamic EnumEditor Demo', )
+
 
 #-------------------------------------------------------------------------
 

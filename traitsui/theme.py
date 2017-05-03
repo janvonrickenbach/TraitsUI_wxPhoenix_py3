@@ -14,7 +14,6 @@
 #  Date:   07/13/2007
 #
 #-------------------------------------------------------------------------------
-
 """ Defines 'theme' related classes.
 """
 
@@ -32,7 +31,8 @@ from .ui_traits import Image, HasBorder, HasMargin, Alignment
 #  'Theme' class:
 #-------------------------------------------------------------------------------
 
-class Theme ( HasPrivateTraits ):
+
+class Theme(HasPrivateTraits):
 
     #-- Public Traits ----------------------------------------------------------
 
@@ -49,21 +49,21 @@ class Theme ( HasPrivateTraits ):
     label = HasMargin
 
     # The alignment to use for positioning the label:
-    alignment = Alignment( cols = 4 )
+    alignment = Alignment(cols=4)
 
     # Note: The 'content_color' and 'label_color' traits should be added by a
     # toolkit-specific category...
 
     #-- Constructor ------------------------------------------------------------
 
-    def __init__ ( self, image = None, **traits ):
+    def __init__(self, image=None, **traits):
         """ Initializes the object.
         """
         if image is not None:
             self.image = image
 
-        super( Theme, self ).__init__( **traits )
+        super(Theme, self).__init__(**traits)
+
 
 # Create a default theme:
 default_theme = Theme()
-

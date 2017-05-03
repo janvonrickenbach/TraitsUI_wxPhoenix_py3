@@ -25,6 +25,7 @@ import traits.trait_notifiers
 
 # ######### Testing tools
 
+
 @contextmanager
 def store_exceptions_on_all_threads():
     """Context manager that captures all exceptions, even those coming from
@@ -73,8 +74,10 @@ def skip_if_not_backend(test_func, backend_name=''):
     if not _is_current_backend(backend_name):
         # preserve original name so that it appears in the report
         orig_name = test_func.__name__
+
         def test_func():
             raise nose.SkipTest
+
         test_func.__name__ = orig_name
 
     return test_func
@@ -88,7 +91,6 @@ is_current_backend_qt4 = partial(_is_current_backend, backend_name='qt4')
 
 #: Return True if current backend is 'null'
 is_current_backend_null = partial(_is_current_backend, backend_name='null')
-
 
 #: Test decorator: Skip test if backend is not 'wx'
 skip_if_not_wx = partial(skip_if_not_backend, backend_name='wx')
@@ -110,8 +112,10 @@ def skip_if_null(test_func):
     if _is_current_backend('null'):
         # preserve original name so that it appears in the report
         orig_name = test_func.__name__
+
         def test_func():
             raise nose.SkipTest
+
         test_func.__name__ = orig_name
 
     return test_func
@@ -133,6 +137,7 @@ def count_calls(func):
 
 
 # ######### Utility tools to test on both qt4 and wx
+
 
 def get_children(node):
     if ETSConfig.toolkit == 'wx':
@@ -178,13 +183,14 @@ def get_dialog_size(ui_control):
 
 # ######### Debug tools
 
+
 def apply_on_children(func, node, _level=0):
     """Print the result of applying a function on `node` and its children.
     """
-    print '-'*_level + str(node)
-    print ' '*_level + str(func(node)) + '\n'
+    print '-' * _level + str(node)
+    print ' ' * _level + str(func(node)) + '\n'
     for child in get_children(node):
-        apply_on_children(func, child, _level+1)
+        apply_on_children(func, child, _level + 1)
 
 
 def wx_print_names(node):
@@ -241,7 +247,9 @@ def wx_find_event_by_number(evt_num):
     """
 
     import wx
-    possible = [attr for attr in dir(wx)
-                if attr.startswith('wxEVT') and getattr(wx, attr) == evt_num]
+    possible = [
+        attr for attr in dir(wx)
+        if attr.startswith('wxEVT') and getattr(wx, attr) == evt_num
+    ]
 
     return possible

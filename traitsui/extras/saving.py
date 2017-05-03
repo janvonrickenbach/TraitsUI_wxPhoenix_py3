@@ -14,7 +14,6 @@
 #  Date:   06/18/2009
 #
 #------------------------------------------------------------------------------
-
 """ Provides a lightweight framework that removes some of the drudge work
     involved with implementing user-friendly saving behavior in a Traits
     UI application.
@@ -176,15 +175,18 @@ class SaveHandler(Handler):
         """ Saves the object to a new path, and sets this as the 'filepath' on
             the object. Returns whether the save actually occurred.
         """
-        fileDialog = FileDialog(action='save as', title='Save As',
-                                wildcard=self.wildcard,
-                                parent=info.ui.control)
+        fileDialog = FileDialog(
+            action='save as',
+            title='Save As',
+            wildcard=self.wildcard,
+            parent=info.ui.control)
         fileDialog.open()
         if fileDialog.path == '' or fileDialog.return_code == CANCEL:
             return False
         else:
             extLen = len(self.extension)
-            if extLen and fileDialog.path[-extLen-1:] != '.' + self.extension:
+            if extLen and fileDialog.path[-extLen -
+                                          1:] != '.' + self.extension:
                 fileDialog.path += '.' + self.extension
             self.saveObject.filepath = fileDialog.path
             return self._validateAndSave()
@@ -194,8 +196,11 @@ class SaveHandler(Handler):
             the user canceled the action that invoked this prompt.
         """
         if self.saveObject.dirty:
-            code = confirm(info.ui.control, self.savePromptMessage,
-                           title="Save now?", cancel=cancel)
+            code = confirm(
+                info.ui.control,
+                self.savePromptMessage,
+                title="Save now?",
+                cancel=cancel)
             if code == CANCEL:
                 return False
             elif code == YES:
@@ -232,8 +237,8 @@ class SaveHandler(Handler):
             self.saveObject.save()
         else:
             title = "Validation error"
-            if (self.allowValidationBypass and
-                confirm(None, message, title=title) == YES):
+            if (self.allowValidationBypass and confirm(
+                    None, message, title=title) == YES):
                 self.saveObject.save()
                 success = True
             else:

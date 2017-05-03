@@ -14,7 +14,6 @@
 #  Date:   07/26/2006
 #
 #-------------------------------------------------------------------------------
-
 """ Defines a completely empty editor, intended to be used as a spacer.
 """
 
@@ -37,7 +36,8 @@ from .editor \
 #  'NullEditor' class:
 #-------------------------------------------------------------------------------
 
-class NullEditor ( Editor ):
+
+class NullEditor(Editor):
     """ A completely empty editor.
     """
 
@@ -46,19 +46,18 @@ class NullEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = control = wx.Window( parent, -1,
-                                            size = wx.Size( 1, 1 ) )
-        control.SetBackgroundColour( parent.GetBackgroundColour() )
+        self.control = control = wx.Window(parent, -1, size=wx.Size(1, 1))
+        control.SetBackgroundColour(parent.GetBackgroundColour())
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """

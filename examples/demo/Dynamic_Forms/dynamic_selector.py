@@ -72,14 +72,13 @@ class Address(HasTraits):
     view = View(
         Item(name='street_address'),
         Item(name='state'),
-        Item(name='city',
-             editor=EnumEditor(name='handler.cities'),
-             ),
+        Item(
+            name='city',
+            editor=EnumEditor(name='handler.cities'), ),
         title='Address Information',
         buttons=['OK'],
         resizable=True,
-        handler=AddressHandler
-    )
+        handler=AddressHandler)
 
 
 # Create the demo:

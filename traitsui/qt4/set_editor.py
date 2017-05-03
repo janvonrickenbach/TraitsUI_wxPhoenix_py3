@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the set editors for the PyQt user interface toolkit.
 """
 
@@ -86,11 +85,11 @@ class SimpleEditor(Editor):
             self._object, self._name, self._value = \
                 self.parse_extended_name(factory.name)
             self.values_changed()
-            self._object.on_trait_change(self._values_changed,
-                                         self._name, dispatch='ui')
+            self._object.on_trait_change(
+                self._values_changed, self._name, dispatch='ui')
         else:
-            factory.on_trait_change(self.update_editor, 'values_modified',
-                                    dispatch='ui')
+            factory.on_trait_change(
+                self.update_editor, 'values_modified', dispatch='ui')
 
         blayout = QtGui.QVBoxLayout()
 
@@ -121,9 +120,7 @@ class SimpleEditor(Editor):
                                           factory.right_column_title)
 
         self.context_object.on_trait_change(
-            self.update_editor,
-            self.extended_name + '_items?',
-            dispatch='ui')
+            self.update_editor, self.extended_name + '_items?', dispatch='ui')
 
     #-------------------------------------------------------------------------
     #  Gets the current set of enumeration names:
@@ -298,16 +295,14 @@ class SimpleEditor(Editor):
         """ Disposes of the contents of an editor.
         """
         if self._object is not None:
-            self._object.on_trait_change(self._values_changed,
-                                         self._name, remove=True)
+            self._object.on_trait_change(
+                self._values_changed, self._name, remove=True)
         else:
-            self.factory.on_trait_change(self.update_editor,
-                                         'values_modified', remove=True)
+            self.factory.on_trait_change(
+                self.update_editor, 'values_modified', remove=True)
 
         self.context_object.on_trait_change(
-            self.update_editor,
-            self.extended_name + '_items?',
-            remove=True)
+            self.update_editor, self.extended_name + '_items?', remove=True)
 
         super(SimpleEditor, self).dispose()
 
@@ -376,8 +371,8 @@ class SimpleEditor(Editor):
         while list_from.count() > 0:
             index_to = list_to.count()
             list_from.item(0).setSelected(True)
-            list_to.insertItems(
-                index_to, self._get_selected_strings(list_from))
+            list_to.insertItems(index_to,
+                                self._get_selected_strings(list_from))
             list_from.takeItem(0)
             values_to.append(values_from[0])
             del values_from[0]
@@ -424,8 +419,9 @@ class SimpleEditor(Editor):
 
             # If right list is ordered, keep moved items selected:
             if self.factory.ordered:
-                items = list_to.findItems(
-                    item_label, QtCore.Qt.MatchFixedString | QtCore.Qt.MatchCaseSensitive)
+                items = list_to.findItems(item_label,
+                                          QtCore.Qt.MatchFixedString |
+                                          QtCore.Qt.MatchCaseSensitive)
                 if items:
                     items[0].setSelected(True)
 
@@ -467,7 +463,8 @@ class SimpleEditor(Editor):
         else:
             index = index_from
             values = [value[index_to], value[index_from]]
-        self.value = value[: index] + values + value[index + 2:]
+        self.value = value[:index] + values + value[index + 2:]
+
     #-------------------------------------------------------------------------
     #  Sets the proper enable state for the up and down buttons:
     #-------------------------------------------------------------------------
@@ -477,11 +474,11 @@ class SimpleEditor(Editor):
         """
         if self.factory.ordered:
             selected = self._used.selectedItems()
-            self._up.setEnabled(len(selected) == 1 and
-                                selected[0] is not self._used.item(0))
+            self._up.setEnabled(
+                len(selected) == 1 and selected[0] is not self._used.item(0))
             self._down.setEnabled(
-                len(selected) == 1 and selected[0] is not self._used.item(
-                    self._used.count() - 1))
+                len(selected) == 1 and
+                selected[0] is not self._used.item(self._used.count() - 1))
 
     #-------------------------------------------------------------------------
     #  Sets the proper enable state for the left and right buttons:
@@ -497,11 +494,11 @@ class SimpleEditor(Editor):
 
         if self.factory.can_move_all:
             self._use_all.setEnabled(
-                self._unused.count() > 0 and self._get_first_selection(
-                    self._unused) >= 0)
+                self._unused.count() > 0 and
+                self._get_first_selection(self._unused) >= 0)
             self._unuse_all.setEnabled(
-                self._used.count() > 0 and self._get_first_selection(
-                    self._used) >= 0)
+                self._used.count() > 0 and
+                self._get_first_selection(self._used) >= 0)
 
     #-------------------------------------------------------------------------
     # Returns a list of the selected strings in the listbox

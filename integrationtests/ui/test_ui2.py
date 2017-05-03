@@ -43,7 +43,6 @@ origin_values = ['top left', 'top right', 'bottom left', 'bottom right']
 
 
 class PersonHandler(Handler):
-
     def object_zip_changed(self, info):
         obj = info.object
         enabled = (obj.zip >= 10000)
@@ -58,13 +57,13 @@ class PersonHandler(Handler):
     def object_call_changed(self, info):
         print 'You called?'
 
+
 #-------------------------------------------------------------------------
 #  'WizardHandler' class:
 #-------------------------------------------------------------------------
 
 
 class WizardHandler(Handler):
-
     def object_sex_changed(self, info):
         if info.object.sex == 'Female':
             info.p1.next = 'p3'
@@ -76,6 +75,7 @@ class WizardHandler(Handler):
         info.p2.enabled = info.p3.enabled = (info.object.name != '')
         if not info.p2.enabled:
             info.p2.msg = info.p3.msg = 'You must enter a valid name.'
+
 
 #-------------------------------------------------------------------------
 #  'Employer' class:
@@ -93,6 +93,7 @@ class Employer(HasTraits):
 
     view = View('company', 'boss')
 
+
 #-------------------------------------------------------------------------
 #  'Person' class
 #-------------------------------------------------------------------------
@@ -108,58 +109,54 @@ class Person(HasTraits):
     age = Int(39)
     sex = Trait('Male', 'Female')
     coolness = Range(0.0, 10.0, 10.0)
-    number = Trait(1, Range(1, 6),
-                   'one', 'two', 'three', 'four', 'five', 'six')
+    number = Trait(1,
+                   Range(1, 6), 'one', 'two', 'three', 'four', 'five', 'six')
     human = Bool(True)
     employer = Trait(Employer(company='Enthought, Inc.', boss='eric'))
     eye_color = RGBAColor
     set = List(editor=CheckListEditor(
-        values=['one', 'two', 'three', 'four'],
-        cols=4))
+        values=['one', 'two', 'three', 'four'], cols=4))
     font = KivaFont
     street = Str
     city = Str
     state = Str
     zip = Int(78663)
     password = Str
-    books = List(Str, ['East of Eden', 'The Grapes of Wrath',
-                       'Of Mice and Men'])
+    books = List(Str,
+                 ['East of Eden', 'The Grapes of Wrath', 'Of Mice and Men'])
     call = Event(0, editor=ButtonEditor(label='Click to call'))
     info = Str(editor=FileEditor())
     location = Str(editor=DirectoryEditor())
-    origin = Trait(editor=ImageEnumEditor(values=origin_values,
-                                          suffix='_origin',
-                                          cols=4,
-                                          klass=Employer),
-                   *origin_values)
+    origin = Trait(
+        editor=ImageEnumEditor(
+            values=origin_values, suffix='_origin', cols=4, klass=Employer),
+        *origin_values)
 
     nm = Item('name', enabled_when='object.age >= 21')
     pw = Item('password', defined_when='object.zip == 78664')
-    view = View(((nm, 'age', 'coolness',
-                  '_', 'eye_color', 'eye_color@', 'eye_color*', 'eye_color~',
-                  '_', 'font', 'font@', 'font*', 'font~',
-                  '_', 'set', 'set@', 'set*', 'set~',
-                  '_', 'sex', 'sex@', 'sex*', 'sex~',
-                  '_', 'human', 'human@', 'human*', 'human~',
-                  '_', 'number', 'number@', 'number*', 'number~',
-                  '_', 'books', '_', 'books@', '_', 'books*', '_', 'books~',
-                  '_', 'info', 'location', 'origin', 'origin@', 'call',
-                  'employer', 'employer[]@', 'employer*', 'employer~',
-                  pw,
-                  '|<[Person:]'),
-                 (' ', 'street', 'city', 'state', 'zip', '|<[Address:]'),
-                 (nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm,
-                  '|<[Names:]'),
-                 '|'),
-                title='Traits 2 User Interface Test',
-                handler=PersonHandler(),
-                buttons=['Apply', 'Revert', 'Undo', 'OK'],
-                height=0.5)
+    view = View(
+        ((nm, 'age', 'coolness', '_', 'eye_color', 'eye_color@', 'eye_color*',
+          'eye_color~', '_', 'font', 'font@', 'font*', 'font~', '_', 'set',
+          'set@', 'set*', 'set~', '_', 'sex', 'sex@', 'sex*', 'sex~', '_',
+          'human', 'human@', 'human*', 'human~', '_', 'number', 'number@',
+          'number*', 'number~', '_', 'books', '_', 'books@', '_', 'books*',
+          '_', 'books~', '_', 'info', 'location', 'origin', 'origin@', 'call',
+          'employer', 'employer[]@', 'employer*', 'employer~', pw,
+          '|<[Person:]'),
+         (' ', 'street', 'city', 'state', 'zip', '|<[Address:]'),
+         (nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm, nm,
+          '|<[Names:]'), '|'),
+        title='Traits 2 User Interface Test',
+        handler=PersonHandler(),
+        buttons=['Apply', 'Revert', 'Undo', 'OK'],
+        height=0.5)
 
-    wizard = View(('|p1:', 'name', 'age', 'sex'),
-                  ('|p2:', 'street', 'city', 'state', 'zip'),
-                  ('|p3:', 'eye_color', 'origin', 'human'),
-                  handler=WizardHandler())
+    wizard = View(
+        ('|p1:', 'name', 'age', 'sex'),
+        ('|p2:', 'street', 'city', 'state', 'zip'),
+        ('|p3:', 'eye_color', 'origin', 'human'),
+        handler=WizardHandler())
+
 
 #-------------------------------------------------------------------------
 #  'TraitSheetApp' class:
@@ -188,6 +185,7 @@ class TraitSheetApp(wx.App):
         ui = self.object.edit_traits('wizard', kind='wizard')
         self.SetTopWindow(ui.control)
         return True
+
 
 #-------------------------------------------------------------------------
 #  Main program:

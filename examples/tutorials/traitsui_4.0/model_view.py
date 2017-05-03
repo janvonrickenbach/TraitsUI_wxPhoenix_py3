@@ -109,6 +109,7 @@ class Parent(HasTraits):
     first_name = Str
     last_name = Str
 
+
 #--[Child Class]----------------------------------------------------------
 
 
@@ -119,6 +120,7 @@ class Child(HasTraits):
 
     first_name = Str
     last_name = Delegate('father')
+
 
 #--[ChildModelView Class]-------------------------------------------------
 
@@ -131,17 +133,18 @@ class ChildModelView(ModelView):
 
     # Define a view showing the family as a table:
     view = View(
-        Item('family',
-             show_label=False,
-             editor=TableEditor(
-                 columns=[ObjectColumn(name='first_name'),
-                          ObjectColumn(name='last_name')])),
-        resizable=True
-    )
+        Item(
+            'family',
+            show_label=False,
+            editor=TableEditor(columns=[
+                ObjectColumn(name='first_name'), ObjectColumn(name='last_name')
+            ])),
+        resizable=True)
 
     # Implementation of the 'family' property:
     def _get_family(self):
         return [self.model.father, self.model.mother, self.model]
+
 
 #--[Example*]-------------------------------------------------------------
 
@@ -152,7 +155,6 @@ son = Child(mother=mom, father=dad, first_name='John')
 
 # Create the controller for the model:
 demo = ChildModelView(model=son)
-
 
 if __name__ == '__main__':
     demo.configure_traits()

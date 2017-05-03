@@ -78,15 +78,16 @@ class SettableCachedProperty(HasTraits):
         Item('a'),
         Item('b'),
         '_',
-        Item('c',
-             editor=RangeEditor(low=1, high=100, mode='slider')),
+        Item(
+            'c', editor=RangeEditor(
+                low=1, high=100, mode='slider')),
         Item('c'),
         '_',
-        Item('d',
-             editor=RangeEditor(low=1, high=400, mode='slider')),
+        Item(
+            'd', editor=RangeEditor(
+                low=1, high=400, mode='slider')),
         Item('d'),
-        width=0.3
-    )
+        width=0.3)
 
     @property_depends_on('a,b', settable=True)
     def _get_c(self):
@@ -95,6 +96,7 @@ class SettableCachedProperty(HasTraits):
     @property_depends_on('c')
     def _get_d(self):
         return (self.c + self.c)
+
 
 #-- Run the demo ---------------------------------------------------------
 

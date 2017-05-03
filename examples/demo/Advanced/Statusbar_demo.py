@@ -40,15 +40,18 @@ class TextEditor(HasPrivateTraits):
     # The view definition:
     view = View(
         Label('Type into the text editor box:'),
-        Item('text', style='custom', show_label=False),
+        Item(
+            'text', style='custom', show_label=False),
         title='Text Editor',
         id='traitsui.demo.advanced.statusbar_demo',
         width=0.4,
         height=0.4,
         resizable=True,
-        statusbar=[StatusItem(name='length', width=0.5),
-                   StatusItem(name='time', width=85)]
-    )
+        statusbar=[
+            StatusItem(
+                name='length', width=0.5), StatusItem(
+                    name='time', width=85)
+        ])
 
     #-- Property Implementations ---------------------------------------------
 
@@ -72,6 +75,7 @@ class TextEditor(HasPrivateTraits):
         while True:
             self.time = strftime('%I:%M:%S %p')
             sleep(1.0)
+
 
 # Create the demo object:
 popup = TextEditor()

@@ -20,7 +20,6 @@ the selected tab completely visible.
 #  tab. The correspondence is determined by the contents of the 'people' trait,
 #  and not by the physical layout of the notebook tabs.
 
-
 from traits.api import HasStrictTraits, Str, Int, Regex, List, Instance, Range
 from traitsui.api import View, VGroup, Item, ListEditor
 
@@ -35,21 +34,23 @@ class Person(HasStrictTraits):
     phone = Regex(value='000-0000', regex='\d\d\d[-]\d\d\d\d')
 
     # Traits view definition:
-    traits_view = View('name', 'age', 'phone',
-                       width=0.18,
-                       buttons=['OK', 'Cancel'])
+    traits_view = View(
+        'name', 'age', 'phone', width=0.18, buttons=['OK', 'Cancel'])
+
 
 #-- Sample Data ----------------------------------------------------------
 
 people = [
-    Person(name='Dave Chomsky', age=39, phone='555-1212'),
-    Person(name='Mike Wakowski', age=28, phone='555-3526'),
-    Person(name='Joe Higginbotham', age=34, phone='555-6943'),
-    Person(name='Tom Derringer', age=22, phone='555-7586'),
-    Person(name='Dick Van Der Hooten', age=63, phone='555-3895'),
-    Person(name='Harry McCallum', age=46, phone='555-3285'),
-    Person(name='Sally Johnson', age=43, phone='555-8797'),
-    Person(name='Fields Timberlawn', age=31, phone='555-3547')
+    Person(
+        name='Dave Chomsky', age=39, phone='555-1212'), Person(
+            name='Mike Wakowski', age=28, phone='555-3526'), Person(
+                name='Joe Higginbotham', age=34, phone='555-6943'), Person(
+                    name='Tom Derringer', age=22, phone='555-7586'), Person(
+                        name='Dick Van Der Hooten', age=63, phone='555-3895'),
+    Person(
+        name='Harry McCallum', age=46, phone='555-3285'), Person(
+            name='Sally Johnson', age=43, phone='555-8797'), Person(
+                name='Fields Timberlawn', age=31, phone='555-3547')
 ]
 
 #-- ListEditorNotebookSelectionDemo Class --------------------------------
@@ -74,17 +75,17 @@ class ListEditorNotebookSelectionDemo(HasStrictTraits):
         Item('index'),
         '_',
         VGroup(
-            Item('people',
-                 id='notebook',
-                 show_label=False,
-                 style='custom',
-                 editor=ListEditor(use_notebook=True,
-                                   deletable=False,
-                                   selected='selected',
-                                   export='DockWindowShell',
-                                   page_name='.name')
-                 )
-        ),
+            Item(
+                'people',
+                id='notebook',
+                show_label=False,
+                style='custom',
+                editor=ListEditor(
+                    use_notebook=True,
+                    deletable=False,
+                    selected='selected',
+                    export='DockWindowShell',
+                    page_name='.name'))),
         id='traitsui.demo.Traits UI Demo.Advanced.'
         'List_editor_notebook_selection_demo',
         dock='horizontal')
@@ -96,6 +97,7 @@ class ListEditorNotebookSelectionDemo(HasStrictTraits):
 
     def _index_changed(self, index):
         self.selected = self.people[index]
+
 
 #-- Set Up The Demo ------------------------------------------------------
 

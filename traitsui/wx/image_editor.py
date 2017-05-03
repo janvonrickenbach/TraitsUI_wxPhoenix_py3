@@ -14,7 +14,6 @@
 #  Date:   06/05/2007
 #
 #-------------------------------------------------------------------------------
-
 """ Traits UI 'display only' image editor.
 """
 
@@ -44,7 +43,8 @@ from .image_control \
 #  '_ImageEditor' class:
 #-------------------------------------------------------------------------------
 
-class _ImageEditor ( Editor ):
+
+class _ImageEditor(Editor):
     """ Traits UI 'display only' image editor.
     """
 
@@ -53,7 +53,7 @@ class _ImageEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
@@ -61,8 +61,7 @@ class _ImageEditor ( Editor ):
         if image is None:
             image = self.value
 
-        self.control = ImageControl( parent, convert_bitmap( image ),
-                                     padding = 0 )
+        self.control = ImageControl(parent, convert_bitmap(image), padding=0)
 
         self.set_tooltip()
 
@@ -70,14 +69,14 @@ class _ImageEditor ( Editor ):
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
         if self.factory.image is None:
             value = self.value
-            if isinstance( value, ImageResource ):
-                self.control.Bitmap( convert_bitmap( value ) )
+            if isinstance(value, ImageResource):
+                self.control.Bitmap(convert_bitmap(value))
+
 
 ### EOF #######################################################################
-

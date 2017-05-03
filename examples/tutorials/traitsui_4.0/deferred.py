@@ -45,10 +45,7 @@ class Count(HasTraits):
     count = Int
     go = Button('Count')
 
-    view = View(
-        Item('count', style='readonly'),
-        Item('go', show_label=False)
-    )
+    view = View(Item('count', style='readonly'), Item('go', show_label=False))
 
     def _go_changed(self):
         # Even though the 'count' trait (which is visible in the UI) is being
@@ -60,10 +57,10 @@ class Count(HasTraits):
         for i in range(10000):
             self.count += 1
 
+
 #--<Example*>-------------------------------------------------------------
 
 demo = Count()
-
 
 if __name__ == '__main__':
     demo.configure_traits()

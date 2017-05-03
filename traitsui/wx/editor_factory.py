@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the base wxPython EditorFactory class and classes the various
     styles of editors used in a Traits-based user interface.
 """
@@ -46,6 +45,7 @@ from .custom_editor import CustomEditor
 #   Deprecated alias for traitsui.editor_factory.EditorFactory
 #-------------------------------------------------------------------------------
 
+
 class EditorFactory(BaseEditorFactory):
     """ Deprecated alias for traitsui.editor_factory.EditorFactory.
     """
@@ -53,13 +53,15 @@ class EditorFactory(BaseEditorFactory):
     def __init__(self, *args, **kwds):
         super(EditorFactory, self).__init__(*args, **kwds)
         warnings.warn("DEPRECATED: Use traitsui.editor_factory."
-            ".EditorFactory instead.", DeprecationWarning)
+                      ".EditorFactory instead.", DeprecationWarning)
+
 
 #-------------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class SimpleEditor ( Editor ):
+
+class SimpleEditor(Editor):
     """ Base class for simple style editors, which displays a text field
         containing the text representation of the object trait value. Clicking
         in the text field displays an editor-specific dialog box for changing
@@ -67,30 +69,30 @@ class SimpleEditor ( Editor ):
     """
 
     # Has the left mouse button been pressed:
-    left_down = Bool( False )
+    left_down = Bool(False)
 
     #---------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = self.create_control( parent )
-        self.control.Bind(wx.EVT_LEFT_DOWN, self._enable_popup_editor )
-        self.control.Bind(wx.EVT_LEFT_UP, self._show_popup_editor  )
+        self.control = self.create_control(parent)
+        self.control.Bind(wx.EVT_LEFT_DOWN, self._enable_popup_editor)
+        self.control.Bind(wx.EVT_LEFT_UP, self._show_popup_editor)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Creates the control to use for the simple editor:
     #---------------------------------------------------------------------------
 
-    def create_control ( self, parent ):
+    def create_control(self, parent):
         """ Creates the control to use for the simple editor.
         """
-        return wx.TextCtrl( parent, -1, self.str_value, style = wx.TE_READONLY )
+        return wx.TextCtrl(parent, -1, self.str_value, style=wx.TE_READONLY)
 
     #---------------------------------------------------------------------------
     #  Invokes the pop-up editor for an object trait:
@@ -98,29 +100,31 @@ class SimpleEditor ( Editor ):
     #  (Normally overridden in a subclass)
     #---------------------------------------------------------------------------
 
-    def popup_editor ( self, event ):
+    def popup_editor(self, event):
         """ Invokes the pop-up editor for an object trait.
         """
         pass
 
-    def _enable_popup_editor ( self, event ):
+    def _enable_popup_editor(self, event):
         """ Mark the left mouse button as being pressed currently.
         """
         self.left_down = True
 
-    def _show_popup_editor ( self, event ):
+    def _show_popup_editor(self, event):
         """ Display the popup editor if the left mouse button was pressed
             previously.
         """
         if self.left_down:
             self.left_down = False
-            self.popup_editor( event )
+            self.popup_editor(event)
+
 
 #-------------------------------------------------------------------------------
 #  'TextEditor' class:
 #-------------------------------------------------------------------------------
 
-class TextEditor ( Editor ):
+
+class TextEditor(Editor):
     """ Base class for text style editors, which displays an editable text
         field, containing a text representation of the object trait value.
     """
@@ -130,21 +134,21 @@ class TextEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = wx.TextCtrl( parent, -1, self.str_value,
-                                    style = wx.TE_PROCESS_ENTER )
-        self.control.Bind(wx.EVT_KILL_FOCUS, self.update_object )
-        self.control.Bind(wx.EVT_TEXT_ENTER, self.update_object )
+        self.control = wx.TextCtrl(
+            parent, -1, self.str_value, style=wx.TE_PROCESS_ENTER)
+        self.control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
+        self.control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Handles the user changing the contents of the edit control:
     #---------------------------------------------------------------------------
 
-    def update_object ( self, event ):
+    def update_object(self, event):
         """ Handles the user changing the contents of the edit control.
         """
         try:
@@ -152,11 +156,14 @@ class TextEditor ( Editor ):
         except TraitError as excp:
             pass
         event.Skip()
+
+
 #-------------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------------
 
-class ReadonlyEditor ( Editor ):
+
+class ReadonlyEditor(Editor):
     """ Base class for read-only style editors, which displays a read-only text
         field, containing a text representation of the object trait value.
     """
@@ -172,17 +179,20 @@ class ReadonlyEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
         if (self.item.resizable is True) or (self.item.height != -1.0):
-            self.control = wx.TextCtrl( parent, -1, self.str_value,
-                       style = wx.NO_BORDER | wx.TE_MULTILINE | wx.TE_READONLY )
-            self.control.SetBackgroundColour( WindowColor )
+            self.control = wx.TextCtrl(
+                parent,
+                -1,
+                self.str_value,
+                style=wx.NO_BORDER | wx.TE_MULTILINE | wx.TE_READONLY)
+            self.control.SetBackgroundColour(WindowColor)
         else:
-            self.control = wx.StaticText( parent, -1, self.str_value,
-                                          style = wx.ALIGN_LEFT )
+            self.control = wx.StaticText(
+                parent, -1, self.str_value, style=wx.ALIGN_LEFT)
             self.layout_style = 0
 
         self.set_tooltip()
@@ -191,14 +201,13 @@ class ReadonlyEditor ( Editor ):
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
         new_value = self.str_value
-        if (self.item.resizable is True) or (self.item.height!= -1.0):
+        if (self.item.resizable is True) or (self.item.height != -1.0):
             if self.control.GetValue() != new_value:
-                self.control.SetValue( new_value )
+                self.control.SetValue(new_value)
         elif self.control.GetLabel() != new_value:
-            self.control.SetLabel( new_value )
-
+            self.control.SetLabel(new_value)

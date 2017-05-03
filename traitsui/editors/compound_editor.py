@@ -12,7 +12,6 @@
 #  Author: David C. Morrill
 #
 #------------------------------------------------------------------------------
-
 """ Defines the compound editor factory for all traits toolkit backends.
 """
 
@@ -31,13 +30,14 @@ from ..editor_factory import EditorFactory
 #-------------------------------------------------------------------------------
 
 # List of component editor factories used to build a compound editor
-editors_trait = List( EditorFactory )
+editors_trait = List(EditorFactory)
 
 #-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for compound editors.
     """
     #---------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class ToolkitEditorFactory ( EditorFactory ):
     #---------------------------------------------------------------------------
 
     # Component editor factories used to build the editor
-    editors  = editors_trait
+    editors = editors_trait
 
     # Is user input set on every keystroke?
     auto_set = true

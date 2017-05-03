@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the various editors for multi-selection enumerations, for the PyQt
 user interface toolkit.
 """
@@ -41,14 +40,13 @@ from editor \
 
 logger = logging.getLogger(__name__)
 
-
 # default formatting function (would import from string, but not in Python 3)
 capitalize = lambda s: s.capitalize()
-
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------
+
 
 class SimpleEditor(EditorWithList):
     """ Simple style of editor for checklists, which displays a combo box.
@@ -156,6 +154,7 @@ class SimpleEditor(EditorWithList):
         except:
             pass
 
+
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -260,6 +259,7 @@ class CustomEditor(SimpleEditor):
             else:
                 cb.setCheckState(QtCore.Qt.Unchecked)
 
+
 #-------------------------------------------------------------------------
 #  'TextEditor' class:
 #-------------------------------------------------------------------------
@@ -285,6 +285,7 @@ class TextEditor(BaseTextEditor):
             self.value = value
         except TraitError as excp:
             pass
+
 
 #-------------------------------------------------------------------------
 #  Parse a value into a list:

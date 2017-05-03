@@ -14,7 +14,6 @@
 #  Date:   03/28/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines 'pseudo' package that imports all of the traits extras symbols.
 """
 

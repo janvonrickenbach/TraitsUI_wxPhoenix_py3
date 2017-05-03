@@ -12,7 +12,6 @@
 #  Date:   Jan 2012
 #
 #------------------------------------------------------------------------------
-
 """
 Test case for bug (wx, Mac OS X)
 
@@ -38,9 +37,10 @@ class NumberWithTextEditor(HasTraits):
 
     traits_view = View(
         Item(label="Range should be 3 to 8. Enter 1, then press OK"),
-        Item('number', editor=RangeEditor(low=3, high=8, mode='text')),
-        buttons = ['OK']
-    )
+        Item(
+            'number', editor=RangeEditor(
+                low=3, high=8, mode='text')),
+        buttons=['OK'])
 
 
 @skip_if_not_wx
@@ -63,7 +63,7 @@ def test_wx_spin_control_editing():
         press_ok_button(ui)
 
     # the number traits should be between 3 and 8
-    assert num.number >= 3 and num.number <=8
+    assert num.number >= 3 and num.number <= 8
 
 
 if __name__ == '__main__':

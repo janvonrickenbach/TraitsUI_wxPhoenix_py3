@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the base class for PyQt editors.
 """
 
@@ -94,8 +93,9 @@ class Editor(UIEditor):
         else:
             control = self.control
 
-        QtGui.QMessageBox.information(
-            control, self.description + ' value error', str(excp))
+        QtGui.QMessageBox.information(control,
+                                      self.description + ' value error',
+                                      str(excp))
 
     #-------------------------------------------------------------------------
     #  Sets the tooltip for a specified control:
@@ -329,10 +329,8 @@ class Editor(UIEditor):
         if action.defined_when != '':
 
             try:
-                if not eval(
-                        action.defined_when,
-                        globals(),
-                        self._menu_context):
+                if not eval(action.defined_when, globals(),
+                            self._menu_context):
                     return False
             except:
                 from traitsui.api import raise_to_debug
@@ -340,10 +338,8 @@ class Editor(UIEditor):
 
         if action.visible_when != '':
             try:
-                if not eval(
-                        action.visible_when,
-                        globals(),
-                        self._menu_context):
+                if not eval(action.visible_when, globals(),
+                            self._menu_context):
                     return False
             except:
                 from traitsui.api import raise_to_debug
@@ -399,6 +395,7 @@ class Editor(UIEditor):
 
         self.control.setSizePolicy(policy)
 
+
 #-------------------------------------------------------------------------
 #  'EditorWithList' class:
 #-------------------------------------------------------------------------
@@ -436,12 +433,10 @@ class EditorWithList(Editor):
             self.list_object, self.list_name = factory, 'values'
             self.list_value = lambda: factory.values
 
-        self.list_object.on_trait_change(self._list_updated,
-                                         self.list_name, dispatch='ui')
         self.list_object.on_trait_change(
-            self._list_updated,
-            self.list_name + '_items',
-            dispatch='ui')
+            self._list_updated, self.list_name, dispatch='ui')
+        self.list_object.on_trait_change(
+            self._list_updated, self.list_name + '_items', dispatch='ui')
 
         self._list_updated()
 
@@ -452,12 +447,10 @@ class EditorWithList(Editor):
     def dispose(self):
         """ Disconnects the listeners set up by the constructor.
         """
-        self.list_object.on_trait_change(self._list_updated,
-                                         self.list_name, remove=True)
         self.list_object.on_trait_change(
-            self._list_updated,
-            self.list_name + '_items',
-            remove=True)
+            self._list_updated, self.list_name, remove=True)
+        self.list_object.on_trait_change(
+            self._list_updated, self.list_name + '_items', remove=True)
 
         super(EditorWithList, self).dispose()
 
@@ -478,6 +471,7 @@ class EditorWithList(Editor):
         """ Handles the monitored list being updated.
         """
         raise NotImplementedError
+
 
 #-------------------------------------------------------------------------
 #  'EditorFromView' class:

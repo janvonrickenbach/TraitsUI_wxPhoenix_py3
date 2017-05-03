@@ -33,10 +33,8 @@ demo_id = 'traitsui.demo.standard_editors.file_dialog.image_info'
 
 # The image filters description:
 filters = [
-    'PNG file (*.png)|*.png',
-    'GIF file (*.gif)|*.gif',
-    'JPG file (*.jpg)|*.jpg',
-    'JPEG file (*.jpeg)|*.jpeg'
+    'PNG file (*.png)|*.png', 'GIF file (*.gif)|*.gif',
+    'JPG file (*.jpg)|*.jpg', 'JPEG file (*.jpeg)|*.jpeg'
 ]
 
 
@@ -52,23 +50,23 @@ class FileDialogDemo(HasTraits):
 
     view = View(
         HGroup(
-            Item('open', show_label=False),
+            Item(
+                'open', show_label=False),
             '_',
-            Item('file_name', style='readonly', springy=True)
-        ),
-        width=0.5
-    )
+            Item(
+                'file_name', style='readonly', springy=True)),
+        width=0.5)
 
     #-- Traits Event Handlers ------------------------------------------------
 
     def _open_changed(self):
         """ Handles the user clicking the 'Open...' button.
         """
-        file_name = open_file(extensions=ImageInfo(),
-                              filter=filters,
-                              id=demo_id)
+        file_name = open_file(
+            extensions=ImageInfo(), filter=filters, id=demo_id)
         if file_name != '':
             self.file_name = file_name
+
 
 # Create the demo:
 demo = FileDialogDemo()

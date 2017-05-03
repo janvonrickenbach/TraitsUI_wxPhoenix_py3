@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the compound editor and the compound editor factory for the
     wxPython user interface toolkit.
 """
@@ -44,7 +43,8 @@ from .helper \
 #  'CompoundEditor' class:
 #-------------------------------------------------------------------------------
 
-class CompoundEditor ( Editor ):
+
+class CompoundEditor(Editor):
     """ Editor for compound traits, which displays editors for each of the
     combined traits, in the appropriate style.
     """
@@ -60,26 +60,26 @@ class CompoundEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
         # Create a panel to hold all of the component trait editors:
-        self.control = panel = TraitsUIPanel( parent, -1 )
-        sizer        = wx.BoxSizer( wx.VERTICAL )
+        self.control = panel = TraitsUIPanel(parent, -1)
+        sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Add all of the component trait editors:
         self._editors = editors = []
         for factory in self.factory.editors:
-            editor = getattr( factory, self.kind )( self.ui, self.object,
-                                       self.name, self.description, panel )
-            editor.prepare( panel )
-            sizer.Add( editor.control, 1,
-                       wx.TOP | wx.BOTTOM | editor.layout_style, 3 )
-            editors.append( editor )
+            editor = getattr(factory, self.kind)(
+                self.ui, self.object, self.name, self.description, panel)
+            editor.prepare(panel)
+            sizer.Add(editor.control, 1, wx.TOP | wx.BOTTOM |
+                      editor.layout_style, 3)
+            editors.append(editor)
 
         # Set-up the layout:
-        panel.SetSizerAndFit( sizer )
+        panel.SetSizerAndFit(sizer)
 
         self.set_tooltip()
 
@@ -87,7 +87,7 @@ class CompoundEditor ( Editor ):
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
@@ -97,17 +97,19 @@ class CompoundEditor ( Editor ):
     #  Disposes of the contents of an editor:
     #---------------------------------------------------------------------------
 
-    def dispose ( self ):
+    def dispose(self):
         """ Disposes of the contents of an editor.
         """
         for editor in self._editors:
             editor.dispose()
 
-        super( CompoundEditor, self ).dispose()
+        super(CompoundEditor, self).dispose()
+
 
 #-------------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
+
 
 class SimpleEditor(CompoundEditor):
 
@@ -115,9 +117,11 @@ class SimpleEditor(CompoundEditor):
     # the default.
     kind = 'simple_editor'
 
+
 #-------------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------------
+
 
 class CustomEditor(CompoundEditor):
 
@@ -125,5 +129,6 @@ class CustomEditor(CompoundEditor):
     # the default.
 
     kind = 'custom_editor'
+
 
 #-- EOF ----------------------------------------------------------------------

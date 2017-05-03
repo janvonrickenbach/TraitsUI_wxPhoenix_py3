@@ -14,7 +14,6 @@
 #  Date:   10/07/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the text editor factory for all traits toolkit backends.
 """
 
@@ -41,27 +40,31 @@ from ..editor_factory import EditorFactory
 #  Define a simple identity mapping:
 #-------------------------------------------------------------------------------
 
-class _Identity ( object ):
+
+class _Identity(object):
     """ A simple identity mapping.
     """
-    def __call__ ( self, value ):
+
+    def __call__(self, value):
         return value
+
 
 #-------------------------------------------------------------------------------
 #  Trait definitions:
 #-------------------------------------------------------------------------------
 
 # Mapping from user input text to other value
-mapping_trait = Dict( Str, Any )
+mapping_trait = Dict(Str, Any)
 
 # Function used to evaluate textual user input
-evaluate_trait = Any( _Identity() )
+evaluate_trait = Any(_Identity())
 
 #-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for text editors.
     """
 
@@ -73,20 +76,20 @@ class ToolkitEditorFactory ( EditorFactory ):
     mapping = mapping_trait
 
     # Is user input set on every keystroke?
-    auto_set = Bool( True )
+    auto_set = Bool(True)
 
     # Is user input set when the Enter key is pressed?
-    enter_set = Bool( False )
+    enter_set = Bool(False)
 
     # Is multi-line text allowed?
-    multi_line = Bool( True )
+    multi_line = Bool(True)
 
     # Is editor readonly (will use custom / default editor appearance with readonly flag set to true)
     # in contrasrt with readonly style for item when completely another edito is used
-    read_only = Bool( False )
+    read_only = Bool(False)
 
     # Is user input unreadable? (e.g., for a password)
-    password = Bool( False )
+    password = Bool(False)
 
     # Function to evaluate textual user input
     evaluate = evaluate_trait
@@ -104,13 +107,15 @@ class ToolkitEditorFactory ( EditorFactory ):
     #  Traits view definition:
     #---------------------------------------------------------------------------
 
-    traits_view = View( [ 'auto_set{Set value when text is typed}',
-                          'enter_set{Set value when enter is pressed}',
-                          'multi_line{Allow multiple lines of text}',
-                          '<extras>',
-                          '|options:[Options]>' ] )
+    traits_view = View([
+        'auto_set{Set value when text is typed}',
+        'enter_set{Set value when enter is pressed}',
+        'multi_line{Allow multiple lines of text}', '<extras>',
+        '|options:[Options]>'
+    ])
 
-    extras = Group( 'password{Is this a password field?}' )
+    extras = Group('password{Is this a password field?}')
+
 
 # Define the TextEditor class.
 TextEditor = ToolkitEditorFactory

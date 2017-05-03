@@ -12,7 +12,6 @@
 #  Date:   Feb 2012
 #
 #------------------------------------------------------------------------------
-
 """
 Test cases for the UI object.
 """
@@ -32,11 +31,7 @@ class FooDialog(HasTraits):
     my_int = Int(2)
     my_str = Str('hallo')
 
-    traits_view = View(
-        Item('my_int'),
-        Item('my_str'),
-        buttons = ['OK']
-    )
+    traits_view = View(Item('my_int'), Item('my_str'), buttons=['OK'])
 
 
 @skip_if_not_wx

@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines a drop target editor for the PyQt user interface toolkit. A drop
 target editor handles drag and drop operations as a drop target.
 """
@@ -90,7 +89,6 @@ class SimpleEditor(Editor):
 
 
 class _DropEventFilter(QtCore.QObject):
-
     def eventFilter(self, source, event):
         typ = event.type()
         if typ == QtCore.QEvent.Drop:

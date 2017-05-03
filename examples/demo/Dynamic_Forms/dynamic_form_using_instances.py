@@ -48,9 +48,7 @@ class ChildSpec(Spec):
     school = Str
     grade = Range(1, 12)
 
-    traits_view = View('legal_guardian',
-                       'school',
-                       'grade')
+    traits_view = View('legal_guardian', 'school', 'grade')
 
 
 class AdultSpec(Spec):
@@ -61,8 +59,7 @@ class AdultSpec(Spec):
     registered_voter = Bool
     military_service = Bool
 
-    traits_view = View('marital_status',
-                       'registered_voter',
+    traits_view = View('marital_status', 'registered_voter',
                        'military_service')
 
 
@@ -77,7 +74,7 @@ class PersonHandler(Handler):
 
     def object_age_changed(self, info):
         if ((info.object.age >= 18) and
-                (not isinstance(info.object.misc, AdultSpec))):
+            (not isinstance(info.object.misc, AdultSpec))):
             info.object.misc = AdultSpec()
         elif ((info.object.age < 18) and
               (not isinstance(info.object.misc, ChildSpec))):
@@ -98,40 +95,30 @@ class Person(HasTraits):
         Item(name='last_name'),
         Item(name='age'),
         label='General Info',
-        show_border=True
-    )
+        show_border=True)
 
     # Interface for attributes that depend on the value of 'age':
     spec_group = Group(
         Group(
-            Item(name='misc', style='custom'),
-            show_labels=False
-        ),
+            Item(
+                name='misc', style='custom'), show_labels=False),
         label='Additional Info',
-        show_border=True
-    )
+        show_border=True)
 
     # A simple View is enough as long as the right handler is specified:
     view = View(
-        Group(
-            gen_group,
-            '10',
-            Label("Using Instances and a Handler:"),
-            '10',
-            spec_group
-        ),
+        Group(gen_group, '10',
+              Label("Using Instances and a Handler:"), '10', spec_group),
         title='Personal Information',
         buttons=['OK'],
         resizable=True,
         width=300,
-        handler=PersonHandler()
-    )
+        handler=PersonHandler())
+
 
 # Create the demo:
-demo = Person(first_name="Samuel",
-              last_name="Johnson",
-              age=18,
-              misc=AdultSpec())
+demo = Person(
+    first_name="Samuel", last_name="Johnson", age=18, misc=AdultSpec())
 
 # Run the demo (if invoked from the command line):
 if __name__ == '__main__':

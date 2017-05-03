@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines various directory editor for the PyQt user interface toolkit.
 """
 
@@ -52,6 +51,7 @@ class SimpleEditor(SimpleFileEditor):
         dlg.setOptions(QtGui.QFileDialog.ShowDirsOnly)
 
         return dlg
+
 
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:

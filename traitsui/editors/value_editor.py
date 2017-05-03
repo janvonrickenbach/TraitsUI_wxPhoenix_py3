@@ -14,7 +14,6 @@
 #  Date:   01/05/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines the tree-based Python value editor and the value editor factory.
 """
 
@@ -40,7 +39,8 @@ from ..editor import Editor
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class _ValueEditor ( Editor ):
+
+class _ValueEditor(Editor):
     """ Simple style of editor for values, which displays a tree.
     """
 
@@ -52,7 +52,7 @@ class _ValueEditor ( Editor ):
     readonly = false
 
     # The root node of the value tree
-    root = Instance( RootNode )
+    root = Instance(RootNode)
 
     # Is the value editor scrollable? This values overrides the default.
     scrollable = True
@@ -62,66 +62,61 @@ class _ValueEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
         self.update_editor()
         editor = TreeEditor(
-            auto_open = self.factory.auto_open,
-            hide_root = True,
-            editable  = False,
-            nodes     = value_tree_nodes
-        )
-        self._ui = self.edit_traits( parent = parent, view =
-                       View(
-                           Item( 'root',
-                                 show_label = False,
-                                 editor     = editor
-                           ),
-                           kind = 'subpanel'
-                       )
-                   )
+            auto_open=self.factory.auto_open,
+            hide_root=True,
+            editable=False,
+            nodes=value_tree_nodes)
+        self._ui = self.edit_traits(
+            parent=parent,
+            view=View(
+                Item(
+                    'root', show_label=False, editor=editor), kind='subpanel'))
         self._ui.parent = self.ui
-        self.control    = self._ui.control
+        self.control = self._ui.control
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes external to the
             editor.
         """
-        self.root = RootNode( name     = '',
-                              value    = self.value,
-                              readonly = self.readonly )
+        self.root = RootNode(name='', value=self.value, readonly=self.readonly)
 
     #---------------------------------------------------------------------------
     #  Disposes of the contents of an editor:
     #---------------------------------------------------------------------------
 
-    def dispose ( self ):
+    def dispose(self):
         """ Disposes of the contents of an editor.
         """
         self._ui.dispose()
 
-        super( _ValueEditor, self ).dispose()
+        super(_ValueEditor, self).dispose()
 
     #---------------------------------------------------------------------------
     #  Returns the editor's control for indicating error status:
     #---------------------------------------------------------------------------
 
-    def get_error_control ( self ):
+    def get_error_control(self):
         """ Returns the editor's control for indicating error status.
         """
         return self._ui.get_error_controls()
+
 
 #-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for tree-based value editors.
     """
 
@@ -130,7 +125,8 @@ class ToolkitEditorFactory ( EditorFactory ):
     #---------------------------------------------------------------------------
 
     # Number of tree levels to automatically open
-    auto_open = Int( 2 )
+    auto_open = Int(2)
+
 
 # Define the ValueEditor class.
 ValueEditor = ToolkitEditorFactory

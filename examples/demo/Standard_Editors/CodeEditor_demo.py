@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of a CodeEditor demo plugin for Traits UI demo program.
 
@@ -26,20 +25,20 @@ class CodeEditorDemo(HasTraits):
 
     # Display specification:
     code_group = Group(
-        Item('code_sample', style='simple', label='Simple'),
+        Item(
+            'code_sample', style='simple', label='Simple'),
         Item('_'),
-        Item('code_sample', style='custom', label='Custom'),
+        Item(
+            'code_sample', style='custom', label='Custom'),
         Item('_'),
-        Item('code_sample', style='text', label='Text'),
+        Item(
+            'code_sample', style='text', label='Text'),
         Item('_'),
-        Item('code_sample', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'code_sample', style='readonly', label='ReadOnly'))
 
     # Demo view:
-    view = View(
-        code_group,
-        title='CodeEditor',
-        buttons=['OK'])
+    view = View(code_group, title='CodeEditor', buttons=['OK'])
 
 
 # Create the demo:

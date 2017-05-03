@@ -36,13 +36,20 @@ class ShellTest(HasPrivateTraits):
     #  Traits view definitions:
     #-------------------------------------------------------------------------
 
-    view = View('name', 'age', 'weight', '_',
-                Item('shell_1', editor=ShellEditor()),
-                Item('shell_2', editor=ShellEditor()),
-                id='traitsui.tests.shell_editor_test',
-                resizable=True,
-                width=0.3,
-                height=0.3)
+    view = View(
+        'name',
+        'age',
+        'weight',
+        '_',
+        Item(
+            'shell_1', editor=ShellEditor()),
+        Item(
+            'shell_2', editor=ShellEditor()),
+        id='traitsui.tests.shell_editor_test',
+        resizable=True,
+        width=0.3,
+        height=0.3)
+
 
 #-------------------------------------------------------------------------
 #  Run the test:

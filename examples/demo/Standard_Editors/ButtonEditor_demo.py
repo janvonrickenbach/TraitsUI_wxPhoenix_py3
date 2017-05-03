@@ -30,8 +30,8 @@ class ButtonEditorDemo(HasTraits):
         'click_counter',
         title='ButtonEditor',
         buttons=['OK'],
-        resizable=True
-    )
+        resizable=True)
+
 
 # Create the demo:
 demo = ButtonEditorDemo()

@@ -14,7 +14,6 @@
 #  Date:   07/19/2005
 #
 #------------------------------------------------------------------------------
-
 """ Defines the editor factory used to wrap a non-Traits based custom control.
 """
 
@@ -34,7 +33,8 @@ from ..toolkit import toolkit_object
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( BasicEditorFactory ):
+
+class ToolkitEditorFactory(BasicEditorFactory):
     """ Editor factory for custom editors.
     """
     # Editor class to be instantiated.
@@ -44,17 +44,17 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
     factory = Callable
 
     # Arguments to be passed to the user's custom editor factory
-    args    = Tuple
+    args = Tuple
 
     #---------------------------------------------------------------------------
     #  Initializes the object:
     #---------------------------------------------------------------------------
 
-    def __init__ ( self, *args, **traits ):
-        if len( args ) >= 1:
+    def __init__(self, *args, **traits):
+        if len(args) >= 1:
             self.factory = args[0]
-            self.args    = args[1:]
-        super( ToolkitEditorFactory, self ).__init__( **traits )
+            self.args = args[1:]
+        super(ToolkitEditorFactory, self).__init__(**traits)
 
     #---------------------------------------------------------------------------
     #  Property getters
@@ -63,6 +63,7 @@ class ToolkitEditorFactory ( BasicEditorFactory ):
         """ Returns the editor class to be created.
         """
         return toolkit_object('custom_editor:CustomEditor')
+
 
 # Define the CustomEditor class.
 CustomEditor = ToolkitEditorFactory

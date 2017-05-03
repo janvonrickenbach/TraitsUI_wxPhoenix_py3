@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This demo illustrates use of the LEDEditor for displaying numeric values
 using a simulated LED display control.
@@ -51,6 +50,7 @@ class LEDDemoHandler(Handler):
             sleep(.01)
         self.alive = False
 
+
 # The main demo class:
 
 
@@ -64,56 +64,57 @@ class LEDDemo(HasTraits):
 
     # The traits view:
     view = View(
-        Item('counter1',
-             label='Left aligned',
-             editor=LEDEditor(alignment='left')
-             ),
-        Item('counter1',
-             label='Center aligned',
-             editor=LEDEditor(alignment='center')
-             ),
-        Item('counter1',
-             label='Right aligned',
-             editor=LEDEditor()  # default = 'right' aligned
-             ),
-        Item('counter2',
-             label='Float value',
-             editor=LEDEditor(format_str='%.3f')
-             ),
+        Item(
+            'counter1',
+            label='Left aligned',
+            editor=LEDEditor(alignment='left')),
+        Item(
+            'counter1',
+            label='Center aligned',
+            editor=LEDEditor(alignment='center')),
+        Item(
+            'counter1',
+            label='Right aligned',
+            editor=LEDEditor()  # default = 'right' aligned
+        ),
+        Item(
+            'counter2',
+            label='Float value',
+            editor=LEDEditor(format_str='%.3f')),
         '_',
         HGroup(
-            Item('counter1',
-                 label='Left',
-                 height=-40,
-                 width=120,
-                 editor=LEDEditor(alignment='left')
-                 ),
+            Item(
+                'counter1',
+                label='Left',
+                height=-40,
+                width=120,
+                editor=LEDEditor(alignment='left')),
             spring,
-            Item('counter1',
-                 label='Center',
-                 height=-40,
-                 width=120,
-                 editor=LEDEditor(alignment='center')
-                 ),
+            Item(
+                'counter1',
+                label='Center',
+                height=-40,
+                width=120,
+                editor=LEDEditor(alignment='center')),
             spring,
-            Item('counter1',
-                 label='Right',
-                 height=-40,
-                 width=120,
-                 editor=LEDEditor()  # default = 'right' aligned
-                 ),
+            Item(
+                'counter1',
+                label='Right',
+                height=-40,
+                width=120,
+                editor=LEDEditor()  # default = 'right' aligned
+            ),
             spring,
-            Item('counter2',
-                 label='Float',
-                 height=-40,
-                 width=120,
-                 editor=LEDEditor(format_str='%.3f')
-                 )
-        ),
+            Item(
+                'counter2',
+                label='Float',
+                height=-40,
+                width=120,
+                editor=LEDEditor(format_str='%.3f'))),
         title='LED Editor Demo',
         buttons=['OK'],
-        handler=LEDDemoHandler
-    )
+        handler=LEDDemoHandler)
+
 
 # Create the demo:
 demo = LEDDemo()

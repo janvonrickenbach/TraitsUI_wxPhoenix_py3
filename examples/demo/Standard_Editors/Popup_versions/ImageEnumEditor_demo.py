@@ -16,10 +16,10 @@ from traitsui.api import Item, Group, View, ImageEnumEditor
 
 image_list = ['top left', 'top right', 'bottom left', 'bottom right']
 
-
 #-------------------------------------------------------------------------
 #  Classes:
 #-------------------------------------------------------------------------
+
 
 class Dummy(HasTraits):
     """ Dummy class for ImageEnumEditor
@@ -33,29 +33,32 @@ class ImageEnumEditorDemo(HasTraits):
     """
 
     # To demonstrate any given Trait editor, an appropriate Trait is required.
-    image_from_list = Trait(editor=ImageEnumEditor(values=image_list,
-                                                   prefix='@icons:',
-                                                   suffix='_origin',
-                                                   cols=4,
-                                                   klass=Dummy),
-                            *image_list)
+    image_from_list = Trait(
+        editor=ImageEnumEditor(
+            values=image_list,
+            prefix='@icons:',
+            suffix='_origin',
+            cols=4,
+            klass=Dummy),
+        *image_list)
 
     # Items are used to define the demo display - one Item per
     # editor style
-    img_group = Group(Item('image_from_list', style='simple', label='Simple'),
-                      Item('_'),
-                      Item('image_from_list', style='custom', label='Custom'),
-                      Item('_'),
-                      Item('image_from_list', style='text', label='Text'),
-                      Item('_'),
-                      Item('image_from_list',
-                           style='readonly',
-                           label='ReadOnly'))
+    img_group = Group(
+        Item(
+            'image_from_list', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'image_from_list', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'image_from_list', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'image_from_list', style='readonly', label='ReadOnly'))
 
     #Demo view
-    view1 = View(img_group,
-                 title='ImageEnumEditor',
-                 buttons=['OK'])
+    view1 = View(img_group, title='ImageEnumEditor', buttons=['OK'])
 
 
 # Create the demo:

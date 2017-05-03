@@ -42,17 +42,13 @@ number_editor = NumericEditor(
     extendable=True,
     new_columns='last',
     configurable=True,
-    columns=[NumericColumn(name='model_indices',
-                           label='i'),
-             NumericColumn(name='x',
-                           label='x',
-                           format='%.2f'),
-             NumericColumn(name='sinx',
-                           label='sin(x)',
-                           format='%.3f'),
-             NumericColumn(name='xsinx',
-                           label='x*sin(x)',
-                           format='%.3f')],
+    columns=[
+        NumericColumn(
+            name='model_indices', label='i'), NumericColumn(
+                name='x', label='x', format='%.2f'), NumericColumn(
+                    name='sinx', label='sin(x)', format='%.3f'), NumericColumn(
+                        name='xsinx', label='x*sin(x)', format='%.3f')
+    ],
     other_columns=[],
     choose_selection_filter=True,
     edit_selection_filter=True,
@@ -106,15 +102,17 @@ class BunchANumbersApp(HasPrivateTraits):
     #-------------------------------------------------------------------------
 
     view = View(
-        HGroup(Item('model', editor=number_editor,
-                    id='model'),
-               #                       Item( 'model', editor = number_editor ),
-               show_labels=False),
+        HGroup(
+            Item(
+                'model', editor=number_editor, id='model'),
+            #                       Item( 'model', editor = number_editor ),
+            show_labels=False),
         title='Numeric Editor Test',
         id='traitsui.tests.numeric_editor_test',
         width=0.28,
         height=0.6,
         resizable=True)
+
 
 #-------------------------------------------------------------------------
 #  Run the test:

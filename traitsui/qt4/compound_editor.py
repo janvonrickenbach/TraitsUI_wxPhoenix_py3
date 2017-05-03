@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the compound editor and the compound editor factory for the
 PyQt user interface toolkit.
 """
@@ -64,14 +63,8 @@ class CompoundEditor(Editor):
         # Add all of the component trait editors:
         self._editors = editors = []
         for factory in self.factory.editors:
-            editor = getattr(
-                factory,
-                self.kind)(
-                self.ui,
-                self.object,
-                self.name,
-                self.description,
-                None)
+            editor = getattr(factory, self.kind)(
+                self.ui, self.object, self.name, self.description, None)
             editor.prepare(self.control)
             layout.addWidget(editor.control)
             editors.append(editor)
@@ -98,6 +91,7 @@ class CompoundEditor(Editor):
 
         super(CompoundEditor, self).dispose()
 
+
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------
@@ -108,6 +102,7 @@ class SimpleEditor(CompoundEditor):
     # The kind of editor to create for each list item. This value overrides
     # the default.
     kind = 'simple_editor'
+
 
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:

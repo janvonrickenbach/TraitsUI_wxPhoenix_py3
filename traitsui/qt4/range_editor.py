@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the various range editors and the range editor factory, for the
 PyQt user interface toolkit.
 """
@@ -69,6 +68,7 @@ class BaseRangeEditor(Editor):
         if self.evaluate is not None:
             value = self.evaluate(value)
         Editor._set_value(self, value)
+
 
 #-------------------------------------------------------------------------
 #  'SimpleSliderEditor' class:
@@ -283,8 +283,8 @@ class SimpleSliderEditor(BaseRangeEditor):
         """ Returns the slider setting corresponding to the user-supplied value.
         """
         if self.high > self.low:
-            ivalue = int((float(value - self.low) /
-                          (self.high - self.low)) * 10000.0)
+            ivalue = int(
+                (float(value - self.low) / (self.high - self.low)) * 10000.0)
         else:
             ivalue = self.low
 
@@ -296,8 +296,7 @@ class SimpleSliderEditor(BaseRangeEditor):
         """ Returns the float or integer value corresponding to the slider
         setting.
         """
-        value = self.low + ((float(ivalue) / 10000.0) *
-                            (self.high - self.low))
+        value = self.low + ((float(ivalue) / 10000.0) * (self.high - self.low))
         if not self.factory.is_float:
             value = int(round(value))
         return value
@@ -328,6 +327,7 @@ class LogRangeSliderEditor(SimpleSliderEditor):
         if not self.factory.is_float:
             fvalue = int(round(fvalue))
         return fvalue
+
 
 #-------------------------------------------------------------------------
 #  'LargeRangeSliderEditor' class:
@@ -463,8 +463,8 @@ class LargeRangeSliderEditor(BaseRangeEditor):
     def update_object_on_scroll(self, pos):
         """ Handles the user changing the current slider value.
         """
-        value = self.cur_low + ((float(pos) / 10000.0)
-                                * (self.cur_high - self.cur_low))
+        value = self.cur_low + (
+            (float(pos) / 10000.0) * (self.cur_high - self.cur_low))
 
         self.control.text.setText(self._format % value)
 
@@ -596,8 +596,7 @@ class LargeRangeSliderEditor(BaseRangeEditor):
             if diff > 99999:
                 self._format = '%.2g'
             elif diff > 1:
-                self._format = '%%.%df' % max(0, 4 -
-                                              int(log10(high - low)))
+                self._format = '%%.%df' % max(0, 4 - int(log10(high - low)))
             else:
                 self._format = '%.3f'
 
@@ -633,6 +632,7 @@ class LargeRangeSliderEditor(BaseRangeEditor):
                     self.value = int(high)
 
             self.update_editor()
+
 
 #-------------------------------------------------------------------------
 #  'SimpleSpinEditor' class:
@@ -733,6 +733,7 @@ class SimpleSpinEditor(BaseRangeEditor):
             self.control.setMaximum(high)
             self.control.setValue(int(self.value))
 
+
 #-------------------------------------------------------------------------
 #  'RangeTextEditor' class:
 #-------------------------------------------------------------------------
@@ -784,6 +785,7 @@ class RangeTextEditor(TextEditor):
         pal.setColor(QtGui.QPalette.Base, col)
         self.control.setPalette(pal)
 
+
 #-------------------------------------------------------------------------
 #  'SimpleEnumEditor' factory adaptor:
 #-------------------------------------------------------------------------
@@ -793,12 +795,18 @@ def SimpleEnumEditor(parent, factory, ui, object, name, description):
     return CustomEnumEditor(parent, factory, ui, object, name, description,
                             'simple')
 
+
 #-------------------------------------------------------------------------
 #  'CustomEnumEditor' factory adaptor:
 #-------------------------------------------------------------------------
 
 
-def CustomEnumEditor(parent, factory, ui, object, name, description,
+def CustomEnumEditor(parent,
+                     factory,
+                     ui,
+                     object,
+                     name,
+                     description,
                      style='custom'):
     """ Factory adapter that returns a enumeration editor of the specified
     style.
@@ -806,14 +814,14 @@ def CustomEnumEditor(parent, factory, ui, object, name, description,
     if factory._enum is None:
         import traitsui.editors.enum_editor as enum_editor
         factory._enum = enum_editor.ToolkitEditorFactory(
-            values=range(factory.low, factory.high + 1),
-            cols=factory.cols)
+            values=range(factory.low, factory.high + 1), cols=factory.cols)
 
     if style == 'simple':
         return factory._enum.simple_editor(ui, object, name, description,
                                            parent)
 
     return factory._enum.custom_editor(ui, object, name, description, parent)
+
 
 #-------------------------------------------------------------------------
 #  Defines the mapping between editor factory 'mode's and Editor classes:

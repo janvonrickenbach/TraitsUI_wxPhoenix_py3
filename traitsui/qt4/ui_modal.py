@@ -9,10 +9,8 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """Creates a PyQt user interface for a specified UI object.
 """
-
 
 from pyface.qt import QtCore, QtGui
 
@@ -25,10 +23,10 @@ from ui_base \
 from ui_panel \
     import panel
 
-
 #-------------------------------------------------------------------------
 #  Create the different modal PyQt user interfaces.
 #-------------------------------------------------------------------------
+
 
 def ui_modal(ui, parent):
     """Creates a modal PyQt user interface for a specified UI object.
@@ -118,8 +116,8 @@ class _ModalDialog(BaseDialog):
                         self._on_apply,
                         enabled=apply,
                         default=default)
-                    ui.on_trait_change(self._on_applyable, 'modified',
-                                       dispatch='ui')
+                    ui.on_trait_change(
+                        self._on_applyable, 'modified', dispatch='ui')
 
                 elif self.is_button(button, 'Revert'):
                     self.revert = self.add_button(
@@ -140,9 +138,12 @@ class _ModalDialog(BaseDialog):
                     ui.on_trait_change(self._on_error, 'errors', dispatch='ui')
 
                 elif self.is_button(button, 'Cancel'):
-                    self.add_button(button, bbox,
-                                    QtGui.QDialogButtonBox.RejectRole,
-                                    self.control.reject, default=default)
+                    self.add_button(
+                        button,
+                        bbox,
+                        QtGui.QDialogButtonBox.RejectRole,
+                        self.control.reject,
+                        default=default)
 
                 elif self.is_button(button, 'Help'):
                     self.add_button(

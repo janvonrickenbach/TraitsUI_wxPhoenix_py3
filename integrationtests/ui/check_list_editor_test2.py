@@ -58,6 +58,7 @@ class CheckListTest(Handler):
     def _values_text_changed(self):
         self.values = self.values_text.split()
 
+
 #-------------------------------------------------------------------------
 #  Run the tests:
 #-------------------------------------------------------------------------

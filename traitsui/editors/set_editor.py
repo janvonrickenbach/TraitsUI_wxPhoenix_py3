@@ -31,7 +31,8 @@ from traits.api import Bool, Str
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorWithListFactory ):
+
+class ToolkitEditorFactory(EditorWithListFactory):
     """ Editor factory for editors for sets.
     """
     #---------------------------------------------------------------------------
@@ -39,10 +40,10 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
     #---------------------------------------------------------------------------
 
     # Are the items in the set ordered (vs. unordered)?
-    ordered = Bool( False )
+    ordered = Bool(False)
 
     # Can the user add and delete all items in the set at once?
-    can_move_all = Bool( True )
+    can_move_all = Bool(True)
 
     # Title of left column:
     left_column_title = Str
@@ -50,8 +51,8 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
     # Title of right column:
     right_column_title = Str
 
+
 # Define the SetEditor class
 SetEditor = ToolkitEditorFactory
 
 ### EOF ---------------------------------------------------------------------
-

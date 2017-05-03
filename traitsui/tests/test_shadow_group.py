@@ -32,5 +32,4 @@ class TestShadowGroup(unittest.TestCase):
             show_left=True,
             orientation='horizontal',
             scrollable=True,
-            shadow=group,
-        )
+            shadow=group, )

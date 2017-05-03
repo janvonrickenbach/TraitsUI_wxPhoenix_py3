@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """ Demonstrates how to use the Dynamic Views facility.
 """
 
@@ -37,13 +36,11 @@ class HasFooView(HasDynamicViews):
                 'resizable': True,
                 'scrollable': True,
             },
-            use_as_default=True,
-        )
+            use_as_default=True, )
         self.declare_dynamic_view(declaration)
 
 
 class MyInfoHandler(Handler):
-
     def object_first_changed(self, info):
         info.object.derived = info.object.first
 
@@ -64,21 +61,19 @@ class BaseFoo(HasFooView):
              'the derived value equal to the first name.\n\n'
              'On the next tab, change the selection in order to\n'
              'control which tabs are visible when the ui is \n'
-             'displayed for the 2nd time.'
-             ),
+             'displayed for the 2nd time.'),
         spring,
-        'first', 'last',
+        'first',
+        'last',
         spring,
         'derived',
         label='My Info',
         _foo_order=5,
         _foo_priority=1,
-        _foo_handler=MyInfoHandler(),
-    )
+        _foo_handler=MyInfoHandler(), )
 
 
 class FatherInfoHandler(Handler):
-
     def object_father_first_name_changed(self, info):
         info.object.father_derived = info.object.father_first_name
 
@@ -105,15 +100,13 @@ class DerivedFoo(BaseFoo):
         'knows_father',
         label='Parents?',
         _foo_order=7,
-        _foo_priority=1,
-    )
+        _foo_priority=1, )
 
     ui_mother = Group(
         'mother_first_name',
         'mother_last_name',
         label="Mother's Info",
-        _foo_priority=1,
-    )
+        _foo_priority=1, )
 
     ui_father = Group(
         'father_first_name',
@@ -123,8 +116,7 @@ class DerivedFoo(BaseFoo):
         label="Father's Info",
         _foo_order=15,
         _foo_priority=1,
-        _foo_handler=FatherInfoHandler(),
-    )
+        _foo_handler=FatherInfoHandler(), )
 
     def _knows_mother_changed(self, old, new):
         ui_mother = self.trait_view('ui_mother')
@@ -152,11 +144,13 @@ class FooDemo(HasTraits):
         Label("Try configuring several times, each time changing the items "
               "on the 'Parents?' tab."),
         '_',
-        HGroup(spring, Item('configure', show_label=False))
-    )
+        HGroup(
+            spring, Item(
+                'configure', show_label=False)))
 
     def _configure_changed(self):
         self.foo.configure_traits()
+
 
 # Create the demo:
 popup = FooDemo()

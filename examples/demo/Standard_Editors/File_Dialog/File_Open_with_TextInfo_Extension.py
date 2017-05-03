@@ -43,23 +43,25 @@ class FileDialogDemo(HasTraits):
 
     view = View(
         HGroup(
-            Item('open', show_label=False),
+            Item(
+                'open', show_label=False),
             '_',
-            Item('file_name', style='readonly', springy=True)
-        ),
-        width=0.5
-    )
+            Item(
+                'file_name', style='readonly', springy=True)),
+        width=0.5)
 
     #-- Traits Event Handlers ------------------------------------------------
 
     def _open_changed(self):
         """ Handles the user clicking the 'Open...' button.
         """
-        file_name = open_file(extensions=TextInfo(),
-                              filter='Python file (*.py)|*.py',
-                              id=demo_id)
+        file_name = open_file(
+            extensions=TextInfo(),
+            filter='Python file (*.py)|*.py',
+            id=demo_id)
         if file_name != '':
             self.file_name = file_name
+
 
 # Create the demo:
 demo = FileDialogDemo()

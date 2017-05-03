@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the Boolean editor factory for all traits toolkit backends.
 """
 
@@ -39,23 +38,25 @@ from .text_editor import ToolkitEditorFactory as EditorFactory
 #-------------------------------------------------------------------------------
 
 # Mapping from user input text to Boolean values
-mapping_trait = Dict( Str, Any, { 'True':  True,
-                                  'true':  True,
-                                  't':     True,
-                                  'yes':   True,
-                                  'y':     True,
-                                  'False': False,
-                                  'false': False,
-                                  'f':     False,
-                                  'no':    False,
-                                  'n':     False,
-                    } )
+mapping_trait = Dict(Str, Any, {
+    'True': True,
+    'true': True,
+    't': True,
+    'yes': True,
+    'y': True,
+    'False': False,
+    'false': False,
+    'f': False,
+    'no': False,
+    'n': False,
+})
 
 #-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for Boolean editors.
     """
     #---------------------------------------------------------------------------

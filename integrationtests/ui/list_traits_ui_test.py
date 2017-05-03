@@ -47,23 +47,25 @@ class Person(HasStrictTraits):
     #  Traits view definition:
     #-------------------------------------------------------------------------
 
-    traits_view = View('name', 'age', 'phone',
-                       width=0.18,
-                       buttons=['OK', 'Cancel'])
+    traits_view = View(
+        'name', 'age', 'phone', width=0.18, buttons=['OK', 'Cancel'])
+
 
 #-------------------------------------------------------------------------
 #  Sample data:
 #-------------------------------------------------------------------------
 
 people = [
-    Person(name='Dave', age=39, phone='555-1212'),
-    Person(name='Mike', age=28, phone='555-3526'),
-    Person(name='Joe', age=34, phone='555-6943'),
-    Person(name='Tom', age=22, phone='555-7586'),
-    Person(name='Dick', age=63, phone='555-3895'),
-    Person(name='Harry', age=46, phone='555-3285'),
-    Person(name='Sally', age=43, phone='555-8797'),
-    Person(name='Fields', age=31, phone='555-3547')
+    Person(
+        name='Dave', age=39, phone='555-1212'), Person(
+            name='Mike', age=28, phone='555-3526'), Person(
+                name='Joe', age=34, phone='555-6943'), Person(
+                    name='Tom', age=22, phone='555-7586'), Person(
+                        name='Dick', age=63, phone='555-3895'), Person(
+                            name='Harry', age=46, phone='555-3285'), Person(
+                                name='Sally', age=43, phone='555-8797'),
+    Person(
+        name='Fields', age=31, phone='555-3547')
 ]
 
 #-------------------------------------------------------------------------
@@ -73,17 +75,17 @@ people = [
 filters = [EvalFilterTemplate, MenuFilterTemplate, RuleFilterTemplate]
 
 table_editor = TableEditor(
-    columns=[ObjectColumn(name='name'),
-             ObjectColumn(name='age'),
-             ObjectColumn(name='phone')],
+    columns=[
+        ObjectColumn(name='name'), ObjectColumn(name='age'),
+        ObjectColumn(name='phone')
+    ],
     editable=True,
     deletable=True,
     sortable=True,
     sort_model=True,
     filters=filters,
     search=RuleTableFilter(),
-    row_factory=Person
-)
+    row_factory=Person)
 
 #-------------------------------------------------------------------------
 #  'ListTraitTest' class:
@@ -104,19 +106,21 @@ class ListTraitTest(HasStrictTraits):
 
     traits_view = View(
         VSplit(
-            Item('people',
-                 id='table',
-                 editor=table_editor),
-            Item('people@',
-                 id='list',
-                 editor=ListEditor(style='custom',
-                                   rows=5)),
-            Item('people@',
-                 id='notebook',
-                 editor=ListEditor(use_notebook=True,
-                                   deletable=True,
-                                   export='DockShellWindow',
-                                   page_name='.name')),
+            Item(
+                'people', id='table', editor=table_editor),
+            Item(
+                'people@',
+                id='list',
+                editor=ListEditor(
+                    style='custom', rows=5)),
+            Item(
+                'people@',
+                id='notebook',
+                editor=ListEditor(
+                    use_notebook=True,
+                    deletable=True,
+                    export='DockShellWindow',
+                    page_name='.name')),
             id='splitter',
             show_labels=False),
         title='List Trait Editor Test',
@@ -126,6 +130,7 @@ class ListTraitTest(HasStrictTraits):
         height=.6,
         resizable=True,
         kind='live')
+
 
 #-------------------------------------------------------------------------
 #  Run the tests:

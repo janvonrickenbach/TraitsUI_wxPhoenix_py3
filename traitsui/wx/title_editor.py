@@ -14,7 +14,6 @@
 #  Date:   07/06/2006
 #
 #-------------------------------------------------------------------------------
-
 """ Define an editor that displays a string value as a title.
 """
 
@@ -34,31 +33,31 @@ from pyface.heading_text \
 from traitsui.editors.title_editor \
     import TitleEditor
 
-
 #-------------------------------------------------------------------------------
 #  '_TitleEditor' class:
 #-------------------------------------------------------------------------------
 
-class _TitleEditor ( Editor ):
+
+class _TitleEditor(Editor):
 
     #---------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self._control = HeadingText( parent )
-        self.control  = self._control.control
+        self._control = HeadingText(parent)
+        self.control = self._control.control
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes external to the
             editor.
         """

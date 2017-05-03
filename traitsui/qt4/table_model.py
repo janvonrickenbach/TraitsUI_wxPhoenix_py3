@@ -8,7 +8,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the table model used by the table editor.
 """
 
@@ -51,6 +50,7 @@ def as_qcolor(color):
         return QtGui.QColor(*color)
     else:
         return QtGui.QColor(color)
+
 
 #-------------------------------------------------------------------------
 #  'TableModel' class:
@@ -239,8 +239,10 @@ class TableModel(QtCore.QAbstractTableModel):
         selection_mode = editor.factory.selection_mode
 
         if selection_mode.startswith("cell"):
-            data = [self._get_cell_drag_value(index.row(), index.column())
-                    for index in indexes]
+            data = [
+                self._get_cell_drag_value(index.row(), index.column())
+                for index in indexes
+            ]
         elif selection_mode.startswith("column"):
             columns = sorted(set(index.column() for index in indexes))
             data = self._get_columns_drag_value(columns)
@@ -289,7 +291,7 @@ class TableModel(QtCore.QAbstractTableModel):
                 row = parent.row()
                 column = parent.column()
 
-            if row != -1 and column != - 1:
+            if row != -1 and column != -1:
                 object = editor.items()[row]
                 column = editor.columns[column]
                 if column.is_droppable(object, data):
@@ -375,6 +377,7 @@ class TableModel(QtCore.QAbstractTableModel):
         # Update the selection for the new location.
         self._editor.set_selection(objects)
 
+
 #-------------------------------------------------------------------------
 #  'SortFilterTableModel' class:
 #-------------------------------------------------------------------------
@@ -432,7 +435,8 @@ class SortFilterTableModel(QtGui.QSortFilterProxyModel):
         """Delegate to source model with mapped rows."""
 
         source = self.sourceModel()
-        current_rows = [self.mapToSource(self.index(row, 0)).row()
-                        for row in current_rows]
+        current_rows = [
+            self.mapToSource(self.index(row, 0)).row() for row in current_rows
+        ]
         new_row = self.mapToSource(self.index(new_row, 0)).row()
         source.moveRows(current_rows, new_row)

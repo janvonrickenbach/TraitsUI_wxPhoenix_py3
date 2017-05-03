@@ -11,7 +11,6 @@
 #  Thanks for using Enthought open source!
 #
 #------------------------------------------------------------------------------
-
 """ Trait definition for an RGB-based color, which is a tuple of the form
     (*red*, *green*, *blue*), where *red*, *green* and *blue* are floats in the
     range from 0.0 to 1.0.
@@ -48,14 +47,13 @@ def convert_to_color(object, name, value):
         TraitError if that is not possible.
     """
     if isinstance(value, SequenceTypes) and len(value) == 3:
-        return (range_check(value[0]),
-                range_check(value[1]),
+        return (range_check(value[0]), range_check(value[1]),
                 range_check(value[2]))
     if isinstance(value, int):
-        return ((value / 0x10000) / 255.0,
-                ((value / 0x100) & 0xFF) / 255.0,
+        return ((value / 0x10000) / 255.0, ((value / 0x100) & 0xFF) / 255.0,
                 (value & 0xFF) / 255.0)
     raise TraitError
+
 
 convert_to_color.info = (
     'a tuple of the form (r,g,b), where r, g, and b '
@@ -69,9 +67,7 @@ convert_to_color.info = (
 # RGB versions of standard colors:
 rgb_standard_colors = {}
 for name, color in standard_colors.items():
-    rgb_standard_colors[name] = (color.redF(),
-                                 color.greenF(),
-                                 color.blueF())
+    rgb_standard_colors[name] = (color.redF(), color.greenF(), color.blueF())
 
 #-------------------------------------------------------------------------
 #  Define wxPython specific color traits:
@@ -90,6 +86,10 @@ def get_rgb_color_editor(*args, **traits):
     from rgb_color_editor import ToolkitEditorFactory
     return ToolkitEditorFactory(*args, **traits)
 
+
 # Trait whose value must be an RGB color:
-RGBColor = Trait('white', convert_to_color, rgb_standard_colors,
-                 editor=get_rgb_color_editor)
+RGBColor = Trait(
+    'white',
+    convert_to_color,
+    rgb_standard_colors,
+    editor=get_rgb_color_editor)

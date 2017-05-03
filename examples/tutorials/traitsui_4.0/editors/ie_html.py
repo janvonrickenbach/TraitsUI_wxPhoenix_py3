@@ -111,19 +111,30 @@ class WebPage(HasTraits):
 
     # The view to display:
     view = View(
-        HGroup('back', 'forward', 'home', 'stop', 'refresh', 'search', '_',
-               Item('status', style='readonly'),
-               show_labels=False
-               ),
-        Item('url',
-             show_label=False,
-             editor=IEHTMLEditor(
-                 home='home', back='back',
-                 forward='forward', stop='stop',
-                 refresh='refresh', search='search',
-                 title='title', status='status')
-             )
-    )
+        HGroup(
+            'back',
+            'forward',
+            'home',
+            'stop',
+            'refresh',
+            'search',
+            '_',
+            Item(
+                'status', style='readonly'),
+            show_labels=False),
+        Item(
+            'url',
+            show_label=False,
+            editor=IEHTMLEditor(
+                home='home',
+                back='back',
+                forward='forward',
+                stop='stop',
+                refresh='refresh',
+                search='search',
+                title='title',
+                status='status')))
+
 
 #--[InternetExplorerDemo Class]-------------------------------------------
 
@@ -139,28 +150,28 @@ class InternetExplorerDemo(HasTraits):
     # The view to display:
     view = View(
         VGroup(
-            Item('url',
-                 label='Location',
-                 editor=TextEditor(auto_set=False, enter_set=True)
-                 )
-        ),
-        Item('pages',
-             show_label=False,
-             style='custom',
-             editor=ListEditor(use_notebook=True,
-                               deletable=True,
-                               dock_style='tab',
-                               export='DockWindowShell',
-                               page_name='.title')
-             )
-    )
+            Item(
+                'url',
+                label='Location',
+                editor=TextEditor(
+                    auto_set=False, enter_set=True))),
+        Item(
+            'pages',
+            show_label=False,
+            style='custom',
+            editor=ListEditor(
+                use_notebook=True,
+                deletable=True,
+                dock_style='tab',
+                export='DockWindowShell',
+                page_name='.title')))
 
     # Event handlers:
     def _url_changed(self, url):
         self.pages.append(WebPage(url=url.strip()))
 
-#--(Demo Notes)-----------------------------------------------------------
 
+#--(Demo Notes)-----------------------------------------------------------
 """
 Demo Notes
 ==========
@@ -173,6 +184,7 @@ Demo Notes
 
 #--<Example*>-------------------------------------------------------------
 
-demo = InternetExplorerDemo(
-    pages=[WebPage(url='http://code.enthought.com/traits/'),
-           WebPage(url='http://dmorrill.com')])
+demo = InternetExplorerDemo(pages=[
+    WebPage(url='http://code.enthought.com/traits/'),
+    WebPage(url='http://dmorrill.com')
+])

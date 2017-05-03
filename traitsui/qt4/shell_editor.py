@@ -11,7 +11,6 @@
 #  Thanks for using Enthought open source!
 #
 #-------------------------------------------------------------------------
-
 """ Editor that displays an interactive Python shell.
 """
 

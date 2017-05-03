@@ -1,4 +1,3 @@
-
 from nose.tools import assert_equals
 
 from traits.api import HasTraits, Font
@@ -10,6 +9,7 @@ from traitsui.tests._tools import *
 def test_font_trait_default():
     class Foo(HasTraits):
         font = Font()
+
     f = Foo()
     assert_equals(f.font, '10 pt Arial')
 
@@ -23,6 +23,7 @@ def test_font_trait_examples():
     The words 'pt, 'point' and 'family' are ignored.
 
     """
+
     class Foo(HasTraits):
         font = Font
 

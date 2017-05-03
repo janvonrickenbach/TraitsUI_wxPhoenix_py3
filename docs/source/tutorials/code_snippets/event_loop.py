@@ -1,9 +1,10 @@
 from traits.api import *
 import wx
 
+
 class Counter(HasTraits):
-    value =  Int()
+    value = Int()
+
 
 Counter().edit_traits()
 wx.PySimpleApp().MainLoop()
-

@@ -55,6 +55,7 @@ class LocatedPerson(Person):
 class EmployedPerson(LocatedPerson):
     employer = Trait(Employer())
 
+
 #-------------------------------------------------------------------------
 #  View classes:
 #-------------------------------------------------------------------------
@@ -74,6 +75,7 @@ class LocatedPersonView(PersonView):
 
 class EmployedPersonView(LocatedPersonView):
     extra = Group('employer', '<extra>')
+
 
 #-------------------------------------------------------------------------
 #  'TraitSheetApp' class:
@@ -101,6 +103,7 @@ class TraitSheetApp(wx.App):
         LocatedPersonView().edit_traits(context=LocatedPerson())
         EmployedPersonView().edit_traits(context=EmployedPerson())
         return True
+
 
 #-------------------------------------------------------------------------
 #  Main program:

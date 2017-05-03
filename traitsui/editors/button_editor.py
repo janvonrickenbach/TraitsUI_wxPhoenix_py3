@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the button editor factory for all traits toolkit backends.
 """
 
@@ -40,7 +39,8 @@ from ..editor_factory import EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for buttons.
     """
 
@@ -67,16 +67,16 @@ class ToolkitEditorFactory ( EditorFactory ):
     image = Image
 
     # Extra padding to add to both the left and the right sides
-    width_padding = Range( 0, 31, 7 )
+    width_padding = Range(0, 31, 7)
 
     # Extra padding to add to both the top and the bottom sides
-    height_padding = Range( 0, 31, 5 )
+    height_padding = Range(0, 31, 5)
 
     # Presentation style
-    style = Enum( 'button', 'radio', 'toolbar', 'checkbox' )
+    style = Enum('button', 'radio', 'toolbar', 'checkbox')
 
     # Orientation of the text relative to the image
-    orientation = Enum( 'vertical', 'horizontal' )
+    orientation = Enum('vertical', 'horizontal')
 
     # The optional view to display when the button is clicked:
     view = AView
@@ -85,23 +85,23 @@ class ToolkitEditorFactory ( EditorFactory ):
     #  Traits view definition:
     #---------------------------------------------------------------------------
 
-    traits_view = View( [ 'label', 'value', '|[]' ] )
+    traits_view = View(['label', 'value', '|[]'])
 
     #---------------------------------------------------------------------------
     #  Implementation of the 'value' property:
     #---------------------------------------------------------------------------
 
-    def _get_value ( self ):
+    def _get_value(self):
         return self._value
 
-    def _set_value ( self, value ):
+    def _set_value(self, value):
         self._value = value
         if isinstance(value, str):
             try:
-                self._value = int( value )
+                self._value = int(value)
             except:
                 try:
-                    self._value = float( value )
+                    self._value = float(value)
                 except:
                     pass
 
@@ -109,9 +109,9 @@ class ToolkitEditorFactory ( EditorFactory ):
     #  Initializes the object:
     #---------------------------------------------------------------------------
 
-    def __init__ ( self, **traits ):
+    def __init__(self, **traits):
         self._value = 0
-        super( ToolkitEditorFactory, self ).__init__( **traits )
+        super(ToolkitEditorFactory, self).__init__(**traits)
 
 
 # Define the ButtonEditor class

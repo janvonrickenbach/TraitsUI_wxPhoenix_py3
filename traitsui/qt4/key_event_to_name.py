@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Converts a QKeyEvent to a standardized "name".
 """
 
@@ -162,8 +161,8 @@ def key_event_to_name(event):
     if modifiers & QtCore.Qt.MetaModifier:
         name += '-Meta' if name else 'Meta'
 
-    if modifiers & QtCore.Qt.ShiftModifier and (
-            (name != '') or (len(key) > 1)):
+    if modifiers & QtCore.Qt.ShiftModifier and ((name != '') or
+                                                (len(key) > 1)):
         name += '-Shift' if name else 'Shift'
 
     if key:

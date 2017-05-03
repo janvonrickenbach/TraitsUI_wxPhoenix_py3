@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the concrete implementations of the traits Toolkit interface for
 the PyQt user interface toolkit.
 """

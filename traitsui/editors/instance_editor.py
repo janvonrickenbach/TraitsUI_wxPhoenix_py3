@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the instance editor factory for all traits user interface
 toolkits.
 """
@@ -39,7 +38,8 @@ from ..editor_factory import EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for instance editors.
     """
 
@@ -48,7 +48,7 @@ class ToolkitEditorFactory ( EditorFactory ):
     #---------------------------------------------------------------------------
 
     # List of items describing the types of selectable or editable instances
-    values = List( InstanceChoiceItem )
+    values = List(InstanceChoiceItem)
 
     # Extended name of the context object trait containing the list of types of
     # selectable or editable instances
@@ -61,19 +61,19 @@ class ToolkitEditorFactory ( EditorFactory ):
     # value of True forces a selection list to be displayed, while a value of
     # False displays a selection list only if at least one object in the list
     # of possible object values is selectable):
-    selectable = Bool( False )
+    selectable = Bool(False)
 
     # Should the editor support drag and drop of objects to set the trait value
     # (a value of True forces the editor to allow drag and drop, while a value
     # of False only supports drag and drop if at least one item in the list of
     # possible objects supports drag and drop):
-    droppable = Bool( False )
+    droppable = Bool(False)
 
     # Should factory-created objects be cached?
     cachable = Bool(True)
 
     # Optional label for button
-    label = Str#Unicode
+    label = Str  #Unicode
 
     # Optional instance view to use
     view = AView
@@ -89,23 +89,21 @@ class ToolkitEditorFactory ( EditorFactory ):
     kind = AKind
 
     # The orientation of the instance editor relative to the instance selector
-    orientation = Enum( 'default', 'horizontal', 'vertical' )
+    orientation = Enum('default', 'horizontal', 'vertical')
 
     # The default adapter class used to create InstanceChoice compatible
     # adapters for instance objects:
-    adapter = Type( InstanceChoice, allow_none = False )
+    adapter = Type(InstanceChoice, allow_none=False)
 
     #---------------------------------------------------------------------------
     #  Traits view definitions:
     #---------------------------------------------------------------------------
 
-    traits_view = View( [ [ 'label{Button label}',
-                            'view{View name}', '|[]' ],
-                          [ 'kind@', '|[Pop-up editor style]<>' ] ] )
+    traits_view = View([['label{Button label}', 'view{View name}', '|[]'],
+                        ['kind@', '|[Pop-up editor style]<>']])
 
 
 # Define the InstanceEditor class.
 InstanceEditor = ToolkitEditorFactory
 
 ### EOF #######################################################################
-

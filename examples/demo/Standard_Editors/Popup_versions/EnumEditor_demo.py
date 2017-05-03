@@ -22,18 +22,21 @@ class EnumEditorDemo(HasTraits):
     name_list = Enum('A-495', 'A-498', 'R-1226', 'TS-17', 'TS-18')
 
     # Items are used to define the display; one Item per editor style.
-    enum_group = Group(Item('name_list', style='simple', label='Simple'),
-                       Item('_'),
-                       Item('name_list', style='custom', label='Custom'),
-                       Item('_'),
-                       Item('name_list', style='text', label='Text'),
-                       Item('_'),
-                       Item('name_list', style='readonly', label='ReadOnly'))
+    enum_group = Group(
+        Item(
+            'name_list', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'name_list', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'name_list', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'name_list', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(enum_group,
-                 title='EnumEditor',
-                 buttons=['OK'])
+    view1 = View(enum_group, title='EnumEditor', buttons=['OK'])
 
 
 # Create the demo:

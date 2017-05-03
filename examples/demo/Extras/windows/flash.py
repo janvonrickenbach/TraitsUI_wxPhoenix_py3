@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """ Demo showing how to use the Windows specific Flash editor.
 """
 
@@ -34,15 +33,12 @@ class FlashDemo(HasTraits):
 
     # The view to display:
     view = View(
-        HGroup(
-            Item('flash', label='Pick a game to play')
-        ),
+        HGroup(Item(
+            'flash', label='Pick a game to play')),
         '_',
-        Item('flash',
-             show_label=False,
-             editor=FlashEditor()
-             )
-    )
+        Item(
+            'flash', show_label=False, editor=FlashEditor()))
+
 
 # Create the demo:
 demo = FlashDemo()

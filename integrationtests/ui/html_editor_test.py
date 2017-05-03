@@ -67,15 +67,18 @@ class TestHTML(HasPrivateTraits):
     #  Traits view definitions:
     #-------------------------------------------------------------------------
 
-    view = View(Group(
-        [Item('html#@', editor=HTMLEditor()), '|<>'],
-        ['{Enter formatted text and/or HTML below:}@',
-         'html#@', '|<>'],
-        '|<>', layout='split'),
+    view = View(
+        Group(
+            [Item(
+                'html#@', editor=HTMLEditor()), '|<>'],
+            ['{Enter formatted text and/or HTML below:}@', 'html#@', '|<>'],
+            '|<>',
+            layout='split'),
         title='HTML Editor Test',
         resizable=True,
         width=0.4,
         height=0.6)
+
 
 #-------------------------------------------------------------------------
 #  Run the test:

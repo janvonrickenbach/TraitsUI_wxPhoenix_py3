@@ -23,7 +23,6 @@ from .editor import Editor
 
 
 class SearchEditor(Editor):
-
     def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
@@ -39,12 +38,12 @@ class SearchEditor(Editor):
         self.control.ShowCancelButton(self.factory.cancel_button)
 
         if self.factory.auto_set:
-            self.control.Bind( wx.EVT_TEXT, self.update_object)
+            self.control.Bind(wx.EVT_TEXT, self.update_object)
 
         if self.factory.enter_set:
             self.control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
 
-        self.control.Bind( wx.EVT_SEARCHCTRL_SEARCH_BTN, self.update_object)
+        self.control.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, self.update_object)
         self.control.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.clear_text)
 
     def update_object(self, event):

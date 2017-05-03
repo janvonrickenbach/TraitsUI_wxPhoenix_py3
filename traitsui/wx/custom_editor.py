@@ -14,7 +14,6 @@
 #  Date:   07/19/2005
 #
 #------------------------------------------------------------------------------
-
 """ Defines the wxPython implementation of the editor used to wrap a non-Traits
 based custom control.
 """
@@ -41,43 +40,46 @@ from .helper \
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------------
 
-class CustomEditor ( Editor ):
+
+class CustomEditor(Editor):
     """ Wrapper for a custom editor control
     """
+
     #---------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
         try:
             factory = self.factory.factory
         except:
-            factory=self.factory
+            factory = self.factory
         if factory is not None:
             try:
-                self.control = factory( *(( parent, self ) + self.factory.args ) )
+                self.control = factory(*((parent, self) + self.factory.args))
             except:
                 open_fbi()
         if self.control is None:
-            self.control = control = wx.StaticText( parent, -1,
-                'An error occurred creating a custom editor.\n'
-                'Please contact the developer.' )
-            control.SetBackgroundColour( wx.RED )
-            control.SetForegroundColour( wx.WHITE )
+            self.control = control = wx.StaticText(
+                parent, -1, 'An error occurred creating a custom editor.\n'
+                'Please contact the developer.')
+            control.SetBackgroundColour(wx.RED)
+            control.SetForegroundColour(wx.WHITE)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
         pass
+
 
 ### EOF #######################################################################

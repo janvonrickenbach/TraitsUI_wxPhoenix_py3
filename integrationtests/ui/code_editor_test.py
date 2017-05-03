@@ -29,19 +29,16 @@ from traitsui.key_bindings \
 #-------------------------------------------------------------------------
 
 key_bindings = KeyBindings(
-
-    KeyBinding(binding1='Ctrl-s',
-               description='Save to a file',
-               method_name='save_file'),
-
-    KeyBinding(binding1='Ctrl-r',
-               description='Run script',
-               method_name='run_script'),
-
-    KeyBinding(binding1='Ctrl-q',
-               description='Edit key bindings',
-               method_name='edit_bindings')
-)
+    KeyBinding(
+        binding1='Ctrl-s',
+        description='Save to a file',
+        method_name='save_file'),
+    KeyBinding(
+        binding1='Ctrl-r', description='Run script', method_name='run_script'),
+    KeyBinding(
+        binding1='Ctrl-q',
+        description='Edit key bindings',
+        method_name='edit_bindings'))
 
 #-------------------------------------------------------------------------
 #  'CodeHandler' class:
@@ -49,7 +46,6 @@ key_bindings = KeyBindings(
 
 
 class CodeHandler(Handler):
-
     def save_file(self, info):
         info.object.status = "save file"
 
@@ -59,6 +55,7 @@ class CodeHandler(Handler):
     def edit_bindings(self, info):
         info.object.status = "edit bindings"
         key_bindings.edit_traits()
+
 
 #-------------------------------------------------------------------------
 #  'TestCode' class:
@@ -71,18 +68,20 @@ class TestCode(HasPrivateTraits):
     status = Str
 
     view = View(
-        [Item('code',
-              style='custom',
-              resizable=True,
-              editor=CodeEditor(key_bindings=key_bindings)),
-         'status~',
-         '|<>'],
+        [
+            Item(
+                'code',
+                style='custom',
+                resizable=True,
+                editor=CodeEditor(key_bindings=key_bindings)), 'status~', '|<>'
+        ],
         id='traitsui.tests.test_code_editor.TestCode',
         title='Sample Code Editor',
         width=0.4,
         height=0.4,
         resizable=True,
         handler=CodeHandler())
+
 
 #-------------------------------------------------------------------------
 #  Run the test:

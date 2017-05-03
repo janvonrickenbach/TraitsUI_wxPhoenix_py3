@@ -22,9 +22,7 @@ class Person(HasTraits):
         stripped_name = self.name.strip()
         return stripped_name == ''
 
-    traits_view = View(
-        Item('name', editor=TextEditor(invalid='invalid')),
-    )
+    traits_view = View(Item('name', editor=TextEditor(invalid='invalid')), )
 
 
 if __name__ == '__main__':

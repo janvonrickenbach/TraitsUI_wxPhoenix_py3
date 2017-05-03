@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Demonstrates the use of the TitleEditor.
 
@@ -31,12 +30,10 @@ from traitsui.api \
 class TitleEditorDemo(HasTraits):
 
     # Define the selection of titles that can be displayed:
-    title = Enum(
-        'Select a new title from the drop down list below',
-        'This is the TitleEditor demonstration',
-        'Acme Widgets Sales for Each Quarter',
-        'This is Not Intended to be a Real Application'
-    )
+    title = Enum('Select a new title from the drop down list below',
+                 'This is the TitleEditor demonstration',
+                 'Acme Widgets Sales for Each Quarter',
+                 'This is Not Intended to be a Real Application')
 
     # A user settable version of the title:
     title_2 = Str('Type into the text field below to change this title')
@@ -52,40 +49,33 @@ class TitleEditorDemo(HasTraits):
         VGroup(
             VGroup(
                 HGroup(
-                    Item('title',
-                         show_label=False,
-                         springy=True,
-                         editor=TitleEditor()
-                         )
-                ),
+                    Item(
+                        'title',
+                        show_label=False,
+                        springy=True,
+                        editor=TitleEditor())),
                 Item('title'),
-                show_border=True
-            ),
+                show_border=True),
             VGroup(
                 HGroup(
-                    Item('title_2',
-                         show_label=False,
-                         springy=True,
-                         editor=TitleEditor()
-                         )
-                ),
-                Item('title_2', label='Title'),
-                show_border=True
-            ),
+                    Item(
+                        'title_2',
+                        show_label=False,
+                        springy=True,
+                        editor=TitleEditor())),
+                Item(
+                    'title_2', label='Title'),
+                show_border=True),
             VGroup(
                 HGroup(
-                    Item('title_3',
-                         show_label=False,
-                         springy=True,
-                         editor=TitleEditor()
-                         )
-                ),
+                    Item(
+                        'title_3',
+                        show_label=False,
+                        springy=True,
+                        editor=TitleEditor())),
                 Item('value'),
-                show_border=True
-            )
-        ),
-        width=0.4
-    )
+                show_border=True)),
+        width=0.4)
 
     #-- Property Implementations ---------------------------------------------
 
@@ -93,10 +83,11 @@ class TitleEditorDemo(HasTraits):
     def _get_title_3(self):
         try:
             return ('The square root of %s is %s' %
-                    (self.value, self.value ** 0.5))
+                    (self.value, self.value**0.5))
         except:
-            return ('The square root of %s is %si' %
-                    (self.value, (-self.value) ** 0.5))
+            return ('The square root of %s is %si' % (self.value,
+                                                      (-self.value)**0.5))
+
 
 # Create the demo:
 demo = TitleEditorDemo()

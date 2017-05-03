@@ -14,7 +14,6 @@
 #  Date:   01/05/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines the tree-based Python value editor and the value editor factory,
     for the wxPython user interface toolkit.
 """
@@ -31,18 +30,21 @@ from traitsui.editors.value_editor \
 
 from .editor import Editor
 
-class SimpleEditor( _ValueEditor, Editor):
+
+class SimpleEditor(_ValueEditor, Editor):
     """ Returns the editor to use for simple style views.
     """
 
     # Override the value of the readonly trait.
     readonly = False
 
-class ReadonlyEditor( _ValueEditor, Editor):
+
+class ReadonlyEditor(_ValueEditor, Editor):
     """ Returns the editor to use for readonly style views.
     """
 
     # Override the value of the readonly trait.
     readonly = True
+
 
 ### EOF #######################################################################

@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the image enumeration editor factory for all traits user interface
 toolkits.
 """
@@ -39,20 +38,21 @@ from .enum_editor import ToolkitEditorFactory as EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for image enumeration editors.
     """
     #---------------------------------------------------------------------------
     #  Trait definitions:
     #---------------------------------------------------------------------------
     # Prefix to add to values to form image names:
-    prefix = Str#Unicode
+    prefix = Str  #Unicode
 
     # Suffix to add to values to form image names:
-    suffix = Str#Unicode
+    suffix = Str  #Unicode
 
     # Path to use to locate image files:
-    path = Str#Unicode
+    path = Str  #Unicode
 
     # Class used to derive the path to the image files:
     klass = Type
@@ -60,25 +60,24 @@ class ToolkitEditorFactory ( EditorFactory ):
     # Module used to derive the path to the image files:
     module = Module
 
-
     #---------------------------------------------------------------------------
     #  Performs any initialization needed after all constructor traits have
     #  been set:
     #---------------------------------------------------------------------------
 
-    def init ( self ):
+    def init(self):
         """ Performs any initialization needed after all constructor traits
             have been set.
         """
-        super( ToolkitEditorFactory, self ).init()
+        super(ToolkitEditorFactory, self).init()
         self._update_path()
 
     #---------------------------------------------------------------------------
     #  Handles one of the items defining the path being updated:
     #---------------------------------------------------------------------------
 
-    @on_trait_change( 'path, klass, module' )
-    def _update_path ( self ):
+    @on_trait_change('path, klass, module')
+    def _update_path(self):
         """ Handles one of the items defining the path being updated.
         """
         if self.path != '':
@@ -88,18 +87,21 @@ class ToolkitEditorFactory ( EditorFactory ):
             if module == '___main___':
                 module = '__main__'
             try:
-                self._image_path = join( dirname( sys.modules[ module
-                                                        ].__file__ ), 'images' )
+                self._image_path = join(
+                    dirname(sys.modules[module].__file__), 'images')
             except:
                 self._image_path = self.path
-                dirs = [ join( dirname( sys.argv[0] ), 'images' ),
-                         join( getcwd(), 'images' ) ]
+                dirs = [
+                    join(dirname(sys.argv[0]), 'images'),
+                    join(getcwd(), 'images')
+                ]
                 for d in dirs:
-                    if exists( d ):
+                    if exists(d):
                         self._image_path = d
                         break
         elif self.module is not None:
-            self._image_path = join( dirname( self.module.__file__ ), 'images' )
+            self._image_path = join(dirname(self.module.__file__), 'images')
+
 
 # Define the ImageEnumEditor class.
 ImageEnumEditor = ToolkitEditorFactory

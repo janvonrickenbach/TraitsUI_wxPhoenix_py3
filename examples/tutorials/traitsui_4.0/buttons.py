@@ -65,18 +65,18 @@ class Adder(HasTraits):
         Item('value_1'),
         Item('value_2'),
         '_',
-        Item('sum', style='readonly'),
+        Item(
+            'sum', style='readonly'),
         title='Adding Machine',
-        buttons=['OK']
-    )
+        buttons=['OK'])
 
     def _get_sum(self):
         return (self.value_1 + self.value_2)
 
+
 #--<Example>--------------------------------------------------------------
 
 popup = Adder()
-
 
 if __name__ == '__main__':
     popup.configure_traits()

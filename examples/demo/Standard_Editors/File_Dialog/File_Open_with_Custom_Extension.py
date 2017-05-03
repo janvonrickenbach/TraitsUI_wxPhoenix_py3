@@ -39,11 +39,10 @@ class LineCountInfo(MFileDialogModel):
 
     view = View(
         VGroup(
-            Item('lines', style='readonly'),
+            Item(
+                'lines', style='readonly'),
             label='Line Count Info',
-            show_border=True
-        )
-    )
+            show_border=True))
 
     #-- Property Implementations ---------------------------------------------
 
@@ -64,11 +63,11 @@ class LineCountInfo(MFileDialogModel):
 
         return ('%s lines' % commatize(len(data.splitlines())))
 
+
 #-- FileDialogDemo Class -------------------------------------------------
 
 # Demo specific file dialig id:
-demo_id = ('traitsui.demo.standard_editors.file_dialog.'
-           'line_count_info')
+demo_id = ('traitsui.demo.standard_editors.file_dialog.' 'line_count_info')
 
 
 class FileDialogDemo(HasTraits):
@@ -83,12 +82,12 @@ class FileDialogDemo(HasTraits):
 
     view = View(
         HGroup(
-            Item('open', show_label=False),
+            Item(
+                'open', show_label=False),
             '_',
-            Item('file_name', style='readonly', springy=True)
-        ),
-        width=0.5
-    )
+            Item(
+                'file_name', style='readonly', springy=True)),
+        width=0.5)
 
     #-- Traits Event Handlers ------------------------------------------------
 
@@ -98,6 +97,7 @@ class FileDialogDemo(HasTraits):
         file_name = open_file(extensions=LineCountInfo(), id=demo_id)
         if file_name != '':
             self.file_name = file_name
+
 
 # Create the demo:
 demo = FileDialogDemo()

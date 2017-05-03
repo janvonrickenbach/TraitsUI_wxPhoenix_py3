@@ -16,14 +16,14 @@ class Adult(HasTraits):
     age = Range(21, 99)
     registered_voter = Bool
 
-    traits_view = View(Item(name='first_name'),
-                       Item(name='last_name'),
-                       Item(name='age'),
-                       Item(name='registered_voter'))
+    traits_view = View(
+        Item(name='first_name'),
+        Item(name='last_name'),
+        Item(name='age'),
+        Item(name='registered_voter'))
 
-alice = Adult(first_name='Alice',
-              last_name='Smith',
-              age=42,
-              registered_voter=True)
+
+alice = Adult(
+    first_name='Alice', last_name='Smith', age=42, registered_voter=True)
 
 alice.configure_traits()

@@ -49,24 +49,31 @@ class Person(HasStrictTraits):
     #  Traits view definition:
     #-------------------------------------------------------------------------
 
-    traits_view = View('name', 'age', 'phone', 'state',
-                       title='Create new person',
-                       width=0.18,
-                       buttons=['OK', 'Cancel'])
+    traits_view = View(
+        'name',
+        'age',
+        'phone',
+        'state',
+        title='Create new person',
+        width=0.18,
+        buttons=['OK', 'Cancel'])
+
 
 #-------------------------------------------------------------------------
 #  Sample data:
 #-------------------------------------------------------------------------
 
 people = [
-    Person(name='Dave', age=39, phone='555-1212'),
-    Person(name='Mike', age=28, phone='555-3526'),
-    Person(name='Joe', age=34, phone='555-6943'),
-    Person(name='Tom', age=22, phone='555-7586'),
-    Person(name='Dick', age=63, phone='555-3895'),
-    Person(name='Harry', age=46, phone='555-3285'),
-    Person(name='Sally', age=43, phone='555-8797'),
-    Person(name='Fields', age=31, phone='555-3547')
+    Person(
+        name='Dave', age=39, phone='555-1212'), Person(
+            name='Mike', age=28, phone='555-3526'), Person(
+                name='Joe', age=34, phone='555-6943'), Person(
+                    name='Tom', age=22, phone='555-7586'), Person(
+                        name='Dick', age=63, phone='555-3895'), Person(
+                            name='Harry', age=46, phone='555-3285'), Person(
+                                name='Sally', age=43, phone='555-8797'),
+    Person(
+        name='Fields', age=31, phone='555-3547')
 ]
 
 #-------------------------------------------------------------------------
@@ -113,6 +120,7 @@ class AgeFilter(TableFilter):
         self.name = self.description()
         print 'AgeFilter _age_changed', self.name
 
+
 #-------------------------------------------------------------------------
 #  'NameFilter' class:
 #-------------------------------------------------------------------------
@@ -150,15 +158,14 @@ class NameFilter(TableFilter):
         """
         return "Name contains '%s'" % self.mname
 
+
 #-------------------------------------------------------------------------
 #  Table editor definition:
 #-------------------------------------------------------------------------
 
 filters = [
-    AgeFilter(
-        age=30),
-    NameFilter(
-        mname='d'),
+    AgeFilter(age=30),
+    NameFilter(mname='d'),
     EvalFilterTemplate,
     MenuFilterTemplate,
     RuleFilterTemplate,
@@ -168,6 +175,8 @@ filters = [
 def evaluate_value(v):
     print 'evaluate_value', v
     return str(v)
+
+
 #-------------------------------------------------------------------------
 #  'TableTest' class:
 #-------------------------------------------------------------------------
@@ -191,15 +200,16 @@ class TableTest(HasStrictTraits):
     _state_editor = EnumEditor(
         name="_valid_states",
         evaluate=evaluate_value,
-        object='table_editor_object'
-    )
+        object='table_editor_object')
 
     table_editor = TableEditor(
-        columns=[ObjectColumn(name='name'),
-                 ObjectColumn(name='age'),
-                 ObjectColumn(name='phone'),
-                 ObjectColumn(name='state',
-                              editor=_state_editor), ],
+        columns=[
+            ObjectColumn(name='name'),
+            ObjectColumn(name='age'),
+            ObjectColumn(name='phone'),
+            ObjectColumn(
+                name='state', editor=_state_editor),
+        ],
         editable=True,
         deletable=True,
         sortable=True,
@@ -207,18 +217,15 @@ class TableTest(HasStrictTraits):
         show_lines=True,
         orientation='vertical',
         show_column_labels=True,
-        edit_view=View(['name', 'age', 'phone', 'state', '|[]'],
-                       resizable=True),
+        edit_view=View(
+            ['name', 'age', 'phone', 'state', '|[]'], resizable=True),
         filter=None,
         filters=filters,
-        row_factory=Person
-    )
+        row_factory=Person)
 
     traits_view = View(
-        [Item('people',
-              id='people',
-              editor=table_editor),
-         '|[]<>'],
+        [Item(
+            'people', id='people', editor=table_editor), '|[]<>'],
         title='Table Editor Test',
         id='traitsui.tests.table_editor_test',
         dock='horizontal',

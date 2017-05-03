@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This demo shows the proper way to create a <b>Property</b> whose value is a
 list, especially when the value of the <b>Property</b> will be used in a user
@@ -60,6 +59,7 @@ class Person(HasStrictTraits):
     age = Int
     gender = Enum('Male', 'Female')
 
+
 #-- PropertyListDemo Class -----------------------------------------------
 
 
@@ -80,26 +80,23 @@ class PropertyListDemo(HasPrivateTraits):
     #-- Traits View Definitions ----------------------------------------------
 
     view = View(
-        Item('people',
-             show_label=False,
-             editor=TableEditor(
-                 columns=[
-                     ObjectColumn(name='name', editable=False,
-                                  width=0.50),
-                     ObjectColumn(name='age', editable=False,
-                                  width=0.15),
-                     ObjectColumn(name='gender', editable=False,
-                                  width=0.35)
-                 ],
-                 auto_size=False,
-                 show_toolbar=False
-             )
-             ),
+        Item(
+            'people',
+            show_label=False,
+            editor=TableEditor(
+                columns=[
+                    ObjectColumn(
+                        name='name', editable=False, width=0.50), ObjectColumn(
+                            name='age', editable=False, width=0.15),
+                    ObjectColumn(
+                        name='gender', editable=False, width=0.35)
+                ],
+                auto_size=False,
+                show_toolbar=False)),
         title='Property List Demo',
         width=0.25,
         height=0.33,
-        resizable=True
-    )
+        resizable=True)
 
     #-- Property Implementations ---------------------------------------------
 
@@ -107,12 +104,13 @@ class PropertyListDemo(HasPrivateTraits):
     def _get_people(self):
         """ Returns the value for the 'people' property.
         """
-        return [Person(
-            name='%s %s' % (
-                choice(['Tom', 'Dick', 'Harry', 'Alice', 'Lia', 'Vibha']),
-                choice(['Thomas', 'Jones', 'Smith', 'Adams', 'Johnson'])),
-            age=randint(21, 75),
-            gender=choice(['Male', 'Female']))
+        return [
+            Person(
+                name='%s %s' %
+                (choice(['Tom', 'Dick', 'Harry', 'Alice', 'Lia', 'Vibha']),
+                 choice(['Thomas', 'Jones', 'Smith', 'Adams', 'Johnson'])),
+                age=randint(21, 75),
+                gender=choice(['Male', 'Female']))
             for i in range(randint(10, 20))
         ]
 
@@ -135,6 +133,7 @@ class PropertyListDemo(HasPrivateTraits):
         for i in range(10):
             sleep(3)
             self.ticker = True
+
 
 # Create the demo:
 demo = PropertyListDemo()

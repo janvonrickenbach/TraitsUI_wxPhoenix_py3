@@ -14,7 +14,6 @@
 #  Date:   09/13/2007
 #
 #------------------------------------------------------------------------------
-
 """ Defines the table column descriptor used for editing the object represented
     by the row
 """
@@ -37,19 +36,19 @@ else:
 #  'EditColumn' class:
 #-------------------------------------------------------------------------------
 
-class EditColumn ( ObjectColumn ):
 
-    def __init__ ( self, **traits ):
+class EditColumn(ObjectColumn):
+    def __init__(self, **traits):
         """ Initializes the object.
         """
-        super( EditColumn, self ).__init__( **traits )
+        super(EditColumn, self).__init__(**traits)
 
         # force the renderer to be a edit renderer
         self.renderer = EditRenderer()
 
         self.label = ''
 
-    def get_cell_color ( self, object ):
+    def get_cell_color(self, object):
         """ Returns the cell background color for the column for a specified
             object.
         """
@@ -57,7 +56,7 @@ class EditColumn ( ObjectColumn ):
         # Override the parent class to ALWAYS provide the standard color:
         return self.cell_color_
 
-    def is_editable ( self, object ):
+    def is_editable(self, object):
         """ Returns whether the column is editable for a specified object.
         """
         return False

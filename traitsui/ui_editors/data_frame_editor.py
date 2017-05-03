@@ -112,7 +112,7 @@ class DataFrameAdapter(TabularAdapter):
         using a dataframe preserves dtypes.
 
         """
-        return getattr(object, trait).iloc[row:row+1]
+        return getattr(object, trait).iloc[row:row + 1]
 
     def delete(self, object, trait, row):
         """ Override the base implementation to work with DataFrames
@@ -123,10 +123,10 @@ class DataFrameAdapter(TabularAdapter):
         import pandas as pd
 
         df = getattr(object, trait)
-        if 0 < row < len(df)-1:
-            new_df = pd.concat([df.iloc[:row, :], df.iloc[row+1:, :]])
+        if 0 < row < len(df) - 1:
+            new_df = pd.concat([df.iloc[:row, :], df.iloc[row + 1:, :]])
         elif row == 0:
-            new_df = df.iloc[row+1:, :]
+            new_df = df.iloc[row + 1:, :]
         else:
             new_df = df.iloc[:row, :]
         setattr(object, trait, new_df)
@@ -140,7 +140,7 @@ class DataFrameAdapter(TabularAdapter):
         import pandas as pd
 
         df = getattr(object, trait)
-        if 0 < row < len(df)-1:
+        if 0 < row < len(df) - 1:
             new_df = pd.concat([df.iloc[:row, :], value, df.iloc[row:, :]])
         elif row == 0:
             new_df = pd.concat([value, df])
@@ -165,7 +165,7 @@ class _DataFrameEditor(UIEditor):
 
     def _target_name(self, name):
         if name:
-            return 'object.object.'+name
+            return 'object.object.' + name
         else:
             return ''
 
@@ -185,19 +185,21 @@ class _DataFrameEditor(UIEditor):
                     selected_row=self._target_name(self.factory.selected_row),
                     selectable=self.factory.selectable,
                     activated=self._target_name(self.factory.selected),
-                    activated_row=self._target_name(self.factory.activated_row),  # noqa
+                    activated_row=self._target_name(
+                        self.factory.activated_row),  # noqa
                     clicked=self._target_name(self.factory.clicked),
                     dclicked=self._target_name(self.factory.dclicked),
-                    right_clicked=self._target_name(self.factory.right_clicked),  # noqa
-                    right_dclicked=self._target_name(self.factory.right_dclicked),  # noqa
-                    column_clicked=self._target_name(self.factory.column_clicked),  # noqa
-                    column_right_clicked=self._target_name(self.factory.column_right_clicked),  # noqa
-                    operations=self.factory.operations,
-                )
-            ),
+                    right_clicked=self._target_name(
+                        self.factory.right_clicked),  # noqa
+                    right_dclicked=self._target_name(
+                        self.factory.right_dclicked),  # noqa
+                    column_clicked=self._target_name(
+                        self.factory.column_clicked),  # noqa
+                    column_right_clicked=self._target_name(
+                        self.factory.column_right_clicked),  # noqa
+                    operations=self.factory.operations, )),
             id='data_frame_editor',
-            resizable=True
-        )
+            resizable=True)
 
     def init_ui(self, parent):
         """ Creates the Traits UI for displaying the array.
@@ -225,16 +227,10 @@ class _DataFrameEditor(UIEditor):
             columns.insert(0, (index_name, 'index'))
 
         self.adapter = DataFrameAdapter(
-            columns=columns,
-            _formats=factory.formats,
-            _fonts=factory.fonts
-        )
+            columns=columns, _formats=factory.formats, _fonts=factory.fonts)
 
         return self.edit_traits(
-            view='_data_frame_view',
-            parent=parent,
-            kind='subpanel'
-        )
+            view='_data_frame_view', parent=parent, kind='subpanel')
 
 
 class DataFrameEditor(BasicEditorFactory):
@@ -305,8 +301,9 @@ class DataFrameEditor(BasicEditorFactory):
     editable = Bool(False)
 
     # What type of operations are allowed on the list:
-    operations = List(Enum('delete', 'insert', 'append', 'edit', 'move'),
-                      ['delete', 'insert', 'append', 'edit', 'move'])
+    operations = List(
+        Enum('delete', 'insert', 'append', 'edit', 'move'),
+        ['delete', 'insert', 'append', 'edit', 'move'])
 
     def _get_klass(self):
         """ The class used to construct editor objects.

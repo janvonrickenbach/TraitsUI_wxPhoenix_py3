@@ -4,7 +4,6 @@ Implementation of a BooleanEditor demo plugin for Traits UI demo program.
 This demo shows each of the four styles of the BooleanEditor
 """
 
-
 #-------------------------------------------------------------------------
 #  Demo Class
 #-------------------------------------------------------------------------
@@ -24,16 +23,19 @@ class BooleanEditorDemo(HasTraits):
     # editor style
     bool_group = Group(
         Item(
-            'boolean_trait', style='simple', label='Simple'), Item('_'), Item(
-            'boolean_trait', style='custom', label='Custom'), Item('_'), Item(
-                'boolean_trait', style='text', label='Text'), Item('_'), Item(
-                    'boolean_trait', style='readonly', label='ReadOnly'))
+            'boolean_trait', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'boolean_trait', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'boolean_trait', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'boolean_trait', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(bool_group,
-                 title='BooleanEditor',
-                 buttons=['OK'],
-                 width=300)
+    view1 = View(bool_group, title='BooleanEditor', buttons=['OK'], width=300)
 
 
 # Hook for 'demo.py'

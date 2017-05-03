@@ -29,8 +29,9 @@ def git_version():
         env['LANG'] = 'C'
         env['LC_ALL'] = 'C'
         out = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, env=env,
-        ).communicate()[0]
+            cmd,
+            stdout=subprocess.PIPE,
+            env=env, ).communicate()[0]
         return out
 
     try:
@@ -89,10 +90,13 @@ if not is_released:
         fullversion += '.dev{0}'.format(dev_num)
 
     with open(filename, "wt") as fp:
-        fp.write(template.format(version=VERSION,
-                                 full_version=fullversion,
-                                 git_revision=git_rev,
-                                 is_released=IS_RELEASED))
+        fp.write(
+            template.format(
+                version=VERSION,
+                full_version=fullversion,
+                git_revision=git_rev,
+                is_released=IS_RELEASED))
+
 
 if __name__ == "__main__":
     write_version_py()
@@ -111,7 +115,9 @@ if __name__ == "__main__":
         version=__version__,
         author='David C. Morrill, et. al.',
         author_email='dmorrill@enthought.com',
-        classifiers=[c.strip() for c in """\
+        classifiers=[
+            c.strip()
+            for c in """\
             Development Status :: 5 - Production/Stable
             Intended Audience :: Developers
             Intended Audience :: Science/Research
@@ -129,7 +135,8 @@ if __name__ == "__main__":
             Topic :: Scientific/Engineering
             Topic :: Software Development
             Topic :: Software Development :: Libraries
-            """.splitlines() if len(c.strip()) > 0],
+            """.splitlines() if len(c.strip()) > 0
+        ],
         description='traitsui: traits-capable user interfaces',
         long_description=open('README.rst').read(),
         url='https://docs.enthought.com/traitsui',
@@ -138,10 +145,9 @@ if __name__ == "__main__":
         license='BSD',
         maintainer='ETS Developers',
         maintainer_email='enthought-dev@enthought.com',
-        package_data=dict(traitsui=['image/library/*.zip',
-                                    'wx/images/*', 'qt4/images/*']),
+        package_data=dict(
+            traitsui=['image/library/*.zip', 'wx/images/*', 'qt4/images/*']),
         packages=find_packages(),
         platforms=["Windows", "Linux", "Mac OS-X", "Unix", "Solaris"],
         zip_safe=False,
-        use_2to3=True,
-    )
+        use_2to3=True, )

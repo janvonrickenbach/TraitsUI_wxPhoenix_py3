@@ -147,7 +147,8 @@ class _BoundsEditor(Editor):
             self.min = self.low
 
     def _step_size(self):
-        slider_delta = self.control.slider.maximum() - self.control.slider.minimum()
+        slider_delta = self.control.slider.maximum(
+        ) - self.control.slider.minimum()
         range_delta = self.max - self.min
 
         return float(range_delta) / slider_delta
@@ -158,7 +159,8 @@ class _BoundsEditor(Editor):
 
     def _convert_to_slider(self, value):
         self._check_max_and_min()
-        return self.control.slider.minimum() + (value - self.min) / self._step_size()
+        return self.control.slider.minimum() + (value - self.min
+                                                ) / self._step_size()
 
     def _low_changed(self, low):
         if self.control is None:

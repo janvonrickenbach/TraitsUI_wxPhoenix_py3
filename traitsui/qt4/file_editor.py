@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines file editors for the PyQt user interface toolkit.
 """
 
@@ -153,6 +152,7 @@ class SimpleEditor(SimpleTextEditor):
 
         return dlg
 
+
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -217,7 +217,8 @@ class CustomEditor(SimpleTextEditor):
         self.set_tooltip()
 
         # This is needed to enable horizontal scrollbar.
-        self.control.header().setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
+        self.control.header().setResizeMode(0,
+                                            QtGui.QHeaderView.ResizeToContents)
         self.control.header().setStretchLastSection(False)
 
     #-------------------------------------------------------------------------
@@ -288,6 +289,7 @@ class CustomEditor(SimpleTextEditor):
         """ Handles the 'reload' trait being changed.
         """
         self._model.refresh()
+
 
 #-------------------------------------------------------------------------
 #  '_TreeView' class:

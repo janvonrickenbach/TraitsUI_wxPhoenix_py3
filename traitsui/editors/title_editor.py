@@ -13,7 +13,6 @@
 #  Author: David C. Morrill
 #
 #------------------------------------------------------------------------------
-
 """ Defines the title editor factory for all traits toolkit backends.
 """
 
@@ -27,7 +26,8 @@ from traits.api import Bool
 from ..editor_factory import EditorFactory
 from ..toolkit import toolkit_object
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for Title editors.
     """
 

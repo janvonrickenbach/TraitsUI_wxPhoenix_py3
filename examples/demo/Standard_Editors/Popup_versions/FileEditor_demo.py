@@ -20,19 +20,21 @@ class FileEditorDemo(HasTraits):
     file_name = File
 
     # Display specification (one Item per editor style)
-    file_group = Group(Item('file_name', style='simple', label='Simple'),
-                       Item('_'),
-                       Item('file_name', style='custom', label='Custom'),
-                       Item('_'),
-                       Item('file_name', style='text', label='Text'),
-                       Item('_'),
-                       Item('file_name', style='readonly', label='ReadOnly'))
+    file_group = Group(
+        Item(
+            'file_name', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'file_name', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'file_name', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'file_name', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(file_group,
-                 title='FileEditor',
-                 width=400,
-                 buttons=['OK'])
+    view1 = View(file_group, title='FileEditor', width=400, buttons=['OK'])
 
 
 # Create the demo:

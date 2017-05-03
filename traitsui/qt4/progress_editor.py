@@ -8,7 +8,6 @@ from pyface.ui.qt4.progress_dialog import ProgressDialog
 
 
 class _ProgressDialog(ProgressDialog):
-
     def close(self):
         """ Overwritten to disable closing.
         """
@@ -53,13 +52,14 @@ class SimpleEditor(Editor):
         Finishes initializing the editor by creating the underlying widget.
         """
 
-        self.progress = _ProgressDialog(title=self.factory.title,
-                                        message=self.factory.message,
-                                        min=self.factory.min,
-                                        max=self.factory.max,
-                                        can_cancel=self.factory.can_cancel,
-                                        show_time=self.factory.show_time,
-                                        show_percent=self.factory.show_percent)
+        self.progress = _ProgressDialog(
+            title=self.factory.title,
+            message=self.factory.message,
+            min=self.factory.min,
+            max=self.factory.max,
+            can_cancel=self.factory.can_cancel,
+            show_time=self.factory.show_time,
+            show_percent=self.factory.show_percent)
 
         control = QtGui.QWidget()
         self.control = control

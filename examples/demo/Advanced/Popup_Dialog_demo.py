@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Demonstrates using a popup view within another view.
 
@@ -50,10 +49,8 @@ class PersonHandler(Handler):
     view = View(
         HGroup(
             spring,
-            Item('cancel', show_label=False),
-        ),
-        kind='popup'
-    )
+            Item(
+                'cancel', show_label=False), ), kind='popup')
 
     # Event handlers:
     def object_gender_changed(self, info):
@@ -65,6 +62,7 @@ class PersonHandler(Handler):
         object = self.info.object
         object.gender = ['Male', 'Female'][object.gender == 'Male']
         self._ui.dispose()
+
 
 #-- The Person class -----------------------------------------------------
 
@@ -82,8 +80,8 @@ class Person(HasPrivateTraits):
         Item('age'),
         Item('gender'),
         title='Button Popup Demo',
-        handler=PersonHandler
-    )
+        handler=PersonHandler)
+
 
 #-- Create and run the demo ----------------------------------------------
 

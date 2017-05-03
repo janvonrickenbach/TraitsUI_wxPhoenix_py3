@@ -13,7 +13,6 @@
 #
 #------------------------------------------------------------------------------
 
-
 from traits.api import Bool, HasTraits, Instance, Int, List
 from traitsui.api import Item, TreeEditor, TreeNode, View
 
@@ -35,17 +34,17 @@ class BogusTreeView(HasTraits):
 
     def default_traits_view(self):
         nodes = [
-            TreeNode(node_for=[Bogus], children='bogus_list', label='=Bogus'),
+            TreeNode(
+                node_for=[Bogus], children='bogus_list', label='=Bogus'),
         ]
 
         tree_editor = TreeEditor(
-            nodes=nodes, hide_root=self.hide_root, editable=False
-        )
+            nodes=nodes, hide_root=self.hide_root, editable=False)
 
         traits_view = View(
-            Item(name='bogus', id='engine', editor=tree_editor),
-            buttons = ['OK'],
-        )
+            Item(
+                name='bogus', id='engine', editor=tree_editor),
+            buttons=['OK'], )
 
         return traits_view
 

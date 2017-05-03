@@ -47,20 +47,21 @@ class InstanceEditorDemo(HasTraits):
 
     # Items are used to define the demo display - one item per
     # editor style
-    inst_group = Group(Item('sample_instance', style='simple', label='Simple'),
-                       Item('_'),
-                       Item('sample_instance', style='custom', label='Custom'),
-                       Item('_'),
-                       Item('sample_instance', style='text', label='Text'),
-                       Item('_'),
-                       Item('sample_instance',
-                            style='readonly',
-                            label='ReadOnly'))
+    inst_group = Group(
+        Item(
+            'sample_instance', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'sample_instance', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'sample_instance', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'sample_instance', style='readonly', label='ReadOnly'))
 
     # Demo View
-    view1 = View(inst_group,
-                 title='InstanceEditor',
-                 buttons=['OK'])
+    view1 = View(inst_group, title='InstanceEditor', buttons=['OK'])
 
 
 # Create the demo:

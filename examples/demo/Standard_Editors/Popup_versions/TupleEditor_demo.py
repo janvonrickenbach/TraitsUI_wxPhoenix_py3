@@ -20,18 +20,21 @@ class TupleEditorDemo(HasTraits):
     tuple = Tuple(Color, Range(1, 4), Str)
 
     # Display specification (one Item per editor style)
-    tuple_group = Group(Item('tuple', style='simple', label='Simple'),
-                        Item('_'),
-                        Item('tuple', style='custom', label='Custom'),
-                        Item('_'),
-                        Item('tuple', style='text', label='Text'),
-                        Item('_'),
-                        Item('tuple', style='readonly', label='ReadOnly'))
+    tuple_group = Group(
+        Item(
+            'tuple', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'tuple', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'tuple', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'tuple', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(tuple_group,
-                 title='TupleEditor',
-                 buttons=['OK'])
+    view1 = View(tuple_group, title='TupleEditor', buttons=['OK'])
 
 
 # Create the demo:

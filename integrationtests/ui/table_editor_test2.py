@@ -40,10 +40,14 @@ class Person(HasStrictTraits):
     #  Traits view definition:
     #-------------------------------------------------------------------------
 
-    traits_view = View('name', 'age', 'phone',
-                       title='Create new person',
-                       width=0.18,
-                       buttons=['OK', 'Cancel'])
+    traits_view = View(
+        'name',
+        'age',
+        'phone',
+        title='Create new person',
+        width=0.18,
+        buttons=['OK', 'Cancel'])
+
 
 #-------------------------------------------------------------------------
 #  'WorkingPerson' class
@@ -62,24 +66,31 @@ class WorkingPerson(Person):
     #  Traits view definition:
     #-------------------------------------------------------------------------
 
-    traits_view = View('name', 'age', 'phone', 'job',
-                       title='Create new working person.........',
-                       width=0.18,
-                       buttons=['OK', 'Cancel'])
+    traits_view = View(
+        'name',
+        'age',
+        'phone',
+        'job',
+        title='Create new working person.........',
+        width=0.18,
+        buttons=['OK', 'Cancel'])
+
 
 #-------------------------------------------------------------------------
 #  Sample data:
 #-------------------------------------------------------------------------
 
 people = [
-    Person(name='Dave', age=39, phone='555-1212'),
-    Person(name='Mike', age=28, phone='555-3526'),
-    WorkingPerson(name='Joe', age=34, phone='555-6943', job='Fireman'),
-    Person(name='Tom', age=22, phone='555-7586'),
-    Person(name='Dick', age=63, phone='555-3895'),
-    Person(name='Harry', age=46, phone='555-3285'),
-    WorkingPerson(name='Sally', age=43, phone='555-8797', job='Soldier'),
-    Person(name='Fields', age=31, phone='555-3547')
+    Person(
+        name='Dave', age=39, phone='555-1212'), Person(
+            name='Mike', age=28, phone='555-3526'), WorkingPerson(
+                name='Joe', age=34, phone='555-6943', job='Fireman'), Person(
+                    name='Tom', age=22, phone='555-7586'), Person(
+                        name='Dick', age=63, phone='555-3895'), Person(
+                            name='Harry', age=46, phone='555-3285'),
+    WorkingPerson(
+        name='Sally', age=43, phone='555-8797', job='Soldier'), Person(
+            name='Fields', age=31, phone='555-3547')
 ]
 
 #-------------------------------------------------------------------------
@@ -100,6 +111,7 @@ class TableTest(HasStrictTraits):
     #-------------------------------------------------------------------------
 
     traits_view = View(['people#', '|<>'], resizable=True)
+
 
 #-------------------------------------------------------------------------
 #  Run the tests:

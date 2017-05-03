@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines a subclass of the base PyQt color editor factory, for colors
 that are represented as tuples of the form ( *red*, *green*, *blue* ), where
 *red*, *green* and *blue* are floats in the range from 0.0 to 1.0.

@@ -14,7 +14,6 @@
 #  Date:   06/25/09
 #
 #-------------------------------------------------------------------------------
-
 """ A single line text widget that supports functionality common to native
     search widgets.
 """

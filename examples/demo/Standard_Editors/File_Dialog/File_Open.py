@@ -79,12 +79,12 @@ class FileDialogDemo(HasTraits):
 
     view = View(
         HGroup(
-            Item('open', show_label=False),
+            Item(
+                'open', show_label=False),
             '_',
-            Item('file_name', style='readonly', springy=True)
-        ),
-        width=0.5
-    )
+            Item(
+                'file_name', style='readonly', springy=True)),
+        width=0.5)
 
     #-- Traits Event Handlers ------------------------------------------------
 
@@ -94,6 +94,7 @@ class FileDialogDemo(HasTraits):
         file_name = open_file()
         if file_name != '':
             self.file_name = file_name
+
 
 # Create the demo:
 demo = FileDialogDemo()

@@ -19,11 +19,14 @@ class SimpleEmployee2(HasTraits):
     employee_number = Str
     salary = Int
 
-    traits_view = View(Group(Item(name='first_name'),
-                             Item(name='last_name'),
-                             Item(name='department'),
-                             label='Personnel profile',
-                             show_border=True))
+    traits_view = View(
+        Group(
+            Item(name='first_name'),
+            Item(name='last_name'),
+            Item(name='department'),
+            label='Personnel profile',
+            show_border=True))
+
 
 sam = SimpleEmployee2()
 sam.configure_traits()

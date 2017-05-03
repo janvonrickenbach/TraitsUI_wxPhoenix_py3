@@ -11,7 +11,6 @@
 # Author: Evan Patterson
 # Date: 06/26/09
 #------------------------------------------------------------------------------
-
 """ A renderer which displays a checked-box for a True value and an unchecked
     box for a false value.
 """

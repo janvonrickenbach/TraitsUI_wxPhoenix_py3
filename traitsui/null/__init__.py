@@ -14,7 +14,6 @@
 #  Date:   02/14/2005
 #
 #------------------------------------------------------------------------------
-
 """ Define the concrete implementations of the traits Toolkit interface for the
     'null' (do nothing) user interface toolkit. This toolkit is provided to
     handle situations where no recognized traits-compatible UI toolkit is
@@ -29,4 +28,3 @@ from __future__ import absolute_import
 
 from . import toolkit
 toolkit = toolkit.GUIToolkit()
-

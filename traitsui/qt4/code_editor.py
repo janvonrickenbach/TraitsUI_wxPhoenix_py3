@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines a source code editor and code editor factory, for the PyQt user
 interface toolkit, useful for tools such as debuggers.
 """
@@ -144,8 +143,7 @@ class SourceEditor(Editor):
         self.update_editor()
 
         # Set up any event listeners:
-        self.sync_value(factory.mark_lines, 'mark_lines', 'from',
-                        is_list=True)
+        self.sync_value(factory.mark_lines, 'mark_lines', 'from', is_list=True)
         self.sync_value(factory.selected_line, 'selected_line', 'from')
         self.sync_value(factory.selected_text, 'selected_text', 'to')
         self.sync_value(factory.line, 'line')
@@ -160,8 +158,8 @@ class SourceEditor(Editor):
         else:
             self.sync_value(factory.dim_color, 'dim_color', 'from')
 
-        self.sync_value(factory.squiggle_lines, 'squiggle_lines', 'from',
-                        is_list=True)
+        self.sync_value(
+            factory.squiggle_lines, 'squiggle_lines', 'from', is_list=True)
         if factory.squiggle_color == '':
             self.squiggle_color = 'red'
         else:
@@ -276,8 +274,8 @@ class SourceEditor(Editor):
     #-------------------------------------------------------------------------
 
     def _selection_changed(self):
-        self.selected_text = unicode(
-            self._widget.code.textCursor().selectedText())
+        self.selected_text = unicode(self._widget.code.textCursor()
+                                     .selectedText())
         start = self._widget.code.textCursor().selectionStart()
         end = self._widget.code.textCursor().selectionEnd()
 

@@ -86,7 +86,6 @@ today_fmt = '%B %d, %Y'
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # Options for HTML output
 # -----------------------
 
@@ -114,8 +113,7 @@ html_favicon = "et.ico"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static',
-                    os.path.join('tutorials','code_snippets')]
+html_static_path = ['_static', os.path.join('tutorials', 'code_snippets')]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -175,9 +173,10 @@ except ImportError as exc:
     html_theme = 'classic'
 
 # Useful aliases to avoid repeating long URLs.
-extlinks = {'github-demo': (
-    'https://github.com/enthought/traitsui/tree/master/examples/demo/%s',
-    'github-demo')
+extlinks = {
+    'github-demo':
+    ('https://github.com/enthought/traitsui/tree/master/examples/demo/%s',
+     'github-demo')
 }
 
 # Options for LaTeX output
@@ -191,9 +190,8 @@ extlinks = {'github-demo': (
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
-latex_documents = [
-  ('index', 'TraitsUI.tex', 'TraitsUI 4 User Manual', 'Enthought, Inc.', 'manual'),
-]
+latex_documents = [('index', 'TraitsUI.tex', 'TraitsUI 4 User Manual',
+                    'Enthought, Inc.', 'manual'), ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.

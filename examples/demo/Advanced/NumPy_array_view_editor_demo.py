@@ -52,20 +52,21 @@ class ShowArray(HasTraits):
     data = Array
 
     view = View(
-        Item('data',
-             show_label=False,
-             editor=ArrayViewEditor(titles=['x', 'y', 'z'],
-                                    format='%.4f',
-                                    # Font fails with wx in OSX;
-                                    #   see traitsui issue #13:
-                                    # font   = 'Arial 8'
-                                    )
-             ),
+        Item(
+            'data',
+            show_label=False,
+            editor=ArrayViewEditor(
+                titles=['x', 'y', 'z'],
+                format='%.4f',
+                # Font fails with wx in OSX;
+                #   see traitsui issue #13:
+                # font   = 'Arial 8'
+            )),
         title='Array Viewer',
         width=0.3,
         height=0.8,
-        resizable=True
-    )
+        resizable=True)
+
 
 #-- Run the demo ---------------------------------------------------------
 

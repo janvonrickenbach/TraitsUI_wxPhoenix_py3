@@ -17,7 +17,6 @@ from traitsui.api import Item, View, Handler, HGroup, VGroup
 
 
 class ApplyRevert_Handler(Handler):
-
     def apply(self, info):
         object = info.object
         object.stack.insert(0, object.input)
@@ -26,6 +25,7 @@ class ApplyRevert_Handler(Handler):
     def revert(self, info):
         # Do something exciting here...
         print('revert called...')
+
 
 # 'ApplyRevertDemo' class:
 
@@ -41,41 +41,35 @@ class ApplyRevertDemo(HasTraits):
     traits_view = View(
         VGroup(
             VGroup(
-                Item('input',
-                     show_label=False
-                     ),
+                Item(
+                    'input', show_label=False),
                 label='Input',
-                show_border=True
-            ),
+                show_border=True),
             HGroup(
                 VGroup(
-                    Item('stack',
-                         show_label=False,
-                         height=50,
-                         width=100,
-                         style='readonly'
-                         ),
+                    Item(
+                        'stack',
+                        show_label=False,
+                        height=50,
+                        width=100,
+                        style='readonly'),
                     label='Stack',
-                    show_border=True
-                ),
+                    show_border=True),
                 VGroup(
-                    Item('queue',
-                         show_label=False,
-                         height=50,
-                         width=100,
-                         style='readonly'
-                         ),
+                    Item(
+                        'queue',
+                        show_label=False,
+                        height=50,
+                        width=100,
+                        style='readonly'),
                     label='Queue',
-                    show_border=True
-                )
-            )
-        ),
+                    show_border=True))),
         resizable=True,
         height=300,
         title='Apply/Revert example',
         buttons=['Apply', 'Revert'],
-        handler=ApplyRevert_Handler
-    )
+        handler=ApplyRevert_Handler)
+
 
 # Create the demo:
 modal_popup = ApplyRevertDemo()

@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the various Boolean editors for the wxPython user interface toolkit.
 """
 
@@ -46,27 +45,29 @@ from .constants \
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class SimpleEditor ( Editor ):
+
+class SimpleEditor(Editor):
     """ Simple style of editor for Boolean values, which displays a check box.
     """
+
     #---------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = wx.CheckBox( parent, -1, '' )
-        parent.Bind(wx.EVT_CHECKBOX, self.update_object )
+        self.control = wx.CheckBox(parent, -1, '')
+        parent.Bind(wx.EVT_CHECKBOX, self.update_object)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Handles the user clicking on the checkbox:
     #---------------------------------------------------------------------------
 
-    def update_object ( self, event ):
+    def update_object(self, event):
         """ Handles the user clicking the checkbox.
         """
         self.value = (self.control.GetValue() != 0)
@@ -75,31 +76,34 @@ class SimpleEditor ( Editor ):
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
-        self.control.SetValue( self.value )
+        self.control.SetValue(self.value)
+
 
 #-------------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------------
 
-class ReadonlyEditor ( Editor ):
+
+class ReadonlyEditor(Editor):
     """ Read-only style of editor for Boolean values, which displays static text
     of either "True" or "False".
     """
+
     #---------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = wx.TextCtrl( parent, -1, '', style = wx.TE_READONLY )
-        self.control.SetBackgroundColour( ReadonlyColor )
+        self.control = wx.TextCtrl(parent, -1, '', style=wx.TE_READONLY)
+        self.control.SetBackgroundColour(ReadonlyColor)
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
@@ -107,11 +111,11 @@ class ReadonlyEditor ( Editor ):
     #  (Should normally be overridden in a subclass)
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
         if self.value:
-            self.control.SetValue( 'True' )
+            self.control.SetValue('True')
         else:
-            self.control.SetValue( 'False' )
+            self.control.SetValue('False')

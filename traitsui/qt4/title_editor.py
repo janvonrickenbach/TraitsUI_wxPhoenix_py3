@@ -57,6 +57,7 @@ class SimpleEditor(Editor):
         """
         self._control.text = self.str_value
 
+
 CustomEditor = SimpleEditor
 ReadonlyEditor = SimpleEditor
 TextEditor = SimpleEditor

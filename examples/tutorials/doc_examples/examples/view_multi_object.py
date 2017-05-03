@@ -17,16 +17,15 @@ class Person(HasTraits):
 class Company(HasTraits):
     company_name = Str
 
+
 # Standalone View object referencing objects in the UI context
-employee_view = View('e.first_name', 'e.last_name',
-                     'c.company_name')
+employee_view = View('e.first_name', 'e.last_name', 'c.company_name')
 
 bill = Person(first_name='Bill')
 acme = Company(company_name='Acme Products')
 
 
 class TraitApp(wx.App):
-
     def __init__(self, obj1, obj2, view):
         self.obj1 = obj1
         self.obj2 = obj2

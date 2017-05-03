@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #----------------------------------------------------------------------------
-
 """ Defines the concrete implementations of the traits Toolkit interface for
     the wxPython user interface toolkit.
 """

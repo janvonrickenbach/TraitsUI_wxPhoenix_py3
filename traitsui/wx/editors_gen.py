@@ -7,7 +7,6 @@
 #
 # Author: Vibha Srinivasan <vibha@enthought.com>
 #------------------------------------------------------------------------------
-
 """ Generates a file containing definitions for all of the editors defined in
 the WX backend.
 """
@@ -15,6 +14,7 @@ the WX backend.
 import os, glob, sys
 from traitsui.api import Editor
 from traitsui.editor_factory import EditorFactory
+
 
 def gen_editor_definitions(target_filename):
     """ Generates a file containing definitions for all of the editors
@@ -60,14 +60,15 @@ def gen_editor_definitions(target_filename):
             if 'ToolkitEditorFactory' in class_names:
                 class_name = 'ToolkitEditorFactory'
             else:
-                class_name = ''.join([name.capitalize() for name in
-                                     filename.split('_')])
+                class_name = ''.join(
+                    [name.capitalize() for name in filename.split('_')])
                 if class_name not in class_names:
                     class_name = class_names[0]
-            function = "def %(filename)s(*args, **traits):"%locals()
+            function = "def %(filename)s(*args, **traits):" % locals()
             target_file.write(function)
             target_file.write('\n')
-            func_code = ' '*4 + "import %(import_path)s as editor"%locals()+'\n'
+            func_code = ' ' * 4 + "import %(import_path)s as editor" % locals(
+            ) + '\n'
             func_code+= ' '*4 + "return editor.%(class_name)s(*args, **traits)" \
                     % locals()
             target_file.write(func_code)

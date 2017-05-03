@@ -20,20 +20,21 @@ class CompoundEditorDemo(HasTraits):
     compound_trait = Trait(1, Range(1, 6), 'a', 'b', 'c', 'd', 'e', 'f')
 
     # Display specification (one Item per editor style)
-    comp_group = Group(Item('compound_trait', style='simple', label='Simple'),
-                       Item('_'),
-                       Item('compound_trait', style='custom', label='Custom'),
-                       Item('_'),
-                       Item('compound_trait', style='text', label='Text'),
-                       Item('_'),
-                       Item('compound_trait',
-                            style='readonly',
-                            label='ReadOnly'))
+    comp_group = Group(
+        Item(
+            'compound_trait', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'compound_trait', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'compound_trait', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'compound_trait', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(comp_group,
-                 title='CompoundEditor',
-                 buttons=['OK'])
+    view1 = View(comp_group, title='CompoundEditor', buttons=['OK'])
 
 
 # Create the demo:

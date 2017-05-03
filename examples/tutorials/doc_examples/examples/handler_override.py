@@ -13,7 +13,6 @@ from traitsui.api import View, Handler
 
 
 class TC_Handler(Handler):
-
     def setattr(self, info, object, name, value):
         Handler.setattr(self, info, object, name, value)
         info.object._updated = True
@@ -29,10 +28,14 @@ class TestClass(HasTraits):
     b3 = Bool
     _updated = Bool(False)
 
-view1 = View('b1', 'b2', 'b3',
-             title="Alter Title",
-             handler=TC_Handler(),
-             buttons=['OK', 'Cancel'])
+
+view1 = View(
+    'b1',
+    'b2',
+    'b3',
+    title="Alter Title",
+    handler=TC_Handler(),
+    buttons=['OK', 'Cancel'])
 
 tc = TestClass()
 tc.configure_traits(view=view1)

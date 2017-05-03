@@ -27,10 +27,12 @@ from .file_editor import ToolkitEditorFactory as EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for directory editors.
     """
     pass
+
 
 # Define the DirectoryEditor class
 DirectoryEditor = ToolkitEditorFactory

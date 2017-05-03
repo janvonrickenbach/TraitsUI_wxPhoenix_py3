@@ -14,7 +14,6 @@
 #  Date:   03/28/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines the table column descriptor used for toggleable columns.
 """
 
@@ -39,16 +38,17 @@ else:
 #  'CheckboxColumn' class:
 #-------------------------------------------------------------------------------
 
-class CheckboxColumn ( ObjectColumn ):
+
+class CheckboxColumn(ObjectColumn):
 
     #---------------------------------------------------------------------------
     #  Initializes the object:
     #---------------------------------------------------------------------------
 
-    def __init__ ( self, **traits ):
+    def __init__(self, **traits):
         """ Initializes the object.
         """
-        super( CheckboxColumn, self ).__init__( **traits )
+        super(CheckboxColumn, self).__init__(**traits)
 
         # force the renderer to be a checkbox renderer
         self.renderer = CheckboxRenderer()
@@ -57,7 +57,7 @@ class CheckboxColumn ( ObjectColumn ):
     #  Returns the cell background color for the column for a specified object:
     #---------------------------------------------------------------------------
 
-    def get_cell_color ( self, object ):
+    def get_cell_color(self, object):
         """ Returns the cell background color for the column for a specified
             object.
         """
@@ -69,7 +69,7 @@ class CheckboxColumn ( ObjectColumn ):
     #  Returns whether the column is editable for a specified object:
     #---------------------------------------------------------------------------
 
-    def is_editable ( self, object ):
+    def is_editable(self, object):
         """ Returns whether the column is editable for a specified object.
         """
 

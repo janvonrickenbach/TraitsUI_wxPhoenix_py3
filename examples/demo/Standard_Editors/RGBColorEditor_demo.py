@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of a ColorEditor demo plugin for Traits UI demo program.
 
@@ -25,22 +24,22 @@ class ColorEditorDemo(HasTraits):
 
     # Items are used to define the demo display, one item per editor style:
     color_group = Group(
-        Item('color_trait', style='simple', label='Simple'),
+        Item(
+            'color_trait', style='simple', label='Simple'),
         Item('_'),
-        Item('color_trait', style='custom', label='Custom'),
+        Item(
+            'color_trait', style='custom', label='Custom'),
         Item('_'),
-        Item('color_trait', style='text', label='Text'),
+        Item(
+            'color_trait', style='text', label='Text'),
         Item('_'),
-        Item('color_trait', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'color_trait', style='readonly', label='ReadOnly'))
 
     # Demo view
     view1 = View(
-        color_group,
-        title='ColorEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+        color_group, title='ColorEditor', buttons=['OK'], resizable=True)
+
 
 # Create the demo:
 demo = ColorEditorDemo()

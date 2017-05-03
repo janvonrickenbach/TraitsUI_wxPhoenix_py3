@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the PyQt implementation of the editor used to wrap a non-Traits
 based custom control.
 """
@@ -37,6 +36,7 @@ from editor \
 class CustomEditor(Editor):
     """ Wrapper for a custom editor control
     """
+
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

@@ -14,7 +14,6 @@
 #  Date:   10/18/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the Include class, which is used to represent a substitutable
     element within a user interface View.
 """
@@ -33,7 +32,8 @@ from .view_element import ViewSubElement
 #  'Include' class:
 #-------------------------------------------------------------------------------
 
-class Include ( ViewSubElement ):
+
+class Include(ViewSubElement):
     """ A substitutable user interface element, i.e., a placeholder in a view
     definition.
 
@@ -81,18 +81,17 @@ class Include ( ViewSubElement ):
     #  Initializes the object:
     #---------------------------------------------------------------------------
 
-    def __init__ ( self, id, **traits ):
+    def __init__(self, id, **traits):
         """ Initializes the Include object.
         """
-        super( ViewSubElement, self ).__init__( **traits )
+        super(ViewSubElement, self).__init__(**traits)
         self.id = id
 
     #---------------------------------------------------------------------------
     #  Returns a 'pretty print' version of the Include:
     #---------------------------------------------------------------------------
 
-    def __repr__ ( self ):
+    def __repr__(self):
         """ Returns a "pretty print" version of the Include object.
         """
         return "<%s>" % self.id
-

@@ -50,8 +50,7 @@ class Person(HasTraits):
         Item(name='last_name'),
         Item(name='age'),
         label='General Info',
-        show_border=True
-    )
+        show_border=True)
 
     # Interface for attributes of Persons under 18:
     child_group = Group(
@@ -60,8 +59,7 @@ class Person(HasTraits):
         Item(name='grade'),
         label='Additional Info for minors',
         show_border=True,
-        visible_when='age < 18',
-    )
+        visible_when='age < 18', )
 
     # Interface for attributes of Persons 18 and over:
     adult_group = Group(
@@ -70,30 +68,19 @@ class Person(HasTraits):
         Item(name='military_service'),
         label='Additional Info for adults',
         show_border=True,
-        visible_when='age >= 18',
-    )
+        visible_when='age >= 18', )
 
     # A simple View is sufficient, since the Group definitions do all the work:
     view = View(
-        Group(
-            gen_group,
-            '10',
-            Label("Using 'visible_when':"),
-            '10',
-            child_group,
-            adult_group
-        ),
+        Group(gen_group, '10',
+              Label("Using 'visible_when':"), '10', child_group, adult_group),
         title='Personal Information',
         resizable=True,
-        buttons=['OK']
-    )
+        buttons=['OK'])
+
 
 # Create the demo:
-demo = Person(
-    first_name="Samuel",
-    last_name="Johnson",
-    age=16
-)
+demo = Person(first_name="Samuel", last_name="Johnson", age=16)
 
 # Run the demo (if invoked from the command line):
 if __name__ == '__main__':

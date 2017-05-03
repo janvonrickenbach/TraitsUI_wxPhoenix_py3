@@ -12,7 +12,6 @@
 #  Author: David C. Morrill
 #
 #------------------------------------------------------------------------------
-
 """ Defines the editor factory for multi-selection enumerations, for all traits toolkit
 backends.
 """
@@ -31,7 +30,8 @@ from ..editor_factory import EditorWithListFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorWithListFactory ):
+
+class ToolkitEditorFactory(EditorWithListFactory):
     """ Editor factory for checklists.
     """
 
@@ -40,8 +40,8 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
     #---------------------------------------------------------------------------
 
     # Number of columns to use when the editor is displayed as a grid
-    cols = Range( 1, 20 )
+    cols = Range(1, 20)
+
 
 # Define the CheckListEditor class
 CheckListEditor = ToolkitEditorFactory
-

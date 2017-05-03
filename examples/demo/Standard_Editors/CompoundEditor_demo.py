@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of a CompoundEditor demo plugin for Traits UI demo program.
 
@@ -26,22 +25,22 @@ class CompoundEditorDemo(HasTraits):
 
     # Display specification (one Item per editor style):
     comp_group = Group(
-        Item('compound_trait', style='simple', label='Simple'),
+        Item(
+            'compound_trait', style='simple', label='Simple'),
         Item('_'),
-        Item('compound_trait', style='custom', label='Custom'),
+        Item(
+            'compound_trait', style='custom', label='Custom'),
         Item('_'),
-        Item('compound_trait', style='text', label='Text'),
+        Item(
+            'compound_trait', style='text', label='Text'),
         Item('_'),
-        Item('compound_trait', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'compound_trait', style='readonly', label='ReadOnly'))
 
     # Demo view:
     view = View(
-        comp_group,
-        title='CompoundEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+        comp_group, title='CompoundEditor', buttons=['OK'], resizable=True)
+
 
 # Create the demo:
 demo = CompoundEditorDemo()

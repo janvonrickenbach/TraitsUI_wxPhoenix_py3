@@ -32,12 +32,17 @@ class TestRegression(unittest.TestCase):
         """ Make sure that DelegatesTo on Events passes Editor creation.
         """
         child = Child(parent=Parent())
-        editor = Editor(None, factory=TextEditor(), object=child, name='button')
+        editor = Editor(
+            None, factory=TextEditor(), object=child, name='button')
         self.assertIs(editor.old_value, Undefined)
 
     def test_attribute_error(self):
         """ Make sure genuine AttributeErrors raise on Editor creation.
         """
-        self.assertRaises(AttributeError, Editor,
-                          None, factory=TextEditor(), object=Parent(),
-                          name='not_a_trait')
+        self.assertRaises(
+            AttributeError,
+            Editor,
+            None,
+            factory=TextEditor(),
+            object=Parent(),
+            name='not_a_trait')

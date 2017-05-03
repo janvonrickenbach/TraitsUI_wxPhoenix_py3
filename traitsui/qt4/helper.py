@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines helper functions and classes used to define PyQt-based trait
     editors and trait editor factories.
 """
@@ -65,6 +64,7 @@ def pixmap_cache(name, path=None):
         QtGui.QPixmapCache.insert(filename, pm)
     return pm
 
+
 #-------------------------------------------------------------------------
 #  Positions a window on the screen with a specified width and height so that
 #  the window completely fits on the screen if possible:
@@ -118,8 +118,9 @@ def position_window(window, width=None, height=None, parent=None):
     y += cdy + fheight
 
     # Position the window (making sure it will fit on the screen).
-    window.move(max(0, min(x, screen_dx - width)),
-                max(0, min(y, screen_dy - height)))
+    window.move(
+        max(0, min(x, screen_dx - width)), max(0, min(y, screen_dy - height)))
+
 
 #-------------------------------------------------------------------------
 #  Restores the user preference items for a specified UI:
@@ -133,6 +134,7 @@ def restore_window(ui):
     if prefs is not None:
         ui.control.setGeometry(*prefs)
 
+
 #-------------------------------------------------------------------------
 #  Saves the user preference items for a specified UI:
 #-------------------------------------------------------------------------
@@ -143,6 +145,7 @@ def save_window(ui):
     """
     geom = ui.control.geometry()
     ui.save_prefs((geom.x(), geom.y(), geom.width(), geom.height()))
+
 
 #-------------------------------------------------------------------------
 #  Safely tries to pop up an FBI window if etsdevtools.debug is installed
@@ -157,6 +160,7 @@ def open_fbi():
             traceback.print_exc()
     except ImportError:
         pass
+
 
 #-------------------------------------------------------------------------
 #  'IconButton' class:
@@ -204,6 +208,7 @@ class IconButton(QtGui.QPushButton):
         self.setFocusPolicy(QtCore.Qt.NoFocus)
 
         self.clicked.connect(slot)
+
 
 #-------------------------------------------------------------------------
 #  Dock-related stubs.

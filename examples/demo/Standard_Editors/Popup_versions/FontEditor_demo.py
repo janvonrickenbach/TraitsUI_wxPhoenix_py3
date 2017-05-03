@@ -20,20 +20,21 @@ class FontEditorDemo(HasTraits):
     font_trait = Font
 
     # Display specification (one Item per editor style)
-    font_group = Group(Item('font_trait', style='simple', label='Simple'),
-                       Item('_'),
-                       Item('font_trait', style='custom', label='Custom'),
-                       Item('_'),
-                       Item('font_trait', style='text', label='Text'),
-                       Item('_'),
-                       Item('font_trait',
-                            style='readonly',
-                            label='ReadOnly'))
+    font_group = Group(
+        Item(
+            'font_trait', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'font_trait', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'font_trait', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'font_trait', style='readonly', label='ReadOnly'))
 
     # Demo view
-    view1 = View(font_group,
-                 title='FontEditor',
-                 buttons=['OK'])
+    view1 = View(font_group, title='FontEditor', buttons=['OK'])
 
 
 # Create the demo:

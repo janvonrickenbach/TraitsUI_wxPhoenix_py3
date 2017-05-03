@@ -27,8 +27,10 @@ from traitsui.api \
 
 colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
 
-numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
-           'nine', 'ten']
+numbers = [
+    'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten'
+]
 
 #-------------------------------------------------------------------------
 #  'CheckListTest' class:
@@ -54,15 +56,14 @@ class CheckListTest(Handler):
         else:
             info.value.factory.values = numbers
 
+
 #-------------------------------------------------------------------------
 #  Run the tests:
 #-------------------------------------------------------------------------
 
 if __name__ == '__main__':
     clt = CheckListTest()
-    clt.configure_traits(
-        view=View('case', '_', Item('value', id='value')))
+    clt.configure_traits(view=View('case', '_', Item('value', id='value')))
     print 'value:', clt.value
-    clt.configure_traits(
-        view=View('case', '_', Item('value@', id='value')))
+    clt.configure_traits(view=View('case', '_', Item('value@', id='value')))
     print 'value:', clt.value

@@ -12,7 +12,6 @@
 #  Date:   Feb 2012
 #
 #------------------------------------------------------------------------------
-
 """
 Test that menu and toolbar actions are triggered.
 """
@@ -31,12 +30,8 @@ if _is_current_backend('null'):
     import nose
     raise nose.SkipTest("Not supported using the null backend")
 
-
 TestAction = Action(
-    name        = 'Test',
-    action      = 'test_clicked',
-    tooltip     = 'Click to test'
-)
+    name='Test', action='test_clicked', tooltip='Click to test')
 
 
 class DialogWithToolbar(HasTraits):
@@ -47,25 +42,18 @@ class DialogWithToolbar(HasTraits):
     def test_clicked(self):
         self.action_successful = True
 
-    menubar = MenuBar(
-        Menu(
-            ActionGroup(TestAction),
-            name='&Test menu'
-        ),
-    )
+    menubar = MenuBar(Menu(ActionGroup(TestAction), name='&Test menu'), )
 
-    toolbar = ToolBar(
-        ActionGroup(TestAction),
-    )
+    toolbar = ToolBar(ActionGroup(TestAction), )
 
     traits_view = View(
         Item(label="Click the button on the toolbar or the menu item.\n"
-                   "The 'Action successful' element should turn to True."),
-        Item('action_successful', style='readonly'),
-        menubar = menubar,
-        toolbar = toolbar,
-        buttons = ['OK']
-    )
+             "The 'Action successful' element should turn to True."),
+        Item(
+            'action_successful', style='readonly'),
+        menubar=menubar,
+        toolbar=toolbar,
+        buttons=['OK'])
 
 
 def _test_actions(trigger_action_func):
@@ -87,6 +75,7 @@ def _test_actions(trigger_action_func):
 
 
 # ----- Qt4 tests
+
 
 def _qt_trigger_action(container_class, ui):
     toolbar = ui.control.findChild(container_class)
@@ -118,13 +107,14 @@ def test_qt_menu_action():
     # TypeError: perform() takes exactly 2 arguments (1 given) was raised
     # instead
 
-    qt_trigger_menu_action = partial(
-        _qt_trigger_action, pyface.ui.qt4.action.menu_manager._Menu)
+    qt_trigger_menu_action = partial(_qt_trigger_action,
+                                     pyface.ui.qt4.action.menu_manager._Menu)
 
     _test_actions(qt_trigger_menu_action)
 
 
 # ----- wx tests
+
 
 @skip_if_not_wx
 def test_wx_toolbar_action():
@@ -151,7 +141,6 @@ def test_wx_toolbar_action():
 
 
 # TODO: I couldn't find a way to press menu items programmatically for wx
-
 
 if __name__ == '__main__':
     # Execute from command line for manual testing

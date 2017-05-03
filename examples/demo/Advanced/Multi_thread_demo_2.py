@@ -30,6 +30,7 @@ class Counter(HasTraits):
 
     view = View(Item('count', style='readonly'))
 
+
 #-- The main 'ThreadDemo' class ------------------------------------------
 
 
@@ -42,17 +43,19 @@ class ThreadDemo(HasTraits):
     counters = List(Counter)
 
     view = View(
-        Item('create', show_label=False, width=-100),
+        Item(
+            'create', show_label=False, width=-100),
         '_',
-        Item('counters', style='custom',
-             show_label=False,
-             editor=ListEditor(use_notebook=True,
-                               dock_style='tab')),
+        Item(
+            'counters',
+            style='custom',
+            show_label=False,
+            editor=ListEditor(
+                use_notebook=True, dock_style='tab')),
         resizable=True,
         width=300,
         height=150,
-        title='Dynamic threads'
-    )
+        title='Dynamic threads')
 
     def __init__(self, **traits):
         super(HasTraits, self).__init__(**traits)
@@ -71,6 +74,7 @@ class ThreadDemo(HasTraits):
             counter.count += 1
             sleep(0.030)
         self.counters.remove(counter)
+
 
 # Create the demo:
 demo = ThreadDemo()

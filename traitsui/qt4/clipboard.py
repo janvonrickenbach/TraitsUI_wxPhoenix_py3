@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Implements a wrapper around the PyQt clipboard that handles Python objects
 using pickle.
 """
@@ -18,10 +17,10 @@ from pyface.qt import QtGui
 from pyface.ui.qt4.mimedata import PyMimeData, str2bytes
 from traits.api import HasTraits, Instance, Property
 
-
 #-------------------------------------------------------------------------
 #  '_Clipboard' class:
 #-------------------------------------------------------------------------
+
 
 class _Clipboard(HasTraits):
     """ The _Clipboard class provides a wrapper around the PyQt clipboard.
@@ -83,6 +82,7 @@ class _Clipboard(HasTraits):
         """ Initialise the clipboard.
         """
         return QtGui.QApplication.clipboard()
+
 
 #-------------------------------------------------------------------------
 #  The singleton clipboard instance.

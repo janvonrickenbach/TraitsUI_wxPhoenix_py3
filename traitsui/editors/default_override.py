@@ -18,6 +18,7 @@ from __future__ import absolute_import
 from traits.api import Dict
 from ..editor_factory import EditorFactory
 
+
 class DefaultOverride(EditorFactory):
     """Editor factory for selectively overriding certain parameters
     of the default editor.
@@ -29,8 +30,8 @@ class DefaultOverride(EditorFactory):
         EditorFactory.__init__(self, *args)
         self._overrides = overrides
 
-    def _customise_default(self, editor_kind, ui, object, name,
-                           description, parent):
+    def _customise_default(self, editor_kind, ui, object, name, description,
+                           parent):
         """
         Obtain the given trait's default editor and set the parameters
         specified in `overrides` above.
@@ -45,17 +46,17 @@ class DefaultOverride(EditorFactory):
         return editor
 
     def simple_editor(self, ui, object, name, description, parent):
-        return self._customise_default('simple_editor', ui, object,
-                                       name, description, parent)
+        return self._customise_default('simple_editor', ui, object, name,
+                                       description, parent)
 
     def custom_editor(self, ui, object, name, description, parent):
-        return self._customise_default('custom_editor', ui, object,
-                                       name, description, parent)
+        return self._customise_default('custom_editor', ui, object, name,
+                                       description, parent)
 
     def text_editor(self, ui, object, name, description, parent):
-        return self._customise_default('text_editor', ui, object,
-                                       name, description, parent)
+        return self._customise_default('text_editor', ui, object, name,
+                                       description, parent)
 
     def readonly_editor(self, ui, object, name, description, parent):
-        return self._customise_default('readonly_editor', ui, object,
-                                       name, description, parent)
+        return self._customise_default('readonly_editor', ui, object, name,
+                                       description, parent)

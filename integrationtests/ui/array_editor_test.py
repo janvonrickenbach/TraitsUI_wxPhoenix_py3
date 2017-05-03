@@ -39,10 +39,21 @@ class Test(HasPrivateTraits):
     #  Traits view definitions:
     #-------------------------------------------------------------------------
 
-    view = View('three', '_', 'three', '_', 'three~', '_',
-                'four', '_', 'four', '_', 'four~',
-                title='ArrayEditor Test Case',
-                resizable=True)
+    view = View(
+        'three',
+        '_',
+        'three',
+        '_',
+        'three~',
+        '_',
+        'four',
+        '_',
+        'four',
+        '_',
+        'four~',
+        title='ArrayEditor Test Case',
+        resizable=True)
+
 
 #-------------------------------------------------------------------------
 #  Run the test case:

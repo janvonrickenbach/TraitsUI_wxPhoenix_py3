@@ -12,7 +12,6 @@
 #  Date:   Feb 2012
 #
 #------------------------------------------------------------------------------
-
 """
 Test the layout of elements is consistent with the layout parameters.
 """
@@ -26,10 +25,10 @@ from traitsui.group import HGroup, VGroup
 
 from traitsui.tests._tools import *
 
-
 _DIALOG_WIDTH = 500
 _DIALOG_HEIGHT = 500
 _TXT_WIDTH = 100
+
 
 class VResizeDialog(HasTraits):
 
@@ -37,12 +36,11 @@ class VResizeDialog(HasTraits):
 
     traits_view = View(
         VGroup(
-            Item('txt', width=_TXT_WIDTH, resizable=True),
-        ),
-        width  = _DIALOG_WIDTH,
-        height = _DIALOG_HEIGHT,
-        resizable=True
-    )
+            Item(
+                'txt', width=_TXT_WIDTH, resizable=True), ),
+        width=_DIALOG_WIDTH,
+        height=_DIALOG_HEIGHT,
+        resizable=True)
 
 
 class HResizeDialog(HasTraits):
@@ -51,12 +49,11 @@ class HResizeDialog(HasTraits):
 
     traits_view = View(
         HGroup(
-            Item('txt', width=_TXT_WIDTH, resizable=True),
-        ),
-        width  = _DIALOG_WIDTH,
-        height = _DIALOG_HEIGHT,
-        resizable=True
-    )
+            Item(
+                'txt', width=_TXT_WIDTH, resizable=True), ),
+        width=_DIALOG_WIDTH,
+        height=_DIALOG_HEIGHT,
+        resizable=True)
 
 
 @skip_if_not_qt4
@@ -74,7 +71,7 @@ def test_qt_resizable_in_vgroup():
         text = ui.control.findChild(qt.QtWidgets.QLineEdit)
 
         # horizontal size should be large
-        nose.tools.assert_greater(text.width(), _DIALOG_WIDTH-100)
+        nose.tools.assert_greater(text.width(), _DIALOG_WIDTH - 100)
 
         # vertical size should be unchanged
         nose.tools.assert_less(text.height(), 100)
@@ -95,7 +92,7 @@ def test_qt_resizable_in_hgroup():
         text = ui.control.findChild(qt.QtWidgets.QLineEdit)
 
         # vertical size should be large
-        nose.tools.assert_greater(text.height(), _DIALOG_HEIGHT-100)
+        nose.tools.assert_greater(text.height(), _DIALOG_HEIGHT - 100)
 
         # horizontal size should be unchanged
         # ??? maybe not: some elements (e.g., the text field) have

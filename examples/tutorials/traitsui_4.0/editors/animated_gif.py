@@ -42,8 +42,7 @@ base_path = join(dirname(ui.__file__), 'demo', 'Extras', 'images')
 
 # Get the names of the animated GIF files that can be displayed:
 files = [
-    join(base_path, 'logo_64x64.gif'),
-    join(base_path, 'logo_48x48.gif'),
+    join(base_path, 'logo_64x64.gif'), join(base_path, 'logo_48x48.gif'),
     join(base_path, 'logo_32x32.gif')
 ]
 
@@ -62,21 +61,19 @@ class AnimatedGIFDemo(HasTraits):
     view = View(
         VGroup(
             HGroup(
-                Item('gif_file',
-                     editor=AnimatedGIFEditor(playing='playing'),
-                     show_label=False),
-                Item('playing'),
-            ),
+                Item(
+                    'gif_file',
+                    editor=AnimatedGIFEditor(playing='playing'),
+                    show_label=False),
+                Item('playing'), ),
             '_',
-            Item('gif_file',
-                 label='GIF File',
-                 editor=EnumEditor(values=files)
-                 )
-        ),
+            Item(
+                'gif_file', label='GIF File',
+                editor=EnumEditor(values=files))),
         title='Animated GIF Demo',
         resizable=True,
-        buttons=['OK']
-    )
+        buttons=['OK'])
+
 
 #--<Example*>-------------------------------------------------------------
 

@@ -14,7 +14,6 @@
 #  Date:   06/25/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines the editor factory for a drag-and-drop editor. A drag-and-drop
     editor represents its value as a simple image which, depending upon the
     editor style, can be a drag source only, a drop target only, or both a
@@ -35,7 +34,8 @@ from ..editor_factory import EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for drag-and-drop editors.
     """
 

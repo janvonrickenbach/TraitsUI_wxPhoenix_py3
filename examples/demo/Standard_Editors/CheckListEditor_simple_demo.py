@@ -27,27 +27,28 @@ class CheckListEditorDemo(HasTraits):
 
     # Specify the strings to be displayed in the checklist:
     checklist = List(editor=CheckListEditor(
-        values=['one', 'two', 'three', 'four',
-                'five', 'six'],
-        cols=2))
+        values=['one', 'two', 'three', 'four', 'five', 'six'], cols=2))
 
     # CheckListEditor display with two columns:
     checklist_group = Group(
         '10',  # insert vertical space
         Label('The custom style lets you select items from a checklist:'),
-        UItem('checklist', style='custom'),
-        '10', '_', '10',  # a horizontal line with 10 empty pixels above and below
+        UItem(
+            'checklist', style='custom'),
+        '10',
+        '_',
+        '10',  # a horizontal line with 10 empty pixels above and below
         Label('The readonly style shows you which items are selected, '
               'as a Python list:'),
-        UItem('checklist', style='readonly'),
-    )
+        UItem(
+            'checklist', style='readonly'), )
 
     traits_view = View(
         checklist_group,
         title='CheckListEditor',
         buttons=['OK'],
-        resizable=True
-    )
+        resizable=True)
+
 
 # Create the demo:
 demo = CheckListEditorDemo()

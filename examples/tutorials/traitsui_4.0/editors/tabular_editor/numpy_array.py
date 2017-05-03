@@ -51,8 +51,7 @@ from pyface.image_resource \
 # Necessary because of the dynamic way in which the demos are loaded:
 import traitsui.api
 
-search_path = [join(dirname(traitsui.api.__file__),
-                    'demo', 'Advanced')]
+search_path = [join(dirname(traitsui.api.__file__), 'demo', 'Advanced')]
 
 #--[Tabular Adapter Definition]-------------------------------------------
 
@@ -72,16 +71,17 @@ class ArrayAdapter(TabularAdapter):
 
     def _get_index_image(self):
         x, y, z = self.item
-        if sqrt((x - 0.5) ** 2 + (y - 0.5) ** 2 + (z - 0.5) ** 2) <= 0.25:
+        if sqrt((x - 0.5)**2 + (y - 0.5)**2 + (z - 0.5)**2) <= 0.25:
             return 'red_flag'
         return None
+
 
 #--[Tabular Editor Definition]--------------------------------------------
 
 tabular_editor = TabularEditor(
     adapter=ArrayAdapter(),
-    images=[ImageResource('red_flag', search_path=search_path)]
-)
+    images=[ImageResource(
+        'red_flag', search_path=search_path)])
 
 #--[ShowArray Class]------------------------------------------------------
 
@@ -91,13 +91,14 @@ class ShowArray(HasTraits):
     data = Array
 
     view = View(
-        Item('data', editor=tabular_editor, show_label=False),
+        Item(
+            'data', editor=tabular_editor, show_label=False),
         title='Array Viewer',
         width=0.3,
         height=0.8,
         resizable=True,
-        buttons=NoButtons
-    )
+        buttons=NoButtons)
+
 
 #--[Example Code*]--------------------------------------------------------
 

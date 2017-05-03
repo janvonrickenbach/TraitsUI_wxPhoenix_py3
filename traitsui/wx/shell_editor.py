@@ -14,7 +14,6 @@
 #  Date:   09/27/2005
 #
 #-------------------------------------------------------------------------------
-
 """ Editor that displays an interactive Python shell.
 """
 
@@ -35,7 +34,8 @@ from .editor \
 #  'ShellEditor' class:
 #-------------------------------------------------------------------------------
 
-class _ShellEditor ( BaseShellEditor, Editor ):
+
+class _ShellEditor(BaseShellEditor, Editor):
     """ Editor that displays an interactive Python shell.
     """
     pass

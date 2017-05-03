@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines various directory editors for the wxPython user interface toolkit.
 """
 
@@ -42,7 +41,8 @@ from .file_editor \
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class SimpleEditor ( SimpleFileEditor ):
+
+class SimpleEditor(SimpleFileEditor):
     """ Simple style of editor for directories, which displays a text field
         and a **Browse** button that opens a directory-selection dialog box.
     """
@@ -51,26 +51,29 @@ class SimpleEditor ( SimpleFileEditor ):
     #  Creates the correct type of file dialog or popup:
     #---------------------------------------------------------------------------
 
-    def _create_file_dialog ( self ):
+    def _create_file_dialog(self):
         """ Creates the correct type of file dialog.
         """
-        dlg = wx.DirDialog( self.control, message = 'Select a Directory' )
-        dlg.SetPath( self._file_name.GetValue() )
+        dlg = wx.DirDialog(self.control, message='Select a Directory')
+        dlg.SetPath(self._file_name.GetValue())
         return dlg
 
-    def _create_file_popup ( self ):
+    def _create_file_popup(self):
         """ Creates the correct type of file popup.
         """
-        return PopupDirectory( control   = self.control,
-                               file_name = self.str_value,
-                               filter    = self.factory.filter,
-                               height    = 300 )
+        return PopupDirectory(
+            control=self.control,
+            file_name=self.str_value,
+            filter=self.factory.filter,
+            height=300)
+
 
 #-------------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------------
 
-class CustomEditor ( CustomFileEditor ):
+
+class CustomEditor(CustomFileEditor):
     """ Custom style of editor for directories, which displays a tree view of
         the file system.
     """
@@ -79,7 +82,7 @@ class CustomEditor ( CustomFileEditor ):
     #  Returns the basic style to use for the control:
     #---------------------------------------------------------------------------
 
-    def get_style ( self ):
+    def get_style(self):
         """ Returns the basic style to use for the control.
         """
         return (wx.DIRCTRL_DIR_ONLY | wx.DIRCTRL_EDIT_LABELS)
@@ -88,28 +91,30 @@ class CustomEditor ( CustomFileEditor ):
     #  Handles the user changing the contents of the edit control:
     #---------------------------------------------------------------------------
 
-    def update_object ( self, event ):
+    def update_object(self, event):
         """ Handles the user changing the contents of the edit control.
         """
         if self.control is not None:
             path = self.control.GetPath()
-            if isdir( path ):
+            if isdir(path):
                 self.value = path
+
 
 #-------------------------------------------------------------------------------
 #  'PopupDirectory' class:
 #-------------------------------------------------------------------------------
 
-class PopupDirectory ( PopupFile ):
 
-    def get_style ( self ):
+class PopupDirectory(PopupFile):
+    def get_style(self):
         """ Returns the basic style to use for the popup.
         """
         return (wx.DIRCTRL_DIR_ONLY | wx.DIRCTRL_EDIT_LABELS)
 
-    def is_valid ( self, path ):
+    def is_valid(self, path):
         """ Returns whether or not the path is valid.
         """
-        return isdir( path )
+        return isdir(path)
+
 
 ### EOF ########################################################################

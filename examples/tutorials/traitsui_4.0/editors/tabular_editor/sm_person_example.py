@@ -69,8 +69,7 @@ from pyface.image_resource \
 # Necessary because of the dynamic way in which the demos are loaded:
 import traitsui.api
 
-search_path = [join(dirname(traitsui.api.__file__),
-                    'demo', 'Advanced')]
+search_path = [join(dirname(traitsui.api.__file__), 'demo', 'Advanced')]
 
 #--[Person Class]---------------------------------------------------------
 
@@ -81,6 +80,7 @@ class Person(HasTraits):
     address = Str
     age = Int
 
+
 #--[MarriedPerson Class]--------------------------------------------------
 
 
@@ -88,14 +88,13 @@ class MarriedPerson(Person):
 
     partner = Instance(Person)
 
+
 #--[Tabular Adapter Definition]-------------------------------------------
 
 
 class ReportAdapter(TabularAdapter):
 
-    columns = [('Name', 'name'),
-               ('Age', 'age'),
-               ('Address', 'address'),
+    columns = [('Name', 'name'), ('Age', 'age'), ('Address', 'address'),
                ('Spouse', 'spouse')]
 
     font = 'Courier 10'
@@ -113,13 +112,14 @@ class ReportAdapter(TabularAdapter):
     def _get_MarriedPerson_spouse_text(self):
         return self.item.partner.name
 
+
 #--[Tabular Editor Definition]--------------------------------------------
 
 tabular_editor = TabularEditor(
     adapter=ReportAdapter(),
     operations=['move'],
-    images=[ImageResource('red_flag', search_path=search_path)],
-)
+    images=[ImageResource(
+        'red_flag', search_path=search_path)], )
 
 #--[Report Class]---------------------------------------------------------
 
@@ -130,95 +130,34 @@ class Report(HasTraits):
 
     view = View(
         Group(
-            Item('people', id='table', editor=tabular_editor),
-            show_labels=False,
-        ),
+            Item(
+                'people', id='table', editor=tabular_editor),
+            show_labels=False, ),
         title='Tabular Editor Demo',
         id='traitsui.demo.Applications.tabular_editor_demo',
         width=0.60,
         height=0.75,
         resizable=True,
-        buttons=NoButtons
-    )
+        buttons=NoButtons)
 
 
 #--<Generate People>------------------------------------------------------
 
 male_names = [
-    'Michael',
-    'Edward',
-    'Timothy',
-    'James',
-    'George',
-    'Ralph',
-    'David',
-    'Martin',
-    'Bryce',
-    'Richard',
-    'Eric',
-    'Travis',
-    'Robert',
-    'Bryan',
-    'Alan',
-    'Harold',
-    'John',
-    'Stephen',
-    'Gael',
-    'Frederic',
-    'Eli',
-    'Scott',
-    'Samuel',
-    'Alexander',
-    'Tobias',
-    'Sven',
-    'Peter',
-    'Albert',
-    'Thomas',
-    'Horatio',
-    'Julius',
-    'Henry',
-    'Walter',
-    'Woodrow',
-    'Dylan',
-    'Elmer']
+    'Michael', 'Edward', 'Timothy', 'James', 'George', 'Ralph', 'David',
+    'Martin', 'Bryce', 'Richard', 'Eric', 'Travis', 'Robert', 'Bryan', 'Alan',
+    'Harold', 'John', 'Stephen', 'Gael', 'Frederic', 'Eli', 'Scott', 'Samuel',
+    'Alexander', 'Tobias', 'Sven', 'Peter', 'Albert', 'Thomas', 'Horatio',
+    'Julius', 'Henry', 'Walter', 'Woodrow', 'Dylan', 'Elmer'
+]
 
 female_names = [
-    'Leah',
-    'Jaya',
-    'Katrina',
-    'Vibha',
-    'Diane',
-    'Lisa',
-    'Jean',
-    'Alice',
-    'Rebecca',
-    'Delia',
-    'Christine',
-    'Marie',
-    'Dorothy',
-    'Ellen',
-    'Victoria',
-    'Elizabeth',
-    'Margaret',
-    'Joyce',
-    'Sally',
-    'Ethel',
-    'Esther',
-    'Suzanne',
-    'Monica',
-    'Hortense',
-    'Samantha',
-    'Tabitha',
-    'Judith',
-    'Ariel',
-    'Helen',
-    'Mary',
-    'Jane',
-    'Janet',
-    'Jennifer',
-    'Rita',
-    'Rena',
-    'Rianna']
+    'Leah', 'Jaya', 'Katrina', 'Vibha', 'Diane', 'Lisa', 'Jean', 'Alice',
+    'Rebecca', 'Delia', 'Christine', 'Marie', 'Dorothy', 'Ellen', 'Victoria',
+    'Elizabeth', 'Margaret', 'Joyce', 'Sally', 'Ethel', 'Esther', 'Suzanne',
+    'Monica', 'Hortense', 'Samantha', 'Tabitha', 'Judith', 'Ariel', 'Helen',
+    'Mary', 'Jane', 'Janet', 'Jennifer', 'Rita', 'Rena', 'Rianna'
+]
 
 all_names = male_names + female_names
 
@@ -338,18 +277,20 @@ address = lambda: '%d %s %s' % (randint(11,
                                         'Avenue',
                                         'Trail']))
 
-people = [Person(name='%s %s' % (any_name(), family_name()),
-                 age=age(),
-                 address=address()) for i in range(5000)]
+people = [
+    Person(
+        name='%s %s' % (any_name(), family_name()),
+        age=age(),
+        address=address()) for i in range(5000)
+]
 
-marrieds = [(MarriedPerson(name='%s %s' % (female_name(), last_name),
-                           age=age(),
-                           address=address),
-             MarriedPerson(name='%s %s' % (male_name(), last_name),
-                           age=age(),
-                           address=address))
-            for last_name, address in
-            [(family_name(), address()) for i in range(2500)]]
+marrieds = [
+    (MarriedPerson(
+        name='%s %s' % (female_name(), last_name), age=age(), address=address),
+     MarriedPerson(
+         name='%s %s' % (male_name(), last_name), age=age(), address=address))
+    for last_name, address in [(family_name(), address()) for i in range(2500)]
+]
 
 for female, male in marrieds:
     female.partner = male

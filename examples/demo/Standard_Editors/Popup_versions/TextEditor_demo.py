@@ -23,50 +23,58 @@ class TextEditorDemo(HasTraits):
     password = Password
 
     # TextEditor display without multi-line capability (for various traits):
-    text_int_group = Group(Item('int_trait', style='simple', label='Simple'),
-                           Item('_'),
-                           Item('int_trait', style='custom', label='Custom'),
-                           Item('_'),
-                           Item('int_trait', style='text', label='Text'),
-                           Item('_'),
-                           Item('int_trait', style='readonly', label='ReadOnly'),
-                           label='Integer')
+    text_int_group = Group(
+        Item(
+            'int_trait', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'int_trait', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'int_trait', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'int_trait', style='readonly', label='ReadOnly'),
+        label='Integer')
 
     # TextEditor display with multi-line capability (for various traits):
-    text_str_group = Group(Item('string_trait',
-                                style='simple',
-                                label='Simple'),
-                           Item('_'),
-                           Item('string_trait',
-                                style='custom',
-                                label='Custom'),
-                           Item('_'),
-                           Item('string_trait',
-                                style='text',
-                                label='Text'),
-                           Item('_'),
-                           Item('string_trait',
-                                style='readonly',
-                                label='ReadOnly'),
-                           label='String')
+    text_str_group = Group(
+        Item(
+            'string_trait', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'string_trait', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'string_trait', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'string_trait', style='readonly', label='ReadOnly'),
+        label='String')
 
     # TextEditor display with secret typing capability (for Password traits):
-    text_pass_group = Group(Item('password', style='simple', label='Simple'),
-                            Item('_'),
-                            Item('password', style='custom', label='Custom'),
-                            Item('_'),
-                            Item('password', style='text', label='Text'),
-                            Item('_'),
-                            Item('password', style='readonly', label='ReadOnly'),
-                            label='Password')
+    text_pass_group = Group(
+        Item(
+            'password', style='simple', label='Simple'),
+        Item('_'),
+        Item(
+            'password', style='custom', label='Custom'),
+        Item('_'),
+        Item(
+            'password', style='text', label='Text'),
+        Item('_'),
+        Item(
+            'password', style='readonly', label='ReadOnly'),
+        label='Password')
 
     # The view includes one group per data type.  These will be displayed
     # on separate tabbed panels.
-    view1 = View(text_int_group,
-                 text_str_group,
-                 text_pass_group,
-                 title='TextEditor',
-                 buttons=['OK'])
+    view1 = View(
+        text_int_group,
+        text_str_group,
+        text_pass_group,
+        title='TextEditor',
+        buttons=['OK'])
 
 
 # Create the demo:

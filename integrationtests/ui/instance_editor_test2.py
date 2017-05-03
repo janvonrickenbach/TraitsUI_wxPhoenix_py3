@@ -27,19 +27,22 @@ class Person(HasStrictTraits):
 
     traits_view = View('name', 'age', 'phone')
 
+
 #-------------------------------------------------------------------------
 #  Sample data:
 #-------------------------------------------------------------------------
 
 people = [
-    Person(name='Dave', age=39, phone='555-1212'),
-    Person(name='Mike', age=28, phone='555-3526'),
-    Person(name='Joe', age=34, phone='555-6943'),
-    Person(name='Tom', age=22, phone='555-7586'),
-    Person(name='Dick', age=63, phone='555-3895'),
-    Person(name='Harry', age=46, phone='555-3285'),
-    Person(name='Sally', age=43, phone='555-8797'),
-    Person(name='Fields', age=31, phone='555-3547')
+    Person(
+        name='Dave', age=39, phone='555-1212'), Person(
+            name='Mike', age=28, phone='555-3526'), Person(
+                name='Joe', age=34, phone='555-6943'), Person(
+                    name='Tom', age=22, phone='555-7586'), Person(
+                        name='Dick', age=63, phone='555-3895'), Person(
+                            name='Harry', age=46, phone='555-3285'), Person(
+                                name='Sally', age=43, phone='555-8797'),
+    Person(
+        name='Fields', age=31, phone='555-3547')
 ]
 
 #-------------------------------------------------------------------------
@@ -62,17 +65,21 @@ class Team(HasStrictTraits):
     #-------------------------------------------------------------------------
 
     traits_view = View(
-        'name', '_', Item(
-            'captain@', editor=InstanceEditor(
-                name='roster', values=[
+        'name',
+        '_',
+        Item(
+            'captain@',
+            editor=InstanceEditor(
+                name='roster',
+                values=[
                     InstanceFactoryChoice(
-                        klass=Person, name='Non player')])))
+                        klass=Person, name='Non player')
+                ])))
+
 
 #-------------------------------------------------------------------------
 #  Run the test:
 #-------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    Team(name='Vultures',
-         captain=people[0],
-         roster=people).configure_traits()
+    Team(name='Vultures', captain=people[0], roster=people).configure_traits()

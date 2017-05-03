@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Sometimes the inputs to a model are not correlated. That is, any valid model
 input produces a corresponding valid model state. However, in other cases, some
@@ -81,8 +80,7 @@ class System(HasTraits):
 
     # The current error status of the system:
     error = Property(
-        Bool,
-        sync_to_view='mass.invalid, velocity.invalid, status.invalid')
+        Bool, sync_to_view='mass.invalid, velocity.invalid, status.invalid')
 
     # The current status of the system:
     status = Property(Str)
@@ -92,22 +90,15 @@ class System(HasTraits):
             VGroup(
                 Item('mass'),
                 Item('velocity'),
-                Item('kinetic_energy',
-                     style='readonly',
-                     format_str='%.0f'
-                     ),
+                Item(
+                    'kinetic_energy', style='readonly', format_str='%.0f'),
                 label='System',
                 show_border=True),
             VGroup(
-                Item('status',
-                     style='readonly',
-                     show_label=False
-                     ),
+                Item(
+                    'status', style='readonly', show_label=False),
                 label='Status',
-                show_border=True
-            ),
-        )
-    )
+                show_border=True), ))
 
     @property_depends_on('mass, velocity')
     def _get_kinetic_energy(self):
@@ -123,6 +114,7 @@ class System(HasTraits):
             return 'The kinetic energy of the system is too high.'
 
         return ''
+
 
 #-- Create and run the demo ----------------------------------------------
 

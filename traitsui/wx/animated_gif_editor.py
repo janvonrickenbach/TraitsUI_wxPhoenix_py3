@@ -14,7 +14,6 @@
 #  Date:   03/02/2007
 #
 #-------------------------------------------------------------------------------
-
 """ Defines an editor for playing animated GIF files.
 """
 
@@ -29,4 +28,3 @@ if wx.__version__[:3] == '2.6':
     from animated_gif_editor_26 import AnimatedGIFEditor
 else:
     from .animated_gif_editor_28 import AnimatedGIFEditor
-

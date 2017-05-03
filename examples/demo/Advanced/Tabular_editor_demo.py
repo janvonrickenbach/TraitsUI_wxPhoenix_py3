@@ -64,8 +64,9 @@ class Person(HasTraits):
     age = Int
 
     # surname is displayed in qt-only row label:
-    surname = Property(fget=lambda self: self.name.split()[-1],
-                       depends_on='name')
+    surname = Property(
+        fget=lambda self: self.name.split()[-1], depends_on='name')
+
 
 #-- MarriedPerson Class Definition ---------------------------------------
 
@@ -73,6 +74,7 @@ class Person(HasTraits):
 class MarriedPerson(Person):
 
     partner = Instance(Person)
+
 
 #-- Tabular Adapter Definition -------------------------------------------
 
@@ -82,9 +84,7 @@ class ReportAdapter(TabularAdapter):
     being displayed. For more details, please refer to the traitsUI user guide.
     """
     # List of (Column labels, Column ID).
-    columns = [('Name', 'name'),
-               ('Age', 'age'),
-               ('Address', 'address'),
+    columns = [('Name', 'name'), ('Age', 'age'), ('Address', 'address'),
                ('Spouse', 'spouse')]
 
     row_label_name = 'surname'
@@ -111,6 +111,7 @@ class ReportAdapter(TabularAdapter):
     def _get_MarriedPerson_spouse_text(self):
         return self.item.partner.name
 
+
 #-- Tabular Editor Definition --------------------------------------------
 
 # The tabular editor works in conjunction with an adapter class, derived from
@@ -119,8 +120,7 @@ tabular_editor = TabularEditor(
     adapter=ReportAdapter(),
     operations=['move', 'edit'],
     # Row titles are not supported in WX:
-    show_row_titles=ETSConfig.toolkit == 'qt4',
-)
+    show_row_titles=ETSConfig.toolkit == 'qt4', )
 
 #-- Report Class Definition ----------------------------------------------
 
@@ -131,93 +131,33 @@ class Report(HasTraits):
 
     view = View(
         Group(
-            Item('people', id='table', editor=tabular_editor),
-            show_labels=False
-        ),
+            Item(
+                'people', id='table', editor=tabular_editor),
+            show_labels=False),
         title='Tabular Editor Demo',
         id='traitsui.demo.Applications.tabular_editor_demo',
         width=0.60,
         height=0.75,
-        resizable=True
-    )
+        resizable=True)
+
 
 #-- Generate 10,000 random single and married people ---------------------
 
 male_names = [
-    'Michael',
-    'Edward',
-    'Timothy',
-    'James',
-    'George',
-    'Ralph',
-    'David',
-    'Martin',
-    'Bryce',
-    'Richard',
-    'Eric',
-    'Travis',
-    'Robert',
-    'Bryan',
-    'Alan',
-    'Harold',
-    'John',
-    'Stephen',
-    'Gael',
-    'Frederic',
-    'Eli',
-    'Scott',
-    'Samuel',
-    'Alexander',
-    'Tobias',
-    'Sven',
-    'Peter',
-    'Albert',
-    'Thomas',
-    'Horatio',
-    'Julius',
-    'Henry',
-    'Walter',
-    'Woodrow',
-    'Dylan',
-    'Elmer']
+    'Michael', 'Edward', 'Timothy', 'James', 'George', 'Ralph', 'David',
+    'Martin', 'Bryce', 'Richard', 'Eric', 'Travis', 'Robert', 'Bryan', 'Alan',
+    'Harold', 'John', 'Stephen', 'Gael', 'Frederic', 'Eli', 'Scott', 'Samuel',
+    'Alexander', 'Tobias', 'Sven', 'Peter', 'Albert', 'Thomas', 'Horatio',
+    'Julius', 'Henry', 'Walter', 'Woodrow', 'Dylan', 'Elmer'
+]
 
 female_names = [
-    'Leah',
-    'Jaya',
-    'Katrina',
-    'Vibha',
-    'Diane',
-    'Lisa',
-    'Jean',
-    'Alice',
-    'Rebecca',
-    'Delia',
-    'Christine',
-    'Marie',
-    'Dorothy',
-    'Ellen',
-    'Victoria',
-    'Elizabeth',
-    'Margaret',
-    'Joyce',
-    'Sally',
-    'Ethel',
-    'Esther',
-    'Suzanne',
-    'Monica',
-    'Hortense',
-    'Samantha',
-    'Tabitha',
-    'Judith',
-    'Ariel',
-    'Helen',
-    'Mary',
-    'Jane',
-    'Janet',
-    'Jennifer',
-    'Rita',
-    'Rena',
-    'Rianna']
+    'Leah', 'Jaya', 'Katrina', 'Vibha', 'Diane', 'Lisa', 'Jean', 'Alice',
+    'Rebecca', 'Delia', 'Christine', 'Marie', 'Dorothy', 'Ellen', 'Victoria',
+    'Elizabeth', 'Margaret', 'Joyce', 'Sally', 'Ethel', 'Esther', 'Suzanne',
+    'Monica', 'Hortense', 'Samantha', 'Tabitha', 'Judith', 'Ariel', 'Helen',
+    'Mary', 'Jane', 'Janet', 'Jennifer', 'Rita', 'Rena', 'Rianna'
+]
 
 all_names = male_names + female_names
 
@@ -337,18 +277,20 @@ address = lambda: '%d %s %s' % (randint(11,
                                         'Avenue',
                                         'Trail']))
 
-people = [Person(name='%s %s' % (any_name(), family_name()),
-                 age=age(),
-                 address=address()) for i in range(5000)]
+people = [
+    Person(
+        name='%s %s' % (any_name(), family_name()),
+        age=age(),
+        address=address()) for i in range(5000)
+]
 
-marrieds = [(MarriedPerson(name='%s %s' % (female_name(), last_name),
-                           age=age(),
-                           address=address),
-             MarriedPerson(name='%s %s' % (male_name(), last_name),
-                           age=age(),
-                           address=address))
-            for last_name, address in
-            [(family_name(), address()) for i in range(2500)]]
+marrieds = [
+    (MarriedPerson(
+        name='%s %s' % (female_name(), last_name), age=age(), address=address),
+     MarriedPerson(
+         name='%s %s' % (male_name(), last_name), age=age(), address=address))
+    for last_name, address in [(family_name(), address()) for i in range(2500)]
+]
 
 for female, male in marrieds:
     female.partner = male

@@ -13,14 +13,12 @@
 #  Author: Corran Webster
 #
 #------------------------------------------------------------------------------
-
 """ A column class for for the TableEditor that displays progress bars. """
 
 from traits.etsconfig.api import ETSConfig
 from traits.api import Bool, Int, Str
 
 from traitsui.table_column import ObjectColumn
-
 
 if ETSConfig.toolkit == 'qt4':
     from traitsui.qt4.extra.progress_renderer import ProgressRenderer

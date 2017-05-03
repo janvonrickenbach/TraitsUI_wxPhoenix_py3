@@ -11,7 +11,6 @@
 #  Thanks for using Enthought open source!
 #
 #------------------------------------------------------------------------------
-
 """ Defines the BasicUIEditor class, which allows creating editors that define
     their function by creating an embedded Traits UI.
 """

@@ -63,6 +63,7 @@ class EmployedPerson(LocatedPerson):
 
     extra = Group('employer', '<extra>')
 
+
 #-------------------------------------------------------------------------
 #  'TraitSheetApp' class:
 #-------------------------------------------------------------------------
@@ -89,6 +90,7 @@ class TraitSheetApp(wx.App):
         LocatedPerson().edit_traits()
         EmployedPerson().edit_traits()
         return True
+
 
 #-------------------------------------------------------------------------
 #  Main program:

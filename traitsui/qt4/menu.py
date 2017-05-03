@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """
 Dynamically construct PyQt Menus or MenuBars from a supplied string
 description of the menu.
@@ -65,6 +64,7 @@ options_pat = re.compile(r'(.*)\[(.*)\](.*)')
 class MakeMenu:
     """ Manages creation of menus.
     """
+
     #-------------------------------------------------------------------------
     #  Initializes the object:
     #-------------------------------------------------------------------------
@@ -140,22 +140,16 @@ class MakeMenu:
                     else:
                         try:
                             _locl = dict(self=self)
-                            exec(
-                                'def handler(self=self.owner):\n %s\n' %
-                                handler, globals(), _locl)
+                            exec('def handler(self=self.owner):\n %s\n' %
+                                 handler, globals(), _locl)
                             handler = _locl['handler']
                         except:
                             handler = null_handler
                 else:
                     try:
                         _locl = dict(self=self)
-                        exec(
-                            'def handler(self=self.owner):\n%s\n' % (
-                                self.get_body(indented),
-                            ),
-                            globals(),
-                            _locl
-                        )
+                        exec('def handler(self=self.owner):\n%s\n' %
+                             (self.get_body(indented), ), globals(), _locl)
                         handler = _locl['handler']
                     except:
                         handler = null_handler
@@ -275,6 +269,7 @@ class MakeMenu:
 
         act.setText(label)
 
+
 #-------------------------------------------------------------------------
 #  'MakeMenuItem' class:
 #-------------------------------------------------------------------------
@@ -302,6 +297,7 @@ class MakeMenuItem:
     def label(self, label=None):
         return self.menu.label(self.act, label)
 
+
 #-------------------------------------------------------------------------
 #  Determine whether a string contains any specified option characters, and
 #  remove them if it does:
@@ -317,8 +313,9 @@ def option_check(test, string):
         col = string.find(char)
         result.append(col >= 0)
         if col >= 0:
-            string = string[: col] + string[col + 1:]
+            string = string[:col] + string[col + 1:]
     return result + [string.strip()]
+
 
 #-------------------------------------------------------------------------
 #  Null menu option selection handler:

@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the various text editors for the PyQt user interface toolkit.
 """
 
@@ -202,6 +201,7 @@ class SimpleEditor(Editor):
         """
         return (self.invalid or self._error)
 
+
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -214,6 +214,7 @@ class CustomEditor(SimpleEditor):
     # FIXME: The wx version exposes a wx constant.
     # Flag for window style. This value overrides the default.
     base_style = QtGui.QTextEdit
+
 
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:

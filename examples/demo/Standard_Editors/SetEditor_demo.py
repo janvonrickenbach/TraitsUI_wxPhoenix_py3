@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of a SetEditor demo plugin for the Traits UI demo program.
 
@@ -53,31 +52,27 @@ class SetEditorDemo(HasTraits):
 
     # SetEditor display, unordered, no move-all buttons:
     no_nma_group = Group(
-        Item('unord_nma_set', style='simple'),
+        Item(
+            'unord_nma_set', style='simple'),
         label='Unord I',
-        show_labels=False
-    )
+        show_labels=False)
 
     # SetEditor display, unordered, move-all buttons:
     no_ma_group = Group(
-        Item('unord_ma_set', style='simple'),
+        Item(
+            'unord_ma_set', style='simple'),
         label='Unord II',
-        show_labels=False
-    )
+        show_labels=False)
 
     # SetEditor display, ordered, no move-all buttons:
     o_nma_group = Group(
-        Item('ord_nma_set', style='simple'),
-        label='Ord I',
-        show_labels=False
-    )
+        Item(
+            'ord_nma_set', style='simple'), label='Ord I', show_labels=False)
 
     # SetEditor display, ordered, move-all buttons:
     o_ma_group = Group(
-        Item('ord_ma_set', style='simple'),
-        label='Ord II',
-        show_labels=False
-    )
+        Item(
+            'ord_ma_set', style='simple'), label='Ord II', show_labels=False)
 
     # The view includes one group per data type. These will be displayed
     # on separate tabbed panels:
@@ -87,8 +82,8 @@ class SetEditorDemo(HasTraits):
         o_nma_group,
         o_ma_group,
         title='SetEditor',
-        buttons=['OK']
-    )
+        buttons=['OK'])
+
 
 # Create the demo:
 demo = SetEditorDemo()

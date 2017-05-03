@@ -69,7 +69,6 @@ class SearchWidget(QtGui.QLineEdit):
 
 
 class SearchEditor(Editor):
-
     def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.

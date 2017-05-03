@@ -30,26 +30,24 @@ class FontEditorDemo(HasTraits):
 
     # Display specification (one Item per editor style):
     font_group = Group(
-        Item('my_font_trait', style='simple', label='Simple'),
+        Item(
+            'my_font_trait', style='simple', label='Simple'),
         Item('_'),
-        Item('my_font_trait', style='custom', label='Custom'),
+        Item(
+            'my_font_trait', style='custom', label='Custom'),
         Item('_'),
-        Item('my_font_trait', style='text', label='Text'),
+        Item(
+            'my_font_trait', style='text', label='Text'),
         Item('_'),
-        Item('my_font_trait', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'my_font_trait', style='readonly', label='ReadOnly'))
 
     # Demo view:
-    view = View(
-        font_group,
-        title='FontEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+    view = View(font_group, title='FontEditor', buttons=['OK'], resizable=True)
+
 
 # Create the demo:
 demo = FontEditorDemo()
-
 
 # Run the demo (if invoked from the command line):
 if __name__ == '__main__':

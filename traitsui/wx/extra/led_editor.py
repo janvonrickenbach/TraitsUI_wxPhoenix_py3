@@ -14,7 +14,6 @@
 #  Date:   03/02/2007
 #
 #-------------------------------------------------------------------------------
-
 """ Traits UI 'display only' LED numeric editor.
 """
 
@@ -40,16 +39,17 @@ from traitsui.basic_editor_factory \
 
 # LED alignment styles:
 LEDStyles = {
-    'left':   LED_ALIGN_LEFT,
+    'left': LED_ALIGN_LEFT,
     'center': LED_ALIGN_CENTER,
-    'right':  LED_ALIGN_RIGHT,
+    'right': LED_ALIGN_RIGHT,
 }
 
 #-------------------------------------------------------------------------------
 #  '_LEDEditor' class:
 #-------------------------------------------------------------------------------
 
-class _LEDEditor ( Editor ):
+
+class _LEDEditor(Editor):
     """ Traits UI 'display only' LED numeric editor.
     """
 
@@ -58,34 +58,35 @@ class _LEDEditor ( Editor ):
     #  widget:
     #---------------------------------------------------------------------------
 
-    def init ( self, parent ):
+    def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = LEDNumberCtrl( parent, -1 )
-        self.control.SetAlignment( LEDStyles[ self.factory.alignment ] )
+        self.control = LEDNumberCtrl(parent, -1)
+        self.control.SetAlignment(LEDStyles[self.factory.alignment])
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
     #---------------------------------------------------------------------------
 
-    def update_editor ( self ):
+    def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
-        self.control.SetValue( self.str_value )
+        self.control.SetValue(self.str_value)
+
 
 #-------------------------------------------------------------------------------
 #  Create the editor factory object:
 #-------------------------------------------------------------------------------
 
+
 # wxPython editor factory for LED editors:
-class LEDEditor ( BasicEditorFactory ):
+class LEDEditor(BasicEditorFactory):
 
     # The editor class to be created:
     klass = _LEDEditor
 
     # The alignment of the numeric text within the control:
-    alignment = Enum( 'right', 'left', 'center' )
-
+    alignment = Enum('right', 'left', 'center')

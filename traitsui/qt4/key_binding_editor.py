@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the key binding editor for use with the KeyBinding class. This is a
 specialized editor used to associate a particular key with a control (i.e., the
 key binding editor).
@@ -114,13 +113,11 @@ class KeyBindingEditor(Editor):
         cur_binding = binding.owner.key_binding_for(binding, key_name)
         if cur_binding is not None:
             if QtGui.QMessageBox.question(
-                self.control,
-                "Duplicate Key Definition",
-                "'%s' has already been assigned to '%s'.\n"
-                "Do you wish to continue?" %
-                (key_name,
-                 cur_binding.description),
-                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
+                    self.control, "Duplicate Key Definition",
+                    "'%s' has already been assigned to '%s'.\n"
+                    "Do you wish to continue?" %
+                (key_name, cur_binding.description
+                 ), QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
                     QtGui.QMessageBox.No) != QtGui.QMessageBox.Yes:
                 return
 
@@ -135,6 +132,7 @@ class KeyBindingEditor(Editor):
         """
         self.value = ''
 
+
 #-------------------------------------------------------------------------
 #  'KeyBindingCtrl' class:
 #-------------------------------------------------------------------------
@@ -143,6 +141,7 @@ class KeyBindingEditor(Editor):
 class KeyBindingCtrl(QtGui.QLabel):
     """ PyQt control for editing key bindings.
     """
+
     #-------------------------------------------------------------------------
     #  Initialize the object:
     #-------------------------------------------------------------------------

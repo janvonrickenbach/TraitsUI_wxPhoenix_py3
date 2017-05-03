@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This example demonstrates several different variations on using the
 ScrubberEditor. A 'scrubber' is a type of widget often seen in certain types
@@ -111,6 +110,7 @@ class TItem(Item):
     editor = ScrubberEditor()
     item_theme = ATheme('@std:LG')
 
+
 #-- ScrubberDemo Class ---------------------------------------------------
 
 
@@ -129,21 +129,23 @@ class ScrubberDemo(HasTraits):
     view = View(
         HGroup(
             VGroup(
-                Item('simple_integer',
-                     editor=ScrubberEditor()),
-                Item('rollover_float',
-                     editor=ScrubberEditor(hover_color=0xFFFFFF,
-                                           active_color=0xA0CD9E)),
-                Item('bordered_unbounded',
-                     editor=ScrubberEditor(hover_color=0xFFFFFF,
-                                           active_color=0xA0CD9E,
-                                           border_color=0x808080)),
+                Item(
+                    'simple_integer', editor=ScrubberEditor()),
+                Item(
+                    'rollover_float',
+                    editor=ScrubberEditor(
+                        hover_color=0xFFFFFF, active_color=0xA0CD9E)),
+                Item(
+                    'bordered_unbounded',
+                    editor=ScrubberEditor(
+                        hover_color=0xFFFFFF,
+                        active_color=0xA0CD9E,
+                        border_color=0x808080)),
                 TItem('themed_dynamic_low'),
                 TItem('themed_dynamic_high'),
                 TItem('themed_dynamic_value'),
                 show_border=True,
-                label='Scrubber Editors'
-            ),
+                label='Scrubber Editors'),
             VGroup(
                 Item('simple_integer'),
                 Item('rollover_float'),
@@ -152,12 +154,10 @@ class ScrubberDemo(HasTraits):
                 Item('themed_dynamic_high'),
                 Item('themed_dynamic_value'),
                 show_border=True,
-                label='Default Editors'
-            ),
-            spring
-        ),
-        title='Scrubber Editor Demo'
-    )
+                label='Default Editors'),
+            spring),
+        title='Scrubber Editor Demo')
+
 
 #-- Create and run the demo ----------------------------------------------
 

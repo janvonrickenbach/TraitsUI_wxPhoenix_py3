@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This example shows how to define a read-only, auto-edit table column using a
 custom pop-up view.
@@ -48,6 +47,7 @@ class Integer(HasTraits):
     # The value:
     n = Int
 
+
 #-- Factor Class ---------------------------------------------------------
 
 
@@ -77,52 +77,45 @@ class Factor(HasTraits):
 
         return result
 
+
 #-- The table editor used for the pop-up view ----------------------------
 
 factor_table_editor = TableEditor(
     columns=[
-        ObjectColumn(name='n',
-                     width=1.0,
-                     editable=False,
-                     horizontal_alignment='center')
+        ObjectColumn(
+            name='n', width=1.0, editable=False, horizontal_alignment='center')
     ],
     sortable=False,
     auto_size=False,
     show_toolbar=False,
-    show_column_labels=False
-)
+    show_column_labels=False)
 
 #-- The table editor used for the main view ------------------------------
 
 factors_view = View(
-    Item('factors',
-         id='factors',
-         show_label=False,
-         editor=factor_table_editor
-         ),
+    Item(
+        'factors', id='factors', show_label=False, editor=factor_table_editor),
     id='traits.examples.demo.Advanced.factors_view',
     kind='info',
-    height=0.30,
-)
+    height=0.30, )
 
 factors_table_editor = TableEditor(
     columns=[
-        ObjectColumn(name='n',
-                     width=0.5,
-                     editable=False,
-                     horizontal_alignment='center'),
-        ObjectColumn(name='factors',
-                     width=0.5,
-                     editable=False,
-                     horizontal_alignment='center',
-                     auto_editable=True,
-                     format_func=lambda f: '%s factors' % len(f),
-                     view=factors_view),
+        ObjectColumn(
+            name='n', width=0.5, editable=False,
+            horizontal_alignment='center'),
+        ObjectColumn(
+            name='factors',
+            width=0.5,
+            editable=False,
+            horizontal_alignment='center',
+            auto_editable=True,
+            format_func=lambda f: '%s factors' % len(f),
+            view=factors_view),
     ],
     sortable=False,
     auto_size=False,
-    show_toolbar=False
-)
+    show_toolbar=False)
 
 #-- Factors Class --------------------------------------------------------
 
@@ -142,24 +135,20 @@ class Factors(HasTraits):
                 Item('max_n'),
                 show_labels=False,
                 show_border=True,
-                label='Maximum Number'
-            ),
+                label='Maximum Number'),
             VGroup(
-                Item('factors',
-                     show_label=False,
-                     editor=factors_table_editor
-                     ),
-            )
-        ),
+                Item(
+                    'factors', show_label=False, editor=factors_table_editor),
+            )),
         title='List of numbers and their factors',
         width=0.2,
         height=0.4,
-        resizable=True
-    )
+        resizable=True)
 
     @property_depends_on('max_n')
     def _get_factors(self):
         return [Factor(n=i + 1) for i in range(self.max_n)]
+
 
 #-- Create and run the demo ----------------------------------------------
 

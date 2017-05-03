@@ -32,31 +32,34 @@ class TextEditorDemo(HasTraits):
 
     # TextEditor display with multi-line capability (for a string):
     text_str_group = Group(
-        Item('string_trait', style='simple', label='Simple'),
+        Item(
+            'string_trait', style='simple', label='Simple'),
         Item('_'),
-        Item('string_trait', style='custom', label='Custom'),
+        Item(
+            'string_trait', style='custom', label='Custom'),
         Item('_'),
         # text style is the same as simple, not shown.
-        Item('string_trait', style='readonly', label='ReadOnly'),
-        label='String'
-    )
+        Item(
+            'string_trait', style='readonly', label='ReadOnly'),
+        label='String')
 
     # TextEditor display without multi-line capability (for an integer):
     text_int_group = Group(
-        Item('int_trait', style='simple', label='Simple'),
+        Item(
+            'int_trait', style='simple', label='Simple'),
         # custom and text styles are not useful for editing integers, not
         # shown:
         Item('_'),
-        Item('int_trait', style='readonly', label='ReadOnly'),
-        label='Integer'
-    )
+        Item(
+            'int_trait', style='readonly', label='ReadOnly'),
+        label='Integer')
 
     # TextEditor display with secret typing capability (for Password traits):
     text_pass_group = Group(
-        Item('password', style='simple', label='Simple'),
+        Item(
+            'password', style='simple', label='Simple'),
         # custom and text style are the same as simple, not shown.
-        label='Password'
-    )
+        label='Password')
 
     # The view includes one group per data type. These will be displayed
     # on separate tabbed panels:
@@ -65,8 +68,8 @@ class TextEditorDemo(HasTraits):
         text_pass_group,
         text_int_group,
         title='TextEditor',
-        buttons=['OK']
-    )
+        buttons=['OK'])
+
 
 # Create the demo:
 demo = TextEditorDemo()

@@ -14,7 +14,6 @@
 #  Date:   07/26/2006
 #
 #-------------------------------------------------------------------------
-
 """ Defines a completely empty editor, intended to be used as a spacer.
 """
 
@@ -41,6 +40,7 @@ from editor \
 class NullEditor(Editor):
     """ A completely empty editor.
     """
+
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

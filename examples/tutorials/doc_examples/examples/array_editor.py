@@ -16,23 +16,22 @@ from traitsui.menu import NoButtons
 class ArrayEditorTest(HasPrivateTraits):
 
     three = Array(Int, (3, 3))
-    four = Array(Float,
-                 (4, 4),
-                 editor=ArrayEditor(width=-50))
+    four = Array(Float, (4, 4), editor=ArrayEditor(width=-50))
 
-    view = View(Item('three', label='3x3 Integer'),
-                '_',
-                Item('three',
-                     label='Integer Read-only',
-                     style='readonly'),
-                '_',
-                Item('four', label='4x4 Float'),
-                '_',
-                Item('four',
-                     label='Float Read-only',
-                     style='readonly'),
-                buttons=NoButtons,
-                resizable=True)
+    view = View(
+        Item(
+            'three', label='3x3 Integer'),
+        '_',
+        Item(
+            'three', label='Integer Read-only', style='readonly'),
+        '_',
+        Item(
+            'four', label='4x4 Float'),
+        '_',
+        Item(
+            'four', label='Float Read-only', style='readonly'),
+        buttons=NoButtons,
+        resizable=True)
 
 
 if __name__ == '__main__':

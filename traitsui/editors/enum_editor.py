@@ -35,13 +35,14 @@ from ..toolkit import toolkit_object
 #-------------------------------------------------------------------------------
 
 # Supported display modes for a custom style editor
-Mode = Enum( 'radio', 'list' )
+Mode = Enum('radio', 'list')
 
 #-------------------------------------------------------------------------------
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorWithListFactory ):
+
+class ToolkitEditorFactory(EditorWithListFactory):
     """ Editor factory for enumeration editors.
     """
 
@@ -53,10 +54,10 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
     evaluate = Any
 
     # Is user input set on every keystroke (when text input is allowed)?
-    auto_set = Bool( True )
+    auto_set = Bool(True)
 
     # Number of columns to use when displayed as a grid:
-    cols = Range( 1, 20 )
+    cols = Range(1, 20)
 
     # Display modes supported for a custom style editor:
     mode = Mode
@@ -65,7 +66,7 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
     #  'Editor' factory methods:
     #---------------------------------------------------------------------------
 
-    def _get_custom_editor_class ( self ):
+    def _get_custom_editor_class(self):
         """ Returns the editor class to use for "custom" style views.
         Overridden to return the editor class for the specified mode.
         """
@@ -74,13 +75,13 @@ class ToolkitEditorFactory ( EditorWithListFactory ):
                             __file__)
         try:
             if self.mode == 'radio':
-                return toolkit_object(editor_file_name.split('.')[0] +
-                                      ':RadioEditor',
-                                      raise_exceptions = True)
+                return toolkit_object(
+                    editor_file_name.split('.')[0] + ':RadioEditor',
+                    raise_exceptions=True)
             else:
-                return toolkit_object(editor_file_name.split('.')[0] +
-                                      ':ListEditor',
-                                      raise_exceptions = True)
+                return toolkit_object(
+                    editor_file_name.split('.')[0] + ':ListEditor',
+                    raise_exceptions=True)
         except:
             return super(ToolkitEditorFactory, self)._get_custom_editor_class()
 

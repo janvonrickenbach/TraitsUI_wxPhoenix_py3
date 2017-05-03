@@ -44,16 +44,16 @@ class MyViewController(Controller):
     view = View(
         VGroup(
             HGroup(
-                Item('myname', springy=True), '10',
-                Item('controller.allow_empty_string', label='Allow Empty')
-            ),
+                Item(
+                    'myname', springy=True),
+                '10',
+                Item(
+                    'controller.allow_empty_string', label='Allow Empty')),
 
             # Add an empty vertical group so the above items don't end up
             # centered vertically:
-            VGroup()
-        ),
-        resizable=True
-    )
+            VGroup()),
+        resizable=True)
 
     #-- Handler Interface ----------------------------------------------------
 
@@ -81,6 +81,7 @@ class MyViewController(Controller):
             self.model.myname = '?'
         else:
             self.model.myname = self.last_name
+
 
 # Create the model and (demo) view/controller:
 demo = MyViewController(MyModel())

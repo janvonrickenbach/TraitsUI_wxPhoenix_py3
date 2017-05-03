@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of a TupleEditor demo plugin for Traits UI demo program.
 
@@ -26,22 +25,21 @@ class TupleEditorDemo(HasTraits):
 
     # Display specification (one Item per editor style):
     tuple_group = Group(
-        Item('tuple', style='simple', label='Simple'),
+        Item(
+            'tuple', style='simple', label='Simple'),
         Item('_'),
-        Item('tuple', style='custom', label='Custom'),
+        Item(
+            'tuple', style='custom', label='Custom'),
         Item('_'),
-        Item('tuple', style='text', label='Text'),
+        Item(
+            'tuple', style='text', label='Text'),
         Item('_'),
-        Item('tuple', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'tuple', style='readonly', label='ReadOnly'))
 
     # Demo view
     view = View(
-        tuple_group,
-        title='TupleEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+        tuple_group, title='TupleEditor', buttons=['OK'], resizable=True)
 
 
 # Create the demo:

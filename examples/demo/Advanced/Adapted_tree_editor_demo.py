@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Demonstrates an alternative method of defining a <b>TreeEditor</b> by creating
 <b>ITreeNodeAdapter</b> subclasses.
@@ -92,6 +91,7 @@ class FileAdapter(ITreeNodeAdapter):
         """
         return True
 
+
 #-- FileTreeDemo Class ---------------------------------------------------
 
 
@@ -107,15 +107,13 @@ class FileTreeDemo(HasTraits):
     view = View(
         VGroup(
             Item('root_path'),
-            Item('root',
-                 editor=TreeEditor(editable=False, auto_open=1)
-                 ),
-            show_labels=False
-        ),
+            Item(
+                'root', editor=TreeEditor(
+                    editable=False, auto_open=1)),
+            show_labels=False),
         width=0.33,
         height=0.50,
-        resizable=True
-    )
+        resizable=True)
 
     #-- Traits Default Value Methods -----------------------------------------
 
@@ -127,6 +125,7 @@ class FileTreeDemo(HasTraits):
     @property_depends_on('root_path')
     def _get_root(self):
         return File(path=self.root_path)
+
 
 #-- Create and run the demo ----------------------------------------------
 

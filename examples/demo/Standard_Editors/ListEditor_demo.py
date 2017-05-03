@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implemention of a ListEditor demo plugin for Traits UI demo program
 
@@ -25,22 +24,21 @@ class ListEditorDemo(HasTraits):
 
     # Items are used to define display, one per editor style:
     list_group = Group(
-        Item('play_list', style='simple', label='Simple', height=75),
+        Item(
+            'play_list', style='simple', label='Simple', height=75),
         Item('_'),
-        Item('play_list', style='custom', label='Custom'),
+        Item(
+            'play_list', style='custom', label='Custom'),
         Item('_'),
-        Item('play_list', style='text', label='Text'),
+        Item(
+            'play_list', style='text', label='Text'),
         Item('_'),
-        Item('play_list', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'play_list', style='readonly', label='ReadOnly'))
 
     # Demo view:
-    view = View(
-        list_group,
-        title='ListEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+    view = View(list_group, title='ListEditor', buttons=['OK'], resizable=True)
+
 
 # Create the demo:
 demo = ListEditorDemo()

@@ -1,8 +1,8 @@
 from traits.api import HasTraits, Instance, Str
 from traitsui.item import Item
 from traitsui.view import View
-from traitsui.tests._tools import (
-    press_ok_button, skip_if_not_qt4, store_exceptions_on_all_threads)
+from traitsui.tests._tools import (press_ok_button, skip_if_not_qt4,
+                                   store_exceptions_on_all_threads)
 
 
 class EditedInstance(HasTraits):

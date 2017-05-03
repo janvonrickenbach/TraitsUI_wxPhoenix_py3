@@ -14,7 +14,6 @@
 #  Date:   08/21/2009
 #
 #-------------------------------------------------------------------------
-
 """ Defines a text editor which displays a text field and maintains a history
     of previously entered values.
 """
@@ -93,8 +92,10 @@ class _HistoryEditor(Editor):
     def save_prefs(self):
         """ Returns any user preference information associated with the editor.
         """
-        history = [str(self.control.itemText(index))
-                   for index in xrange(self.control.count())]
+        history = [
+            str(self.control.itemText(index))
+            for index in xrange(self.control.count())
+        ]
 
         # If the view closed successfully, update the history with the current
         # editor value, as long it is different from the current object value:

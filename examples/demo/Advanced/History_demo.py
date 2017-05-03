@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 This program demonstrates the use of editors that support <i>history</i>. A
 history is a persistent record of the last 'n' values the user has entered or
@@ -39,29 +38,23 @@ class HistoryDemo(HasTraits):
     directory = Directory
 
     view = View(
-        Item('name',
-             id='name',
-             editor=HistoryEditor(entries=5)
-             ),
-        Item('file',
-             id='file1',
-             editor=FileEditor(entries=10)
-             ),
-        Item('file',
-             id='file2',
-             editor=FileEditor(entries=10,
-                               filter=['All files (*.*)|*.*',
-                                       'Python files (*.py)|*.py'])
-             ),
-        Item('directory',
-             id='directory',
-             editor=DirectoryEditor(entries=10)
-             ),
+        Item(
+            'name', id='name', editor=HistoryEditor(entries=5)),
+        Item(
+            'file', id='file1', editor=FileEditor(entries=10)),
+        Item(
+            'file',
+            id='file2',
+            editor=FileEditor(
+                entries=10,
+                filter=['All files (*.*)|*.*', 'Python files (*.py)|*.py'])),
+        Item(
+            'directory', id='directory', editor=DirectoryEditor(entries=10)),
         title='History Editor Demo',
         id='enthought.test.history_demo.HistoryDemo',
         width=0.33,
-        resizable=True
-    )
+        resizable=True)
+
 
 # Create the demo:
 demo = HistoryDemo()

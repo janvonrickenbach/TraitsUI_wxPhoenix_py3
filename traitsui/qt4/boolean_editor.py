@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the various Boolean editors for the PyQt user interface toolkit.
 """
 
@@ -45,6 +44,7 @@ from constants \
 class SimpleEditor(Editor):
     """ Simple style of editor for Boolean values, which displays a check box.
     """
+
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
@@ -80,6 +80,7 @@ class SimpleEditor(Editor):
         else:
             self.control.setCheckState(QtCore.Qt.Unchecked)
 
+
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------
@@ -89,6 +90,7 @@ class ReadonlyEditor(Editor):
     """ Read-only style of editor for Boolean values, which displays static text
     of either "True" or "False".
     """
+
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

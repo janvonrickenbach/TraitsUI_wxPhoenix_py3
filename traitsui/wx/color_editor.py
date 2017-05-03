@@ -10,7 +10,6 @@
 #
 #  Thanks for using Enthought open source!
 #------------------------------------------------------------------------------
-
 """ Defines the various color editors for the Wx user interface toolkit.
 """
 
@@ -38,10 +37,10 @@ try:
 except:
     ColorTypes = wx.Colour
 
-
 #---------------------------------------------------------------------------
 #  The Wx ToolkitEditorFactory class.
 #---------------------------------------------------------------------------
+
 
 class ToolkitEditorFactory(BaseToolkitEditorFactory):
     """ Wx editor factory for color editors.
@@ -57,7 +56,7 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
                 color = getattr(editor.object, editor.name)
 
         if isinstance(color, tuple):
-            color = wx.Colour(*[int(round(c * 255.0)) for c in color])
+            color = wx.Colour(* [int(round(c * 255.0)) for c in color])
         return color
 
     #--------------------------------------------------------------------------
@@ -79,11 +78,11 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
         if isinstance(color, ColorTypes):
             alpha = color.Alpha()
             if alpha == 255:
-                return "rgb(%d,%d,%d)" % (
-                        color.Red(), color.Green(), color.Blue())
+                return "rgb(%d,%d,%d)" % (color.Red(), color.Green(),
+                                          color.Blue())
 
-            return "rgb(%d,%d,%d,%d)" % (
-                    color.Red(), color.Green(), color.Blue(), alpha)
+            return "rgb(%d,%d,%d,%d)" % (color.Red(), color.Green(),
+                                         color.Blue(), alpha)
 
         return str(color)
 
@@ -91,6 +90,7 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
 #------------------------------------------------------------------------------
 #  'ColorComboBox' class:
 #------------------------------------------------------------------------------
+
 
 class ColorComboBox(wx.adv.OwnerDrawnComboBox):
     def OnDrawItem(self, dc, rect, item, flags):
@@ -105,22 +105,23 @@ class ColorComboBox(wx.adv.OwnerDrawnComboBox):
                     r.y + (r.height - dc.GetCharHeight()) // 2)
 
         if color_name == 'custom':
-            swatch = wx.Rect(r.x + r.width - swatch_size, r.y + 1,
-                             swatch_size, swatch_size)
-            dc.GradientFillLinear(swatch, wx.Colour(255, 255, 0),
-                                  wx.Colour(0, 0, 255))
+            swatch = wx.Rect(r.x + r.width - swatch_size, r.y + 1, swatch_size,
+                             swatch_size)
+            dc.GradientFillLinear(swatch,
+                                  wx.Colour(255, 255, 0), wx.Colour(0, 0, 255))
         else:
             color = w3c_color_database.Find(color_name)
 
             brush = wx.Brush(color)
             dc.SetBrush(brush)
-            dc.DrawRectangle(r.x + r.width - swatch_size, r.y + 1,
-                             swatch_size, swatch_size)
+            dc.DrawRectangle(r.x + r.width - swatch_size, r.y + 1, swatch_size,
+                             swatch_size)
 
 
 #------------------------------------------------------------------------------
 #  'SimpleColorEditor' class:
 #------------------------------------------------------------------------------
+
 
 class SimpleColorEditor(BaseSimpleEditor):
     """ Simple style of color editor, which displays a text field whose
@@ -137,9 +138,11 @@ class SimpleColorEditor(BaseSimpleEditor):
     def _choices_default(self):
         """ by default, uses the W3C 16 color names.
         """
-        return ['aqua', 'black', 'blue', 'fuchsia', 'gray', 'green',
-                'lime', 'maroon', 'navy', 'olive', 'purple', 'red',
-                'silver', 'teal', 'white', 'yellow', 'custom']
+        return [
+            'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime',
+            'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal',
+            'white', 'yellow', 'custom'
+        ]
 
     def init(self, parent):
         """
@@ -148,9 +151,14 @@ class SimpleColorEditor(BaseSimpleEditor):
         current_color = self.factory.to_wx_color(self)
         current_color_name = current_color.GetAsString()
 
-        self.control = ColorComboBox(parent, -1, current_color_name,
-                                wx.Point(0, 0), wx.Size(40, -1), self.choices,
-                                style=wx.CB_READONLY)
+        self.control = ColorComboBox(
+            parent,
+            -1,
+            current_color_name,
+            wx.Point(0, 0),
+            wx.Size(40, -1),
+            self.choices,
+            style=wx.CB_READONLY)
 
         self.control.Bind(wx.EVT_COMBOBOX, self.color_selected)
         return
@@ -204,6 +212,7 @@ class SimpleColorEditor(BaseSimpleEditor):
 #  'CustomColorEditor' class:
 #------------------------------------------------------------------------------
 
+
 class CustomColorEditor(BaseSimpleEditor):
     """ Simple style of color editor, which displays a text field whose
     background color is the color value. Selecting the text field displays
@@ -222,14 +231,14 @@ class CustomColorEditor(BaseSimpleEditor):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # 'text_control' is the text display of the color.
-        text_control = wx.TextCtrl(parent, -1, self.str_value,
-                                   style=wx.TE_PROCESS_ENTER)
-        text_control.Bind( wx.EVT_KILL_FOCUS, self.update_object)
-        text_control.Bind( wx.EVT_TEXT_ENTER, self.update_object)
+        text_control = wx.TextCtrl(
+            parent, -1, self.str_value, style=wx.TE_PROCESS_ENTER)
+        text_control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
+        text_control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
 
         # 'button_control' shows the 'Edit' button.
         button_control = wx.Button(parent, label='Edit', style=wx.BU_EXACTFIT)
-        button_control.Bind( wx.EVT_BUTTON,self.open_color_dialog)
+        button_control.Bind(wx.EVT_BUTTON, self.open_color_dialog)
 
         sizer.Add(text_control, wx.ALIGN_LEFT)
         sizer.AddSpacer(8)
@@ -315,6 +324,7 @@ class CustomColorEditor(BaseSimpleEditor):
 #  'ReadonlyColorEditor' class:
 #------------------------------------------------------------------------------
 
+
 class ReadonlyColorEditor(BaseReadonlyEditor):
     """ Read-only style of color editor, which displays a read-only text field
     whose background color is the color value.
@@ -361,6 +371,7 @@ class ReadonlyColorEditor(BaseReadonlyEditor):
 #  'ReadonlyColorEditor' class:
 #------------------------------------------------------------------------------
 
+
 class TextColorEditor(BaseTextEditor):
     """ Text style of color editor, which displays a text field
     whose background color is the color value.
@@ -405,6 +416,7 @@ class TextColorEditor(BaseTextEditor):
 #------------------------------------------------------------------------------
 #   Sets the color of the specified editor's color control:
 #------------------------------------------------------------------------------
+
 
 def set_color(editor):
     """  Sets the color of the specified color control.

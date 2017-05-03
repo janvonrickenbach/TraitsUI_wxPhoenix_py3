@@ -47,29 +47,30 @@ class MultiSelect(HasPrivateTraits):
 
     view = View(
         HGroup(
-            UItem('choices',
-                  editor=TabularEditor(
-                      show_titles=True,
-                      selected='selected',
-                      editable=False,
-                      multi_select=True,
-                      adapter=MultiSelectAdapter())
-                  ),
-            UItem('selected',
-                  editor=TabularEditor(
-                      show_titles=True,
-                      editable=False,
-                      adapter=MultiSelectAdapter())
-                  )
-        ),
+            UItem(
+                'choices',
+                editor=TabularEditor(
+                    show_titles=True,
+                    selected='selected',
+                    editable=False,
+                    multi_select=True,
+                    adapter=MultiSelectAdapter())),
+            UItem(
+                'selected',
+                editor=TabularEditor(
+                    show_titles=True,
+                    editable=False,
+                    adapter=MultiSelectAdapter()))),
         resizable=True,
         width=200,
-        height=300
-    )
+        height=300)
+
 
 # Create the demo:
-demo = MultiSelect(choices=['one', 'two', 'three', 'four', 'five', 'six',
-                            'seven', 'eight', 'nine', 'ten'])
+demo = MultiSelect(choices=[
+    'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten'
+])
 
 # Run the demo (if invoked from the command line):
 if __name__ == '__main__':

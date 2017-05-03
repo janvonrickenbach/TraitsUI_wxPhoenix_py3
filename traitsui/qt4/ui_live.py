@@ -9,11 +9,9 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """Creates a PyQt user interface for a specified UI object, where the UI is
    "live", meaning that it immediately updates its underlying object(s).
 """
-
 
 from pyface.qt import QtCore, QtGui
 
@@ -29,10 +27,10 @@ from ui_base \
 from ui_panel \
     import panel
 
-
 #-------------------------------------------------------------------------
 #  Create the different 'live update' PyQt user interfaces.
 #-------------------------------------------------------------------------
+
 
 def ui_live(ui, parent):
     """Creates a live, non-modal PyQt user interface for a specified UI object.
@@ -79,12 +77,12 @@ class _LiveWindow(BaseDialog):
 
         if self.control is not None:
             if history is not None:
-                history.on_trait_change(self._on_undoable, 'undoable',
-                                        remove=True)
-                history.on_trait_change(self._on_redoable, 'redoable',
-                                        remove=True)
-                history.on_trait_change(self._on_revertable, 'undoable',
-                                        remove=True)
+                history.on_trait_change(
+                    self._on_undoable, 'undoable', remove=True)
+                history.on_trait_change(
+                    self._on_redoable, 'redoable', remove=True)
+                history.on_trait_change(
+                    self._on_revertable, 'undoable', remove=True)
 
             ui.reset()
         else:
@@ -98,9 +96,9 @@ class _LiveWindow(BaseDialog):
 
         no_buttons = ((nr_buttons == 1) and self.is_button(buttons[0], ''))
 
-        has_buttons = (
-            (not no_buttons) and (
-                (nr_buttons > 0) or view.undo or view.revert or view.ok or view.cancel))
+        has_buttons = ((not no_buttons) and
+                       ((nr_buttons > 0) or view.undo or view.revert or
+                        view.ok or view.cancel))
 
         if has_buttons or (view.menubar is not None):
             if history is None:
@@ -137,20 +135,16 @@ class _LiveWindow(BaseDialog):
                         self._on_undo,
                         False,
                         default=default)
-                    history.on_trait_change(self._on_undoable, 'undoable',
-                                            dispatch='ui')
+                    history.on_trait_change(
+                        self._on_undoable, 'undoable', dispatch='ui')
                     if history.can_undo:
                         self._on_undoable(True)
 
                     self.redo = self.add_button(
-                        button,
-                        bbox,
-                        QtGui.QDialogButtonBox.ActionRole,
-                        self._on_redo,
-                        False,
-                        'Redo')
-                    history.on_trait_change(self._on_redoable, 'redoable',
-                                            dispatch='ui')
+                        button, bbox, QtGui.QDialogButtonBox.ActionRole,
+                        self._on_redo, False, 'Redo')
+                    history.on_trait_change(
+                        self._on_redoable, 'redoable', dispatch='ui')
                     if history.can_redo:
                         self._on_redoable(True)
 
@@ -162,8 +156,8 @@ class _LiveWindow(BaseDialog):
                         self._on_revert,
                         False,
                         default=default)
-                    history.on_trait_change(self._on_revertable, 'undoable',
-                                            dispatch='ui')
+                    history.on_trait_change(
+                        self._on_revertable, 'undoable', dispatch='ui')
                     if history.can_undo:
                         self._on_revertable(True)
 
@@ -177,9 +171,12 @@ class _LiveWindow(BaseDialog):
                     ui.on_trait_change(self._on_error, 'errors', dispatch='ui')
 
                 elif self.is_button(button, 'Cancel'):
-                    self.add_button(button, bbox,
-                                    QtGui.QDialogButtonBox.RejectRole,
-                                    self.control.reject, default=default)
+                    self.add_button(
+                        button,
+                        bbox,
+                        QtGui.QDialogButtonBox.RejectRole,
+                        self.control.reject,
+                        default=default)
 
                 elif self.is_button(button, 'Help'):
                     self.add_button(

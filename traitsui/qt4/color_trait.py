@@ -9,7 +9,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Trait definition for a PyQt-based color.
 """
 
@@ -60,6 +59,7 @@ def convert_to_color(object, name, value):
 
     return color
 
+
 convert_to_color.info = ('a string of the form (r,g,b) or (r,g,b,a) where r, '
                          'g, b, and a are integers from 0 to 255, a QColor '
                          'instance, a Qt.GlobalColor, an integer which in hex '
@@ -92,6 +92,7 @@ def get_color_editor(*args, **traits):
     from traitsui.qt4.color_editor import ToolkitEditorFactory
     return ToolkitEditorFactory(*args, **traits)
 
+
 #-------------------------------------------------------------------------
 #  Define PyQt specific color traits:
 #-------------------------------------------------------------------------
@@ -101,8 +102,17 @@ def PyQtColor(default='white', allow_none=False, **metadata):
     """ Defines PyQt-specific color traits.
     """
     if allow_none:
-        return Trait(default, None, standard_colors, convert_to_color,
-                     editor=get_color_editor, **metadata)
+        return Trait(
+            default,
+            None,
+            standard_colors,
+            convert_to_color,
+            editor=get_color_editor,
+            **metadata)
 
-    return Trait(default, standard_colors, convert_to_color,
-                 editor=get_color_editor, **metadata)
+    return Trait(
+        default,
+        standard_colors,
+        convert_to_color,
+        editor=get_color_editor,
+        **metadata)

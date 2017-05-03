@@ -14,7 +14,6 @@
 #  Date:   08/04/2009
 #
 #------------------------------------------------------------------------------
-
 """ A Traits UI editor for datetime.time objects.
 """
 
@@ -79,6 +78,7 @@ class SimpleEditor(Editor):
         except ValueError:
             print 'Invalid time:', hour, minute, second
             raise
+
 
 #------------------------------------------------------------------------------
 # 'ReadonlyEditor' class:

@@ -1,4 +1,3 @@
-
 from contextlib import contextmanager
 import warnings
 
@@ -22,7 +21,6 @@ def clear_toolkit():
 
 
 class TestToolkit(unittest.TestCase):
-
     def test_default_toolkit(self):
         with clear_toolkit():
             # try to import default toolkit - this is just a smoke test

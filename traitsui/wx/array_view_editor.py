@@ -12,7 +12,9 @@ from .ui_editor \
 #  '_ArrayViewEditor' class:
 #-------------------------------------------------------------------------------
 
-class _ArrayViewEditor ( BaseArrayViewEditor, UIEditor ):
+
+class _ArrayViewEditor(BaseArrayViewEditor, UIEditor):
     pass
+
 
 #--EOF-------------------------------------------------------------------------

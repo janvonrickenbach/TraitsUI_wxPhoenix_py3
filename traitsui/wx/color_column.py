@@ -13,13 +13,11 @@
 #  Author: David C. Morrill
 #
 #------------------------------------------------------------------------------
-
 """ Table column object for Color traits.
 """
 
 import warnings
 warnings.warn("traitsui.wx.color_column is deprecated. Use the "
-    "backend-independent implementation in traitsui.color_column")
+              "backend-independent implementation in traitsui.color_column")
 
 from traitsui.color_column import ColorColumn
-

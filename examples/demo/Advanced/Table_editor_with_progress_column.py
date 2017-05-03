@@ -21,8 +21,7 @@ class JobManager(HasTraits):
 
     def populate(self):
         self.jobs = [
-            Job(name='job %02d' % i, percent_complete=0)
-            for i in range(1, 25)
+            Job(name='job %02d' % i, percent_complete=0) for i in range(1, 25)
         ]
 
     def process(self):
@@ -38,15 +37,14 @@ class JobManager(HasTraits):
         GUI.invoke_after(1000, self.process)
 
     view = View(
-        UItem('jobs', editor=TableEditor(
-            columns=[
+        UItem(
+            'jobs',
+            editor=TableEditor(columns=[
                 ObjectColumn(name='name'),
                 ProgressColumn(name='percent_complete'),
-            ]
-        )),
+            ])),
         UItem('start'),
-        resizable=True,
-    )
+        resizable=True, )
 
 
 demo = view = job_manager = JobManager()

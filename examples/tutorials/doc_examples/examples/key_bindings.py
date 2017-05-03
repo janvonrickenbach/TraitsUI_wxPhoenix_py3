@@ -16,22 +16,21 @@ from traitsui.key_bindings \
 #--[Code]-----------------------------------------------------------------
 
 key_bindings = KeyBindings(
-    KeyBinding(binding1='Ctrl-s',
-               description='Save to a file',
-               method_name='save_file'),
-    KeyBinding(binding1='Ctrl-r',
-               description='Run script',
-               method_name='run_script'),
-    KeyBinding(binding1='Ctrl-k',
-               description='Edit key bindings',
-               method_name='edit_bindings')
-)
+    KeyBinding(
+        binding1='Ctrl-s',
+        description='Save to a file',
+        method_name='save_file'),
+    KeyBinding(
+        binding1='Ctrl-r', description='Run script', method_name='run_script'),
+    KeyBinding(
+        binding1='Ctrl-k',
+        description='Edit key bindings',
+        method_name='edit_bindings'))
 
 # Traits UI Handler class for bound methods
 
 
 class CodeHandler(Handler):
-
     def save_file(self, info):
         info.object.status = "save file"
 
@@ -49,20 +48,19 @@ class KBCodeExample(HasPrivateTraits):
     status = Str
     kb = Button(label='Edit Key Bindings')
 
-    view = View(Group(
-        Item('code',
-             style='custom',
-             resizable=True),
-        Item('status', style='readonly'),
-        'kb',
-        orientation='vertical',
-        show_labels=False,
-    ),
+    view = View(
+        Group(
+            Item(
+                'code', style='custom', resizable=True),
+            Item(
+                'status', style='readonly'),
+            'kb',
+            orientation='vertical',
+            show_labels=False, ),
         id='KBCodeExample',
         key_bindings=key_bindings,
         title='Code Editor With Key Bindings',
         resizable=True,
-
         handler=CodeHandler())
 
     def _kb_fired(self, event):

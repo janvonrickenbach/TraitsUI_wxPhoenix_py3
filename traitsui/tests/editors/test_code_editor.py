@@ -17,12 +17,12 @@ from traitsui.view import View, Group
 from traitsui.item import Item
 from traitsui.editors.code_editor import CodeEditor
 
-
 from traitsui.tests._tools import *
 
 
 class CodeModel(HasTraits):
     code = Str('world domination code')
+
 
 class CodeView(ModelView):
     model = Instance(CodeModel)
@@ -31,10 +31,10 @@ class CodeView(ModelView):
 
     def default_traits_view(self):
         traits_view = View(
-            Item('model.code',
-                 editor=CodeEditor(show_line_numbers=self.show_line_numbers),
-                 style=self.style)
-        )
+            Item(
+                'model.code',
+                editor=CodeEditor(show_line_numbers=self.show_line_numbers),
+                style=self.style))
         return traits_view
 
 
@@ -42,6 +42,7 @@ class CodeView(ModelView):
 def test_code_editor_show_line_numbers():
     """ CodeEditor should honor the `show_line_numbers` setting
     """
+
     def is_line_numbers_visible(ui):
         from pyface import qt
         txt_ctrl = ui.control.findChild(qt.QtWidgets.QPlainTextEdit)
@@ -50,14 +51,14 @@ def test_code_editor_show_line_numbers():
     def test_line_numbers_visibility(show=True):
         with store_exceptions_on_all_threads():
             code_model = CodeModel()
-            code_view = CodeView(model=code_model,
-                                 show_line_numbers=show)
+            code_view = CodeView(model=code_model, show_line_numbers=show)
             ui = code_view.edit_traits()
             nose.tools.assert_equal(is_line_numbers_visible(ui), show)
             ui.control.close()
 
     test_line_numbers_visibility(True)
     test_line_numbers_visibility(False)
+
 
 @skip_if_not_qt4
 def test_code_editor_readonly():
@@ -66,8 +67,7 @@ def test_code_editor_readonly():
     from pyface import qt
     with store_exceptions_on_all_threads():
         code_model = CodeModel()
-        code_view = CodeView(model=code_model,
-                             style='readonly')
+        code_view = CodeView(model=code_model, style='readonly')
         ui = code_view.edit_traits()
         txt_ctrl = ui.control.findChild(qt.QtWidgets.QPlainTextEdit)
         nose.tools.assert_true(txt_ctrl.isReadOnly())
@@ -79,7 +79,7 @@ def test_code_editor_readonly():
         nose.tools.assert_equal(txt_ctrl.toPlainText(), code_model.code)
 
         # Test changing the underlying object
-        code_model2 = CodeModel(code=code_model.code*2)
+        code_model2 = CodeModel(code=code_model.code * 2)
         code_view.model = code_model2
         nose.tools.assert_true(txt_ctrl.isReadOnly())
         nose.tools.assert_equal(txt_ctrl.toPlainText(), code_model.code)

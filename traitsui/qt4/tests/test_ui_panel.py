@@ -32,10 +32,8 @@ class FooDialog(HasTraits):
     panel2 = Instance(FooPanel)
 
     view = View(
-        Group(Item("panel1"),
-              Item("panel2"),
-              layout="split",
-              style="custom"))
+        Group(
+            Item("panel1"), Item("panel2"), layout="split", style="custom"))
 
     def _panel1_default(self):
         return FooPanel()
@@ -46,7 +44,6 @@ class FooDialog(HasTraits):
 
 @skip_if_not_qt4
 class TestUIPanel(unittest.TestCase):
-
     def setup_qt4_dock_window(self):
         from pyface.qt import QtGui
 

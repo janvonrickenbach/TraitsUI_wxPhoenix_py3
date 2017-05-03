@@ -8,7 +8,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """ Defines the concrete implementations of the traits Toolkit interface for
 the PyQt user interface toolkit.
 """
@@ -113,6 +112,7 @@ def ui_handler(handler, *args, **kwds):
     """
     _CallAfter(handler, *args, **kwds)
 
+
 # Tell the traits notification handlers to use this UI handler
 set_ui_handler(ui_handler)
 
@@ -124,6 +124,7 @@ set_ui_handler(ui_handler)
 class GUIToolkit(Toolkit):
     """ Implementation class for PyQt toolkit.
     """
+
     #-------------------------------------------------------------------------
     #  Create PyQt specific user interfaces using information from the
     #  specified UI object:
@@ -178,8 +179,14 @@ class GUIToolkit(Toolkit):
         import ui_wizard
         ui_wizard.ui_wizard(ui, parent)
 
-    def view_application(self, context, view, kind=None, handler=None,
-                         id='', scrollable=None, args=None):
+    def view_application(self,
+                         context,
+                         view,
+                         kind=None,
+                         handler=None,
+                         id='',
+                         scrollable=None,
+                         args=None):
         """ Creates a PyQt modal dialog user interface that
             runs as a complete application, using information from the
             specified View object.
@@ -376,8 +383,8 @@ class GUIToolkit(Toolkit):
             return
 
         elif events == 'keys':
-            class KeyEventHook(QtCore.QObject):
 
+            class KeyEventHook(QtCore.QObject):
                 def eventFilter(self, object, event):
                     if event.type() == QtCore.QEvent.KeyPress:
                         return handler(event)
@@ -462,8 +469,9 @@ class GUIToolkit(Toolkit):
               specific color format.
         """
         return {
-            'WindowColor': QtGui.QApplication.palette().color(
-                QtGui.QPalette.Window), }
+            'WindowColor':
+            QtGui.QApplication.palette().color(QtGui.QPalette.Window),
+        }
 
     #-------------------------------------------------------------------------
     #  GUI toolkit dependent trait definitions:

@@ -33,6 +33,7 @@ class EmployeeAdapter(TabularAdapter):
     def get_default_value(self, object, trait):
         return Employee(salary=30000)
 
+
 #-- Employee Class -------------------------------------------------------
 
 
@@ -40,6 +41,7 @@ class Employee(HasTraits):
 
     name = Str
     salary = Float
+
 
 #-- Company Class --------------------------------------------------------
 
@@ -52,38 +54,43 @@ class Company(HasTraits):
     give_raise = Button('Give raise')
 
     view = View(
-        Item('employees',
-             show_label=False,
-             editor=TabularEditor(adapter=EmployeeAdapter(),
-                                  selected='employee',
-                                  auto_update=True)
-             ),
+        Item(
+            'employees',
+            show_label=False,
+            editor=TabularEditor(
+                adapter=EmployeeAdapter(),
+                selected='employee',
+                auto_update=True)),
         HGroup(
             spring,
             Item('increase'),
-            Item('give_raise',
-                 show_label=False,
-                 enabled_when='employee is not None')
-        ),
+            Item(
+                'give_raise',
+                show_label=False,
+                enabled_when='employee is not None')),
         title='Auto Update Tabular Editor demo',
         height=0.25,
         width=0.30,
-        resizable=True
-    )
+        resizable=True)
 
     def _give_raise_changed(self):
         self.employee.salary += self.increase
         self.employee = None
 
+
 #-- Set up the demo ------------------------------------------------------
 
-demo = Company(increase=1000, employees=[
-    Employee(name='Fred', salary=45000),
-    Employee(name='Sally', salary=52000),
-    Employee(name='Jim', salary=39000),
-    Employee(name='Helen', salary=41000),
-    Employee(name='George', salary=49000),
-    Employee(name='Betty', salary=46000)])
+demo = Company(
+    increase=1000,
+    employees=[
+        Employee(
+            name='Fred', salary=45000), Employee(
+                name='Sally', salary=52000), Employee(
+                    name='Jim', salary=39000), Employee(
+                        name='Helen', salary=41000), Employee(
+                            name='George', salary=49000), Employee(
+                                name='Betty', salary=46000)
+    ])
 
 # Run the demo (if invoked from the command line):
 if __name__ == '__main__':

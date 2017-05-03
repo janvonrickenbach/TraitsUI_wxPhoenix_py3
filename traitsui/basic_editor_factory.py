@@ -14,7 +14,6 @@
 #  Date:   10/21/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the BasicEditorFactory class, which allows creating editor
     factories that use the same class for creating all editor styles.
 """
@@ -33,7 +32,8 @@ from .editor_factory import EditorFactory
 #  'BasicEditorFactory' base class:
 #-------------------------------------------------------------------------------
 
-class BasicEditorFactory ( EditorFactory ):
+
+class BasicEditorFactory(EditorFactory):
     """ Base class for editor factories that use the same class for creating
         all editor styles.
     """
@@ -49,28 +49,28 @@ class BasicEditorFactory ( EditorFactory ):
     #  Property getters.
     #---------------------------------------------------------------------------
 
-    def _get_simple_editor_class ( self ):
+    def _get_simple_editor_class(self):
         """ Returns the editor class to use for "simple" style views.
         Overridden to return the value of the 'klass' trait.
 
         """
         return self.klass
 
-    def _get_custom_editor_class ( self ):
+    def _get_custom_editor_class(self):
         """ Returns the editor class to use for "custom" style views.
         Overridden to return the value of the 'klass' trait.
 
         """
         return self.klass
 
-    def _get_text_editor_class ( self ):
+    def _get_text_editor_class(self):
         """ Returns the editor class to use for "text" style views.
         Overridden to return the value of the 'klass' trait.
 
         """
         return self.klass
 
-    def _get_readonly_editor_class ( self ):
+    def _get_readonly_editor_class(self):
         """ Returns the editor class to use for "readonly" style views.
         Overridden to return the value of the 'klass' trait.
 
@@ -81,8 +81,8 @@ class BasicEditorFactory ( EditorFactory ):
     #  Allow an instance to be called:
     #---------------------------------------------------------------------------
 
-    def __call__ ( self, *args, **traits ):
-        return self.set( **traits )
+    def __call__(self, *args, **traits):
+        return self.set(**traits)
+
 
 ## EOF ########################################################################
-

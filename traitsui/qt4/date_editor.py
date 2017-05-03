@@ -14,7 +14,6 @@
 #  Date:   08/03/2009
 #
 #------------------------------------------------------------------------------
-
 """ A Traits UI editor for datetime.date objects.
 """
 
@@ -107,6 +106,7 @@ class SimpleEditor(Editor):
             print('Invalid date:', year, month, day)
             raise
 
+
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -160,6 +160,7 @@ class CustomEditor(Editor):
         except ValueError:
             print('Invalid date:', year, month, day)
             raise
+
 
 #------------------------------------------------------------------------------
 # 'ReadonlyEditor' class:

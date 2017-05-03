@@ -10,7 +10,6 @@
 #
 # Author: Evan Patterson
 #------------------------------------------------------------------------------
-
 """ Defines a Traits UI View that allows for the customization of Qt-specific
     widget properties.
 """
@@ -48,8 +47,15 @@ class QtView(View):
     #  Creates a UI user interface object:
     #-------------------------------------------------------------------------
 
-    def ui(self, context, parent=None, kind=None, view_elements=None,
-           handler=None, id='', scrollable=None, args=None):
+    def ui(self,
+           context,
+           parent=None,
+           kind=None,
+           view_elements=None,
+           handler=None,
+           id='',
+           scrollable=None,
+           args=None):
         ui = super(QtView, self).ui(context, parent, kind, view_elements,
                                     handler, id, scrollable, args)
 

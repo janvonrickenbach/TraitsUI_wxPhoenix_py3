@@ -1,6 +1,5 @@
 #  Copyright (c) 2007, Enthought, Inc.
 #  License: BSD Style.
-
 """
 Implementation of an InstanceEditor demo plugin for the Traits UI demo program.
 
@@ -48,22 +47,22 @@ class InstanceEditorDemo(HasTraits):
 
     # Items are used to define the demo display, one item per editor style:
     inst_group = Group(
-        Item('sample_instance', style='simple', label='Simple'),
+        Item(
+            'sample_instance', style='simple', label='Simple'),
         Item('_'),
-        Item('sample_instance', style='custom', label='Custom'),
+        Item(
+            'sample_instance', style='custom', label='Custom'),
         Item('_'),
-        Item('sample_instance', style='text', label='Text'),
+        Item(
+            'sample_instance', style='text', label='Text'),
         Item('_'),
-        Item('sample_instance', style='readonly', label='ReadOnly')
-    )
+        Item(
+            'sample_instance', style='readonly', label='ReadOnly'))
 
     # Demo View:
     view = View(
-        inst_group,
-        title='InstanceEditor',
-        buttons=['OK'],
-        resizable=True
-    )
+        inst_group, title='InstanceEditor', buttons=['OK'], resizable=True)
+
 
 # Create the demo:
 demo = InstanceEditorDemo()

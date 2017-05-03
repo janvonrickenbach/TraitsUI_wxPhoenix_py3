@@ -14,14 +14,12 @@
 #  Date:   12/13/2004
 #
 #------------------------------------------------------------------------------
-
 """ Defines the tuple editor for the wxPython user interface toolkit.
 """
 
 #-------------------------------------------------------------------------------
 #  Imports:
 #-------------------------------------------------------------------------------
-
 
 # FIXME: ToolkitEditorFactory is a proxy class defined here just for backward
 # compatibility. The class has been moved to the
@@ -36,12 +34,14 @@ from .editor \
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
 
-class SimpleEditor ( BaseSimpleEditor, Editor ):
+
+class SimpleEditor(BaseSimpleEditor, Editor):
     """ Simple style of editor for tuples.
 
         The editor displays an editor for each of the fields in the tuple,
         based on the type of each field.
     """
     pass
+
 
 ### EOF #######################################################################

@@ -31,7 +31,8 @@ from .text_editor import ToolkitEditorFactory as EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for drop editors.
     """
 
@@ -47,6 +48,7 @@ class ToolkitEditorFactory ( EditorFactory ):
 
     # Can the user type into the editor, or is it read only?
     readonly = Bool(True)
+
 
 # Define the DropEditor class.
 DropEditor = ToolkitEditorFactory

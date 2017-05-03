@@ -8,7 +8,6 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
-
 """Creates a panel-based PyQt user interface for a specified UI object.
 """
 
@@ -45,7 +44,6 @@ from ui_base \
 from editor \
     import Editor
 
-
 #-------------------------------------------------------------------------
 #  Constants:
 #-------------------------------------------------------------------------
@@ -57,10 +55,10 @@ LABEL_PUNCTUATION_CHARS = '?=:;,.<>/\\"\'-+#|'
 # Pattern of all digits
 all_digits = re.compile(r'\d+')
 
-
 #-------------------------------------------------------------------------
 #  Create the different panel-based PyQt user interfaces.
 #-------------------------------------------------------------------------
+
 
 def ui_panel(ui, parent):
     """Creates a panel-based PyQt user interface for a specified UI object.
@@ -113,16 +111,14 @@ class _Panel(BasePanel):
         if history is not None:
             history.on_trait_change(self._on_undoable, 'undoable', remove=True)
             history.on_trait_change(self._on_redoable, 'redoable', remove=True)
-            history.on_trait_change(self._on_revertable, 'undoable',
-                                    remove=True)
+            history.on_trait_change(
+                self._on_revertable, 'undoable', remove=True)
 
         # Determine if we need any buttons or an 'undo' history.
         buttons = [self.coerce_button(button) for button in view.buttons]
         nr_buttons = len(buttons)
-        has_buttons = (
-            not is_subpanel and (
-                nr_buttons != 1 or not self.is_button(
-                    buttons[0], '')))
+        has_buttons = (not is_subpanel and
+                       (nr_buttons != 1 or not self.is_button(buttons[0], '')))
 
         if nr_buttons == 0:
             if view.undo:
@@ -134,11 +130,8 @@ class _Panel(BasePanel):
 
         if not is_subpanel and history is None:
             for button in buttons:
-                if self.is_button(
-                        button,
-                        'Undo') or self.is_button(
-                        button,
-                        'Revert'):
+                if self.is_button(button, 'Undo') or self.is_button(button,
+                                                                    'Revert'):
                     history = ui.history = UndoHistory()
                     break
 
@@ -156,9 +149,8 @@ class _Panel(BasePanel):
         # Panels must be widgets as it is only the TraitsUI PyQt code that can
         # handle them being layouts as well.  Therefore create a widget if the
         # panel is not a widget or if we need a title or buttons.
-        if not isinstance(
-                self.control,
-                QtGui.QWidget) or title != "" or has_buttons:
+        if not isinstance(self.control,
+                          QtGui.QWidget) or title != "" or has_buttons:
             w = QtGui.QWidget()
             layout = QtGui.QVBoxLayout(w)
             layout.setContentsMargins(0, 0, 0, 0)
@@ -189,16 +181,14 @@ class _Panel(BasePanel):
                 for button in buttons:
                     role = QtGui.QDialogButtonBox.ActionRole
                     if self.is_button(button, 'Undo'):
-                        self.undo = self.add_button(button, bbox, role,
-                                                    self._on_undo, False,
-                                                    'Undo')
-                        self.redo = self.add_button(button, bbox, role,
-                                                    self._on_redo, False,
-                                                    'Redo')
-                        history.on_trait_change(self._on_undoable, 'undoable',
-                                                dispatch='ui')
-                        history.on_trait_change(self._on_redoable, 'redoable',
-                                                dispatch='ui')
+                        self.undo = self.add_button(
+                            button, bbox, role, self._on_undo, False, 'Undo')
+                        self.redo = self.add_button(
+                            button, bbox, role, self._on_redo, False, 'Redo')
+                        history.on_trait_change(
+                            self._on_undoable, 'undoable', dispatch='ui')
+                        history.on_trait_change(
+                            self._on_redoable, 'redoable', dispatch='ui')
                     elif self.is_button(button, 'Revert'):
                         role = QtGui.QDialogButtonBox.ResetRole
                         self.revert = self.add_button(button, bbox, role,
@@ -336,6 +326,7 @@ def _fill_panel(panel, content, ui, item_handler=None):
 def _size_hint_wrapper(f, ui):
     """Wrap an existing sizeHint method with sizes from a UI object.
     """
+
     def sizeHint():
         size = f()
         if ui.view.width > 0:
@@ -343,7 +334,9 @@ def _size_hint_wrapper(f, ui):
         if ui.view.height > 0:
             size.setHeight(ui.view.height)
         return size
+
     return sizeHint
+
 
 #-------------------------------------------------------------------------
 #  Displays a help window for the specified UI's active Group:
@@ -363,10 +356,10 @@ def show_help(ui, button):
     for item in group.get_content(False):
         if not item.is_spacer():
             fields.append(template.item_help % (
-                cgi.escape(item.get_label(ui)),
-                cgi.escape(item.get_help(ui))))
+                cgi.escape(item.get_label(ui)), cgi.escape(item.get_help(ui))))
     html = template.group_html % (header, '\n'.join(fields))
     HTMLHelpWindow(button, html, .25, .33)
+
 
 #-------------------------------------------------------------------------
 #  Displays a pop-up help window for a single trait:
@@ -411,7 +404,7 @@ class _GroupSplitter(QtGui.QSplitter):
 
         parent = self.parent()
         if (not self._initialized and parent and
-                (self.isVisible() or isinstance(parent, QtGui.QMainWindow))):
+            (self.isVisible() or isinstance(parent, QtGui.QMainWindow))):
             self._initialized = True
             self._resize_items()
 
@@ -646,8 +639,8 @@ class _GroupPanel(object):
 
                 layout = panel.layout()
                 if layout is not None:
-                    layout.setAlignment(
-                        QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+                    layout.setAlignment(QtCore.Qt.AlignLeft |
+                                        QtCore.Qt.AlignTop)
 
                 splitter.addWidget(panel)
 
@@ -860,8 +853,8 @@ class _GroupPanel(object):
             # Create the requested type of editor from the editor factory:
             factory_method = getattr(editor_factory, item.style + '_editor')
             editor = factory_method(
-                ui, object, name, item.tooltip, None
-            ).set(item=item, object_name=item.object)
+                ui, object, name, item.tooltip,
+                None).set(item=item, object_name=item.object)
 
             # Tell the editor to actually build the editing widget.  Note that
             # "inner" is a layout.  This shouldn't matter as individual editors
@@ -997,28 +990,25 @@ class _GroupPanel(object):
 
         is_label_left = self.group.show_left
 
-        is_item_resizable = (
-            (item.resizable is True) or
-            ((item.resizable is Undefined) and editor.scrollable)
-        )
+        is_item_resizable = ((item.resizable is True) or (
+            (item.resizable is Undefined) and editor.scrollable))
         is_item_springy = item.springy
 
         # handle exceptional case 2)
         item_policy = editor.control.sizePolicy().horizontalPolicy()
 
-        if (label is not None
-            and not is_label_left
-                and item_policy == QtGui.QSizePolicy.Minimum):
+        if (label is not None and not is_label_left and
+                item_policy == QtGui.QSizePolicy.Minimum):
             # this item cannot be stretched horizontally, and the label
             # exists and is on the right -> make label stretchable if necessary
 
-            if (self.direction == QtGui.QBoxLayout.LeftToRight
-                    and is_item_springy):
+            if (self.direction == QtGui.QBoxLayout.LeftToRight and
+                    is_item_springy):
                 is_item_springy = False
                 self._make_label_h_stretchable(label, stretch or 50)
 
-            elif (self.direction == QtGui.QBoxLayout.TopToBottom
-                  and is_item_resizable):
+            elif (self.direction == QtGui.QBoxLayout.TopToBottom and
+                  is_item_resizable):
                 is_item_resizable = False
                 self._make_label_h_stretchable(label, stretch or 50)
 
@@ -1029,8 +1019,8 @@ class _GroupPanel(object):
         elif is_item_springy:
             stretch = stretch or 50
 
-        editor.set_size_policy(self.direction,
-                               is_item_resizable, is_item_springy, stretch)
+        editor.set_size_policy(self.direction, is_item_resizable,
+                               is_item_springy, stretch)
         return stretch
 
     def _make_label_h_stretchable(self, label, stretch):
@@ -1041,11 +1031,15 @@ class _GroupPanel(object):
         """
         label_policy = label.sizePolicy()
         label_policy.setHorizontalStretch(stretch)
-        label_policy.setHorizontalPolicy(
-            QtGui.QSizePolicy.Expanding)
+        label_policy.setHorizontalPolicy(QtGui.QSizePolicy.Expanding)
         label.setSizePolicy(label_policy)
 
-    def _add_widget(self, layout, w, row, column, show_labels,
+    def _add_widget(self,
+                    layout,
+                    w,
+                    row,
+                    column,
+                    show_labels,
                     label_alignment=QtCore.Qt.AlignmentFlag(0)):
         """Adds a widget to a layout taking into account the orientation and
            the position of any labels.
@@ -1122,9 +1116,8 @@ class _GroupPanel(object):
 
         # append a suffix if the label is on the left and it does
         # not already end with a punctuation character
-        if (label != ''
-            and label[-1] not in LABEL_PUNCTUATION_CHARS
-                and self.group.show_left):
+        if (label != '' and label[-1] not in LABEL_PUNCTUATION_CHARS and
+                self.group.show_left):
             label = label + suffix
 
         # create label controller
@@ -1228,6 +1221,7 @@ class TabbedFoldGroupEditor(GroupEditor):
 #  'HTMLHelpWindow' class:
 #-------------------------------------------------------------------------
 
+
 class HTMLHelpWindow(QtGui.QDialog):
     """ Window for displaying Traits-based help text with HTML formatting.
     """
@@ -1262,6 +1256,7 @@ class HTMLHelpWindow(QtGui.QDialog):
         # Position and show the dialog
         position_window(self, parent=parent)
         self.show()
+
 
 #-------------------------------------------------------------------------
 #  Creates a PyFace HeadingText control:

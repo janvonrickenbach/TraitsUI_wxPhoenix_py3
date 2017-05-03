@@ -14,7 +14,6 @@
 #  Date:   01/27/2006
 #
 #------------------------------------------------------------------------------
-
 """ Defines the code editor factory for all traits toolkit backends,
 useful for tools such as debuggers.
 """
@@ -33,7 +32,8 @@ from ..editor_factory import EditorFactory
 #  'ToolkitEditorFactory' class:
 #-------------------------------------------------------------------------------
 
-class ToolkitEditorFactory ( EditorFactory ):
+
+class ToolkitEditorFactory(EditorFactory):
     """ Editor factory for code editors.
     """
 
@@ -45,7 +45,7 @@ class ToolkitEditorFactory ( EditorFactory ):
     mark_lines = Str
 
     # Background color for marking lines
-    mark_color = Color( 0xECE9D8 )
+    mark_color = Color(0xECE9D8)
 
     # Object trait containing the currently selected line (optional)
     selected_line = Str
@@ -60,13 +60,13 @@ class ToolkitEditorFactory ( EditorFactory ):
     selected_end_pos = Str
 
     # Background color for selected lines
-    selected_color = Color( 0xA4FFFF )
+    selected_color = Color(0xA4FFFF)
 
     # Where should the search toolbar be placed?
-    search = Enum( 'top', 'bottom', 'none' )
+    search = Enum('top', 'bottom', 'none')
 
     # Background color for lines that match the current search
-    search_color = Color( 0xFFFF94 )
+    search_color = Color(0xFFFF94)
 
     # Current line
     line = Str
@@ -75,19 +75,19 @@ class ToolkitEditorFactory ( EditorFactory ):
     column = Str
 
     # Should code folding be enabled?
-    foldable = Bool( True )
+    foldable = Bool(True)
 
     # Should line numbers be displayed in the margin?
-    show_line_numbers = Bool( True )
+    show_line_numbers = Bool(True)
 
     # Is user input set on every change?
-    auto_set = Bool( True )
+    auto_set = Bool(True)
 
     # Should the editor auto-scroll when a new **selected_line** value is set?
-    auto_scroll = Bool( True )
+    auto_scroll = Bool(True)
 
     # Optional key bindings associated with the editor
-    key_bindings = Instance( 'traitsui.key_bindings.KeyBindings' )
+    key_bindings = Instance('traitsui.key_bindings.KeyBindings')
 
     # Calltip clicked event
     calltip_clicked = Str

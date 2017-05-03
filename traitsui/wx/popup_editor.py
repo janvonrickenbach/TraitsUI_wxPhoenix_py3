@@ -2,7 +2,6 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-
 # FIXME: PopupEditor is a proxy class defined here just for backward
 # compatibility. The class (which represents the editor factory) has been moved
 # to the traitsui.editors.list_editor file.
@@ -16,6 +15,9 @@ from .ui_editor \
 #  '_PopupEditor' class:
 #-------------------------------------------------------------------------------
 
-class _PopupEditor ( BasePopupEditor, UIEditor ):
+
+class _PopupEditor(BasePopupEditor, UIEditor):
     pass
+
+
 #--EOF-------------------------------------------------------------------------

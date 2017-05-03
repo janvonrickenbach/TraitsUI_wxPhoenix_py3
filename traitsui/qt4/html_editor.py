@@ -11,7 +11,6 @@
 #  Thanks for using Enthought open source!
 #
 #------------------------------------------------------------------------------
-
 """ Defines the HTML "editor" for the QT4 user interface toolkit.
     HTML editors interpret and display HTML-formatted text, but do not
     modify it.
@@ -95,5 +94,6 @@ class SimpleEditor(Editor):
 
     def _link_clicked(self, url):
         webbrowser.open_new(url.toString())
+
 
 #-EOF--------------------------------------------------------------------------
