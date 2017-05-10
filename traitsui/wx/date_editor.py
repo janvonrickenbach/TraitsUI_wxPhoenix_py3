@@ -377,7 +377,7 @@ class MultiCalendarCtrl(wx.Panel):
 
             # When multi_select is False wrap in a list to pass the for-loop.
             if self.multi_select == False:
-                if selected_days == None:
+                if selected_days is None:
                     selected_days = []
                 else:
                     selected_days = [selected_days]

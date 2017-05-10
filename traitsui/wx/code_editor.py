@@ -40,7 +40,7 @@ from traitsui.editors.code_editor \
 from pyface.api \
     import PythonEditor
 
-from pyface.util.python_stc \
+from pyface.wx.python_stc \
     import faces
 
 from .editor \

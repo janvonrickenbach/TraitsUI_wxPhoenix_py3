@@ -41,7 +41,7 @@ def store_exceptions_on_all_threads():
     def _print_uncaught_exception(type, value, tb):
         message = 'Uncaught exception:\n'
         message += ''.join(traceback.format_exception(type, value, tb))
-        print message
+        print(message)
 
     def excepthook(type, value, tb):
         exceptions.append(value)

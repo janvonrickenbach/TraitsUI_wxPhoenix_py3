@@ -558,7 +558,7 @@ class UI(HasPrivateTraits):
                 editor = getattr(info, name, None)
                 if isinstance(editor, Editor) and (editor.ui is self):
                     editor_prefs = prefs.get(name)
-                    if editor_prefs != None:
+                    if editor_prefs is not None:
                         editor.restore_prefs(editor_prefs)
 
             if self.key_bindings is not None:
@@ -607,7 +607,7 @@ class UI(HasPrivateTraits):
             editor = getattr(info, name, None)
             if isinstance(editor, Editor) and (editor.ui is self):
                 prefs = editor.save_prefs()
-                if prefs != None:
+                if prefs is not None:
                     ui_prefs[name] = prefs
 
         return ui_prefs

@@ -526,7 +526,7 @@ class MethodNode(MultiValueTreeNodeObject):
     def tno_has_children(self, node):
         """ Returns whether the object has children.
         """
-        return (self.value.im_func != None)
+        return (self.value.im_func is not None)
 
     #---------------------------------------------------------------------------
     #  Gets the object's children:
