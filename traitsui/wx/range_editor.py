@@ -813,7 +813,8 @@ class SimpleSpinEditor(BaseRangeEditor):
         """
         self._locked = True
         try:
-            self.value = self.control.GetValue()
+            if self.control:
+                self.value = self.control.GetValue()
         finally:
             self._locked = False
 
