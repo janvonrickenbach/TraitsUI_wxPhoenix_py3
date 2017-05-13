@@ -521,7 +521,8 @@ class ListEditor(BaseEditor):
             wx.Size(-1, -1),
             self.names,
             style=wx.LB_SINGLE | wx.LB_NEEDED_SB)
-        wx.EVT_LISTBOX(parent, self.control.GetId(), self.update_object)
+        #wx.EVT_LISTBOX(parent, self.control.GetId(), self.update_object)
+        self.control.Bind(wx.EVT_LISTBOX, self.update_object)
         self.set_tooltip()
 
     def dispose(self):
