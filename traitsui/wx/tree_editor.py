@@ -1568,7 +1568,7 @@ class SimpleEditor(Editor):
         return (can_cut and self._menu_node.can_delete_me(object))
 
     def _is_pasteable(self, object):
-        from pyface.wx.clipboard import clipboard
+        from pyface.api import clipboard
 
         return self._menu_node.can_add(object, clipboard.object_type)
 
@@ -1823,7 +1823,7 @@ class SimpleEditor(Editor):
     def _menu_copy_node(self):
         """ Copies the current tree node object to the paste buffer.
         """
-        from pyface.wx.clipboard import clipboard
+        from pyface.api import clipboard
 
         clipboard.data = self._data[1]
         self._data = None
@@ -1835,7 +1835,7 @@ class SimpleEditor(Editor):
     def _menu_cut_node(self):
         """  Cuts the current tree node object into the paste buffer.
         """
-        from pyface.wx.clipboard import clipboard
+        from pyface.api import clipboard
 
         node, object, nid = self._data
         clipboard.data = object
@@ -1850,7 +1850,7 @@ class SimpleEditor(Editor):
         """ Pastes the current contents of the paste buffer into the current
             node.
         """
-        from pyface.wx.clipboard import clipboard
+        from pyface.api import clipboard
 
         node, object, nid = self._data
         self._data = None
@@ -2001,7 +2001,7 @@ class SimpleEditor(Editor):
         """
         nids = {}
         for name2, nid in self._map[id(object)]:
-            if nid not in nids:
+            if nid not in nids: #unhashable type error here
                 nids[nid] = None
                 node = self._get_node_data(nid)[1]
                 self._tree.SetItemText(nid, node.get_label(object))

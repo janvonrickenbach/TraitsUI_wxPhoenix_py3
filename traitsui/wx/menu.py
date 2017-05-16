@@ -178,7 +178,7 @@ class MakeMenu:
                     except:
 
                         handler = null_handler
-                self.window(wx.EVT_MENU, handler, id=cur_id)
+                self.window.Bind(wx.EVT_MENU, handler, id=cur_id)
                 not_checked = checked = disabled = False
                 line = line[:col]
                 match = options_pat.search(line)

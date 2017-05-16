@@ -786,7 +786,7 @@ class _ListStrEditor(Editor):
             index = selected[0]
             if index < self.item_count:
                 try:
-                    from pyface.wx.clipboard import clipboard
+                    from pyface.api import clipboard
 
                     clipboard.data = self.adapter.get_text(self.object,
                                                            self.name, index)
@@ -806,7 +806,7 @@ class _ListStrEditor(Editor):
                 index = selected[0]
                 if index < self.item_count:
                     try:
-                        from pyface.wx.clipboard import clipboard
+                        from pyface.api import clipboard
 
                         clipboard.data = self.adapter.get_text(
                             self.object, self.name, index)
@@ -825,7 +825,7 @@ class _ListStrEditor(Editor):
             selected = self._get_selected()
             if len(selected) == 1:
                 try:
-                    from pyface.wx.clipboard import clipboard
+                    from pyface.api import clipboard
 
                     self._set_text_current(
                         selected[0], clipboard.text_data, insert=True)
