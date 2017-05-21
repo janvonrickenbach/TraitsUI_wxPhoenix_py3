@@ -159,26 +159,27 @@ class MakeMenu:
             # Check for a menu item:
             col = line.find(':')
             if col >= 0:
-                handler = line[col + 1:].strip()
+                handler = line[ col + 1: ].strip()
                 if handler != '':
                     if self.indirect:
-                        self.indirect(cur_id, handler)
+                        self.indirect( cur_id, handler )
                         handler = self.indirect
                     else:
                         try:
-                            exec('def handler(event,self=self.owner):\n %s\n' %
-                                 handler)
+                            d=locals()
+                            exec('def handler(event,self=self.owner):\n    '
+                                  +handler+"\n", globals() , d)
+                            handler=d['handler']
                         except:
                             handler = null_handler
                 else:
                     try:
-
-                        exec('def handler(event,self=self.owner):\n%s\n' %
-                             (self.get_body(indented), ) in globals())
+                        d=locals()
+                        exec('def handler(event,self=self.owner):\n%s\n' % (
+                            self.get_body( indented )), globals(), d)
+                        handler=d['handler']
                     except:
-
                         handler = null_handler
-                self.window.Bind(wx.EVT_MENU, handler, id=cur_id)
                 not_checked = checked = disabled = False
                 line = line[:col]
                 match = options_pat.search(line)
