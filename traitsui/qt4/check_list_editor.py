@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various editors for multi-selection enumerations, for the PyQt
 user interface toolkit.
 """
@@ -17,7 +18,7 @@ user interface toolkit.
 #  Imports:
 #-------------------------------------------------------------------------
 
-from __future__ import division
+
 
 import logging
 
@@ -32,21 +33,22 @@ from traits.api \
 from traitsui.editors.check_list_editor \
     import ToolkitEditorFactory
 
-from editor_factory \
+from .editor_factory \
     import TextEditor as BaseTextEditor
 
-from editor \
+from .editor \
     import EditorWithList
 
 logger = logging.getLogger(__name__)
 
+
 # default formatting function (would import from string, but not in Python 3)
 capitalize = lambda s: s.capitalize()
+
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------
-
 
 class SimpleEditor(EditorWithList):
     """ Simple style of editor for checklists, which displays a combo box.
@@ -92,7 +94,7 @@ class SimpleEditor(EditorWithList):
         """ Handles updates to the list of legal checklist values.
         """
         sv = self.string_value
-        if (len(values) > 0) and isinstance(values[0], basestring):
+        if (len(values) > 0) and isinstance(values[0], str):
             values = [(x, sv(x, capitalize)) for x in values]
         self.values = valid_values = [x[0] for x in values]
         self.names = [x[1] for x in values]
@@ -109,7 +111,7 @@ class SimpleEditor(EditorWithList):
                     logger.warn('Unable to remove non-current value [%s] from '
                                 'values %s', cur_value[i], values)
         if modified:
-            if isinstance(self.value, basestring):
+            if isinstance(self.value, str):
                 cur_value = ','.join(cur_value)
             self.value = cur_value
 
@@ -135,8 +137,8 @@ class SimpleEditor(EditorWithList):
     def update_object(self, text):
         """ Handles the user selecting a new value from the combo box.
         """
-        value = self.values[self.names.index(unicode(text))]
-        if not isinstance(self.value, basestring):
+        value = self.values[self.names.index(str(text))]
+        if not isinstance(self.value, str):
             value = [value]
         self.value = value
 
@@ -153,7 +155,6 @@ class SimpleEditor(EditorWithList):
                 self.values.index(parse_value(self.value)[0]))
         except:
             pass
-
 
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
@@ -239,7 +240,7 @@ class CustomEditor(SimpleEditor):
         elif cb.value in cur_value:
             cur_value.remove(cb.value)
 
-        if isinstance(self.value, basestring):
+        if isinstance(self.value, str):
             cur_value = ','.join(cur_value)
 
         self.value = cur_value
@@ -259,7 +260,6 @@ class CustomEditor(SimpleEditor):
             else:
                 cb.setCheckState(QtCore.Qt.Unchecked)
 
-
 #-------------------------------------------------------------------------
 #  'TextEditor' class:
 #-------------------------------------------------------------------------
@@ -277,7 +277,7 @@ class TextEditor(BaseTextEditor):
         """ Handles the user changing the contents of the edit control.
         """
         try:
-            value = unicode(self.control.text())
+            value = str(self.control.text())
             value = eval(value)
         except:
             pass
@@ -285,7 +285,6 @@ class TextEditor(BaseTextEditor):
             self.value = value
         except TraitError as excp:
             pass
-
 
 #-------------------------------------------------------------------------
 #  Parse a value into a list:
@@ -297,6 +296,6 @@ def parse_value(value):
     """
     if value is None:
         return []
-    if not isinstance(value, basestring):
+    if not isinstance(value, str):
         return value[:]
     return [x.strip() for x in value.split(',')]

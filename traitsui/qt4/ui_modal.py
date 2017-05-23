@@ -9,24 +9,26 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """Creates a PyQt user interface for a specified UI object.
 """
+
 
 from pyface.qt import QtCore, QtGui
 
 from traitsui.menu \
     import ApplyButton, RevertButton, OKButton, CancelButton, HelpButton
 
-from ui_base \
+from .ui_base \
     import BaseDialog
 
-from ui_panel \
+from .ui_panel \
     import panel
+
 
 #-------------------------------------------------------------------------
 #  Create the different modal PyQt user interfaces.
 #-------------------------------------------------------------------------
-
 
 def ui_modal(ui, parent):
     """Creates a modal PyQt user interface for a specified UI object.
@@ -116,8 +118,8 @@ class _ModalDialog(BaseDialog):
                         self._on_apply,
                         enabled=apply,
                         default=default)
-                    ui.on_trait_change(
-                        self._on_applyable, 'modified', dispatch='ui')
+                    ui.on_trait_change(self._on_applyable, 'modified',
+                                       dispatch='ui')
 
                 elif self.is_button(button, 'Revert'):
                     self.revert = self.add_button(
@@ -138,12 +140,9 @@ class _ModalDialog(BaseDialog):
                     ui.on_trait_change(self._on_error, 'errors', dispatch='ui')
 
                 elif self.is_button(button, 'Cancel'):
-                    self.add_button(
-                        button,
-                        bbox,
-                        QtGui.QDialogButtonBox.RejectRole,
-                        self.control.reject,
-                        default=default)
+                    self.add_button(button, bbox,
+                                    QtGui.QDialogButtonBox.RejectRole,
+                                    self.control.reject, default=default)
 
                 elif self.is_button(button, 'Help'):
                     self.add_button(
@@ -176,7 +175,7 @@ class _ModalDialog(BaseDialog):
         """Creates a copy of a *context* dictionary.
         """
         result = {}
-        for name, value in context.items():
+        for name, value in list(context.items()):
             if value is not None:
                 result[name] = value.clone_traits()
             else:
@@ -187,7 +186,7 @@ class _ModalDialog(BaseDialog):
     def _apply_context(self, from_context, to_context):
         """Applies the traits in the *from_context* to the *to_context*.
         """
-        for name, value in from_context.items():
+        for name, value in list(from_context.items()):
             if value is not None:
                 to_context[name].copy_traits(value)
             else:

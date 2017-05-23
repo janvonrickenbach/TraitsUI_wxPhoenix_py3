@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the base PyQt classes the various styles of editors used in a
 Traits-based user interface.
 """
@@ -25,7 +26,7 @@ from traits.api \
 from traitsui.editor_factory \
     import EditorFactory as BaseEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
 #-------------------------------------------------------------------------
@@ -43,7 +44,6 @@ class EditorFactory(BaseEditorFactory):
         warnings.warn("DEPRECATED: Use traitsui.editor_factory."
                       ".EditorFactory instead.", DeprecationWarning)
 
-
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------
@@ -55,7 +55,6 @@ class SimpleEditor(Editor):
     the text field displays an editor-specific dialog box for changing the
     value.
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
@@ -79,7 +78,6 @@ class SimpleEditor(Editor):
         """
         pass
 
-
 #-------------------------------------------------------------------------
 #  'TextEditor' class:
 #-------------------------------------------------------------------------
@@ -89,7 +87,6 @@ class TextEditor(Editor):
     """ Base class for text style editors, which displays an editable text
     field, containing a text representation of the object trait value.
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
@@ -111,10 +108,9 @@ class TextEditor(Editor):
         """ Handles the user changing the contents of the edit control.
         """
         try:
-            self.value = unicode(self.control.text())
+            self.value = str(self.control.text())
         except TraitError as excp:
             pass
-
 
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
@@ -176,13 +172,13 @@ class ReadonlyEditor(Editor):
         """
         self.control.setText(self.str_value)
 
-
 #-------------------------------------------------------------------------
 #  '_SimpleField' class:
 #-------------------------------------------------------------------------
 
 
 class _SimpleField(QtGui.QLineEdit):
+
     def __init__(self, editor):
         QtGui.QLineEdit.__init__(self, editor.str_value)
 

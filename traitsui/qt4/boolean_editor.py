@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various Boolean editors for the PyQt user interface toolkit.
 """
 
@@ -24,16 +25,16 @@ from pyface.qt import QtCore, QtGui
 from traitsui.editors.boolean_editor \
     import ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
 # This needs to be imported in here for use by the editor factory for boolean
 # editors (declared in traitsui). The editor factory's text_editor
 # method will use the TextEditor in the ui.
-from text_editor \
+from .text_editor \
     import SimpleEditor as TextEditor
 
-from constants \
+from .constants \
     import ReadonlyColor
 
 #-------------------------------------------------------------------------
@@ -44,7 +45,6 @@ from constants \
 class SimpleEditor(Editor):
     """ Simple style of editor for Boolean values, which displays a check box.
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
@@ -80,7 +80,6 @@ class SimpleEditor(Editor):
         else:
             self.control.setCheckState(QtCore.Qt.Unchecked)
 
-
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------
@@ -90,7 +89,6 @@ class ReadonlyEditor(Editor):
     """ Read-only style of editor for Boolean values, which displays static text
     of either "True" or "False".
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

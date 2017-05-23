@@ -118,12 +118,8 @@ def toolkit_object(name, raise_exceptions=False):
         #    be_mname, globals=globals(), fromlist=[oname], level=1
         #)
         import importlib
-        module = importlib.import_module(be_mname)
-        module = importlib.import_module("." + mname, "traitsui.wx")
-        #module=importlib.import_module(be_mname)
-        #ldict = locals()
-        #exec(be_mname,globals(),ldict)
-        #module = ldict['module']
+        module=importlib.import_module("."+mname,be_mname)
+
         try:
             be_obj = getattr(module, oname)
         except AttributeError as e:

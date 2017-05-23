@@ -14,6 +14,7 @@
 #  Date:   08/05/2009
 #
 #-------------------------------------------------------------------------
+
 """ Traits UI editor for editing lists of strings.
 """
 
@@ -29,8 +30,8 @@ from traits.api import Any, Bool, Event, Int, Instance, List, \
     Property, Str, TraitListEvent, NO_COMPARE
 from traitsui.list_str_adapter import ListStrAdapter
 
-from editor import Editor
-from list_str_model import ListStrModel
+from .editor import Editor
+from .list_str_model import ListStrModel
 from traitsui.menu import Menu
 
 #-------------------------------------------------------------------------
@@ -143,13 +144,10 @@ class _ListStrEditor(Editor):
 
         # Set up the selection listener
         if factory.multi_select:
-            self.sync_value(
-                factory.selected, 'multi_selected', 'both', is_list=True)
-            self.sync_value(
-                factory.selected_index,
-                'multi_selected_indices',
-                'both',
-                is_list=True)
+            self.sync_value(factory.selected, 'multi_selected', 'both',
+                            is_list=True)
+            self.sync_value(factory.selected_index, 'multi_selected_indices',
+                            'both', is_list=True)
         else:
             self.sync_value(factory.selected, 'selected', 'both')
             self.sync_value(factory.selected_index, 'selected_index', 'both')
@@ -159,8 +157,10 @@ class _ListStrEditor(Editor):
         self.sync_value(factory.activated_index, 'activated_index', 'to')
 
         self.sync_value(factory.right_clicked, 'right_clicked', 'to')
-        self.sync_value(factory.right_clicked_index, 'right_clicked_index',
-                        'to')
+        self.sync_value(
+            factory.right_clicked_index,
+            'right_clicked_index',
+            'to')
 
         # Make sure we listen for 'items' changes as well as complete list
         # replacements:
@@ -194,7 +194,8 @@ class _ListStrEditor(Editor):
             editor.
         """
         if not self._no_update:
-            self.model.reset()
+            self.model.beginResetModel()
+            self.model.endResetModel()
             # restore selection back
             if self.factory.multi_select:
                 self._multi_selected_changed(self.multi_selected)
@@ -226,7 +227,7 @@ class _ListStrEditor(Editor):
         old = self._no_notify
         self._no_notify = True
         try:
-            for name, value in keywords.items():
+            for name, value in list(keywords.items()):
                 setattr(self, name, value)
         finally:
             self._no_notify = old
@@ -326,9 +327,8 @@ class _ListStrEditor(Editor):
             smodel = self.list_view.selectionModel()
             smodel.clearSelection()
             for selected_index in selected_indices:
-                smodel.select(
-                    self.model.index(selected_index),
-                    QtGui.QItemSelectionModel.Select)
+                smodel.select(self.model.index(selected_index),
+                              QtGui.QItemSelectionModel.Select)
             if selected_indices:
                 self.list_view.scrollTo(self.model.index(selected_indices[-1]))
 
@@ -338,13 +338,11 @@ class _ListStrEditor(Editor):
         if not self._no_update:
             smodel = self.list_view.selectionModel()
             for selected_index in event.removed:
-                smodel.select(
-                    self.model.index(selected_index),
-                    QtGui.QItemSelectionModel.Deselect)
+                smodel.select(self.model.index(selected_index),
+                              QtGui.QItemSelectionModel.Deselect)
             for selected_index in event.added:
-                smodel.select(
-                    self.model.index(selected_index),
-                    QtGui.QItemSelectionModel.Select)
+                smodel.select(self.model.index(selected_index),
+                              QtGui.QItemSelectionModel.Select)
 
     #-- List Control Event Handlers ------------------------------------------
 
@@ -360,8 +358,8 @@ class _ListStrEditor(Editor):
         mi = self.list_view.indexAt(point)
         if mi.isValid():
             self.right_clicked_index = index = mi.row()
-            self.right_clicked = self.adapter.get_item(self.object, self.name,
-                                                       index)
+            self.right_clicked = self.adapter.get_item(
+                self.object, self.name, index)
 
     def _on_row_selection(self, added, removed):
         """ Handle the row selection being changed.
@@ -386,10 +384,9 @@ class _ListStrEditor(Editor):
         try:
             indices = self.list_view.selectionModel().selectedRows()
             self.multi_selected_indices = indices = [i.row() for i in indices]
-            self.multi_selected = [
-                self.adapter.get_item(self.object, self.name, i)
-                for i in self.multi_selected_indices
-            ]
+            self.multi_selected = [self.adapter.get_item(self.object,
+                                                         self.name, i)
+                                   for i in self.multi_selected_indices]
         finally:
             self._no_update = False
 
@@ -407,19 +404,16 @@ class _ListStrEditor(Editor):
         if menu is not None:
             qmenu = menu.create_menu(self.list_view, self)
 
-            self._menu_context = {
-                'selection': self.object,
-                'object': self.object,
-                'editor': self,
-                'index': index,
-                'info': self.ui.info,
-                'handler': self.ui.handler
-            }
+            self._menu_context = {'selection': self.object,
+                                  'object': self.object,
+                                  'editor': self,
+                                  'index': index,
+                                  'info': self.ui.info,
+                                  'handler': self.ui.handler}
 
             qmenu.exec_(self.list_view.mapToGlobal(pos))
 
             self._menu_context = None
-
 
 #-------------------------------------------------------------------------
 #  Qt widgets that have been configured to behave as expected by Traits UI:
@@ -444,8 +438,9 @@ class _ItemDelegate(QtGui.QStyledItemDelegate):
         if self._editor.factory.horizontal_lines:
             painter.save()
             painter.setPen(option.palette.color(QtGui.QPalette.Dark))
-            painter.drawLine(option.rect.bottomLeft(),
-                             option.rect.bottomRight())
+            painter.drawLine(
+                option.rect.bottomLeft(),
+                option.rect.bottomRight())
             painter.restore()
 
 
@@ -495,7 +490,7 @@ class _ListView(QtGui.QListView):
         # Note that setting 'EditKeyPressed' as an edit trigger does not work on
         # most platforms, which is why we do this here.
         if (event.key() in (QtCore.Qt.Key_Enter, QtCore.Qt.Key_Return) and
-                self.state() != QtGui.QAbstractItemView.EditingState and
+            self.state() != QtGui.QAbstractItemView.EditingState and
                 factory.editable and 'edit' in factory.operations):
             if factory.multi_select:
                 indices = editor.multi_selected_indices
@@ -507,8 +502,7 @@ class _ListView(QtGui.QListView):
                 event.accept()
                 self.edit(editor.model.index(row))
 
-        elif (event.key() in
-              (QtCore.Qt.Key_Backspace, QtCore.Qt.Key_Delete) and
+        elif (event.key() in (QtCore.Qt.Key_Backspace, QtCore.Qt.Key_Delete) and
               factory.editable and 'delete' in factory.operations):
             event.accept()
 
@@ -529,8 +523,8 @@ class _ListView(QtGui.QListView):
                 editor.selected_index = min(
                     row, editor.adapter.len(editor.object, editor.name) - 1)
 
-        elif (event.key() == QtCore.Qt.Key_Insert and factory.editable and
-              'insert' in factory.operations):
+        elif (event.key() == QtCore.Qt.Key_Insert and
+              factory.editable and 'insert' in factory.operations):
             event.accept()
 
             if factory.multi_select:

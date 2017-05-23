@@ -14,6 +14,7 @@
 #  Date:   07/26/2006
 #
 #-------------------------------------------------------------------------
+
 """ Defines a completely empty editor, intended to be used as a spacer.
 """
 
@@ -29,7 +30,7 @@ from pyface.qt import QtGui
 from traitsui.editors.null_editor \
     import NullEditor as ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
 #-------------------------------------------------------------------------
@@ -40,7 +41,6 @@ from editor \
 class NullEditor(Editor):
     """ A completely empty editor.
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

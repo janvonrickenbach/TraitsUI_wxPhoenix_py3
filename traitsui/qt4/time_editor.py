@@ -14,6 +14,7 @@
 #  Date:   08/04/2009
 #
 #------------------------------------------------------------------------------
+
 """ A Traits UI editor for datetime.time objects.
 """
 
@@ -25,8 +26,8 @@ import datetime
 
 from pyface.qt import QtCore, QtGui
 
-from editor import Editor
-from editor_factory import ReadonlyEditor as BaseReadonlyEditor
+from .editor import Editor
+from .editor_factory import ReadonlyEditor as BaseReadonlyEditor
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -76,9 +77,8 @@ class SimpleEditor(Editor):
         try:
             self.value = datetime.time(hour, minute, second)
         except ValueError:
-            print 'Invalid time:', hour, minute, second
+            print('Invalid time:', hour, minute, second)
             raise
-
 
 #------------------------------------------------------------------------------
 # 'ReadonlyEditor' class:

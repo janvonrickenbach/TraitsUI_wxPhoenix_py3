@@ -11,6 +11,7 @@
 #  Thanks for using Enthought open source!
 #
 #------------------------------------------------------------------------------
+
 """ Defines the HTML "editor" for the QT4 user interface toolkit.
     HTML editors interpret and display HTML-formatted text, but do not
     modify it.
@@ -26,7 +27,7 @@ from pyface.qt import QtCore, QtGui, QtWebKit
 
 from traits.api import Str
 
-from editor import Editor
+from .editor import Editor
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -94,6 +95,5 @@ class SimpleEditor(Editor):
 
     def _link_clicked(self, url):
         webbrowser.open_new(url.toString())
-
 
 #-EOF--------------------------------------------------------------------------

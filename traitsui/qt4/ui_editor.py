@@ -11,6 +11,7 @@
 #  Thanks for using Enthought open source!
 #
 #------------------------------------------------------------------------------
+
 """ Defines the BasicUIEditor class, which allows creating editors that define
     their function by creating an embedded Traits UI.
 """
@@ -21,7 +22,7 @@
 
 from traitsui.ui_editor import UIEditor as BaseUIEditor
 
-from editor import Editor
+from .editor import Editor
 
 #-------------------------------------------------------------------------
 #  'UIEditor' base class:

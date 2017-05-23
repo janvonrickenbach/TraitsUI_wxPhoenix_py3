@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various text editors for the PyQt user interface toolkit.
 """
 
@@ -27,13 +28,13 @@ from traits.api \
 from traitsui.editors.text_editor \
     import evaluate_trait, ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
-from editor_factory \
+from .editor_factory \
     import ReadonlyEditor as BaseReadonlyEditor
 
-from constants \
+from .constants \
     import OKColor
 
 #-------------------------------------------------------------------------
@@ -164,7 +165,7 @@ class SimpleEditor(Editor):
         except AttributeError:
             value = self.control.toPlainText()
 
-        value = unicode(value)
+        value = str(value)
 
         try:
             value = self.evaluate(value)
@@ -201,7 +202,6 @@ class SimpleEditor(Editor):
         """
         return (self.invalid or self._error)
 
-
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -214,7 +214,6 @@ class CustomEditor(SimpleEditor):
     # FIXME: The wx version exposes a wx constant.
     # Flag for window style. This value overrides the default.
     base_style = QtGui.QTextEdit
-
 
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:

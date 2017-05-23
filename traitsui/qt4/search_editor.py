@@ -16,7 +16,7 @@
 from pyface.qt import QtCore, QtGui
 
 # ETS imports
-from editor import Editor
+from .editor import Editor
 
 
 class SearchWidget(QtGui.QLineEdit):
@@ -28,7 +28,7 @@ class SearchWidget(QtGui.QLineEdit):
         """ Store the descriptive text for the widget.
         """
         super(SearchWidget, self).__init__()
-        self._desc = unicode(desc)
+        self._desc = str(desc)
         self._set_descriptive_text()
 
     def focusInEvent(self, event):
@@ -69,6 +69,7 @@ class SearchWidget(QtGui.QLineEdit):
 
 
 class SearchEditor(Editor):
+
     def init(self, parent):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.

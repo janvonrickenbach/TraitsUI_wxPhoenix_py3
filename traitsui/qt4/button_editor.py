@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various button editors for the PyQt user interface toolkit.
 """
 
@@ -26,7 +27,7 @@ from traits.api import Unicode, List, Str, on_trait_change
 from traitsui.editors.button_editor \
     import ToolkitEditorFactory
 
-from editor import Editor
+from .editor import Editor
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -65,10 +66,11 @@ class SimpleEditor(Editor):
             self.control = QtGui.QToolButton()
             self.control.toolButtonStyle = QtCore.Qt.ToolButtonTextOnly
             self.control.setText(self.string_value(label))
-            self.object.on_trait_change(self._update_menu,
-                                        self.factory.values_trait)
-            self.object.on_trait_change(self._update_menu,
-                                        self.factory.values_trait + "_items")
+            self.object.on_trait_change(
+                self._update_menu, self.factory.values_trait)
+            self.object.on_trait_change(
+                self._update_menu,
+                self.factory.values_trait + "_items")
             self._menu = QtGui.QMenu()
             self._update_menu()
             self.control.setMenu(self._menu)
@@ -110,15 +112,14 @@ class SimpleEditor(Editor):
 
         # If there is an associated view, then display it:
         if (self.factory is not None) and (self.factory.view is not None):
-            self.object.edit_traits(
-                view=self.factory.view, parent=self.control)
+            self.object.edit_traits(view=self.factory.view,
+                                    parent=self.control)
 
     def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
             editor.
         """
         pass
-
 
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:

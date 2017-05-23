@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines a subclass of the base PyQt color editor factory, for colors
 that are represented as tuples of the form ( *red*, *green*, *blue* ), where
 *red*, *green* and *blue* are floats in the range from 0.0 to 1.0.
@@ -27,7 +28,7 @@ from traits.trait_base \
 # subclass of the abstract ToolkitEditorFactory class
 # (in traitsui.api) with qt4-specific methods defined.
 # We need to override the implementations of the qt4-specific methods here.
-from color_editor \
+from .color_editor \
     import ToolkitEditorFactory as BaseColorToolkitEditorFactory
 
 #-------------------------------------------------------------------------

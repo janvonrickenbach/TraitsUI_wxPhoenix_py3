@@ -9,10 +9,11 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various color editors for the PyQt user interface toolkit.
 """
 
-from __future__ import division
+
 
 #-------------------------------------------------------------------------
 #  Imports:
@@ -23,12 +24,12 @@ from pyface.qt import QtCore, QtGui
 from traitsui.editors.color_editor \
     import ToolkitEditorFactory as BaseToolkitEditorFactory
 
-from editor_factory \
+from .editor_factory \
     import SimpleEditor as BaseSimpleEditor, \
     TextEditor as BaseTextEditor, \
     ReadonlyEditor as BaseReadonlyEditor
 
-from editor \
+from .editor \
     import Editor
 
 #-------------------------------------------------------------------------
@@ -83,14 +84,13 @@ class ToolkitEditorFactory(BaseToolkitEditorFactory):
         if isinstance(color, QtGui.QColor):
             alpha = color.alpha()
             if alpha == 255:
-                return "(%d,%d,%d)" % (color.red(), color.green(),
-                                       color.blue())
+                return "(%d,%d,%d)" % (
+                    color.red(), color.green(), color.blue())
 
-            return "(%d,%d,%d,%d)" % (color.red(), color.green(), color.blue(),
-                                      alpha)
+            return "(%d,%d,%d,%d)" % (
+                color.red(), color.green(), color.blue(), alpha)
 
         return color
-
 
 #-------------------------------------------------------------------------
 #  'SimpleColorEditor' class:
@@ -117,8 +117,9 @@ class SimpleColorEditor(BaseSimpleEditor):
         color = QtGui.QColorDialog.getColor(
             color,
             self.control,
-            u'Select Color',
-            options, )
+            'Select Color',
+            options,
+        )
 
         if color.isValid():
             self.value = self.factory.from_qt4_color(color)
@@ -143,7 +144,6 @@ class SimpleColorEditor(BaseSimpleEditor):
         """ Returns the text representation of a specified color value.
         """
         return self.factory.str_color(color)
-
 
 #-------------------------------------------------------------------------
 #  'CustomColorEditor' class:
@@ -194,7 +194,7 @@ class CustomColorEditor(Editor):
     def update_object_from_swatch(self, color_text):
         """ Updates the object trait when a color swatch is clicked.
         """
-        color = QtGui.QColor(* [int(part) for part in color_text.split(',')])
+        color = QtGui.QColor(*[int(part) for part in color_text.split(',')])
         self.value = self.factory.from_qt4_color(color)
         self.update_editor()
 
@@ -206,7 +206,6 @@ class CustomColorEditor(Editor):
         """ Returns the text representation of a specified color value.
         """
         return self.factory.str_color(color)
-
 
 #-------------------------------------------------------------------------
 #  'TextColorEditor' class:
@@ -225,7 +224,7 @@ class TextColorEditor(BaseTextEditor):
     def update_object(self):
         """ Handles the user changing the contents of the edit control.
         """
-        self.value = unicode(self.control.text())
+        self.value = str(self.control.text())
         set_color(self)
 
     #-------------------------------------------------------------------------
@@ -247,7 +246,6 @@ class TextColorEditor(BaseTextEditor):
         """ Returns the text representation of a specified color value.
         """
         return self.factory.str_color(color)
-
 
 #-------------------------------------------------------------------------
 #  'ReadonlyColorEditor' class:
@@ -291,7 +289,6 @@ class ReadonlyColorEditor(BaseReadonlyEditor):
         """
         return self.factory.str_color(color)
 
-
 #-------------------------------------------------------------------------
 #   Sets the color of the specified editor's color control:
 #-------------------------------------------------------------------------
@@ -311,7 +308,6 @@ def set_color(editor):
         pal.setColor(QtGui.QPalette.Text, QtCore.Qt.white)
 
     editor.control.setPalette(pal)
-
 
 #----------------------------------------------------------------------------
 #  Creates a custom color editor panel for a specified editor:
@@ -384,7 +380,7 @@ def color_editor_for(editor, parent):
 
             i += 1
 
-    mapper.mapped[unicode].connect(editor.update_object_from_swatch)
+    mapper.mapped[str].connect(editor.update_object_from_swatch)
 
     panel.addLayout(grid)
 

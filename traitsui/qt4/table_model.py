@@ -8,6 +8,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the table model used by the table editor.
 """
 
@@ -51,7 +52,6 @@ def as_qcolor(color):
     else:
         return QtGui.QColor(color)
 
-
 #-------------------------------------------------------------------------
 #  'TableModel' class:
 #-------------------------------------------------------------------------
@@ -74,7 +74,7 @@ class TableModel(QtCore.QAbstractTableModel):
     def rowCount(self, mi):
         """Reimplemented to return the number of rows."""
 
-        return len(self._editor.items())
+        return len(list(self._editor.items()))
 
     def columnCount(self, mi):
         """Reimplemented to return the number of columns."""
@@ -84,7 +84,7 @@ class TableModel(QtCore.QAbstractTableModel):
     def data(self, mi, role):
         """Reimplemented to return the data."""
 
-        obj = self._editor.items()[mi.row()]
+        obj = list(self._editor.items())[mi.row()]
         column = self._editor.columns[mi.column()]
 
         if role == QtCore.Qt.DisplayRole or role == QtCore.Qt.EditRole:
@@ -156,7 +156,7 @@ class TableModel(QtCore.QAbstractTableModel):
         flags = QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled | \
             QtCore.Qt.ItemIsDragEnabled
 
-        obj = editor.items()[mi.row()]
+        obj = list(editor.items())[mi.row()]
         column = editor.columns[mi.column()]
 
         if editor.factory:
@@ -198,7 +198,7 @@ class TableModel(QtCore.QAbstractTableModel):
             obj = editor.create_new_row()
 
         self.beginInsertRows(parent, row, row)
-        editor.callx(editor.items().insert, row, obj)
+        editor.callx(list(editor.items()).insert, row, obj)
         self.endInsertRows()
         return True
 
@@ -206,9 +206,9 @@ class TableModel(QtCore.QAbstractTableModel):
         """Reimplemented to allow creation of new rows."""
 
         editor = self._editor
-        items = editor.items()
+        items = list(editor.items())
         self.beginInsertRows(parent, row, row + count - 1)
-        for i in xrange(count):
+        for i in range(count):
             editor.callx(items.insert, row + i, editor.create_new_row())
         self.endInsertRows()
         return True
@@ -218,9 +218,9 @@ class TableModel(QtCore.QAbstractTableModel):
         and drop."""
 
         editor = self._editor
-        items = editor.items()
+        items = list(editor.items())
         self.beginRemoveRows(parent, row, row + count - 1)
-        for i in xrange(count):
+        for i in range(count):
             editor.callx(items.pop, row + i)
         self.endRemoveRows()
         return True
@@ -239,10 +239,8 @@ class TableModel(QtCore.QAbstractTableModel):
         selection_mode = editor.factory.selection_mode
 
         if selection_mode.startswith("cell"):
-            data = [
-                self._get_cell_drag_value(index.row(), index.column())
-                for index in indexes
-            ]
+            data = [self._get_cell_drag_value(index.row(), index.column())
+                    for index in indexes]
         elif selection_mode.startswith("column"):
             columns = sorted(set(index.column() for index in indexes))
             data = self._get_columns_drag_value(columns)
@@ -270,13 +268,13 @@ class TableModel(QtCore.QAbstractTableModel):
         # this is a drag from a table model?
         data = mime_data.data(mime_type)
         if not data.isNull() and action == QtCore.Qt.MoveAction:
-            id_and_rows = map(int, str(data).split(' '))
+            id_and_rows = list(map(int, str(data).split(' ')))
             table_id = id_and_rows[0]
             # is it from ourself?
             if table_id == id(self):
                 current_rows = id_and_rows[1:]
                 if not parent.isValid():
-                    row = len(self._editor.items()) - 1
+                    row = len(list(self._editor.items())) - 1
                 else:
                     row = parent.row()
 
@@ -291,8 +289,8 @@ class TableModel(QtCore.QAbstractTableModel):
                 row = parent.row()
                 column = parent.column()
 
-            if row != -1 and column != -1:
-                object = editor.items()[row]
+            if row != -1 and column != - 1:
+                object = list(editor.items())[row]
                 column = editor.columns[column]
                 if column.is_droppable(object, data):
                     column.set_value(object, data)
@@ -319,14 +317,14 @@ class TableModel(QtCore.QAbstractTableModel):
         """ Return the model data for the column as a list """
         editor = self._editor
         column_obj = editor.columns[column]
-        return [column_obj.get_value(item) for item in editor.items()]
+        return [column_obj.get_value(item) for item in list(editor.items())]
 
     def _get_rows_drag_value(self, rows):
         """ Returns the value to use when the specified rows are dragged or
             copied and pasted. The parameter *rows* is a list of row indexes.
             Return a list of objects.
         """
-        items = self._editor.items()
+        items = list(self._editor.items())
         return [items[row] for row in rows]
 
     def _get_cell_drag_value(self, row, column):
@@ -334,7 +332,7 @@ class TableModel(QtCore.QAbstractTableModel):
             copied and pasted.
         """
         editor = self._editor
-        item = editor.items()[row]
+        item = list(editor.items())[row]
         drag_value = editor.columns[column].get_drag_value(item)
         return drag_value
 
@@ -362,7 +360,7 @@ class TableModel(QtCore.QAbstractTableModel):
             new_row += 1
 
         # Remove selected rows...
-        items = self._editor.items()
+        items = list(self._editor.items())
         objects = []
         for row in current_rows:
             if row <= new_row:
@@ -376,7 +374,6 @@ class TableModel(QtCore.QAbstractTableModel):
 
         # Update the selection for the new location.
         self._editor.set_selection(objects)
-
 
 #-------------------------------------------------------------------------
 #  'SortFilterTableModel' class:
@@ -417,7 +414,7 @@ class SortFilterTableModel(QtGui.QSortFilterProxyModel):
 
         editor = self._editor
         column = editor.columns[left_mi.column()]
-        items = editor.items()
+        items = list(editor.items())
         left, right = items[left_mi.row()], items[right_mi.row()]
 
         return column.key(left) < column.key(right)
@@ -435,8 +432,7 @@ class SortFilterTableModel(QtGui.QSortFilterProxyModel):
         """Delegate to source model with mapped rows."""
 
         source = self.sourceModel()
-        current_rows = [
-            self.mapToSource(self.index(row, 0)).row() for row in current_rows
-        ]
+        current_rows = [self.mapToSource(self.index(row, 0)).row()
+                        for row in current_rows]
         new_row = self.mapToSource(self.index(new_row, 0)).row()
         source.moveRows(current_rows, new_row)

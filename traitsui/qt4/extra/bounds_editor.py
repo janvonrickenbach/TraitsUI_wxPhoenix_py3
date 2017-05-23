@@ -79,7 +79,7 @@ class _BoundsEditor(Editor):
     def update_low_on_enter(self):
         try:
             try:
-                low = eval(unicode(self._label_lo.text()).strip())
+                low = eval(str(self._label_lo.text()).strip())
                 if self.evaluate is not None:
                     low = self.evaluate(low)
             except Exception as ex:
@@ -101,7 +101,7 @@ class _BoundsEditor(Editor):
     def update_high_on_enter(self):
         try:
             try:
-                high = eval(unicode(self._label_hi.text()).strip())
+                high = eval(str(self._label_hi.text()).strip())
                 if self.evaluate is not None:
                     high = self.evaluate(high)
             except:
@@ -147,8 +147,7 @@ class _BoundsEditor(Editor):
             self.min = self.low
 
     def _step_size(self):
-        slider_delta = self.control.slider.maximum(
-        ) - self.control.slider.minimum()
+        slider_delta = self.control.slider.maximum() - self.control.slider.minimum()
         range_delta = self.max - self.min
 
         return float(range_delta) / slider_delta
@@ -159,8 +158,7 @@ class _BoundsEditor(Editor):
 
     def _convert_to_slider(self, value):
         self._check_max_and_min()
-        return self.control.slider.minimum() + (value - self.min
-                                                ) / self._step_size()
+        return self.control.slider.minimum() + (value - self.min) / self._step_size()
 
     def _low_changed(self, low):
         if self.control is None:

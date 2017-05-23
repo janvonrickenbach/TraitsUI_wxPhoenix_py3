@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines various directory editor for the PyQt user interface toolkit.
 """
 
@@ -24,7 +25,7 @@ from pyface.qt import QtGui
 from traitsui.editors.directory_editor \
     import ToolkitEditorFactory
 
-from file_editor \
+from .file_editor \
     import SimpleEditor as SimpleFileEditor, \
     CustomEditor as CustomFileEditor
 
@@ -52,7 +53,6 @@ class SimpleEditor(SimpleFileEditor):
 
         return dlg
 
-
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -71,4 +71,4 @@ class CustomEditor(CustomFileEditor):
         """ Handles the user changing the contents of the edit control.
         """
         if self._model.isDir(idx):
-            self.value = unicode(self._model.filePath(idx))
+            self.value = str(self._model.filePath(idx))

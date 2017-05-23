@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the concrete implementations of the traits Toolkit interface for
 the PyQt user interface toolkit.
 """
@@ -21,7 +22,7 @@ import pyface.qt
 #  Define the reference to the exported GUIToolkit object:
 #----------------------------------------------------------------------------
 
-import toolkit
+from . import toolkit
 
 # Reference to the GUIToolkit object for PyQt.
 toolkit = toolkit.GUIToolkit()

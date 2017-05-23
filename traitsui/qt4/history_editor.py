@@ -14,6 +14,7 @@
 #  Date:   08/21/2009
 #
 #-------------------------------------------------------------------------
+
 """ Defines a text editor which displays a text field and maintains a history
     of previously entered values.
 """
@@ -24,7 +25,7 @@
 
 from pyface.qt import QtCore, QtGui
 
-from editor import Editor
+from .editor import Editor
 
 #-------------------------------------------------------------------------
 #  '_HistoryEditor' class:
@@ -63,7 +64,7 @@ class _HistoryEditor(Editor):
         """ Handles the user entering input data in the edit control.
         """
         if not self._no_update:
-            self.value = unicode(text)
+            self.value = str(text)
 
     def update_editor(self):
         """ Updates the editor when the object trait changes externally to the
@@ -92,10 +93,8 @@ class _HistoryEditor(Editor):
     def save_prefs(self):
         """ Returns any user preference information associated with the editor.
         """
-        history = [
-            str(self.control.itemText(index))
-            for index in xrange(self.control.count())
-        ]
+        history = [str(self.control.itemText(index))
+                   for index in range(self.control.count())]
 
         # If the view closed successfully, update the history with the current
         # editor value, as long it is different from the current object value:
@@ -116,5 +115,5 @@ class _HistoryEditor(Editor):
         """
         diff = self.control.count() - self.factory.entries
         if diff > 0:
-            for i in xrange(diff):
+            for i in range(diff):
                 self.control.removeItem(self.factory.entries)

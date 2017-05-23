@@ -14,7 +14,7 @@
 #  Imports:
 #-------------------------------------------------------------------------
 
-from __future__ import absolute_import
+
 
 from pyface.qt import QtCore
 
@@ -56,7 +56,6 @@ class SimpleEditor(Editor):
             editor.
         """
         self._control.text = self.str_value
-
 
 CustomEditor = SimpleEditor
 ReadonlyEditor = SimpleEditor

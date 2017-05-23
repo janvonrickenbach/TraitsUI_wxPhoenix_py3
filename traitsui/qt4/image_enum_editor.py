@@ -14,6 +14,7 @@
 #  Date:   08/11/2009
 #
 #------------------------------------------------------------------------------
+
 """ Defines the various image enumeration editors for the PyQt user interface
     toolkit.
 """
@@ -29,11 +30,11 @@ from pyface.qt import QtCore, QtGui
 # traitsui.editors.image_enum_editor file.
 from traitsui.editors.image_enum_editor import ToolkitEditorFactory
 
-from editor import Editor
-from enum_editor import BaseEditor as BaseEnumEditor
-from enum_editor import SimpleEditor as SimpleEnumEditor
-from enum_editor import RadioEditor as CustomEnumEditor
-from helper import pixmap_cache
+from .editor import Editor
+from .enum_editor import BaseEditor as BaseEnumEditor
+from .enum_editor import SimpleEditor as SimpleEnumEditor
+from .enum_editor import RadioEditor as CustomEnumEditor
+from .helper import pixmap_cache
 
 #-------------------------------------------------------------------------
 #  'BaseImageEnumEditor' class:
@@ -52,7 +53,6 @@ class BaseEditor(object):
         factory = self.factory
         name = ''.join((factory.prefix, name, factory.suffix))
         return pixmap_cache(name, factory._image_path)
-
 
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
@@ -86,7 +86,6 @@ class ReadonlyEditor(BaseEditor, BaseEnumEditor):
             editor.
         """
         self.control.setPixmap(self.get_pixmap(self.str_value))
-
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -142,7 +141,6 @@ class SimpleEditor(BaseEditor, SimpleEnumEditor):
         """
         self.control.model().reset()
 
-
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -173,7 +171,6 @@ class CustomEditor(BaseEditor, CustomEnumEditor):
 
         return button
 
-
 #-------------------------------------------------------------------------
 #  Custom Qt objects used in the SimpleEditor:
 #-------------------------------------------------------------------------
@@ -202,7 +199,7 @@ class ImageEnumComboBox(QtGui.QComboBox):
             # Unless we force it, the popup for a combo box will not be wider
             # than the box itself, so we set a high minimum width.
             width = 0
-            for col in xrange(self._editor.factory.cols):
+            for col in range(self._editor.factory.cols):
                 width += view.sizeHintForColumn(col)
             view.setMinimumWidth(width)
         else:
@@ -221,9 +218,8 @@ class ImageEnumComboBox(QtGui.QComboBox):
 
         editor = self._editor
         pixmap = editor.get_pixmap(editor.inverse_mapping[editor.value])
-        arrow = self.style().subControlRect(QtGui.QStyle.CC_ComboBox, option,
-                                            QtGui.QStyle.SC_ComboBoxArrow,
-                                            None)
+        arrow = self.style().subControlRect(QtGui.QStyle.CC_ComboBox,
+                                            option, QtGui.QStyle.SC_ComboBoxArrow, None)
         option.rect.setWidth(option.rect.width() - arrow.width())
         target = QtGui.QStyle.alignedRect(QtCore.Qt.LeftToRight,
                                           QtCore.Qt.AlignCenter,
@@ -246,6 +242,7 @@ class ImageEnumComboBox(QtGui.QComboBox):
 
 
 class ImageEnumTablePopupView(QtGui.QTableView):
+
     def __init__(self, parent):
         """ Configure the appearence of the table view.
         """

@@ -14,6 +14,7 @@
 #  Date:   01/10/2006
 #
 #------------------------------------------------------------------------------
+
 """ Defines array editors for the PyQt user interface toolkit.
 """
 
@@ -26,7 +27,7 @@
 from traitsui.editors.array_editor \
     import SimpleEditor as BaseSimpleEditor, ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
 #-------------------------------------------------------------------------
@@ -42,7 +43,6 @@ class SimpleEditor(BaseSimpleEditor, Editor):
     # PyQt Editor class.
     pass
 
-
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------
@@ -52,6 +52,5 @@ class ReadonlyEditor(SimpleEditor):
 
     # Set the value of the readonly trait.
     readonly = True
-
 
 ### EOF #######################################################################

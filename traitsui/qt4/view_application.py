@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Creates a PyQt specific modal dialog user interface that runs as a
 complete application, using information from the specified UI object.
 """
@@ -27,6 +28,7 @@ from pyface.qt import QtGui
 from pyface.util.guisupport import is_event_loop_running_qt4, \
     start_event_loop_qt4
 
+
 KEEP_ALIVE_UIS = set()
 
 
@@ -44,7 +46,6 @@ def on_ui_destroyed(object, name, old, destroyed):
 #  Creates a 'stand-alone' PyQt application to display a specified traits UI
 #  View:
 #-------------------------------------------------------------------------
-
 
 def view_application(context, view, kind, handler, id, scrollable, args):
     """ Creates a stand-alone PyQt application to display a specified traits UI
@@ -79,8 +80,8 @@ def view_application(context, view, kind, handler, id, scrollable, args):
 
     app = QtGui.QApplication.instance()
     if app is None or not is_event_loop_running_qt4(app):
-        return ViewApplication(context, view, kind, handler, id, scrollable,
-                               args).ui.result
+        return ViewApplication(context, view, kind, handler, id,
+                               scrollable, args).ui.result
 
     ui = view.ui(context,
                  kind=kind,
@@ -96,7 +97,6 @@ def view_application(context, view, kind, handler, id, scrollable, args):
         ui.on_trait_change(on_ui_destroyed, 'destroyed')
     return ui.result
 
-
 #-------------------------------------------------------------------------
 #  'ViewApplication' class:
 #-------------------------------------------------------------------------
@@ -105,7 +105,6 @@ def view_application(context, view, kind, handler, id, scrollable, args):
 class ViewApplication(object):
     """ Modal window that contains a stand-alone application.
     """
-
     #-------------------------------------------------------------------------
     #  Initializes the object:
     #-------------------------------------------------------------------------

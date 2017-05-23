@@ -9,9 +9,11 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """Defines the base class for the PyQt-based Traits UI modal and non-modal
    dialogs.
 """
+
 
 from pyface.qt import QtCore, QtGui
 
@@ -24,14 +26,15 @@ from traitsui.api \
 from traitsui.menu \
     import Action
 
-from constants \
+from .constants \
     import DefaultTitle
 
-from editor \
+from .editor \
     import Editor
 
-from helper \
+from .helper \
     import restore_window, save_window
+
 
 #-------------------------------------------------------------------------
 #  Constants:
@@ -47,7 +50,6 @@ PerformHandlers = ('object', 'model')
 def default_icon():
     from pyface.image_resource import ImageResource
     return ImageResource('frame.png')
-
 
 #-------------------------------------------------------------------------
 #  'RadioGroup' class:
@@ -83,7 +85,6 @@ class RadioGroup(HasStrictTraits):
             if item is not toolbar_item:
                 item.tool_bar.ToggleTool(item.control_id, False)
                 item.item.action.checked = False
-
 
 #-------------------------------------------------------------------------
 #  'ButtonEditor' class:
@@ -185,7 +186,7 @@ class BasePanel(object):
     def is_button(self, action, name):
         """ Returns whether a specified action button is a system button.
         """
-        if isinstance(action, basestring):
+        if isinstance(action, str):
             return (action == name)
         return (action.name == name)
 
@@ -196,28 +197,22 @@ class BasePanel(object):
     def coerce_button(self, action):
         """ Coerces a string to an Action if necessary.
         """
-        if isinstance(action, basestring):
-            return Action(
-                name=action, action='?' [(not action in SystemButtons):])
+        if isinstance(action, str):
+            return Action(name=action,
+                          action='?'[(not action in SystemButtons):])
         return action
 
     #-------------------------------------------------------------------------
     #  Creates a user specified button:
     #-------------------------------------------------------------------------
 
-    def add_button(self,
-                   action,
-                   bbox,
-                   role,
-                   method=None,
-                   enabled=True,
-                   name=None,
-                   default=False):
+    def add_button(self, action, bbox, role, method=None, enabled=True,
+                   name=None, default=False):
         """ Creates a button.
         """
         ui = self.ui
         if ((action.defined_when != '') and
-            (not ui.eval_when(action.defined_when))):
+                (not ui.eval_when(action.defined_when))):
             return None
 
         if name is None:
@@ -228,7 +223,9 @@ class BasePanel(object):
         button.setDefault(default)
         button.setEnabled(enabled)
         if (method is None) or (action.enabled_when != '') or (id != ''):
-            editor = ButtonEditor(ui=ui, action=action, control=button)
+            editor = ButtonEditor(ui=ui,
+                                  action=action,
+                                  control=button)
             if id != '':
                 ui.info.bind(id, editor)
             if action.visible_when != '':
@@ -299,7 +296,7 @@ class BasePanel(object):
 
         if action.style == 'radio':
             if ((self._last_group is None) or
-                (self._last_parent is not item.parent)):
+                    (self._last_parent is not item.parent)):
                 self._last_group = RadioGroup()
                 self._last_parent = item.parent
             self._last_group.items.append(menu_item)
@@ -434,7 +431,7 @@ class BaseDialog(BasePanel):
     """Base class for Traits UI dialog boxes."""
 
     # The different dialog styles.
-    NONMODAL, MODAL, POPUP = range(3)
+    NONMODAL, MODAL, POPUP = list(range(3))
 
     def init(self, ui, parent, style):
         """Initialise the dialog by creating the controls."""
@@ -596,7 +593,6 @@ class BaseDialog(BasePanel):
     def _set_status_text(self, control):
         """ Helper function for _add_statusbar.
         """
-
         def set_status_text(text):
             control.setText(text)
 

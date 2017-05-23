@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various list editors for the PyQt user interface toolkit.
 """
 
@@ -29,9 +30,9 @@ from traits.trait_base import user_name_for, xgetattr
 from traitsui.editors.list_editor import ListItemProxy, \
     ToolkitEditorFactory
 
-from editor import Editor
-from helper import IconButton
-from menu import MakeMenu
+from .editor import Editor
+from .helper import IconButton
+from .menu import MakeMenu
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -135,7 +136,9 @@ class SimpleEditor(Editor):
         # when setting up the listener.
         extended_name = self.extended_name.replace('.', ':')
         self.context_object.on_trait_change(
-            self.update_editor_item, extended_name + '_items?', dispatch='ui')
+            self.update_editor_item,
+            extended_name + '_items?',
+            dispatch='ui')
         self.set_tooltip()
 
     #-------------------------------------------------------------------------
@@ -149,7 +152,9 @@ class SimpleEditor(Editor):
 
         extended_name = self.extended_name.replace('.', ':')
         self.context_object.on_trait_change(
-            self.update_editor_item, extended_name + '_items?', remove=True)
+            self.update_editor_item,
+            extended_name + '_items?',
+            remove=True)
 
         super(SimpleEditor, self).dispose()
 
@@ -196,7 +201,7 @@ class SimpleEditor(Editor):
                 # sender to the callback method
                 self.mapper.setMapping(control, control)
 
-                layout.addWidget(control, row, column + 1)
+                layout.addWidget(control, row, column+1)
 
             proxy = ListItemProxy(self.object, self.name, index, item_trait,
                                   value)
@@ -386,8 +391,8 @@ class SimpleEditor(Editor):
         """ Moves the current item down one in the list.
         """
         list, index = self.get_info()
-        self.value = (
-            list[:index] + [list[index + 1], list[index]] + list[index + 2:])
+        self.value = (list[:index] + [list[index + 1], list[index]] +
+                      list[index + 2:])
         self.update_editor()
 
     #-------------------------------------------------------------------------
@@ -442,7 +447,6 @@ class SimpleEditor(Editor):
         """
         return self.factory.mutable
 
-
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -469,7 +473,6 @@ class CustomEditor(SimpleEditor):
     # Is the list editor is scrollable? This values overrides the default.
     scrollable = True
 
-
 #-------------------------------------------------------------------------
 #  'TextEditor' class:
 #-------------------------------------------------------------------------
@@ -481,7 +484,6 @@ class TextEditor(CustomEditor):
     # default.
     kind = 'text_editor'
 
-
 #-------------------------------------------------------------------------
 #  'ReadonlyEditor' class:
 #-------------------------------------------------------------------------
@@ -492,7 +494,6 @@ class ReadonlyEditor(CustomEditor):
     # Is the list of items being edited mutable? This value overrides the
     # default.
     mutable = False
-
 
 #-------------------------------------------------------------------------
 #  'NotebookEditor' class:
@@ -539,7 +540,7 @@ class NotebookEditor(Editor):
 
         # Create a tab widget to hold each separate object's view:
         self.control = QtGui.QTabWidget()
-        self.control.currentChanged  #(self._tab_activated)
+        self.control.currentChanged.connect(self._tab_activated)
 
         # minimal dock_style handling
         if self.factory.dock_style == 'tab':
@@ -574,7 +575,9 @@ class NotebookEditor(Editor):
         # when setting up the listener.
         extended_name = self.extended_name.replace('.', ':')
         self.context_object.on_trait_change(
-            self.update_editor_item, extended_name + '_items?', dispatch='ui')
+            self.update_editor_item,
+            extended_name + '_items?',
+            dispatch='ui')
 
         # Set of selection synchronization:
         self.sync_value(self.factory.selected, 'selected')
@@ -615,13 +618,13 @@ class NotebookEditor(Editor):
         for i in event.removed:
             page, ui, view_object, monitoring = self._uis[index]
             if monitoring:
-                view_object.on_trait_change(
-                    self.update_page_name, page_name, remove=True)
+                view_object.on_trait_change(self.update_page_name, page_name,
+                                            remove=True)
             ui.dispose()
             self.control.removeTab(self.control.indexOf(page))
 
             if self.factory.show_notebook_menu:
-                for name, tmp in self._pagewidgets.items():
+                for name, tmp in list(self._pagewidgets.items()):
                     if tmp is page:
                         del self._pagewidgets[name]
                 self._context_menu.removeAction(self._action_dict[name])
@@ -634,8 +637,7 @@ class NotebookEditor(Editor):
         for object in event.added:
             ui, view_object, monitoring = self._create_page(object)
             self._uis[index:index] = [
-                [ui.control, ui, view_object, monitoring]
-            ]
+                [ui.control, ui, view_object, monitoring]]
             index += 1
 
             if first_page is None:
@@ -652,7 +654,7 @@ class NotebookEditor(Editor):
         """ Closes the currently selected tab:
         """
         widget = self.control.currentWidget()
-        for i in xrange(len(self._uis)):
+        for i in range(len(self._uis)):
             page, ui, _, _ = self._uis[i]
             if page is widget:
                 if force or ui.handler.close(ui.info, True):
@@ -662,7 +664,7 @@ class NotebookEditor(Editor):
         if self.factory.show_notebook_menu:
             # Find the name associated with this widget, so we can purge its action
             # from the menu
-            for name, tmp in self._pagewidgets.items():
+            for name, tmp in list(self._pagewidgets.items()):
                 if tmp is widget:
                     break
             else:
@@ -687,8 +689,8 @@ class NotebookEditor(Editor):
 
         for _, ui, view_object, monitoring in self._uis:
             if monitoring:
-                view_object.on_trait_change(
-                    self.update_page_name, page_name, remove=True)
+                view_object.on_trait_change(self.update_page_name, page_name,
+                                            remove=True)
             ui.dispose()
 
         # Reset the list of ui's and dictionary of page name counts:
@@ -704,8 +706,8 @@ class NotebookEditor(Editor):
     def dispose(self):
         """ Disposes of the contents of an editor.
         """
-        self.context_object.on_trait_change(
-            self.update_editor_item, self.name + '_items?', remove=True)
+        self.context_object.on_trait_change(self.update_editor_item,
+                                            self.name + '_items?', remove=True)
         self.close_all()
 
         super(NotebookEditor, self).dispose()
@@ -721,15 +723,20 @@ class NotebookEditor(Editor):
             page, ui, _, _ = value
             if object is ui.info.object:
                 name = None
-                handler = getattr(self.ui.handler, '%s_%s_page_name' %
-                                  (self.object_name, self.name), None)
+                handler = getattr(
+                    self.ui.handler, '%s_%s_page_name' %
+                    (self.object_name, self.name), None)
 
                 if handler is not None:
                     name = handler(self.ui.info, object)
 
                 if name is None:
                     name = str(
-                        xgetattr(object, self.factory.page_name[1:], '???'))
+                        xgetattr(
+                            object,
+                            self.factory.page_name[
+                                1:],
+                            '???'))
                 self.control.setTabText(self.control.indexOf(page), name)
                 break
 
@@ -743,9 +750,10 @@ class NotebookEditor(Editor):
         factory = self.factory
         if factory.factory is not None:
             view_object = factory.factory(object)
-        ui = view_object.edit_traits(
-            parent=self.control, view=factory.view,
-            kind=factory.ui_kind).set(parent=self.ui)
+        ui = view_object.edit_traits(parent=self.control,
+                                     view=factory.view,
+                                     kind=factory.ui_kind).set(
+            parent=self.ui)
 
         # Get the name of the page being added to the notebook:
         name = ''
@@ -764,8 +772,8 @@ class NotebookEditor(Editor):
                     name = handler_name
                 else:
                     name = str(name) or '???'
-                view_object.on_trait_change(
-                    self.update_page_name, page_name[1:], dispatch='ui')
+                view_object.on_trait_change(self.update_page_name,
+                                            page_name[1:], dispatch='ui')
             else:
                 name = ''
         elif page_name != '':

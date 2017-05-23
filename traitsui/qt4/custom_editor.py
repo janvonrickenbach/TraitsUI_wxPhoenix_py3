@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the PyQt implementation of the editor used to wrap a non-Traits
 based custom control.
 """
@@ -25,7 +26,7 @@ from pyface.qt import QtGui
 from traitsui.editors.custom_editor \
     import ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
 #-------------------------------------------------------------------------
@@ -36,7 +37,6 @@ from editor \
 class CustomEditor(Editor):
     """ Wrapper for a custom editor control
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

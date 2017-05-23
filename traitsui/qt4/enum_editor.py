@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various editors and the editor factory for single-selection
     enumerations, for the PyQt user interface toolkit.
 """
@@ -28,23 +29,24 @@ from traits.api \
 from traitsui.editors.enum_editor \
     import ToolkitEditorFactory
 
-from editor \
+from .editor \
     import Editor
 
-from constants \
+from .constants \
     import OKColor, ErrorColor
 
 from traitsui.helper \
     import enum_values_changed
 from functools import reduce
 
+
 # default formatting function (would import from string, but not in Python 3)
 capitalize = lambda s: s.capitalize()
+
 
 #-------------------------------------------------------------------------
 #  'BaseEditor' class:
 #-------------------------------------------------------------------------
-
 
 class BaseEditor(Editor):
     """ Base class for enumeration editors.
@@ -77,11 +79,11 @@ class BaseEditor(Editor):
             self._object, self._name, self._value = \
                 self.parse_extended_name(factory.name)
             self.values_changed()
-            self._object.on_trait_change(
-                self._values_changed, ' ' + self._name, dispatch='ui')
+            self._object.on_trait_change(self._values_changed,
+                                         ' ' + self._name, dispatch='ui')
         else:
-            factory.on_trait_change(
-                self.rebuild_editor, 'values_modified', dispatch='ui')
+            factory.on_trait_change(self.rebuild_editor, 'values_modified',
+                                    dispatch='ui')
 
     #-------------------------------------------------------------------------
     #  Gets the current set of enumeration names:
@@ -158,14 +160,13 @@ class BaseEditor(Editor):
         """ Disposes of the contents of an editor.
         """
         if self._object is not None:
-            self._object.on_trait_change(
-                self._values_changed, ' ' + self._name, remove=True)
+            self._object.on_trait_change(self._values_changed,
+                                         ' ' + self._name, remove=True)
         else:
-            self.factory.on_trait_change(
-                self.rebuild_editor, 'values_modified', remove=True)
+            self.factory.on_trait_change(self.rebuild_editor,
+                                         'values_modified', remove=True)
 
         super(BaseEditor, self).dispose()
-
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -222,11 +223,16 @@ class SimpleEditor(BaseEditor):
     #-------------------------------------------------------------------------
 
     def set_size_policy(self, direction, resizable, springy, stretch):
-        super(SimpleEditor, self).set_size_policy(direction, resizable,
-                                                  springy, stretch)
+        super(
+            SimpleEditor,
+            self).set_size_policy(
+            direction,
+            resizable,
+            springy,
+            stretch)
 
         if ((direction == QtGui.QBoxLayout.LeftToRight and springy) or
-            (direction != QtGui.QBoxLayout.LeftToRight and resizable)):
+                (direction != QtGui.QBoxLayout.LeftToRight and resizable)):
             self.control.setSizeAdjustPolicy(
                 QtGui.QComboBox.AdjustToContentsOnFirstShow)
 
@@ -240,7 +246,7 @@ class SimpleEditor(BaseEditor):
         if self._no_enum_update == 0:
             self._no_enum_update += 1
             try:
-                self.value = self.mapping[unicode(text)]
+                self.value = self.mapping[str(text)]
             except:
                 from traitsui.api import raise_to_debug
                 raise_to_debug()
@@ -254,7 +260,7 @@ class SimpleEditor(BaseEditor):
         """ Handles the user typing text into the combo box text entry field.
         """
         if self._no_enum_update == 0:
-            value = unicode(text)
+            value = str(text)
             try:
                 value = self.mapping[value]
             except:
@@ -332,7 +338,6 @@ class SimpleEditor(BaseEditor):
         self.control.blockSignals(False)
 
         self.update_editor()
-
 
 #-------------------------------------------------------------------------
 #  'RadioEditor' class:
@@ -454,7 +459,6 @@ class RadioEditor(BaseEditor):
         label = self.string_value(name, capitalize)
         return QtGui.QRadioButton(label)
 
-
 #-------------------------------------------------------------------------
 #  'ListEditor' class:
 #-------------------------------------------------------------------------
@@ -464,7 +468,6 @@ class ListEditor(BaseEditor):
     """ Enumeration editor, used for the "custom" style, that displays a list
         box.
     """
-
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:
@@ -489,7 +492,7 @@ class ListEditor(BaseEditor):
     def update_object(self, text):
         """ Handles the user selecting a list box item.
         """
-        value = unicode(text)
+        value = str(text)
         try:
             value = self.mapping[value]
         except:

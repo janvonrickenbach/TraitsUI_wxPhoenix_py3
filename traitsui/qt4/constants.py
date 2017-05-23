@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines constants used by the PyQt implementation of the various text
 editors and text editor factories.
 """

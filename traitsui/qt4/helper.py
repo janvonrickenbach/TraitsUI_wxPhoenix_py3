@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines helper functions and classes used to define PyQt-based trait
     editors and trait editor factories.
 """
@@ -24,6 +25,8 @@ from pyface.ui_traits import convert_image
 from traits.api import Enum, CTrait, BaseTraitHandler, TraitError
 
 from traitsui.ui_traits import SequenceTypes
+
+is_qt5 = QtCore.__version_info__ >= (5,)
 
 #-------------------------------------------------------------------------
 #  Trait definitions:
@@ -58,12 +61,17 @@ def pixmap_cache(name, path=None):
             filename = os.path.join(path, name)
     filename = os.path.abspath(filename)
 
-    pm = QtGui.QPixmap()
-    if not QtGui.QPixmapCache.find(filename, pm):
-        pm.load(filename)
-        QtGui.QPixmapCache.insert(filename, pm)
+    if is_qt5:
+        pm = QtGui.QPixmapCache.find(filename)
+        if pm is None:
+            pm = QtGui.QPixmap(filename)
+            QtGui.QPixmapCache.insert(filename, pm)
+    else:
+        pm = QtGui.QPixmap()
+        if not QtGui.QPixmapCache.find(filename, pm):
+            pm.load(filename)
+            QtGui.QPixmapCache.insert(filename, pm)
     return pm
-
 
 #-------------------------------------------------------------------------
 #  Positions a window on the screen with a specified width and height so that
@@ -118,9 +126,8 @@ def position_window(window, width=None, height=None, parent=None):
     y += cdy + fheight
 
     # Position the window (making sure it will fit on the screen).
-    window.move(
-        max(0, min(x, screen_dx - width)), max(0, min(y, screen_dy - height)))
-
+    window.move(max(0, min(x, screen_dx - width)),
+                max(0, min(y, screen_dy - height)))
 
 #-------------------------------------------------------------------------
 #  Restores the user preference items for a specified UI:
@@ -134,7 +141,6 @@ def restore_window(ui):
     if prefs is not None:
         ui.control.setGeometry(*prefs)
 
-
 #-------------------------------------------------------------------------
 #  Saves the user preference items for a specified UI:
 #-------------------------------------------------------------------------
@@ -145,7 +151,6 @@ def save_window(ui):
     """
     geom = ui.control.geometry()
     ui.save_prefs((geom.x(), geom.y(), geom.width(), geom.height()))
-
 
 #-------------------------------------------------------------------------
 #  Safely tries to pop up an FBI window if etsdevtools.debug is installed
@@ -160,7 +165,6 @@ def open_fbi():
             traceback.print_exc()
     except ImportError:
         pass
-
 
 #-------------------------------------------------------------------------
 #  'IconButton' class:
@@ -184,7 +188,7 @@ class IconButton(QtGui.QPushButton):
         # Get the minimum icon size to use.
         ico_sz = sty.pixelMetric(QtGui.QStyle.PM_ButtonIconSize)
 
-        if isinstance(icon, basestring):
+        if isinstance(icon, str):
             pm = pixmap_cache(icon)
 
             # Increase the icon size to accomodate the image if needed.
@@ -208,7 +212,6 @@ class IconButton(QtGui.QPushButton):
         self.setFocusPolicy(QtCore.Qt.NoFocus)
 
         self.clicked.connect(slot)
-
 
 #-------------------------------------------------------------------------
 #  Dock-related stubs.

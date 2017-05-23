@@ -10,6 +10,7 @@
 #
 # Author: Corran Webster
 #------------------------------------------------------------------------------
+
 """ A renderer which displays a progress bar. """
 
 # System library imports

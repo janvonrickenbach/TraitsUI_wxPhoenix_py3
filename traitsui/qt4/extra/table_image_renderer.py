@@ -11,6 +11,7 @@
 # Author: Evan Patterson
 # Date: 06/25/09
 #------------------------------------------------------------------------------
+
 """ A renderer which will display a cell-specific image in addition to some
     text displayed in the same way the default renderer would.
 """

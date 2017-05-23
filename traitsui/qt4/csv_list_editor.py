@@ -14,6 +14,7 @@
 #  Date:   11 Jan 2012
 #
 #------------------------------------------------------------------------------
+
 """ Defines the various text editors for the Qt user interface toolkit.
     The module is mainly a place-folder for TextEditor factories that have
     been augmented to also listen to changes in the items of the list object.
@@ -45,6 +46,5 @@ class ReadonlyEditor(QtReadonlyEditor):
     """ Readonly Editor style for CSVListEditor. """
     prepare = _prepare_method
     dispose = _dispose_method
-
 
 TextEditor = SimpleEditor

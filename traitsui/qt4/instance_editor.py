@@ -9,6 +9,7 @@
 #
 # Author: Riverbank Computing Limited
 #------------------------------------------------------------------------------
+
 """ Defines the various instance editors and the instance editor factory for
     the PyQt user interface toolkit..
 """
@@ -40,13 +41,13 @@ from traitsui.handler \
 from traitsui.instance_choice \
     import InstanceChoiceItem
 
-from editor \
+from .editor \
     import Editor
 
-from constants \
+from .constants \
     import DropColor
 
-from helper \
+from .helper \
     import position_window
 
 #-------------------------------------------------------------------------
@@ -128,15 +129,15 @@ class CustomEditor(Editor):
             self.set_tooltip(self._choice)
 
             if factory.name != '':
-                self._object.on_trait_change(
-                    self.rebuild_items, self._name, dispatch='ui')
+                self._object.on_trait_change(self.rebuild_items,
+                                             self._name, dispatch='ui')
                 self._object.on_trait_change(
                     self.rebuild_items, self._name + '_items', dispatch='ui')
 
-            factory.on_trait_change(
-                self.rebuild_items, 'values', dispatch='ui')
-            factory.on_trait_change(
-                self.rebuild_items, 'values_items', dispatch='ui')
+            factory.on_trait_change(self.rebuild_items, 'values',
+                                    dispatch='ui')
+            factory.on_trait_change(self.rebuild_items, 'values_items',
+                                    dispatch='ui')
 
             self.rebuild_items()
 
@@ -287,7 +288,7 @@ class CustomEditor(Editor):
     def update_object(self, text):
         """ Handles the user selecting a new value from the combo box.
         """
-        name = unicode(text)
+        name = str(text)
         for item in self.items:
             if name == item.get_name():
                 id_item = id(item)
@@ -401,15 +402,15 @@ class CustomEditor(Editor):
 
         if self._choice is not None:
             if self._object is not None:
-                self._object.on_trait_change(
-                    self.rebuild_items, self._name, remove=True)
+                self._object.on_trait_change(self.rebuild_items,
+                                             self._name, remove=True)
                 self._object.on_trait_change(
                     self.rebuild_items, self._name + '_items', remove=True)
 
-            self.factory.on_trait_change(
-                self.rebuild_items, 'values', remove=True)
-            self.factory.on_trait_change(
-                self.rebuild_items, 'values_items', remove=True)
+            self.factory.on_trait_change(self.rebuild_items, 'values',
+                                         remove=True)
+            self.factory.on_trait_change(self.rebuild_items,
+                                         'values_items', remove=True)
 
         super(CustomEditor, self).dispose()
 
@@ -455,7 +456,8 @@ class CustomEditor(Editor):
         """
         ui = self._ui
         if (ui is not None) and (ui.id != ''):
-            return {'id': ui.id, 'prefs': ui.get_prefs()}
+            return {'id': ui.id,
+                    'prefs': ui.get_prefs()}
 
         return None
 
@@ -463,7 +465,6 @@ class CustomEditor(Editor):
 
     def _view_changed(self, view):
         self.resynch_editor()
-
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -508,8 +509,8 @@ class SimpleEditor(CustomEditor):
         view = self.ui.handler.trait_view_for(self.ui.info, factory.view,
                                               self.value, self.object_name,
                                               self.name)
-        self._dialog_ui = self.value.edit_traits(
-            view, kind=factory.kind, id=factory.id)
+        self._dialog_ui = self.value.edit_traits(view, kind=factory.kind,
+                                                 id=factory.id)
 
         # Check to see if the view was 'modal', in which case it will already
         # have been closed (i.e. is None) by the time we get control back:

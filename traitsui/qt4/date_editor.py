@@ -14,6 +14,7 @@
 #  Date:   08/03/2009
 #
 #------------------------------------------------------------------------------
+
 """ A Traits UI editor for datetime.date objects.
 """
 
@@ -25,8 +26,8 @@ import datetime
 
 from pyface.qt import QtCore, QtGui
 
-from editor import Editor
-from editor_factory import ReadonlyEditor as BaseReadonlyEditor
+from .editor import Editor
+from .editor_factory import ReadonlyEditor as BaseReadonlyEditor
 
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
@@ -106,7 +107,6 @@ class SimpleEditor(Editor):
             print('Invalid date:', year, month, day)
             raise
 
-
 #-------------------------------------------------------------------------
 #  'CustomEditor' class:
 #-------------------------------------------------------------------------
@@ -160,7 +160,6 @@ class CustomEditor(Editor):
         except ValueError:
             print('Invalid date:', year, month, day)
             raise
-
 
 #------------------------------------------------------------------------------
 # 'ReadonlyEditor' class:

@@ -10,6 +10,7 @@
 #
 # Author: Evan Patterson
 #------------------------------------------------------------------------------
+
 """ Defines a Traits UI View that allows for the customization of Qt-specific
     widget properties.
 """
@@ -47,15 +48,8 @@ class QtView(View):
     #  Creates a UI user interface object:
     #-------------------------------------------------------------------------
 
-    def ui(self,
-           context,
-           parent=None,
-           kind=None,
-           view_elements=None,
-           handler=None,
-           id='',
-           scrollable=None,
-           args=None):
+    def ui(self, context, parent=None, kind=None, view_elements=None,
+           handler=None, id='', scrollable=None, args=None):
         ui = super(QtView, self).ui(context, parent, kind, view_elements,
                                     handler, id, scrollable, args)
 
@@ -71,7 +65,7 @@ class QtView(View):
 
         if len(self.tab_order) >= 2:
             previous = self._get_editor_control(ui, self.tab_order[0])
-            for i in xrange(1, len(self.tab_order)):
+            for i in range(1, len(self.tab_order)):
                 current = self._get_editor_control(ui, self.tab_order[i])
                 QtGui.QWidget.setTabOrder(previous, current)
                 previous = current

@@ -14,6 +14,7 @@
 #  Date:   08/05/2009
 #
 #-------------------------------------------------------------------------
+
 """ Defines the table model used by the tabular editor.
 """
 
@@ -78,8 +79,8 @@ class ListStrModel(QtCore.QAbstractListModel):
 
         elif role == QtCore.Qt.DecorationRole:
             if editor.is_auto_add(index):
-                image = adapter.get_default_image(editor.object, editor.name,
-                                                  index)
+                image = adapter.get_default_image(editor.object,
+                                                  editor.name, index)
             else:
                 image = adapter.get_image(editor.object, editor.name, index)
             image = editor.get_image(image)
@@ -88,8 +89,8 @@ class ListStrModel(QtCore.QAbstractListModel):
 
         elif role == QtCore.Qt.BackgroundRole:
             if editor.is_auto_add(index):
-                color = adapter.get_default_bg_color(editor.object,
-                                                     editor.name)
+                color = adapter.get_default_bg_color(
+                    editor.object, editor.name)
             else:
                 color = adapter.get_bg_color(editor.object, editor.name, index)
             if color is not None:
@@ -104,8 +105,8 @@ class ListStrModel(QtCore.QAbstractListModel):
                 color = adapter.get_default_text_color(editor.object,
                                                        editor.name)
             else:
-                color = adapter.get_text_color(editor.object, editor.name,
-                                               index)
+                color = adapter.get_text_color(editor.object,
+                                               editor.name, index)
             if color is not None:
                 if isinstance(color, SequenceTypes):
                     q_color = QtGui.QColor(*color)
@@ -143,13 +144,11 @@ class ListStrModel(QtCore.QAbstractListModel):
         flags = QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
 
         if (editor.factory.editable and 'edit' in editor.factory.operations and
-                editor.adapter.get_can_edit(editor.object, editor.name,
-                                            index)):
+                editor.adapter.get_can_edit(editor.object, editor.name, index)):
             flags |= QtCore.Qt.ItemIsEditable
 
         if (editor.factory.editable and 'move' in editor.factory.operations and
-                editor.adapter.get_drag(editor.object, editor.name,
-                                        index) is not None):
+                editor.adapter.get_drag(editor.object, editor.name, index) is not None):
             flags |= QtCore.Qt.ItemIsDragEnabled | QtCore.Qt.ItemIsDropEnabled
 
         return flags
@@ -172,8 +171,8 @@ class ListStrModel(QtCore.QAbstractListModel):
         if obj is None:
             obj = adapter.get_default_value(editor.object, editor.name)
         self.beginInsertRows(parent, row, row)
-        editor.callx(editor.adapter.insert, editor.object, editor.name, row,
-                     obj)
+        editor.callx(
+            editor.adapter.insert, editor.object, editor.name, row, obj)
         self.endInsertRows()
         return True
 
@@ -184,10 +183,14 @@ class ListStrModel(QtCore.QAbstractListModel):
         adapter = editor.adapter
 
         self.beginInsertRows(parent, row, row + count - 1)
-        for i in xrange(count):
+        for i in range(count):
             value = adapter.get_default_value(editor.object, editor.name)
-            editor.callx(adapter.insert, editor.object, editor.name, row,
-                         value)
+            editor.callx(
+                adapter.insert,
+                editor.object,
+                editor.name,
+                row,
+                value)
         self.endInsertRows()
         return True
 
@@ -199,7 +202,7 @@ class ListStrModel(QtCore.QAbstractListModel):
         adapter = editor.adapter
 
         self.beginRemoveRows(parent, row, row + count - 1)
-        for i in xrange(count):
+        for i in range(count):
             editor.callx(adapter.delete, editor.object, editor.name, row)
         self.endRemoveRows()
         return True
@@ -282,8 +285,8 @@ class ListStrModel(QtCore.QAbstractListModel):
         # Update the selection for the new location.
         if editor.factory.multi_select:
             editor.setx(multi_selected=objects)
-            editor.multi_selected_indices = range(new_row,
-                                                  new_row + len(objects))
+            editor.multi_selected_indices = list(range(
+                new_row, new_row + len(objects)))
         else:
             editor.setx(selected=objects[0])
             editor.selected_index = new_row

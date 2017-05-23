@@ -14,6 +14,7 @@
 #  Date:   07/21/2009
 #
 #-------------------------------------------------------------------------
+
 """ Traits UI 'display only' image editor.
 """
 
@@ -21,7 +22,7 @@
 #  Imports:
 #-------------------------------------------------------------------------
 
-from __future__ import absolute_import
+
 
 from pyface.qt.QtGui import QFrame, QPainter, QPalette
 
@@ -259,7 +260,6 @@ class QImageView(QFrame):
 #-------------------------------------------------------------------------
 #  '_ImageEditor' class:
 #-------------------------------------------------------------------------
-
 
 class _ImageEditor(Editor):
     """ Traits UI 'display only' image editor.
