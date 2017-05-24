@@ -57,7 +57,10 @@ class SimpleEditor(Editor):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        self.control = QtWebKit.QWebView()
+        try:
+            self.control = QtWebKit.QWebView()
+        except:
+            self.control = QtWebKit.QWebEngineView()
         self.control.setSizePolicy(QtGui.QSizePolicy.Expanding,
                                    QtGui.QSizePolicy.Expanding)
 
