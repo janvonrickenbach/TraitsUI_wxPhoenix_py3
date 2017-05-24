@@ -122,7 +122,7 @@ class _ListStrEditor(Editor):
             header_view = QtGui.QHeaderView(QtCore.Qt.Horizontal, self.control)
             header_view.setModel(self.model)
             header_view.setMaximumHeight(header_view.sizeHint().height())
-            header_view.setResizeMode(QtGui.QHeaderView.Stretch)
+            header_view.setSectionResizeMode(QtGui.QHeaderView.Stretch)
             layout.addWidget(header_view)
 
         self.list_view = _ListView(self)
