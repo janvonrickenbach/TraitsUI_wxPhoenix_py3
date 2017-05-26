@@ -512,13 +512,13 @@ class MouseMonitor(wx.Timer):
             return
 
         mx, my = wx.GetMousePosition()
-        cx, cy = control.Window.ClientToScreen(0, 0)
+        cx, cy = control.ClientToScreen(0, 0)
         cdx, cdy = control.GetSize().Get()
 
         if self.is_activated:
             # Don't close the popup if any mouse buttons are currently pressed:
             ms = wx.GetMouseState()
-            if ms.LeftDown() or ms.MiddleDown() or ms.RightDown():
+            if ms.LeftIsDown() or ms.MiddleIsDown() or ms.RightIsDown():
                 return
 
             # Check for the special case of the mouse pointer having to be

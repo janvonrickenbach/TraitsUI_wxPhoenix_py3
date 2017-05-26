@@ -88,7 +88,7 @@ def extract_docstring_from_source(source):
                 break
         else:
             # No docstrings found. Return blank docstring and all the source.
-            return '', source.strip()
+            return '', (source.decode("utf-8")).strip()
     except Exception as excp:
         print("traitui parse exception", excp)
     try:
