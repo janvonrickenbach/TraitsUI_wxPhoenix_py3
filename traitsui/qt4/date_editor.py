@@ -28,7 +28,7 @@ from pyface.qt import QtCore, QtGui
 
 from .editor import Editor
 from .editor_factory import ReadonlyEditor as BaseReadonlyEditor
-
+from traits.api import Instance
 #-------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------
@@ -115,7 +115,7 @@ class SimpleEditor(Editor):
 class CustomEditor(Editor):
     """ Custom Traits UI date editor that wraps QCalendarWidget.
     """
-
+    value=Instance(datetime.date)
     #-------------------------------------------------------------------------
     #  Finishes initializing the editor by creating the underlying toolkit
     #  widget:

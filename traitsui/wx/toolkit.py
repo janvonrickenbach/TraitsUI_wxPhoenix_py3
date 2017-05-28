@@ -250,7 +250,7 @@ class GUIToolkit(Toolkit):
             px, py = 0, 0
             pdx, pdy = screen_dx, screen_dy
         else:
-            px, py = parent.Sizer.GetPosition().Get()
+            px, py = parent.GetPosition().Get()
             pdx, pdy = parent.GetSize().Get()
 
         # Calculate the correct width and height for the window:

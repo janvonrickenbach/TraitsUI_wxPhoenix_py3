@@ -253,7 +253,7 @@ class ImagePanel(ThemedWindow):
 #-------------------------------------------------------------------------------
 
 
-class ImageSizer(wx.PySizer):
+class ImageSizer(wx.Sizer):
     """ Defines a sizer that correctly sizes a window's children to fit within
         the borders implicitly defined by a background ImageSlice object,
     """

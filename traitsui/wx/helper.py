@@ -538,7 +538,7 @@ def init_wx_handlers(control, object, prefix=''):
     for handler, name in handlers:
         method = getattr(object, prefix + name, None)
         if method is not None:
-            handler(control, method)
+            control.Bind(handler, method)
 
 
 #-------------------------------------------------------------------------------

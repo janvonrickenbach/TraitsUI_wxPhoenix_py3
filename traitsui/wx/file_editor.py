@@ -117,7 +117,7 @@ class SimpleEditor(SimpleTextEditor):
         """ Disposes of the contents of an editor.
         """
         panel = self.control
-        button.Bind(wx.EVT_BUTTON, None)
+        #button.Bind(wx.EVT_BUTTON, None)
         self._button = None
 
         if self.history is not None:
@@ -346,7 +346,7 @@ class CustomEditor(SimpleTextEditor):
         tree, self._tree = self._tree, None
         id = tree.GetId()
 
-        tree.Bind(wx.EVT_TREE_SEL_CHANGE, None)
+        tree.Bind(wx.EVT_TREE_SEL_CHANGED, None)
         tree.Bind(wx.EVT_TREE_ITEM_ACTIVATED, None)
 
         super(CustomEditor, self).dispose()
