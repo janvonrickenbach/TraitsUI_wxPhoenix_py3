@@ -54,6 +54,7 @@ exec_str =  """from traits.api import *
 
 """
 import os
+import base64
 
 def image_to_string(imgfile):
     with open(imgfile, "rb") as imageFile:
