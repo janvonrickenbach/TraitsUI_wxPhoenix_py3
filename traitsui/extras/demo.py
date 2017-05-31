@@ -53,7 +53,7 @@ from os.path import (join, isdir, split, splitext, dirname, basename, abspath,
 exec_str =  """from traits.api import *
 
 """
-
+import os
 
 def image_to_string(imgfile):
     with open(imgfile, "rb") as imageFile:
@@ -586,8 +586,10 @@ class DemoPath ( DemoTreeNodeObject ):
             self._description, source = parse_source(
                                               join( self.path, '__init__.py' ) )
         else:
-            self._description = ('<img src="traits_ui_demo.jpg">')
+            imgfile=os.path.join(self.path,'traits_ui_demo.jpg' )
+            self._description = html_image(imgfile)
             source = ''
+
 
         self._source = exec_str + source
 
