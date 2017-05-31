@@ -20,14 +20,28 @@ parameter True.
 
 from traits.api import HasTraits, HTML
 from traitsui.api import UItem, View, HTMLEditor
-
+from traitsui.extras.demo import image_to_string, html_image
 # Sample text to display as HTML: header, plus module docstring, plus
 # some lists. The docstring and lists will be auto-formatted
 # (format_text=True).
+import os
+the_path=os.path.dirname(os.path.realpath(__file__))
+the_path, a_dir=os.path.split(the_path)
+imgfile=os.path.join(the_path,'traits_ui_demo.jpg' )
+
 sample_text = ("""
 <html><body><h1>HTMLEditor example</h1>
 
 """ + __doc__ + """
+
+ An embedded image:
+""" +
+    html_image(imgfile, size=250)
+               + """ 
+
+"""
++
+"""
 <i>Here are some lists formatted in this way:</i>
 
 Numbered list:
@@ -39,6 +53,7 @@ Bulleted list:
   - eat
   - drink
   - be merry
+
 """)
 
 

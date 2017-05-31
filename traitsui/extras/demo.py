@@ -54,6 +54,23 @@ exec_str =  """from traits.api import *
 
 """
 
+
+def image_to_string(imgfile):
+    with open(imgfile, "rb") as imageFile:
+        imgstr = base64.b64encode(imageFile.read())
+    return imgstr.decode("utf-8")
+
+def html_image(imgfile, size=None):
+    filename, file_extension = os.path.splitext(imgfile)
+    prefix='<img src="data:image/'+file_extension+';base64,'
+    the_size=' '
+    if size is not None:
+        if isinstance(size,tuple):
+           the_size='width="'+str(size[0])+'" height="'+str(size[1])+'"'
+        else:
+           the_size='width="'+str(size)+'"'
+
+
 #----------------------------------------------------------------------------
 #  Return a 'user-friendly' name for a specified string:
 #----------------------------------------------------------------------------

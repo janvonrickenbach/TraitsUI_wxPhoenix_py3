@@ -45,12 +45,10 @@ from pyface.image_resource \
 #-- Constants ------------------------------------------------------------
 
 # Necessary because of the dynamic way in which the demos are loaded:
-search_path = [
-    join(
-        dirname(traitsui.api.__file__), '..', 'examples', 'demo',
-        'Applications')
-]
-
+import os
+search_path = [join(os.path.dirname(
+               os.path.realpath(__file__)),
+              'images' )]
 #-- FileInfo Class Definition --------------------------------------------
 
 
@@ -100,9 +98,11 @@ class FileInfoAdapter(TabularAdapter):
     def _get_big_image(self):
         size = self.item.size
         if size > 65536:
-            return ImageResource('red_ball')
+            return ImageResource('red_ball',
+                      search_path=search_path)
 
-        return (None, ImageResource('blue_ball'))[size > 16384]
+        return (None, ImageResource('blue_ball',
+               search_path=search_path))[size > 16384]
 
 
 #-- Tabular Editor Definition --------------------------------------------
