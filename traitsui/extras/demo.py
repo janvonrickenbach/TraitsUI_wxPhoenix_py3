@@ -69,7 +69,7 @@ def html_image(imgfile, size=None):
            the_size='width="'+str(size[0])+'" height="'+str(size[1])+'"'
         else:
            the_size='width="'+str(size)+'"'
-
+    return prefix + image_to_string(imgfile)+'"'  + the_size+'>'
 
 #----------------------------------------------------------------------------
 #  Return a 'user-friendly' name for a specified string:
