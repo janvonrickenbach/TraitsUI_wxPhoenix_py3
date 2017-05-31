@@ -24,6 +24,7 @@
 #-------------------------------------------------------------------------------
 
 import os.path
+import base64
 import webbrowser
 
 import wx.html as wh
@@ -38,6 +39,22 @@ from traits.api import Str
 from traitsui.editors.html_editor import ToolkitEditorFactory
 
 from .editor import Editor
+
+def image_to_string(imgfile):
+    with open(imgfile, "rb") as imageFile:
+        imgstr = base64.b64encode(imageFile.read())
+    return imgstr.decode("utf-8")
+
+def html_image(imgfile, size=None):
+    filename, file_extension = os.path.splitext(imgfile)
+    prefix='<img src="data:image/'+file_extension+';base64,'
+    the_size=' '
+    if size is not None:
+        if isinstance(size,tuple):
+           the_size='width="'+str(size[0])+'" height="'+str(size[1])+'"'
+        else:
+           the_size='width="'+str(size)+'"'
+    return prefix + image_to_string(imgfile)+'"'  + the_size+'>'
 
 
 #-------------------------------------------------------------------------------

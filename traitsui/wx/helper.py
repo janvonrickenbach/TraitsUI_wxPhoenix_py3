@@ -652,7 +652,7 @@ class PopupControl(HasPrivateTraits):
         """
         # Calculate the desired size of the popup control:
 
-        px, cy = self.control.Window.ClientToScreen(0, 0)
+        px, cy = self.control.ClientToScreen(0, 0)
         cdx, cdy = self.control.GetSize().Get()
         pdx, pdy = self.popup.GetSize().Get()
         pdx, pdy = max(pdx, cdx, self.width), max(pdy, self.height)

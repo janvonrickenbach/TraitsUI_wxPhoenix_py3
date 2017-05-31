@@ -502,7 +502,8 @@ class ObjectColumn(TableColumn):
         """ Sets the value of the column for a specified object.
         """
         target, name = self.target_name(object)
-        setattr(target, name, value)
+        the_type=type(getattr(target,name))
+        setattr( target, name, the_type(value) )
 
     #---------------------------------------------------------------------------
     #  Gets the editor for the column of a specified object:

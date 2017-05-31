@@ -125,7 +125,7 @@ except TypeError:
     NORMAL_HIGHLIGHT_FG = wx.Colour(0, 0, 0)
     NORMAL_HIGHLIGHT_BG = wx.Colour(255, 255, 255)
 
-class wxMouseBoxCalendarCtrl(adv.CalendarCtrl):
+class wxMouseBoxCalendarCtrl(adv.GenericCalendarCtrl):
     """
     Subclass to add a mouse-over box-selection tool.
 
