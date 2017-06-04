@@ -72,6 +72,14 @@ def html_image(imgfile, size=None):
            the_size='width="'+str(size)+'"'
     return prefix + image_to_string(imgfile)+'"'  + the_size+'>'
 
+def html_image_fit_width(imgfile):
+    filename, file_extension = os.path.splitext(imgfile)
+    prefix='<img src="data:image/'+file_extension+';base64,'
+    the_size="style='height: 100%; width: 100%; object-fit: contain'"
+    #the_size="style=width: 100%; object-fit: contain'"
+    #the_size="style='height: 100%; object-fit: contain'"
+    return prefix + image_to_string(imgfile)+'"' + the_size+'>'
+
 #----------------------------------------------------------------------------
 #  Return a 'user-friendly' name for a specified string:
 #----------------------------------------------------------------------------
@@ -588,7 +596,7 @@ class DemoPath ( DemoTreeNodeObject ):
                                               join( self.path, '__init__.py' ) )
         else:
             imgfile=os.path.join(self.path,'traits_ui_demo.jpg' )
-            self._description = html_image(imgfile)
+            self._description = html_image_fit_width(imgfile)
             source = ''
 
 
@@ -861,8 +869,8 @@ class Demo ( HasPrivateTraits ):
             # But without them, it throws an exception on exit:
             #    Internal C++ object (_StickyDialog) already deleted.
             # No, actually sometimes we get the latter even with them.
-            width     = 950,
-            height    = 900
+            width     = 800,
+            height    = 500
         )
         return traits_view
 

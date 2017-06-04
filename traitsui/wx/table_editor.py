@@ -249,7 +249,6 @@ class TableEditor(Editor, BaseTableEditor):
             # correct history also:
             self.selected_row = None
             self.selected_row = selected
-
             dc.style = item.dock
             contents.append(
                 DockRegion(contents=[
@@ -636,6 +635,7 @@ class TableEditor(Editor, BaseTableEditor):
         return []
 
     def _get_selected_values(self):
+
         if self.in_row_mode:
             return [(item, '') for item in self.selected_items]
 
@@ -767,16 +767,21 @@ class TableEditor(Editor, BaseTableEditor):
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for row in xrange(row0, row1 + 1):
+            for row in range(row0, row1 + 1):
                 if row < rows:
                     values.append((rio(row), gfi(row)))
-
+    
         if len(values) > 0:
             # Sort by increasing row index:
             values.sort(key=itemgetter(0))
             index, row = values[0]
         else:
-            index, row = -1, None
+            if self.grid._moveTo is None:
+                index, row = -1, None
+            else:
+                row = self.grid._moveTo[0]
+                values.append((rio(row), gfi(row))) 
+                index, row = values[0]
 
         # Save the new selection information:
         self.set(selected_row_index=index, trait_change_notify=False)
@@ -803,7 +808,7 @@ class TableEditor(Editor, BaseTableEditor):
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for row in xrange(row0, row1 + 1):
+            for row in range(row0, row1 + 1):
                 if row < rows:
                     values.append((rio(row), gfi(row)))
 
@@ -829,21 +834,24 @@ class TableEditor(Editor, BaseTableEditor):
         cols = self.columns
         tl = self.grid._grid.GetSelectionBlockTopLeft()
         br = iter(self.grid._grid.GetSelectionBlockBottomRight())
-
         # Get the column items and indices in the selection:
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for col in xrange(col0, col1 + 1):
+            for col in range(col0, col1 + 1):
                 values.append((col, cols[col].name))
 
         if len(values) > 0:
-            # Sort by increasing column index:
+            # Sort by increasing row index:
             values.sort(key=itemgetter(0))
             index, column = values[0]
         else:
-            index, column = -1, ''
-
+            if self.grid._moveTo is None:
+                index, row = -1, ''
+            else:
+                col = self.grid._moveTo[1]
+                values.append((col, cols[col].name))
+                index, column = values[0]
         # Save the new selection information:
         self.set(selected_column_index=index, trait_change_notify=False)
         self.setx(selected_column=column)
@@ -862,7 +870,7 @@ class TableEditor(Editor, BaseTableEditor):
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for col in xrange(col0, col1 + 1):
+            for col in range(col0, col1 + 1):
                 values.append((col, cols[col].name))
 
         # Sort by increasing row index:
@@ -893,9 +901,9 @@ class TableEditor(Editor, BaseTableEditor):
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for row in xrange(row0, row1 + 1):
+            for row in range(row0, row1 + 1):
                 item = gfi(row)
-                for col in xrange(col0, col1 + 1):
+                for col in range(col0, col1 + 1):
                     values.append(((rio(row), col), (item, cols[col].name)))
 
         if len(values) > 0:
@@ -904,7 +912,18 @@ class TableEditor(Editor, BaseTableEditor):
             index, cell = values[0]
         else:
             index, cell = (-1, -1), (None, '')
-
+        if len(values) > 0:
+            # Sort by increasing row index:
+            values.sort(key=itemgetter(0))
+            index, row = values[0]
+        else:
+            if self.grid._moveTo is None:
+                index, row = (-1, -1), (None, '')
+            else:
+                row, col = self.grid._moveTo
+                item = gfi(row)
+                values.append(((rio(row), col), (item, cols[col].name)))
+                index, cell = values[0]
         # Save the new selection information:
         self.set(selected_cell_index=index, trait_change_notify=False)
         self.setx(selected_cell=cell)
@@ -928,9 +947,9 @@ class TableEditor(Editor, BaseTableEditor):
         values = []
         for row0, col0 in tl:
             row1, col1 = br.next()
-            for row in xrange(row0, row1 + 1):
+            for row in range(row0, row1 + 1):
                 item = gfi(row)
-                for col in xrange(col0, col1 + 1):
+                for col in range(col0, col1 + 1):
                     values.append(((rio(row), col), (item, cols[col].name)))
 
         # Sort by increasing row, column index:

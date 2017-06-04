@@ -91,7 +91,7 @@ class SimpleEditor(EditorWithList):
         """
         self.control = wx.Choice(parent, -1,
                                  wx.Point(0, 0), wx.Size(100, 20), [])
-        control.Bind(wx.EVT_CHOICE, self.update_object)
+        self.control.Bind(wx.EVT_CHOICE, self.update_object)
 
     #---------------------------------------------------------------------------
     #  Handles the list of legal check list values being updated:
