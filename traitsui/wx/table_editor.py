@@ -296,7 +296,7 @@ class TableEditor(Editor, BaseTableEditor):
         # Set the min height of the grid panel to 0, this will provide
         # a scrollbar if the window is resized such that only the first row
         # is visible
-        panel.SetMinSize((-1, 0))
+        #panel.SetMinSize((-1, 0))#this line causes problems in Mayavi
 
         # Finish the panel layout setup:
         panel.SetSizer(sizer)
@@ -362,8 +362,8 @@ class TableEditor(Editor, BaseTableEditor):
             min_height = _grid.GetColLabelSize() + (max_rows * height)
         else:
             min_height = (max_rows * height)
-
-        _grid.SetMinSize(wx.Size(min_width, min_height))
+        # the following line causes some layout issues 6/6/17
+        #_grid.SetMinSize(wx.Size(min_width, min_height))
 
         # On Linux, there is what appears to be a bug in wx in which the
         # vertical scrollbar will not be sized properly if the TableEditor is
