@@ -134,7 +134,7 @@ class Editor(HasPrivateTraits):
             self.old_value = getattr(self.object, self.name)
         except AttributeError:
             ctrait = self.object.base_trait(self.name)
-            if ctrait.type == 'event' or self.name == 'spring':
+            if ctrait.type == 'event' or self.name == 'spring' or self.name='children':
                 # Getting the attribute will fail for 'Event' traits:
                 self.old_value = Undefined
             else:

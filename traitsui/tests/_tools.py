@@ -23,6 +23,7 @@ import traceback
 from traits.etsconfig.api import ETSConfig
 import traits.trait_notifiers
 
+
 # ######### Testing tools
 
 
@@ -159,9 +160,9 @@ def press_ok_button(ui):
 
     elif is_current_backend_qt4():
         from pyface import qt
-
+        import PyQt5.QtWidgets as QtWidgets
         # press the OK button and close the dialog
-        ok_button = ui.control.findChild(qt.QtWidgets.QPushButton)
+        ok_button = ui.control.findChild(QtWidgets.QPushButton)
         ok_button.click()
 
 
@@ -187,8 +188,8 @@ def get_dialog_size(ui_control):
 def apply_on_children(func, node, _level=0):
     """Print the result of applying a function on `node` and its children.
     """
-    print '-' * _level + str(node)
-    print ' ' * _level + str(func(node)) + '\n'
+    print('-' * _level + str(node))
+    print(' ' * _level + str(func(node)) + '\n')
     for child in get_children(node):
         apply_on_children(func, child, _level + 1)
 
@@ -227,11 +228,11 @@ def wx_announce_when_destroyed(node):
     _destroy_method = node.Destroy
 
     def destroy_wrapped():
-        print 'Destroying:', node
+        print('Destroying:', node)
         #print 'Stack is'
         #traceback.print_stack()
         _destroy_method()
-        print 'Destroyed:', node
+        print('Destroyed:', node)
 
     node.Destroy = destroy_wrapped
     return 'Node {} decorated'.format(node.GetName())
