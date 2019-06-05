@@ -31,6 +31,7 @@ import tokenize
 import operator
 from io import StringIO, BytesIO
 from configobj import ConfigObj
+from OpenGL import GL
 
 from traits.api import (HasTraits, HasPrivateTraits, Str, Instance, Property,
                         Any, Code, HTML, true, false, Dict)
