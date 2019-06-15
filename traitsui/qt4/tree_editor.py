@@ -1077,7 +1077,7 @@ class SimpleEditor(Editor):
         if editor is not None:
             # If we already had a node editor, destroy it:
             editor.setUpdatesEnabled(False)
-            self._clear_editor()
+            #self._clear_editor()
 
             # If there is a selected object, create a new editor for it:
             if object is not None:
