@@ -629,7 +629,7 @@ class TraitsNode(ObjectNode):
         """ Gets the object's children.
         """
         names = self._get_names()
-        names.sort()
+        sorted(names)#names.sort()
         value = self.value
         node_for = self.node_for
         nodes = []
