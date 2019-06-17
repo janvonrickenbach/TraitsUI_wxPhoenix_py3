@@ -17,7 +17,13 @@ and paragraphs without HTML tags, by setting the editor's 'format_text'
 parameter True.
 
 """
-
+import traits.etsconfig.etsconfig as etsc
+the_back = etsc.ETSConfig._get_toolkit()
+if the_back=='qt4':
+    from OpenGL import GL
+    import PyQt5.QtWebEngineWidgets as qt_wew
+    from PyQt5 import QtWidgets, QtCore
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
 from traits.api import HasTraits, HTML
 from traitsui.api import UItem, View, HTMLEditor
 from traitsui.extras.demo import image_to_string, html_image

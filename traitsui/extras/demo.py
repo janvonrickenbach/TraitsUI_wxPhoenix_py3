@@ -31,7 +31,13 @@ import tokenize
 import operator
 from io import StringIO, BytesIO
 from configobj import ConfigObj
-from OpenGL import GL
+import traits.etsconfig.etsconfig as etsc
+the_back = etsc.ETSConfig._get_toolkit()
+if the_back=='qt4':
+    from OpenGL import GL
+    import PyQt5.QtWebEngineWidgets as qt_wew
+    from PyQt5 import QtWidgets, QtCore
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
 
 from traits.api import (HasTraits, HasPrivateTraits, Str, Instance, Property,
                         Any, Code, HTML, true, false, Dict)
