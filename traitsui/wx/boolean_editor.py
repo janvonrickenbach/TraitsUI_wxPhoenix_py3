@@ -60,7 +60,7 @@ class SimpleEditor(Editor):
             widget.
         """
         self.control = wx.CheckBox(parent, -1, '')
-        parent.Bind(wx.EVT_CHECKBOX, self.update_object)
+        self.control.Bind(wx.EVT_CHECKBOX, self.update_object)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
