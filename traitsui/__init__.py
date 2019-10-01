@@ -20,6 +20,6 @@ from __future__ import absolute_import
 from ._version import full_version as __version__
 
 __requires__ = [
-    'traits',
-    'pyface',
+    'traits==4.7.0.dev51',
+    'pyface==5.2.0.dev266',
 ]
