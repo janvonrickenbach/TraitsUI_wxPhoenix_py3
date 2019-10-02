@@ -180,7 +180,7 @@ def convert_image(value, level=3):
     if result is None:
         if is_traits_image:
             try:
-                from pyface.image.image import ImageLibrary
+                from .image.image import ImageLibrary
                 result = ImageLibrary.image_resource(value)
             except:
                 result = None

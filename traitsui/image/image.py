@@ -22,7 +22,7 @@ from stat import ST_MTIME
 from platform import system
 from zipfile import is_zipfile, ZipFile, ZIP_DEFLATED
 from time import time, sleep, localtime, strftime
-from thread import allocate_lock
+from six.moves._thread import allocate_lock
 from threading import Thread
 
 from traits.api import (HasPrivateTraits, Property, Str, Int, List, Dict, File,
