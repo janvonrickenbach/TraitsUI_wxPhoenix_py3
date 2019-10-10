@@ -131,6 +131,8 @@ class ImageControl(wx.Window):
             self._mouse_over = True
             self.Refresh()
 
+        event.Skip()
+
     #---------------------------------------------------------------------------
     #  Handles the mouse leaving the control:
     #---------------------------------------------------------------------------
@@ -141,6 +143,8 @@ class ImageControl(wx.Window):
         if self._mouse_over:
             self._mouse_over = False
             self.Refresh()
+
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handles the user pressing the mouse button:
@@ -153,6 +157,8 @@ class ImageControl(wx.Window):
             self.CaptureMouse()
             self._button_down = True
             self.Refresh()
+
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handles the user clicking the control:
@@ -181,6 +187,8 @@ class ImageControl(wx.Window):
 
         if need_refresh:
             self.Refresh()
+
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handles the control being re-painted:

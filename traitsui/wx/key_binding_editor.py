@@ -192,6 +192,7 @@ class KeyBindingCtrl(wx.Window):
         """ Handle keyboard keys being pressed.
         """
         self.editor.key = event
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Erase background event handler:
@@ -227,6 +228,7 @@ class KeyBindingCtrl(wx.Window):
         """ Sets the keyboard focus to this window.
         """
         self.SetFocus()
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handles getting/losing the focus:
@@ -237,12 +239,14 @@ class KeyBindingCtrl(wx.Window):
         """
         self.editor.has_focus = True
         self.Refresh()
+        event.Skip()
 
     def _lose_focus(self, event):
         """ Handles losing the focus.
         """
         self.editor.has_focus = False
         self.Refresh()
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handles the user double clicking the control to clear its contents:
@@ -252,6 +256,7 @@ class KeyBindingCtrl(wx.Window):
         """ Handles the user double clicking the control to clear its contents.
         """
         self.editor.clear = True
+        event.Skip()
 
 
 ### EOF #######################################################################

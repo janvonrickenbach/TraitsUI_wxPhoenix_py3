@@ -104,7 +104,7 @@ class SimpleEditor(Editor):
             control = wx.TextCtrl(parent, -1, self.str_value, style=style)
             parent.Bind(wx.EVT_TEXT_ENTER, self.update_object, control)
             parent.Bind(wx.EVT_TEXT, self.update_object, control)
-        #wx.EVT_KILL_FOCUS( control, self.update_object )
+        #wx.EVT_KILL_FOCUS( control, self.wx_update_object )
         control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
 
         if factory.auto_set:
@@ -119,6 +119,10 @@ class SimpleEditor(Editor):
     #---------------------------------------------------------------------------
     #  Handles the user entering input data in the edit control:
     #---------------------------------------------------------------------------
+
+    def wx_update_object( self, event ):
+        self.update_object(event)
+        event.Skip()
 
     def update_object(self, event):
         """ Handles the user entering input data in the edit control.
@@ -303,27 +307,28 @@ class ReadonlyEditor(BaseReadonlyEditor):
     def _enter_window(self, event):
         self._in_window = True
         self._set_color()
+        event.Skip()
 
     def _leave_window(self, event):
         self._in_window = False
         self._set_color()
+        event.Skip()
 
     def _left_down(self, event):
         self.control.CaptureMouse()
         self._down = True
         self._set_color()
+        event.Skip()
 
     def _left_up(self, event):
         self._set_color()
-        if not self._down:
-            return
+        if self._down:
+          self.control.ReleaseMouse()
+          self._down = False
 
-        self.control.ReleaseMouse()
-        self._down = False
-
-        if self._in_window:
+          if self._in_window:
             self.object.edit_traits(
                 view=self.factory.view, parent=self.control)
-
+event.Skip()
 
 TextEditor = SimpleEditor

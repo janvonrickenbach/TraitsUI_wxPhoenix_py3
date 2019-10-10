@@ -214,10 +214,11 @@ class SimpleEditor ( BaseEditor ):
     def dispose ( self ):
         """ Disposes of the contents of an editor.
         """
-        disconnect( self.control,
-                    wx.EVT_COMBOBOX, wx.EVT_TEXT_ENTER, wx.EVT_TEXT )
+        if not isinstance( self.control, wx._core._wxPyDeadObject ):
+          disconnect( self.control,
+                      wx.EVT_COMBOBOX, wx.EVT_TEXT_ENTER, wx.EVT_TEXT )
 
-        disconnect_no_id( self.control, wx.EVT_KILL_FOCUS )
+          disconnect_no_id( self.control, wx.EVT_KILL_FOCUS )
 
         super( SimpleEditor, self ).dispose()
 

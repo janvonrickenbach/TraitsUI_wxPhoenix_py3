@@ -697,7 +697,10 @@ class FillPanel(object):
                 # If so, add them to the panel and exit:
                 self.add_groups(content, panel)
             else:
-                self.add_items(content, panel, self.sizer)
+                if group.show_border and wx.__version__ == "2.9.1.1":
+                  self.add_items(content, box, self.sizer)
+                else:
+                  self.add_items(content, panel, self.sizer)
 
         # If the caller is a DockWindow, we need to define the content we are
         # adding to it:

@@ -97,6 +97,7 @@ class SimpleEditor (Editor):
             if date.IsValid():
                 # Important: set the day before setting the month, otherwise wx may fail
                 # to set the month.
+                date.SetDay(1)
                 date.SetYear(self.value.year)
                 date.SetDay(self.value.day)
                 # wx 2.8.8 has 0-indexed months.
@@ -224,7 +225,7 @@ class wxMouseBoxCalendarCtrl(adv.GenericCalendarCtrl):
         event.Skip()
         self.selecting = True
         self.box_selected = []
-        self.sel_start = (event.m_x, event.m_y)
+        self.sel_start = (event.GetX(), event.GetY())
         self.sel_end = self.sel_start
 
 
@@ -239,7 +240,7 @@ class wxMouseBoxCalendarCtrl(adv.GenericCalendarCtrl):
         if not self.selecting:
             return
 
-        self.sel_end = (event.m_x, event.m_y)
+        self.sel_end = (event.GetX(), event.GetY())
         self.box_selected = self.boxed_days()
         self.Refresh()
 
