@@ -95,7 +95,7 @@ class SimpleEditor ( SimpleTextEditor ):
             else:
                 control = wx.TextCtrl( panel, -1, '' )
 
-            control.Bind(wx.EVT_KILL_FOCUS, self.update_object )
+            control.Bind(wx.EVT_KILL_FOCUS, self.wx_update_object )
 
             if factory.auto_set:
                 control.Bind(wx.EVT_TEXT, self.update_object )
@@ -149,6 +149,10 @@ class SimpleEditor ( SimpleTextEditor ):
     #---------------------------------------------------------------------------
     #  Handles the user changing the contents of the edit control:
     #---------------------------------------------------------------------------
+
+    def wx_update_object( self, event ):
+        self.update_object(event)
+        event.Skip()
 
     def update_object ( self, event ):
         """ Handles the user changing the contents of the edit control.
@@ -260,7 +264,7 @@ class SimpleEditor ( SimpleTextEditor ):
                              wildcard = wildcard,
                              style=style)
 
-        dlg.SetFilename( self._get_value() )
+        dlg.SetPath( self._get_value() )
 
         return dlg
 

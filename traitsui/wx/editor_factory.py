@@ -109,6 +109,7 @@ class SimpleEditor(Editor):
         """ Mark the left mouse button as being pressed currently.
         """
         self.left_down = True
+        event.Skip()
 
     def _show_popup_editor(self, event):
         """ Display the popup editor if the left mouse button was pressed
@@ -117,6 +118,7 @@ class SimpleEditor(Editor):
         if self.left_down:
             self.left_down = False
             self.popup_editor(event)
+        event.Skip()
 
 
 #-------------------------------------------------------------------------------
@@ -140,13 +142,17 @@ class TextEditor(Editor):
         """
         self.control = wx.TextCtrl(
             parent, -1, self.str_value, style=wx.TE_PROCESS_ENTER)
-        self.control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
+        self.control.Bind(wx.EVT_KILL_FOCUS, self.wx_update_object)
         self.control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
         self.set_tooltip()
 
     #---------------------------------------------------------------------------
     #  Handles the user changing the contents of the edit control:
     #---------------------------------------------------------------------------
+
+    def wx_update_object( self, event ):
+        self.update_object(self)
+        event.Skip()
 
     def update_object(self, event):
         """ Handles the user changing the contents of the edit control.

@@ -233,7 +233,7 @@ class CustomColorEditor(BaseSimpleEditor):
         # 'text_control' is the text display of the color.
         text_control = wx.TextCtrl(
             parent, -1, self.str_value, style=wx.TE_PROCESS_ENTER)
-        text_control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
+        text_control.Bind(wx.EVT_KILL_FOCUS, self.wx_update_object )
         text_control.Bind(wx.EVT_TEXT_ENTER, self.update_object)
 
         # 'button_control' shows the 'Edit' button.
@@ -251,6 +251,10 @@ class CustomColorEditor(BaseSimpleEditor):
         self.set_tooltip()
 
         return
+
+    def wx_update_object( self, event ):
+        self.update_object(event)
+        event.Skip()
 
     def update_object(self, event):
         """ Handles the user changing the contents of the edit control.

@@ -433,18 +433,14 @@ class GUIToolkit(Toolkit):
             handler = ui.route_event  #this method returns back to route_event below
 
         id = control.GetId()
-        event_handler = EventHandlerWrapper()  #wx.EvtHandler()
-        connect = event_handler.Connect  #Connect Method of wx.EvtHandler
+        event_handler = control
+        connect       = event_handler.Connect
 
         for event in events:
             connect(id, id, event, handler)
 
-        #control.PushEventHandler( event_handler ) #where the real event hooking happens
-
-        for child in control.GetChildren(
-        ):  #goes through each child of control, and each child of each child
-            self.hook_events(ui, child, events, handler,
-                             drop_target)  #recursive until child is None
+        for child in control.GetChildren():
+            self.hook_events( ui, child, events, handler, drop_target )
 
     #---------------------------------------------------------------------------
     #  Routes a 'hooked' event to the correct handler method:

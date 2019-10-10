@@ -176,7 +176,7 @@ class SimpleSliderEditor(BaseRangeEditor):
             size=wx.Size(56, 20),
             style=wx.TE_PROCESS_ENTER)
         text.Bind(wx.EVT_TEXT_ENTER, self.update_object_on_enter)
-        text.Bind(wx.EVT_KILL_FOCUS, self.update_object_on_enter)
+        text.Bind(wx.EVT_KILL_FOCUS, self.update_object_on_kill_focus)
 
         sizer.Add(text, 0, wx.LEFT | wx.EXPAND, 4)
 
@@ -228,6 +228,11 @@ class SimpleSliderEditor(BaseRangeEditor):
     #---------------------------------------------------------------------------
     #  Handle the user pressing the 'Enter' key in the edit control:
     #---------------------------------------------------------------------------
+
+    def update_object_on_kill_focus( self, event ):
+        self.update_object_on_enter(event)
+        event.Skip()
+
 
     def update_object_on_enter(self, event):
         """ Handles the user pressing the Enter key in the text field.
@@ -507,7 +512,7 @@ class LargeRangeSliderEditor(BaseRangeEditor):
             size=wx.Size(56, 20),
             style=wx.TE_PROCESS_ENTER)
         text.Bind(wx.EVT_TEXT_ENTER, self.update_object_on_enter)
-        text.Bind(wx.EVT_KILL_FOCUS, self.update_object_on_enter)
+        text.Bind(wx.EVT_KILL_FOCUS, self.update_object_on_kill_focus)
 
         sizer.Add(text, 0, wx.LEFT | wx.EXPAND, 4)
 
@@ -550,6 +555,10 @@ class LargeRangeSliderEditor(BaseRangeEditor):
                     self.value = int(value)
         finally:
             self.ui_changing = False
+
+    def update_object_on_kill_focus( self, event ):
+        self.update_object_on_enter(event)
+        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Handle the user pressing the 'Enter' key in the edit control:

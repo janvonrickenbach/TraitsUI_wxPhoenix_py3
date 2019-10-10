@@ -353,7 +353,8 @@ class TraitsUIPanel(wx.Panel):
         bg_color = kw.pop('bg_color', None)
         wx.Panel.__init__(self, parent, *args, **kw)
 
-        self.Bind(wx.EVT_CHILD_FOCUS, self.OnChildFocus)
+        if wx.__version__ < '2.9':
+            self.Bind(wx.EVT_CHILD_FOCUS, self.OnChildFocus)
 
         if bg_color:
             self.SetBackgroundColour(bg_color)
@@ -711,6 +712,8 @@ class BufferDC(wx.MemoryDC):
             width, height = dc.GetClientSize().Get()
             dc = wx.PaintDC(dc)
         self.dc = dc
+        width = max(1, width)
+        height = max(1, height)
         self.bitmap = wx.Bitmap(width, height)
 
         self.SelectObject(self.bitmap)

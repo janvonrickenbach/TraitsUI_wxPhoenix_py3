@@ -22,7 +22,7 @@
 #  Imports:
 #-------------------------------------------------------------------------------
 
-import logging
+#import logging
 
 import wx
 
@@ -53,7 +53,7 @@ from pyface.ui.wx.grid.trait_grid_cell_adapter \
 from pyface.timer.api \
     import do_later
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 #-------------------------------------------------------------------------------
 #  'TraitGridSelection' class:
@@ -190,8 +190,8 @@ class TableModel(GridModel):
         try:
             return self.__filtered_items()[index]
         except:
-            logger.error('TableModel error: Request for invalid row %d out of '
-                         '%d' % (index, len(self.__filtered_items())))
+            #logger.error( 'TableModel error: Request for invalid row %d out of '
+            #              '%d' % ( index, len( self.__filtered_items() ) ) )
             return None
 
     #---------------------------------------------------------------------------
