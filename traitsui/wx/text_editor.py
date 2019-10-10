@@ -104,12 +104,9 @@ class SimpleEditor(Editor):
             control = wx.TextCtrl(parent, -1, self.str_value, style=style)
             parent.Bind(wx.EVT_TEXT_ENTER, self.update_object, control)
             parent.Bind(wx.EVT_TEXT, self.update_object, control)
-        #wx.EVT_KILL_FOCUS( control, self.wx_update_object )
         control.Bind(wx.EVT_KILL_FOCUS, self.update_object)
 
         if factory.auto_set:
-            #wx.EVT_TEXT( parent, control.GetId(), self.update_object )
-            #parent.Bind(wx.EVT_TEXT, self.update_object, control)
             control.Bind(wx.EVT_TEXT, self.update_object)
 
         self.control = control
@@ -127,6 +124,11 @@ class SimpleEditor(Editor):
     def update_object(self, event):
         """ Handles the user entering input data in the edit control.
         """
+        if isinstance(event, wx.FocusEvent):
+            # Ensure that the base class' focus event handlers are run, some
+            # built-in behavior may break on some platforms otherwise.
+            event.Skip()
+
         if (not self._no_update) and (self.control is not None):
             try:
                 self.value = self._get_user_value()
@@ -139,7 +141,6 @@ class SimpleEditor(Editor):
 
             except TraitError as excp:
                 pass
-        event.Skip()
 
     #---------------------------------------------------------------------------
     #  Updates the editor when the object trait changes external to the editor:
