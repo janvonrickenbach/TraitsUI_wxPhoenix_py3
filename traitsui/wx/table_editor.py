@@ -798,19 +798,33 @@ class TableEditor(Editor, BaseTableEditor):
         """
         gfi = self.model.get_filtered_item
         rio = self.model.raw_index_of
-        tl = self.grid._grid.GetSelectionBlockTopLeft()
-        br = iter(self.grid._grid.GetSelectionBlockBottomRight())
-        rows = len(self.model.get_filtered_items())
-        if self.auto_add:
-            rows -= 1
-
-        # Get the row items and indices in the selection:
         values = []
-        for row0, col0 in tl:
-            row1, col1 = br.next()
-            for row in range(row0, row1 + 1):
-                if row < rows:
-                    values.append((rio(row), gfi(row)))
+
+        if self.grid.selection_mode == 'rows':
+            # RR: fix to ensure that the toolbar gets enabled if selection_mode is 'rows'
+            # assumption: only one row is selected
+            sel_row = self.grid._grid.GetSelectedRows()
+            if len(sel_row):
+                rows = len(self.model.get_filtered_items())
+                if self.auto_add:
+                    rows -= 1
+
+                if sel_row[0] < rows:
+                    values.append((rio(sel_row[0]), gfi(sel_row[0])))
+        else:
+            tl = self.grid._grid.GetSelectionBlockTopLeft()
+            br = iter(self.grid._grid.GetSelectionBlockBottomRight())
+
+            rows = len(self.model.get_filtered_items())
+            if self.auto_add:
+                rows -= 1
+
+            # Get the row items and indices in the selection:
+            for row0, col0 in tl:
+                row1, col1 = br.next()
+                for row in range(row0, row1 + 1):
+                    if row < rows:
+                        values.append((rio(row), gfi(row)))
 
         # Sort by increasing row index:
         values.sort(key=itemgetter(0))

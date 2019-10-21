@@ -239,6 +239,9 @@ class TableModel(GridModel):
         if index >= len(self.editor.filtered_indices):
             raise IndexError
 
+        ## ensure that EndEdit is called for the grid cells before the column edit
+        self.update_columns()
+
         mapped_index = self.editor.filtered_indices[index]
         items = self.__items()
         object = items[mapped_index]
