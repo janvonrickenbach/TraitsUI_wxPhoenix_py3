@@ -431,6 +431,18 @@ class TableEditor(Editor, BaseTableEditor):
     def dispose(self):
         """ Disposes of the contents of an editor.
         """
+
+        """
+        R. Roos Oct 2019: The destroy method of wx (Grid.Destroy()) causes a crash if the table editor contains one or 
+        several EnumEditors that are active. Therefore the TableEditor is refreshed before Destroy() is called in order
+        to bring it back to it initial state.
+        """
+        try:
+            if self.grid._grid:
+                self.grid._grid.ForceRefresh()
+        except:
+            pass
+
         if self.toolbar_ui is not None:
             self.toolbar_ui.dispose()
 

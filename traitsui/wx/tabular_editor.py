@@ -24,6 +24,7 @@
 
 import wx
 import wx.lib.mixins.listctrl as listmix
+from bisect import bisect
 
 from traits.api \
     import HasStrictTraits, Int, \
@@ -85,6 +86,47 @@ class TextEditMixin(listmix.TextEditMixin):
         else:
             return listmix.TextEditMixin.OpenEditor(self, col, row)
 
+    def OnLeftDown(self, evt=None):
+        ''' Examine the click and double
+        click events to see if a row has been click on twice. If so,
+        determine the current row and columnn and open the editor.
+
+        R.Roos: Because of a bug in wx\lib\mixins\listctrl.py this function is reimplemented here.
+
+        '''
+
+        if self.editor.IsShown():
+            self.CloseEditor()
+
+        x,y = evt.GetPosition()
+        row,flags = self.HitTest((x,y))
+
+        if row < 0:
+            evt.Skip()
+            return
+
+        # the following should really be done in the mixin's init but
+        # the wx.ListCtrl demo creates the columns after creating the
+        # ListCtrl (generally not a good idea) on the other hand,
+        # doing this here handles adjustable column widths
+
+        self.col_locs = [0]
+        loc = 0
+        for n in range(self.GetColumnCount()):
+            loc = loc + self.GetColumnWidth(n)
+            self.col_locs.append(loc)
+
+        col = bisect(self.col_locs, x+self.GetScrollPos(wx.HORIZONTAL)) - 1
+
+        if col < 0:
+            evt.Skip()
+            return
+
+        if row == self.curRow and col == self.curCol:
+            evt.Skip()
+            return
+
+        self.OpenEditor(col, row)
 
 #-------------------------------------------------------------------------------
 #  'wxListCtrl' class:
