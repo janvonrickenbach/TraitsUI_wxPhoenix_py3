@@ -26,6 +26,7 @@
 import os.path
 import base64
 import webbrowser
+import sys
 
 
 
@@ -60,7 +61,13 @@ def html_image(imgfile, size=None):
 #-------------------------------------------------------------------------------
 #  'SimpleEditor' class:
 #-------------------------------------------------------------------------------
-try:
+
+"""
+Rene Roos Nov 2019: wxPython 4.0.6 is built against gtk3 for Windows and gtk2 for Linux because of several optical
+issues on Linux. wx.html2 is based on gtk3 technology and therefore wx.html is used on Linux.
+This should become obsolete once wxPython is built against gtk3 on all OS.
+"""
+if sys.platform == 'win32':
     import wx.html2 as webview
     class SimpleEditor ( Editor ):
         """ Simple style of editor for HTML, which displays interpreted HTML.
@@ -116,7 +123,7 @@ try:
             #self.control.base_url = url
             self.update_editor()
 
-except:
+else:
     # previous wx.html version
     #-------------------------------------------------------------------------------
     #  URLResolvingHtmlWindow class:
