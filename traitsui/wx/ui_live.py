@@ -188,8 +188,8 @@ class LiveWindow(BaseDialog):
                     parent,
                     -1,
                     title,
-                    style=window_style | (wx.DEFAULT_FRAME_STYLE & ~(
-                        wx.RESIZE_BORDER | wx.MAXIMIZE_BOX)))
+                    style=window_style | (wx.DEFAULT_FRAME_STYLE & ~wx.RESIZE_BORDER)
+                )
             else:
                 if window_style == 0:
                     window_style = wx.SIMPLE_BORDER
