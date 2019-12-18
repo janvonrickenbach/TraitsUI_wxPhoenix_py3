@@ -1,6 +1,5 @@
 ============================================
 TraitsUI: Traits-capable windowing framework
-Fork: Support wxPythonPhoenix and Python3
 ============================================
 
 .. image:: https://travis-ci.org/enthought/traitsui.svg?branch=master
@@ -11,6 +10,8 @@ Fork: Support wxPythonPhoenix and Python3
 
 .. image:: https://codecov.io/github/enthought/traitsui/coverage.svg?branch=master
    :target: https://codecov.io/github/enthought/traitsui?branch=master
+   
+This is a fork of the TraitsUI Package that adds support wxPythonPhoenix and Python3   
 
 The TraitsUI project contains a toolkit-independent GUI abstraction layer,
 which is used to support the "visualization" features of the
